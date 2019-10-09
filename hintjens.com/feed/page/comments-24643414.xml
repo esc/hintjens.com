@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;A Protocol for REST over ZeroMQ&quot;</title>
+		<link>http://hintjens.com/blog:86/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:29:59 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:86/comments/show#post-2422745</guid>
+				<title>Re: RESTful with protobuf</title>
+				<link>http://hintjens.com/blog:86/comments/show#post-2422745</link>
+				<description></description>
+				<pubDate>Sun, 13 Dec 2015 12:08:16 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>REST is a well-defined pattern, see Roy Fielding's paper on the topic. You can certainly implement that using protobufs. You'd probably want to keep the same semantics (e.g. location, status code, method, etc.) as usual.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:86/comments/show#post-2422360</guid>
+				<title>RESTful with protobuf</title>
+				<link>http://hintjens.com/blog:86/comments/show#post-2422360</link>
+				<description></description>
+				<pubDate>Sat, 12 Dec 2015 23:10:02 +0000</pubDate>
+				<wikidot:authorName>Strahlexus</wikidot:authorName>				<wikidot:authorUserId>2363239</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Thank you for the enlightening article.</p> <p>Would you consider a protocol that uses protbuf with a common &quot;Container&quot; class and a required type field to distinguish messages as restful? One would extend the &quot;API&quot; by adding new types.</p> <p>The problem is that extending the &quot;API&quot; requires modification of the protocol level &quot;Container&quot; object which is probably a design error.</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

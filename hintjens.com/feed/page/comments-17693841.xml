@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;A Web Server in 30 Lines of C&quot;</title>
+		<link>http://hintjens.com/blog:42/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:30:53 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:42/comments/show#post-2807664</guid>
+				<title>czmq version</title>
+				<link>http://hintjens.com/blog:42/comments/show#post-2807664</link>
+				<description></description>
+				<pubDate>Tue, 02 May 2017 00:06:52 +0000</pubDate>
+				<wikidot:authorName>eipeace2u</wikidot:authorName>				<wikidot:authorUserId>3094988</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>What version of czmq/zmq did you use to compile this? 3.0.2 has ctx and doesn't have ZMQ_STREAM 4.0 has no ctx and ZMQ_STREAM</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:42/comments/show#post-2020318</guid>
+				<title>stress test failure</title>
+				<link>http://hintjens.com/blog:42/comments/show#post-2020318</link>
+				<description></description>
+				<pubDate>Sun, 27 Apr 2014 01:51:47 +0000</pubDate>
+				<wikidot:authorName>GopalaKrishna Palem</wikidot:authorName>				<wikidot:authorUserId>1879390</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>This code when tested, is not able to accept connections beyond 400 or 500 connections (from the same client). Its not a HWM problem.</p> <p>I have posted a question with some more details on this on Stack overflow. Hope some one is able to provide some insight into the behavior.</p> <p>question is available on:</p> <p>stackoverflow com/q/23305254/451456</p> <p>(unable to paste the link, hence mangled it)</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:42/comments/show#post-1808875</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:42/comments/show#post-1808875</link>
+				<description></description>
+				<pubDate>Thu, 04 Jul 2013 11:21:30 +0000</pubDate>
+				<wikidot:authorName>porjo</wikidot:authorName>				<wikidot:authorUserId>1474489</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I wonder if you could discuss the C10K problem and how ZeroMQ addresses this?</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:42/comments/show#post-1779288</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:42/comments/show#post-1779288</link>
+				<description></description>
+				<pubDate>Mon, 20 May 2013 07:58:16 +0000</pubDate>
+				<wikidot:authorName>lalebarde</wikidot:authorName>				<wikidot:authorUserId>1629498</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Understood. Thanks a lot. I am digging into the 0MQ Guide, after having spent the last months to study &quot;classic&quot; IPC, that's tremendous. Huge thanks to making this available to everyone.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:42/comments/show#post-1778675</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:42/comments/show#post-1778675</link>
+				<description></description>
+				<pubDate>Sun, 19 May 2013 08:11:25 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Since there are hundreds of millions of devices (phones, laptops, etc.) that act as HTTP clients, you need HTTP servers for them to talk to. This was how we connected computers until messaging became freely available.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:42/comments/show#post-1777402</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:42/comments/show#post-1777402</link>
+				<description></description>
+				<pubDate>Fri, 17 May 2013 14:45:11 +0000</pubDate>
+				<wikidot:authorName>lalebarde</wikidot:authorName>				<wikidot:authorUserId>1629498</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Sorry for this naive question, but it will help for my networking-newbby understanding: what is the added value of &quot;servers&quot; like apache/nginx/mongrel2 ?</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

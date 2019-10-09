@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Sex in Title, and Other Stories&quot;</title>
+		<link>http://hintjens.com/blog:73/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:30:21 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:73/comments/show#post-2009510</guid>
+				<title>Re: BuildStuff url typo</title>
+				<link>http://hintjens.com/blog:73/comments/show#post-2009510</link>
+				<description></description>
+				<pubDate>Wed, 09 Apr 2014 17:32:49 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Fixed it, sorry for missing your comment&#8230;</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:73/comments/show#post-1924570</guid>
+				<title>BuildStuff url typo</title>
+				<link>http://hintjens.com/blog:73/comments/show#post-1924570</link>
+				<description></description>
+				<pubDate>Sun, 29 Dec 2013 23:01:37 +0000</pubDate>
+				<wikidot:authorName>greggirwin</wikidot:authorName>				<wikidot:authorUserId>583361</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p><a href="http://buildstuff.it/">http://buildstuff.it/</a> should be <a href="http://buildstuff.lt/">http://buildstuff.lt/</a></p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:73/comments/show#post-1924276</guid>
+				<title>Meetups as high-speed data distribution can scale much larger than state sharing.</title>
+				<link>http://hintjens.com/blog:73/comments/show#post-1924276</link>
+				<description></description>
+				<pubDate>Sun, 29 Dec 2013 09:38:51 +0000</pubDate>
+				<wikidot:authorName>crocket</wikidot:authorName>				<wikidot:authorUserId>1794068</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I think comiket may help you learn better about meetups. Comiket is probably the 3rd largest meetup on this planet(1st and 2nd positions are taken up by worldcup and olympics). It is held twice a year in Tokyo, Japan. About 590,000 people gathered at comiket this summer. Right now, if you search &quot;comiket&quot; in twitter, you'll find many interesting tweets.</p> <p>According to wikipedia, &quot;it is a grassroots, DIY effort for selling dōjinshi, self-published Japanese works.&quot;</p> <p>I think it is an evidence that decentralized economies(LSNS) can grow much larger than centralized ones(LSHS).</p> <p>However, a huge meetup like that has adversarial effects. It is the biggest mutex. People have to wait for hours to buy something. Some people even vomit due to bad conditions. Anyway, most meetups wouldn't suffer from huge size.</p> <p>Now think about real life LSHS. Microsoft has ~100,518 employees, and IBM has ~435,000 employees. Their size must be choking themselves to death.</p> <p>I think people can better grow large economies by building decentralized products with scalability layers like ZeroMQ.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:73/comments/show#post-1919035</guid>
+				<title>Re: There are differences other than gender ones.</title>
+				<link>http://hintjens.com/blog:73/comments/show#post-1919035</link>
+				<description></description>
+				<pubDate>Fri, 20 Dec 2013 08:43:37 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>My understanding of human nature comes from looking at evolutionary pressures. Our mind doesn't have &quot;features&quot;, it has solutions to real, life-or-death problems that faced us in the past.</p> <p>Often these examples seem caricatures yet they're valid. (Most) young boys are much better at throwing and kicking objects than (most) young girls. (Most) young girls are much better at language and social skills than (most) young boys.</p> <p>Designing large systems needs specific kinds of visual imagination that go along with reading maps, orientation in a landscape, and other skills that our (mostly) male ancestors would need to do the successful large-scale hunts which kept our species alive for so long, before agriculture.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:73/comments/show#post-1918188</guid>
+				<title>There are differences other than gender ones.</title>
+				<link>http://hintjens.com/blog:73/comments/show#post-1918188</link>
+				<description></description>
+				<pubDate>Wed, 18 Dec 2013 22:58:06 +0000</pubDate>
+				<wikidot:authorName>crocket</wikidot:authorName>				<wikidot:authorUserId>1794068</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>First of all, thanks for catering my social need to comment without hassle.</p> <p>There are 3 kinds of people in corporations.</p> <p>weak-minded men become managers, focus on people, and find faults in them to manipulate people. Regulating people is at the core of any central power.</p> <p>Most people are event-aware tacticians who talk about people and events.</p> <p>Some mainly think about abstract ideas such as mathematics, artificial intelligence, distributed computing, and philosophy.<br /> Those abstract thinkers who also comprehend details may become technical leaders like linus torvalds, rich hickey, pieter hintjens? :)</p> <p>I think you wanted to say some men are inclined to think abstractly when you mentioned thousand-node image processing cloud.<br /> Abstract thinking may or may not be gender-specific.</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

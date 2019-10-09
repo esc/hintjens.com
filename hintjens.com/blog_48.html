@@ -1,0 +1,647 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from hintjens.com/blog:48 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:30:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Using ZeroMQ Security (part 1) - Hintjens.com</title>
+    
+    	<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+    // DEFINE DFP SLOTS
+googletag.defineSlot('/1030917/wikidot_free_sites_top_728x90', [728, 90], 'div-gpt-ad-1410946564449-1').addService(googletag.pubads());
+googletag.defineSlot('/1030917/wikidot_free_sites_bottom_300x250', [300, 250], 'div-gpt-ad-1410946564449-0').addService(googletag.pubads());
+
+// googletag.pubads().enableSingleRequest();
+googletag.pubads().collapseEmptyDivs(true, true);
+googletag.pubads().setTargeting("w_name", "hintjens");
+googletag.pubads().setTargeting("w_domain", "com.hintjens");
+googletag.pubads().setTargeting("w_verified", "false");
+if(null){googletag.pubads().setTargeting("w_cats", null);}
+if(false){googletag.pubads().setTargeting("w_mn", "true");}
+googletag.enableServices();
+});
+</script>
+<script type="text/javascript" src="http://www.wikidot.com/default__flow/login__CustomDomainScript?site_id=352120"></script>
+
+    
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/init.combined.js"></script>
+    <script  type="text/javascript">
+        var URL_HOST = 'www.wikidot.com';
+        var URL_DOMAIN = 'wikidot.com';
+        var USE_SSL =  true ;
+        var URL_STATIC = 'http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade';
+        // global request information
+        
+        var WIKIREQUEST = {};
+        WIKIREQUEST.info = {};
+        
+        WIKIREQUEST.info.domain = "hintjens.com";
+        WIKIREQUEST.info.siteId = 352120;
+        WIKIREQUEST.info.siteUnixName = "hintjens";
+        WIKIREQUEST.info.categoryId = 1984291;
+        WIKIREQUEST.info.themeId = 1;
+        WIKIREQUEST.info.requestPageName = "blog:48";
+        OZONE.request.timestamp = 1570613238;
+        OZONE.request.date = new Date();
+        WIKIREQUEST.info.lang = 'en';
+                WIKIREQUEST.info.pageUnixName = "blog:48";
+        WIKIREQUEST.info.pageId = 19787605;
+                        WIKIREQUEST.info.lang = "en";
+        OZONE.lang = "en";
+        var isUAMobile = !!/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    </script>
+    
+    
+
+
+    
+        <script  type="text/javascript">
+    
+        require.config({
+            baseUrl: URL_STATIC + '/common--javascript',
+            paths: {
+                'jquery.ui': 'jquery-ui.min',
+                'jquery.form': 'jquery.form'
+            }
+        });
+    
+    </script>
+    
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+            
+    
+    
+    
+    
+    <meta http-equiv="content-language" content="en"/>
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/WIKIDOT.combined.js"></script>
+        
+    
+    <style type="text/css" id="internal-style">
+        
+        /* modules */
+@import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/css/pagerate/PageRateWidgetModule.css);
+
+
+        
+                
+        /* theme */
+                    @import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--theme/base/css/style.css);
+                    @import url(http://hintjens.wdfiles.com/local--code/admin%3Athemes/1);
+            </style>
+    
+        
+        
+        
+    <link rel="shortcut icon" href="local--favicon/favicon.gif"/>
+    <link rel="icon" type="image/gif" href="local--favicon/favicon.gif"/>
+    
+            <link rel="apple-touch-icon" href="common--images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="common--images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="common--images/apple-touch-icon-114x114.png" />
+        
+        
+            <link rel="alternate" type="application/wiki" title="Edit this page" href="javascript:WIKIDOT.page.listeners.editClick()"/>
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18234656-1']);
+        _gaq.push(['_setDomainName', 'none']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        _gaq.push(['old._setAccount', 'UA-68540-5']);
+        _gaq.push(['old._setDomainName', 'none']);
+        _gaq.push(['old._setAllowLinker', true]);
+        _gaq.push(['old._trackPageview']);
+
+                _gaq.push(['userTracker._setAccount', 'UA-623476-16']);
+        _gaq.push(['userTracker._trackPageview']);
+            </script>
+    
+    <script type="text/javascript">
+        window.google_analytics_uacct = 'UA-18234656-1';
+        window.google_analytics_domain_name = 'none';
+    </script>
+    
+        <link rel="manifest" href="onesignal/manifest.html" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" acync=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: null,
+          });
+        });
+    </script>
+        
+<link rel="alternate" type="application/rss+xml" title="Comments for the page &quot;Using ZeroMQ Security (part 1)&quot;" href="feed/page/comments-19787605.xml"/><script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/misc/NewPageHelperModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/list/ListPagesModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/pagerate/PageRateWidgetModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumCommentsModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/sub/ForumNewPostFormModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadPostsModule.js"></script>
+</head>
+<body id="html-body">
+<div id="skrollr-body">
+<a name="page-top"></a>
+
+<div id="container-wrap-wrap">
+    <div id="container-wrap">
+        <div id="container">
+            <div id="header">
+              <h1><a href="index.html"><span>Hintjens.com</span></a></h1>
+                
+                    <h2><span>Moving Pieces</span></h2>
+                
+                
+                <!-- google_ad_section_start(weight=ignore) -->
+                
+                <div id="search-top-box" class="form-search">
+    <form id="search-top-box-form" action="http://hintjens.com/dummy" class="input-append">
+        <input id="search-top-box-input" class="text empty search-query" type="text" size="15" name="query" value="Search this site" onfocus="if(YAHOO.util.Dom.hasClass(this, 'empty')){YAHOO.util.Dom.removeClass(this,'empty'); this.value='';}"/><input class="button btn" type="submit" name="search" value="Search"/>
+    </form>
+</div>
+                
+                
+                    <div id="top-bar">
+                        
+
+<ul>
+<li><a href="index.html">Front</a></li>
+<li><a href="blog__zeromq.html">ZeroMQ</a></li>
+<li><a href="blog__community.html">Community</a></li>
+<li><a href="blog__unprotocols.html">Unprotocols</a></li>
+<li><a href="blog__psychopaths.html">Psychopaths</a></li>
+</ul>
+
+                    </div>
+                
+                <div id="login-status"><a href="javascript:;" onclick="WIKIDOT.page.listeners.createAccount(event)" class="login-status-create-account btn">Create account</a> <span>or</span> <a href="javascript:;" onclick="WIKIDOT.page.listeners.loginClick(event)" class="login-status-sign-in btn btn-primary">Sign in</a> </div>
+                <div id="header-extra-div-1"><span></span></div><div id="header-extra-div-2"><span></span></div><div id="header-extra-div-3"><span></span></div>
+            </div>
+            
+            <div id="content-wrap">
+                
+                    <div id="side-bar">
+                        
+
+
+                        
+
+<p><a class="wiki-standalone-button" style="background-image: url(http://www.wikidot.com/local--files/files/document-print.png); background-repeat: no-repeat; background-position: bottom right; padding-right: 20px;color: #444" href="javascript:;" onclick="WIKIDOT.page.listeners.printClick(event)">print</a></p>
+<a href="http://hintjens.wdfiles.com/local--files/nav:side/culture.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/nav:side/culture.jpg/small.jpg" alt="culture.jpg" class="image" /></a>
+<p><strong>Pieter Hintjens</strong></p>
+<p><a href="main_biography.html">Biography</a> | <a href="main_portfolio.html">Portfolio</a> | <a href="https://github.com/hintjens">GitHub</a><br />
+<a href="books.html">Books</a> | <a href="https://vimeo.com/user10099130/videos">Videos</a> | <a href="http://www.slideshare.net/pieterh">Slides</a> | <a href="http://fiction.hintjens.com/">Stories</a> | <a href="http://wiki.hintjens.com/">Wiki</a><br />
+<a href="contact.html">Contact</a></p>
+<p><strong>Thank you for the gifts</strong></p>
+<p><a href="http://paypal.me/Hintjens">Kind people already sent donations</a> that will make my childrens' lives easier, when I'm not there any more. Thank you enormously! :-)</p>
+<p>Podcasts/Interviews</p>
+<p><a href="http://softwareengineeringdaily.com/2016/06/23/death-distributed-systems-pieter-hintjens/">Software Engineering Daily</a><br />
+<a href="https://www.youtube.com/watch?v=ApqI9XLRk4k">Interview by Adam Dymitruk</a><br />
+<a href="http://devchat.tv/ruby-rogues/188-rr-community-building-with-pieter-hintjens">Ruby Rogues #188, Community Building</a></p>
+<p>Talks on video</p>
+<p><a href="http://deredactie.be/cm/vrtnieuws/videozone/programmas/deafspraak/2.44331">&quot;De afspraak&quot;, VRT, May 2016</a> (panel discussion)<br />
+<a href="http://www.rtl.be/rtltvi/video/581260.aspx">RTL TV, May 2016</a> (panel discussion)<br />
+<a href="https://www.youtube.com/watch?v=uzxcILudFWM">DomCode 2015, Nov 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=7HECD3eLoVo">Coding Serbia, Oct 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=O8CbzKREAj4">Euroscipy, Cambridge, Aug 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=FKu09-_AaeM&amp;index=4&amp;list=PLFxMLyzsWeqr4SCyx0ZmFkVz2vZJk_CI5">PyGrunn, Groningen, May 2015</a><br />
+<a href="http://www.ustream.tv/recorded/61450822">Craft Conf, Budapest, Apr 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design-2015">QCon London, Mar 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design">Code Mesh London, Nov 2014</a><br />
+<a href="http://www.infoq.com/presentations/trick-better-software">Build Stuff, Vilnius 2014</a><br />
+<a href="https://www.youtube.com/watch?v=_QF9sFJGJuc">Build Stuff, Vilnius, Nov 2014</a> (interview)<br />
+<a href="https://www.youtube.com/watch?v=xFVDNTXIC_Y">Coding Serbia, Nov 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=DAOFZfSlFs0">Devnology, Leusden, Oct 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=QB7VXSc5H3A">EuroPython, Berlin, Jul 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=qTNqgwN5gzA&amp;feature=youtu.be">Build Stuff, Vilnius, Dec 2013</a> (interview)<br />
+<a href="http://www.infoq.com/presentations/digital-revolution-freedom">Build Stuff, Vilnius, Dec 2013</a> (keynote)<br />
+<a href="http://vimeo.com/82175816">Code Mesh London, Dec 2013</a><br />
+<a href="http://vimeo.com/79378301">DevOps Days, London, Nov 2013</a><br />
+<a href="https://vimeo.com/68236487">NDC Oslo, Jun 2013</a><br />
+<a href="https://vimeo.com/69666055">CERN - Geneva, Jun 2013</a><br />
+<a href="https://www.youtube.com/watch?v=uj-li0LO_2g">Tech Mesh, London, Dec 2012</a><br />
+<a href="http://www.infoq.com/presentations/Architecture-Scale-ZeroMQ">Strange Loop, St.Louis, Oct 2012</a><br />
+<a href="https://vimeo.com/37854675">ZeroMQ@PDX part 2 - Portland, Feb 2012</a><br />
+<a href="https://vimeo.com/38117896">ZeroMQ@PDX part 1 - Portland, Feb 2012</a><br />
+<a href="http://www.youtube.com/watch?gl=BE&amp;v=4II94h6-IFY">FLOSS Weekly, Petaliuma CA, Dec 2011</a><br />
+<a href="https://www.youtube.com/watch?v=CCBYzKfmQ4U">FOSDEM 2011, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=h0facLxJPUE">Berlin Buzzwords 2010</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=bQgPArfbXm4">FOSDEM 2009, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=fJo1jmuOuqQ">Hellenic FOSS Conference 2008, Athens part 1</a><br />
+<a href="https://www.youtube.com/watch?v=Hx6cS1VLhoo">Hellenic FOSS Conference 2008, Athens part 2</a></p>
+<p>Email me at <span class="wiki-email">moc.snejtnih|reteip#moc.snejtnih|reteip</span> if you'd like me to present at your event, or in your organization.</p>
+<a href="books.html"><img src="https://www.createspace.com/Img/T448/T45/T21/BookCoverImage.jpg?random=0.4431380270844333" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.4431380270844333" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/socarch.png" style="padding:5px" width="100" alt="socarch.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/confessions.jpg" style="padding:5px" width="100" alt="confessions.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/psccover.jpg" style="padding:5px" width="100" alt="psccover.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://akamaicovers.oreilly.com/images/0636920026136/cat.gif" style="padding:5px" width="100" alt="cat.gif" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/scalablec.png" style="padding:5px" width="100" alt="scalablec.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="https://www.createspace.com/Img/T409/T85/T11/BookCoverImage.jpg?random=0.7859812398986378" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.7859812398986378" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<p><strong><a href="books.html">Download and read online</a></strong></p>
+<p><strong><a href="legal_start.html">Legal</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></strong></p>
+<div class="collapsible-block">
+<div class="collapsible-block-folded"><a class="collapsible-block-link" href="javascript:;"> ▽ </a></div>
+<div class="collapsible-block-unfolded" style="display:none">
+<div class="collapsible-block-unfolded-link"><a class="collapsible-block-link" href="javascript:;"> △ </a></div>
+<div class="collapsible-block-content">
+<div class="side-box">
+<p><a href="_admin.html">Manage</a> | <a href="admin_themes.html">Theme</a> | <a href="nav_top.html">Top</a> | <a href="nav_top.html">Side</a></p>
+
+<div class="new-page-box" style="text-align: center; margin: 1em 0;">
+	<form action="http://hintjens.com/dummy.html" method="get" onsubmit="WIKIDOT.modules.NewPageHelperModule.listeners.create(event);">
+		<input class="text" name="pageName" type="text" size="40" maxlength="128" style="margin: 1px"/>
+				<input type="submit" class="button" value="New post" style="margin: 1px;"/>
+									<input type="hidden" name="categoryName" value="blog"/>
+													<input type="hidden" name="parent" value="blog:_start"/>
+				
+	</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                        
+
+
+                    </div>
+                
+                
+                <!-- google_ad_section_end -->
+                
+                <div id="main-content">
+                    <div id="action-area-top"></div>
+                    
+                    
+                        <div id="page-title">
+                            Using ZeroMQ Security (part 1)
+                        </div>
+                    
+
+                    
+                        <div id="breadcrumbs">
+                            <a href="blog__start.html">All Articles</a> &raquo; Using ZeroMQ Security (part 1)
+                        </div>
+                    
+
+                                    <!-- wikidot_top_728x90 -->
+<div id="div-gpt-ad-1410946564449-1" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-above_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-1'); });
+</script>
+</div>
+
+            
+    
+
+
+                    <div id="page-content">
+                        
+
+<div style="overflow:hidden; font-size: 13px; margin: -26px 0 -22px 0">
+<div style="float:left"><div class="list-pages-box">    
+
+<p><a href="blog_47.html">&lt; Previous</a></p>
+
+    
+    
+    
+    </div></div>
+<div style="float:right"><div class="list-pages-box">    
+
+<p><a href="blog_49.html">Next &gt;</a></p>
+
+    
+    
+    
+    </div></div>
+</div>
+<div style="border: solid 1px #f00; padding:0 1em 0 1em; margin-bottom: 1em; margin-top:1em; min-height: 140px; overflow: hidden">
+<p><span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1473156444" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)" /></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;">pieterh</a></span> wrote on <span class="odate time_1378977475 format_%25e%20%25b%2C%20%25H%3A%25M%20%28%25O%20ago%29">12 Sep 2013 09:17</span></p>
+<div class="image-container floatleft"><a href="http://hintjens.wdfiles.com/local--files/blog:48/look.png"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:48/look.png/small.jpg" alt="look.png" class="image" /></a></div>
+<p>In this series of articles I'll explain how to use the new ZeroMQ security layers in your applications. The example we'll make is a chat application that provides unbreakable strong security. In this first article, I'll explain more about ZeroMQ's security technology, how it works, and why we chose it. (<a href="blog_49.html">Read part 2.</a>)</p>
+<h2 id="toc0"><span>The Case for Privacy</span></h2>
+<p>The summer of 2013 was when privacy on the Internet died. Or rather, when our belief in privacy died, because the surveillance of our phone calls, emails, web searches, and chats has been going on for many years, if not since the start of the telegraph era.</p>
+<p>Privacy is a cost issue. An organization can secure its data centers from surveillance (by spies of all colors, whether they are foreign intelligence services, competitors, or criminals) by building its own physical networks and isolating these from the public Internet. However that is extraordinarily costly. More typically, we'll use virtual private networks (VPNs) to create secure lines that cross public networks.</p>
+<p>VPNs are not reliably secure, however. They use long term keys that can be broken. They are complex to configure and to upgrade. The often use aging algorithms like RC4 <a href="http://www.theregister.co.uk/2013/09/06/nsa_cryptobreaking_bullrun_analysis/">that are considered crackable</a>.</p>
+<p>Even SSL/TLS <a href="http://www.techdirt.com/articles/20130910/10470024468/flying-pig-nsa-is-running-man-middle-attacks-imitating-googles-servers.shtml#addyourcomment">are not immune</a> from attack. The NSA themselves point out that the mainstream cryptography <a href="http://www.nsa.gov/business/programs/elliptic_curve.shtml">is over 20 years old</a>, and state that &quot;the best assured group of new public key techniques is built on the arithmetic of elliptic curves.&quot;</p>
+<p>Without the shield of cheap, trustable privacy, an organization cannot safely use the public Internet. What the NSA can break today, any competitor or foreign intelligence service can break tomorrow. In our connected world, this throws a pool of ice cold water over the growth of low-friction Internet commerce.</p>
+<h2 id="toc1"><span>Goals for ZeroMQ's Security Layers</span></h2>
+<p>Just as ZeroMQ brought us cheap, standardized connectivity for distributed systems, our goals with the security layers (which I'll explain in a minute) are to bring cheap, standardized privacy and authentication for distributed systems. The focus here is on cost. Cryptography has not stood still since the 1970s and there are many excellent, strong security options. However they remain costly to learn, understand, and safely use.</p>
+<p>Here is our shortlist of goals:</p>
+<ul>
+<li><em>It must be very simple to use, and impossible to get wrong</em>. Complexity is the number one risk with cryptography and the number one vulnerability. Every additional option is a way to get it wrong and end up with an insecure system.</li>
+</ul>
+<ul>
+<li><em>It must be fast enough for real work</em>. If security makes a system too slow to use, people will switch it off, because the pragmatic need of being able to work today beats the risk of intrusion tomorrow.</li>
+</ul>
+<ul>
+<li><em>It must be based on standardized protocols</em>, so that it can be re-implemented by any team, verified independently, and improved outside of the software stack.</li>
+</ul>
+<ul>
+<li><em>It must have free and open source implementations</em>, so that the code can be inspected and fixed. One cannot trust a closed-source security stack, given the risk of secret backdoors.</li>
+</ul>
+<ul>
+<li><em>It must be free of patent risk</em>, so that it cannot be blocked on grounds of intellectual property violations.</li>
+</ul>
+<ul>
+<li><em>It must work with all ZeroMQ socket types</em>, and more generally, be interoperable with clear text messaging. A typical architecture will use clear text for internal messages, and security on external traffic.</li>
+</ul>
+<ul>
+<li><em>It must be built-in to the core libzmq library</em>, so that it is available to all language bindings. Full-native stacks like JeroMQ should be able to re-implement the security protocols.</li>
+</ul>
+<p>We started working on this in March of 2013, and the first formal publication will be in the forthcoming ZeroMQ/4.0.0 release. You can always get the latest version from the ZeroMQ GitHub project.</p>
+<h2 id="toc2"><span>How ZeroMQ Security Works</span></h2>
+<p>The security architecture is broken into several layers:</p>
+<ul>
+<li>A new wire protocol, <a href="http://zmtp.org/">ZMTP 3.0</a>, that adds a security handshake to all ZeroMQ connections.</li>
+</ul>
+<ul>
+<li>A new security protocol, <a href="http://curvezmq.org/">CurveZMQ</a>, that implements &quot;perfect forward security&quot; between two ZeroMQ peers over a TCP connection. I'll explain CurveZMQ below.</li>
+</ul>
+<ul>
+<li>A set of security mechanisms for ZMTP: NULL, PLAIN, and CURVE, each described by their own RFCs. NULL is essentially what we had before. PLAIN allows simple username and password authentication. CURVE implements the CurveZMQ protocol.</li>
+</ul>
+<ul>
+<li>An extended API for libzmq that lets you choose and configure the security mechanism for any socket. The default is NULL. You can then upgrade the socket to PLAIN or CURVE, either as a client (that connects securely to one server), or a server (which authenticates any number of clients).</li>
+</ul>
+<ul>
+<li><a href="http://rfc.zeromq.org/spec:27">A protocol (ZAP)</a> that lets you install arbitrary authentication servers. ZeroMQ lets you choose how you authenticate clients, be it via configuration files, LDAP, databases, etc.</li>
+</ul>
+<ul>
+<li>Finally, a separate security library, <a href="https://github.com/zeromq/libcurve">Curve</a>, that implements CurveZMQ on top of ZeroMQ. Curve is a reference implementation for the CurveZMQ protocol, and a way to get that functionality on older versions of ZeroMQ. It will work with ZeroMQ/2.x and ZeroMQ/3.x (but not interoperate with the ZeroMQ/4.x CURVE mechanism, that works at a different level).</li>
+</ul>
+<p>Let's walk through how we do secure PUB-SUB from one publisher to a number of subscribers, using the CURVE mechanism:</p>
+<ul>
+<li>We generate a long term keypair for the publisher. ZeroMQ provides a tool (curve_keygen) to do this. We store the resulting keypair safely.</li>
+</ul>
+<ul>
+<li>We manually distribute the public part of the keypair. This is a short text string. ZeroMQ does not do key exchange.</li>
+</ul>
+<ul>
+<li>If we want to authenticate subscribers, we generate a keypair for each subscriber, store the public+secret keypair safely at each subscriber, and collect all public subscriber keys on the publisher.</li>
+</ul>
+<ul>
+<li>Now, we can create a PUB socket and configure it with the long term keypair, and tell ZeroMQ that it is a server. This requires three zmq_setsockopt calls.</li>
+</ul>
+<ul>
+<li>We can then create any number of SUB sockets, and configure each one with its own keypair, and the server's public key. Again, three calls to zmq_setsockopt.</li>
+</ul>
+<ul>
+<li>We then bind the PUB socket, and connect the SUB sockets as usual.</li>
+</ul>
+<ul>
+<li>The ZeroMQ messaging API is unchanged. We send and recv messages as before.</li>
+</ul>
+<p>One aspect that surprises some people is that one socket can have exactly one security level. You cannot have, for instance, PLAIN and CURVE subscribers connected to the same publisher. This would be technically feasible but would add extra work to applications to check the security level of every incoming message. It would make it easy to &quot;get it wrong&quot;.</p>
+<h2 id="toc3"><span>The Curve Story</span></h2>
+<p>Elliptic curve cryptography is a controversial topic. It has the reputation of being &quot;backdoored&quot; by the NSA, and heavily patented. There is no single curve, but an infinite number, and different curves have different strengths and weaknesses. Some of the &quot;official&quot; curves proposed by the NIST are suspect.</p>
+<p>We use <a href="http://cr.yp.to/ecdh.html">Curve25519</a> as designed by Daniel J. Berstein, which is the basis for the <a href="http://nacl.cace-project.eu/features.html">NaCl cryptographic library</a>, more widely used as <a href="https://github.com/jedisct1/libsodium">libsodium</a>.</p>
+<p>Curve25519 together with the other algorithms used in NaCl has some attractive features:</p>
+<ul>
+<li>It is fast.</li>
+<li>It <a href="http://cr.yp.to/ecdh/patents.html">has no known patent issues</a>.</li>
+<li>It is considered strong.</li>
+</ul>
+<p>Curve25519 provides encryption and authentication with 256-bit keys, equivalent to 3072-bit RSA keys.</p>
+<p>This isn't sufficient guard against the simplest threat, where an attacker records encrypted data today, and then decrypts that tomorrow, after getting the keys by force, subterfuge, or warrant.</p>
+<p>To prevent that, we need &quot;perfect forward security&quot;, in which the two peers create temporary session keys and exchange those safely using the long-term keys. When the session is over, they discard their keys, and the encrypted data is then unreadable by anyone.</p>
+<p>D. J. Bernstein developed the <a href="http://curvecp.org/">CurveCP</a> protocol for secure networking over UDP, part of which was a secure handshake that provides perfect forward security using Curve25519.</p>
+<p>The ZeroMQ CurveZMQ protocol is essentially a fork of CurveCP, adapted for use over TCP, and written as a single RFC.</p>
+<p>Clients and servers have long-term permanent keys, and for each connection, they create and securely exchange short-term transient keys. Each key is a public/secret keypair, following the elliptic curve security model.</p>
+<p>To start a secure connection the client needs the server permanent public key. It then generates a transient key pair and sends a HELLO command to the server that contains its short term public key. The HELLO command is worthless to an attacker; it doesn't identify the client.</p>
+<p>The server, when it gets a HELLO, generates its own short term key pair (one connection uses four keys in total), and encodes this new private key in a &quot;cookie&quot;, which it sends back to the client as a WELCOME command. It also sends its short term public key, encrypted so only the client can read it. It then discards this short term key pair.</p>
+<p>At this stage, the server hasn't stored any state for the client. It has generated a keypair, sent that back to the client in a way only the client can read, and thrown it away.</p>
+<p>The client comes back with an INITIATE command that provides the server with its cookie back, and the client permanent public key, encrypted as a &quot;vouch&quot; so only the server can read it. As far as the client is concerned, the server is now authenticated, so it can also send back metadata in the command.</p>
+<p>The server reads the INITIATE and can now authenticate the client permanent public key. It also unpacks the cookie and gets its short term key pair for the connection. As far as the server is now concerned, the client is now authenticated, so the server can send its metadata safely. Both sides can then send messages and commands.</p>
+<p>This handshake provides a number of protections but mainly, <em>perfect forward security</em> (you cannot crack data encrypted using the short term keys even if you record it, and then later get access to the permanent keys) and <em>protection of client identity</em> (the client permanent public key is not sent in clear-text).</p>
+<h2 id="toc4"><span>Multilayer Security Using Libcurve</span></h2>
+<p>ZeroMQ's built-in Curve security can protect only one hop. For a B-to-C use-case this is ideal, and acts as a replacement for TLS/SSL, without the certificate authorities, but with the added cost of pre-distribution of public keys.</p>
+<p>For C-to-B-to-C cases however, it is not sufficient, just as TLS/SSL is not sufficient. The cloud in the middle gets unencrypted traffic, and surveillance at that point is trivial.</p>
+<p>To solve this we need security at a higher layer (instead of, or in addition to, the transport-layer security).</p>
+<p>In effect this means encrypting messages <em>before</em> passing them to ZeroMQ, and then decrypting them after receiving them from ZeroMQ. The same requirement for perfect forward security applies, otherwise the data is vulnerable to key theft attacks.</p>
+<p>With our security architecture, we use the Curve library (libcurve) to handle this higher layer. Curve provides both low-level codecs (to encrypt and decrypt) messages, and high-level &quot;virtual sockets&quot; (that act like ZeroMQ sockets but do security behind the scenes).</p>
+<h2 id="toc5"><span>Coming Up</span></h2>
+<p>Security is complex, but if done right, will protect your business secrets from attackers. In my next article I'll start show example code that does secure messaging, over ZeroMQ. If you want to contact me directly about using ZeroMQ's security in your architectures, email me at <span class="wiki-email">moc.xitami|hp#moc.xitami|hp</span>.</p>
+<div style="float:left;width:33%; margin:-15px 0 0 0">
+<p><iframe src="http://hintjens.wdfiles.com/local--html/blog%3A48/5ec6a6e875901368d565f65673fbbf1bd19f6b1e-149657781158363069/hintjens.com/" allowtransparency="true" frameborder="0" class="html-block-iframe"></iframe></p>
+</div>
+<div style="float:right"><div class="page-rate-widget"><div class="page-rate-widget-start" data-rating="0"></div></div></div>
+</div>
+<p><a name="comments"></a></p>
+<div class="comments-box">
+	<h1>Comments</h1>	
+	<div class="options" id="comments-options-hidden" style="display: none">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.showComments(event)">Show Comments</a> 
+	</div>
+		
+	<div id="thread-container" class="thread-container reverse" style="margin-top: 1em">
+					
+
+
+<script type="text/javascript">
+	WIKIDOT.forumThreadId = 694555;
+</script>
+
+        <a href="javascript:;" id="new-post-button" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.newPost(event,null)"
+      style="display:  block ; margin-bottom:1em"
+    >Add a New Comment</a>
+
+ 
+
+
+<div id="thread-container-posts" style="display: none">
+    
+
+
+
+
+
+</div>
+
+
+<div style="display:none" id="post-options-template">
+	<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.showPermalink(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Permanent Link</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.editPost(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Edit</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.deletePost(event,'%POST_ID%')" class="btn btn-danger btn-small btn-sm">Delete</a>
+</div>
+	
+			</div>
+	
+	
+	
+</div>
+                    </div>
+
+                                    <!-- wikidot_bottom_300x250 -->
+<div id="div-gpt-ad-1410946564449-0" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-below_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-0'); });
+</script>
+</div>
+
+            
+    
+
+
+                    
+                        <div class="page-tags">
+                            <span>
+                                <a href="system_page-tags/tag/security.html#pages">security</a><a href="system_page-tags/tag/zeromq.html#pages">zeromq</a>
+                            </span>
+                        </div>
+                    
+
+                    <div id="page-info-break"></div>
+                    
+                        <div id="page-options-container">
+                            
+                        </div>
+                    
+                    <div id="action-area" style="display: none;"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div id="footer" style="display: block; visibility: visible;">
+                <div class="options" style="display: block; visibility: visible;">
+    <a href="http://www.wikidot.com/doc" id="wikidot-help-button">Help</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:terms-of-service" id="wikidot-tos-button">Terms of Service</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:privacy-policy" id="wikidot-privacy-button">Privacy</a>
+    &nbsp;|
+    <a href="javascript:;" id="bug-report-button" onclick="WIKIDOT.page.listeners.pageBugReport(event)">Report a bug</a>
+    &nbsp;|
+    <a href="javascript:;" id="abuse-report-button" onclick="WIKIDOT.page.listeners.flagPageObjectionable(event)">Flag as objectionable</a>
+</div>
+Powered by <a href="http://www.wikidot.com/">Wikidot.com</a> 
+            </div>
+            
+                <div id="license-area" class="license-area">
+                    Unless otherwise stated, the content of this page is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>
+                </div>
+            
+            
+            
+
+
+
+            <div id="extrac-div-1"><span></span></div><div id="extrac-div-2"><span></span></div><div id="extrac-div-3"><span></span></div>
+            
+            
+            
+            
+                
+            
+        </div>
+        
+    </div>
+<!-- These extra divs/spans may be used as catch-alls to add extra imagery. -->
+<div id="extra-div-1"><span></span></div><div id="extra-div-2"><span></span></div><div id="extra-div-3"><span></span></div>
+<div id="extra-div-4"><span></span></div><div id="extra-div-5"><span></span></div><div id="extra-div-6"><span></span></div>
+</div>
+
+
+
+</div>
+<div id="dummy-ondomready-block" style="display: none;" ></div>
+    <!-- Google Analytics load -->
+    <script type="text/javascript">
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <!-- Quantcast -->
+    <script type="text/javascript">
+    _qoptions={
+        qacct:"p-edL3gsnUjJzw-"
+    };
+    (function() {
+        var qc = document.createElement('script'); qc.type = 'text/javascript'; qc.async = true;
+        qc.src = ('https:' == document.location.protocol ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(qc, s);
+    })();
+    </script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-edL3gsnUjJzw-.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+    </noscript>
+
+
+
+
+<div id="page-options-bottom-tips" style="display: none;">
+    <div id="edit-button-hovertip">
+        Click here to edit contents of this page.    </div>
+</div>
+<div id="page-options-bottom-2-tips"  style="display: none;">
+    <div id="edit-sections-button-hovertip">
+        Click here to toggle editing of individual sections of the page (if possible).         Watch headings for an &quot;edit&quot; link when available.    </div>
+    <div id="edit-append-button-hovertip">
+        Append content without editing the whole page source.    </div>
+    <div id="history-button-hovertip">
+        Check out how this page has evolved in the past.    </div>
+    <div id="discuss-button-hovertip">
+        If you want to discuss contents of this page - this is the easiest way to do it.    </div>
+    <div id="files-button-hovertip">
+        View and manage file attachments for this page.    </div>
+    <div id="site-tools-button-hovertip">
+        A few useful tools to manage this Site.    </div>
+    <div id="backlinks-button-hovertip">
+        See pages that link to and include this page.    </div>
+    <div id="rename-move-button-hovertip">
+        Change the name (also URL address, possibly the category) of the page.    </div>
+    <div id="view-source-button-hovertip">
+        View wiki source for this page without editing.    </div>
+    <div id="parent-page-button-hovertip">  
+        View/set parent page (used for creating breadcrumbs and structured layout).    </div>
+            <div id="abuse-report-button-hovertip">
+            Notify administrators if there is objectionable content in this page.        </div>
+        <div id="bug-report-button-hovertip">
+            Something does not work as expected? Find out what you can do.        </div>
+        <div id="wikidot-help-button-hovertip">
+            General Wikidot.com documentation and help section.        </div>
+        <div id="wikidot-tos-button-hovertip">
+            Wikidot.com Terms of Service - what you can, what you should not etc.        </div>
+        <div id="wikidot-privacy-button-hovertip">
+            Wikidot.com Privacy Policy.          
+        </div>
+    </div>
+</body>
+
+<!-- Mirrored from hintjens.com/blog:48 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:30:42 GMT -->
+</html>

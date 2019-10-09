@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Ten Myths About Harassment&quot;</title>
+		<link>http://hintjens.com/blog:105/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:29:30 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:105/comments/show#post-2422146</guid>
+				<title>Re: I read issues around mrvn.</title>
+				<link>http://hintjens.com/blog:105/comments/show#post-2422146</link>
+				<description></description>
+				<pubDate>Sat, 12 Dec 2015 13:25:57 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>This hyper-sensitivity to perceived insult, combined with the ability to project threat and hate is a standard bad actor pattern. The whole emotional palette is fake. The real emotion is &quot;I'm interested in you and if you show weakness, I will target you and start to be obsessed.&quot;</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:105/comments/show#post-2422071</guid>
+				<title>I read issues around mrvn.</title>
+				<link>http://hintjens.com/blog:105/comments/show#post-2422071</link>
+				<description></description>
+				<pubDate>Sat, 12 Dec 2015 08:00:31 +0000</pubDate>
+				<wikidot:authorName>crocket</wikidot:authorName>				<wikidot:authorUserId>1794068</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>People like mrvn exercise power by censoring contents for such irrelvant quality issues as pull request title not conforming to his own strict rules on title naming. I believe censoring pull requests whose titles do not conform to a maintainer's own strict rules is a direct breach of C4.1. Lots of people on stackexchange behave like mrvn.</p> <p>Lots of stackexchange questions are downvoted and even closed for not conforming to a specific format for the question.</p> <p>There's a problem with online governance, and it is that polycentric legal system doesn't often work inside a given website. Forking saves polycentric legal order on open source ecosystem, but forking is not applicable on most websites. Trolls on stackexchange impose their own rules on others, and those rules are not agreed upon with others. In such occasions, I try to recall the historic and concurrent polycentric legal systems.</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

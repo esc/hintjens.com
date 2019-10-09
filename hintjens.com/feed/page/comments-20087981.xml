@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Securing ZeroMQ: Soul of a New Certificate&quot;</title>
+		<link>http://hintjens.com/blog:53/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:30:35 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:53/comments/show#post-1870574</guid>
+				<title>Re: Proposal</title>
+				<link>http://hintjens.com/blog:53/comments/show#post-1870574</link>
+				<description></description>
+				<pubDate>Mon, 14 Oct 2013 11:38:35 +0000</pubDate>
+				<wikidot:authorName>stl-ajk</wikidot:authorName>				<wikidot:authorUserId>837446</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>4716 would appear to be the way forward although I couldn't see an RFC for private key format either.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:53/comments/show#post-1868651</guid>
+				<title>Re: Proposal</title>
+				<link>http://hintjens.com/blog:53/comments/show#post-1868651</link>
+				<description></description>
+				<pubDate>Fri, 11 Oct 2013 09:44:02 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Just read <a href="http://www.ietf.org/rfc/rfc4716.txt">http://www.ietf.org/rfc/rfc4716.txt</a> and it's <em>very</em> close to what I was designing, which was an HTTP-style header + content section wrapped in begin/end lines and limited to 72 columns.</p> <p>Is there an RFC for the SSH private key format? I couldn't find it.</p> <p>What I'll propose later (today) will be similar to the RFC 4716 format but with some modifications. However it's a great start, thanks for this suggestion.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:53/comments/show#post-1868644</guid>
+				<title>Re: Proposal</title>
+				<link>http://hintjens.com/blog:53/comments/show#post-1868644</link>
+				<description></description>
+				<pubDate>Fri, 11 Oct 2013 09:03:38 +0000</pubDate>
+				<wikidot:authorName>stl-ajk</wikidot:authorName>				<wikidot:authorUserId>837446</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>And as I said above, very common and widely accepted. +1 for OpenSSH key format for just this reason.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:53/comments/show#post-1868298</guid>
+				<title>Proposal</title>
+				<link>http://hintjens.com/blog:53/comments/show#post-1868298</link>
+				<description></description>
+				<pubDate>Thu, 10 Oct 2013 21:43:22 +0000</pubDate>
+				<wikidot:authorName>Sourcerer</wikidot:authorName>				<wikidot:authorUserId>1744561</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Hmm, what about using OpenSSH´s public key certificate storage format, or something very similar?<br /> Having just one line that can be copy&amp;pasted easily seems to be a quite successful format to me, especially if you don´t need any hierarchy or web-of-trust.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:53/comments/show#post-1867924</guid>
+				<title>Re: character encoding</title>
+				<link>http://hintjens.com/blog:53/comments/show#post-1867924</link>
+				<description></description>
+				<pubDate>Thu, 10 Oct 2013 12:18:34 +0000</pubDate>
+				<wikidot:authorName>stl-ajk</wikidot:authorName>				<wikidot:authorUserId>837446</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I've never been a huge fan of most cert formats at all. When I saw yours I thought &quot;ah, something sensible&quot;.</p> <p>But unfortunately that just leads on to &quot;oh not yet another format&quot;. Basically, there already exists lots of software for creating keys that people have and use and they all output into a &quot;commonly used format&quot;. Many of these people would be scratching their heads wondering why this new client doesn't accept any of the keys I already have *at least without a converter).</p> <p>Never liked x509 but unfortunately it's out there and common :(</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:53/comments/show#post-1861744</guid>
+				<title>character encoding</title>
+				<link>http://hintjens.com/blog:53/comments/show#post-1861744</link>
+				<description></description>
+				<pubDate>Tue, 01 Oct 2013 13:17:24 +0000</pubDate>
+				<wikidot:authorName>cremes</wikidot:authorName>				<wikidot:authorUserId>479952</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Note that this will also be used worldwide, so character encoding might be an important detail. I don't have any expertise here so I don't know what the simplest encoding would be that would support all/most languages.</p> <p>Maybe it's best to just force everyone to ascii.</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

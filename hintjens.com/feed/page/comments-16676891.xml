@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Securing ZeroMQ: CurveCP and NaCl&quot;</title>
+		<link>http://hintjens.com/blog:34/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:31:12 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:34/comments/show#post-1788783</guid>
+				<title>Re: MinimaLT</title>
+				<link>http://hintjens.com/blog:34/comments/show#post-1788783</link>
+				<description></description>
+				<pubDate>Mon, 03 Jun 2013 11:39:35 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Yes, I've read the MinimalT paper. It's a very nice design and I think will form the basis of the next design version of CurveZMQ.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:34/comments/show#post-1788774</guid>
+				<title>MinimaLT</title>
+				<link>http://hintjens.com/blog:34/comments/show#post-1788774</link>
+				<description></description>
+				<pubDate>Mon, 03 Jun 2013 11:23:29 +0000</pubDate>
+				<wikidot:authorName>SilentLennie</wikidot:authorName>				<wikidot:authorUserId>1643763</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Have you seen what Bernsteins recently helped to create ?</p> <p>It's called MinimaLT. As my account is a new account I can't post a link. But you can search for it on Google and find it with the keywords: MinimaLT Bernstein PDF</p> <p>That solves the keydistribution I believe.</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

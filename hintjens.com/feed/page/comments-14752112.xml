@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Burning Down the House: AMQP revisited&quot;</title>
+		<link>http://hintjens.com/blog:28/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:31:26 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:28/comments/show#post-1610671</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:28/comments/show#post-1610671</link>
+				<description></description>
+				<pubDate>Fri, 09 Nov 2012 09:08:17 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>The stripped-down version of the XML structures is BSD licensed, indeed. But this is not the spec. It lacks the text that defines interoperability. We'd have to rewrite that from first base, and not reuse any of the language or text from the published 0.9.1 spec. Then we'd have to rewrite a specification document, again, from scratch. Furthermore, this would have to be done by people who did not participate in the original work, to avoid any risk of copyright infringement claims.</p> <p>What could be more fun is to take that BSD-licensed framing, remove the junk that's still there (such as the connection multiplexing), and publish it under a new license, then see if people are willing to contribute that back into shape as a new lite standard.</p> <p>I'd be more than happy to help with that, especially if we arrive at semantics that can be run over other transports, e.g. ZeroMQ.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:28/comments/show#post-1598306</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:28/comments/show#post-1598306</link>
+				<description></description>
+				<pubDate>Fri, 26 Oct 2012 11:18:51 +0000</pubDate>
+				<wikidot:authorName>Simon MacMullen</wikidot:authorName>				<wikidot:authorUserId>1475666</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Thank you for an interesting blog post. I'm not going to comment on AMQP 1.0 because, you know, politics. Blech.</p> <p>I would argue with: &quot;AMQP/0.9.1 is legally and technically dead. The old spec is copyrighted by the AMQP Working Group and not remixable. There are no mechanisms for extensions, patches, fixes, anything.&quot;</p> <p>The stripped version of the 0-9-1 spec is BSD licenced, and that's all we've ever used. We at RabbitMQ have extended it perfectly happily. Now, the AMQP WG may not be interested in updating 0-9-1, sure, but we invite anyone else who's interested in its continued evolution to work with us. We're friendly people, honest :-)</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

@@ -1,0 +1,809 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from hintjens.com/blog:38 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:31:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>The PUB-SUB Hacks: Census - Hintjens.com</title>
+    
+    	<script type="text/javascript" src="http://www.wikidot.com/default__flow/login__CustomDomainScript?site_id=352120"></script>
+
+    
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/init.combined.js"></script>
+    <script  type="text/javascript">
+        var URL_HOST = 'www.wikidot.com';
+        var URL_DOMAIN = 'wikidot.com';
+        var USE_SSL =  true ;
+        var URL_STATIC = 'http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade';
+        // global request information
+        
+        var WIKIREQUEST = {};
+        WIKIREQUEST.info = {};
+        
+        WIKIREQUEST.info.domain = "hintjens.com";
+        WIKIREQUEST.info.siteId = 352120;
+        WIKIREQUEST.info.siteUnixName = "hintjens";
+        WIKIREQUEST.info.categoryId = 1984291;
+        WIKIREQUEST.info.themeId = 1;
+        WIKIREQUEST.info.requestPageName = "blog:38";
+        OZONE.request.timestamp = 1570613249;
+        OZONE.request.date = new Date();
+        WIKIREQUEST.info.lang = 'en';
+                WIKIREQUEST.info.pageUnixName = "blog:38";
+        WIKIREQUEST.info.pageId = 16980376;
+                        WIKIREQUEST.info.lang = "en";
+        OZONE.lang = "en";
+        var isUAMobile = !!/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    </script>
+    
+    
+
+
+    
+        <script  type="text/javascript">
+    
+        require.config({
+            baseUrl: URL_STATIC + '/common--javascript',
+            paths: {
+                'jquery.ui': 'jquery-ui.min',
+                'jquery.form': 'jquery.form'
+            }
+        });
+    
+    </script>
+    
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+            
+    
+    
+    
+    
+    <meta http-equiv="content-language" content="en"/>
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/WIKIDOT.combined.js"></script>
+        
+    
+    <style type="text/css" id="internal-style">
+        
+        /* modules */
+@import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/css/pagerate/PageRateWidgetModule.css);
+
+
+        
+                
+        /* theme */
+                    @import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--theme/base/css/style.css);
+                    @import url(http://hintjens.wdfiles.com/local--code/admin%3Athemes/1);
+            </style>
+    
+        
+        
+        
+    <link rel="shortcut icon" href="local--favicon/favicon.gif"/>
+    <link rel="icon" type="image/gif" href="local--favicon/favicon.gif"/>
+    
+            <link rel="apple-touch-icon" href="common--images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="common--images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="common--images/apple-touch-icon-114x114.png" />
+        
+        
+            <link rel="alternate" type="application/wiki" title="Edit this page" href="javascript:WIKIDOT.page.listeners.editClick()"/>
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18234656-1']);
+        _gaq.push(['_setDomainName', 'none']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        _gaq.push(['old._setAccount', 'UA-68540-5']);
+        _gaq.push(['old._setDomainName', 'none']);
+        _gaq.push(['old._setAllowLinker', true]);
+        _gaq.push(['old._trackPageview']);
+
+                _gaq.push(['userTracker._setAccount', 'UA-623476-16']);
+        _gaq.push(['userTracker._trackPageview']);
+            </script>
+    
+    <script type="text/javascript">
+        window.google_analytics_uacct = 'UA-18234656-1';
+        window.google_analytics_domain_name = 'none';
+    </script>
+    
+        <link rel="manifest" href="onesignal/manifest.html" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" acync=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: null,
+          });
+        });
+    </script>
+        
+<link rel="alternate" type="application/rss+xml" title="Comments for the page &quot;The PUB-SUB Hacks: Census&quot;" href="feed/page/comments-16980376.xml"/><script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/misc/NewPageHelperModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/list/ListPagesModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/pagerate/PageRateWidgetModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumCommentsModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/sub/ForumNewPostFormModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadPostsModule.js"></script>
+</head>
+<body id="html-body">
+<div id="skrollr-body">
+<a name="page-top"></a>
+
+<div id="container-wrap-wrap">
+    <div id="container-wrap">
+        <div id="container">
+            <div id="header">
+              <h1><a href="index.html"><span>Hintjens.com</span></a></h1>
+                
+                    <h2><span>Moving Pieces</span></h2>
+                
+                
+                <!-- google_ad_section_start(weight=ignore) -->
+                
+                <div id="search-top-box" class="form-search">
+    <form id="search-top-box-form" action="http://hintjens.com/dummy" class="input-append">
+        <input id="search-top-box-input" class="text empty search-query" type="text" size="15" name="query" value="Search this site" onfocus="if(YAHOO.util.Dom.hasClass(this, 'empty')){YAHOO.util.Dom.removeClass(this,'empty'); this.value='';}"/><input class="button btn" type="submit" name="search" value="Search"/>
+    </form>
+</div>
+                
+                
+                    <div id="top-bar">
+                        
+
+<ul>
+<li><a href="index.html">Front</a></li>
+<li><a href="blog__zeromq.html">ZeroMQ</a></li>
+<li><a href="blog__community.html">Community</a></li>
+<li><a href="blog__unprotocols.html">Unprotocols</a></li>
+<li><a href="blog__psychopaths.html">Psychopaths</a></li>
+</ul>
+
+                    </div>
+                
+                <div id="login-status"><a href="javascript:;" onclick="WIKIDOT.page.listeners.createAccount(event)" class="login-status-create-account btn">Create account</a> <span>or</span> <a href="javascript:;" onclick="WIKIDOT.page.listeners.loginClick(event)" class="login-status-sign-in btn btn-primary">Sign in</a> </div>
+                <div id="header-extra-div-1"><span></span></div><div id="header-extra-div-2"><span></span></div><div id="header-extra-div-3"><span></span></div>
+            </div>
+            
+            <div id="content-wrap">
+                
+                    <div id="side-bar">
+                        
+
+
+                        
+
+<p><a class="wiki-standalone-button" style="background-image: url(http://www.wikidot.com/local--files/files/document-print.png); background-repeat: no-repeat; background-position: bottom right; padding-right: 20px;color: #444" href="javascript:;" onclick="WIKIDOT.page.listeners.printClick(event)">print</a></p>
+<a href="http://hintjens.wdfiles.com/local--files/nav:side/culture.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/nav:side/culture.jpg/small.jpg" alt="culture.jpg" class="image" /></a>
+<p><strong>Pieter Hintjens</strong></p>
+<p><a href="main_biography.html">Biography</a> | <a href="main_portfolio.html">Portfolio</a> | <a href="https://github.com/hintjens">GitHub</a><br />
+<a href="books.html">Books</a> | <a href="https://vimeo.com/user10099130/videos">Videos</a> | <a href="http://www.slideshare.net/pieterh">Slides</a> | <a href="http://fiction.hintjens.com/">Stories</a> | <a href="http://wiki.hintjens.com/">Wiki</a><br />
+<a href="contact.html">Contact</a></p>
+<p><strong>Thank you for the gifts</strong></p>
+<p><a href="http://paypal.me/Hintjens">Kind people already sent donations</a> that will make my childrens' lives easier, when I'm not there any more. Thank you enormously! :-)</p>
+<p>Podcasts/Interviews</p>
+<p><a href="http://softwareengineeringdaily.com/2016/06/23/death-distributed-systems-pieter-hintjens/">Software Engineering Daily</a><br />
+<a href="https://www.youtube.com/watch?v=ApqI9XLRk4k">Interview by Adam Dymitruk</a><br />
+<a href="http://devchat.tv/ruby-rogues/188-rr-community-building-with-pieter-hintjens">Ruby Rogues #188, Community Building</a></p>
+<p>Talks on video</p>
+<p><a href="http://deredactie.be/cm/vrtnieuws/videozone/programmas/deafspraak/2.44331">&quot;De afspraak&quot;, VRT, May 2016</a> (panel discussion)<br />
+<a href="http://www.rtl.be/rtltvi/video/581260.aspx">RTL TV, May 2016</a> (panel discussion)<br />
+<a href="https://www.youtube.com/watch?v=uzxcILudFWM">DomCode 2015, Nov 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=7HECD3eLoVo">Coding Serbia, Oct 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=O8CbzKREAj4">Euroscipy, Cambridge, Aug 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=FKu09-_AaeM&amp;index=4&amp;list=PLFxMLyzsWeqr4SCyx0ZmFkVz2vZJk_CI5">PyGrunn, Groningen, May 2015</a><br />
+<a href="http://www.ustream.tv/recorded/61450822">Craft Conf, Budapest, Apr 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design-2015">QCon London, Mar 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design">Code Mesh London, Nov 2014</a><br />
+<a href="http://www.infoq.com/presentations/trick-better-software">Build Stuff, Vilnius 2014</a><br />
+<a href="https://www.youtube.com/watch?v=_QF9sFJGJuc">Build Stuff, Vilnius, Nov 2014</a> (interview)<br />
+<a href="https://www.youtube.com/watch?v=xFVDNTXIC_Y">Coding Serbia, Nov 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=DAOFZfSlFs0">Devnology, Leusden, Oct 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=QB7VXSc5H3A">EuroPython, Berlin, Jul 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=qTNqgwN5gzA&amp;feature=youtu.be">Build Stuff, Vilnius, Dec 2013</a> (interview)<br />
+<a href="http://www.infoq.com/presentations/digital-revolution-freedom">Build Stuff, Vilnius, Dec 2013</a> (keynote)<br />
+<a href="http://vimeo.com/82175816">Code Mesh London, Dec 2013</a><br />
+<a href="http://vimeo.com/79378301">DevOps Days, London, Nov 2013</a><br />
+<a href="https://vimeo.com/68236487">NDC Oslo, Jun 2013</a><br />
+<a href="https://vimeo.com/69666055">CERN - Geneva, Jun 2013</a><br />
+<a href="https://www.youtube.com/watch?v=uj-li0LO_2g">Tech Mesh, London, Dec 2012</a><br />
+<a href="http://www.infoq.com/presentations/Architecture-Scale-ZeroMQ">Strange Loop, St.Louis, Oct 2012</a><br />
+<a href="https://vimeo.com/37854675">ZeroMQ@PDX part 2 - Portland, Feb 2012</a><br />
+<a href="https://vimeo.com/38117896">ZeroMQ@PDX part 1 - Portland, Feb 2012</a><br />
+<a href="http://www.youtube.com/watch?gl=BE&amp;v=4II94h6-IFY">FLOSS Weekly, Petaliuma CA, Dec 2011</a><br />
+<a href="https://www.youtube.com/watch?v=CCBYzKfmQ4U">FOSDEM 2011, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=h0facLxJPUE">Berlin Buzzwords 2010</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=bQgPArfbXm4">FOSDEM 2009, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=fJo1jmuOuqQ">Hellenic FOSS Conference 2008, Athens part 1</a><br />
+<a href="https://www.youtube.com/watch?v=Hx6cS1VLhoo">Hellenic FOSS Conference 2008, Athens part 2</a></p>
+<p>Email me at <span class="wiki-email">moc.snejtnih|reteip#moc.snejtnih|reteip</span> if you'd like me to present at your event, or in your organization.</p>
+<a href="books.html"><img src="https://www.createspace.com/Img/T448/T45/T21/BookCoverImage.jpg?random=0.4431380270844333" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.4431380270844333" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/socarch.png" style="padding:5px" width="100" alt="socarch.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/confessions.jpg" style="padding:5px" width="100" alt="confessions.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/psccover.jpg" style="padding:5px" width="100" alt="psccover.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://akamaicovers.oreilly.com/images/0636920026136/cat.gif" style="padding:5px" width="100" alt="cat.gif" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/scalablec.png" style="padding:5px" width="100" alt="scalablec.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="https://www.createspace.com/Img/T409/T85/T11/BookCoverImage.jpg?random=0.7859812398986378" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.7859812398986378" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<p><strong><a href="books.html">Download and read online</a></strong></p>
+<p><strong><a href="legal_start.html">Legal</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></strong></p>
+<div class="collapsible-block">
+<div class="collapsible-block-folded"><a class="collapsible-block-link" href="javascript:;"> ▽ </a></div>
+<div class="collapsible-block-unfolded" style="display:none">
+<div class="collapsible-block-unfolded-link"><a class="collapsible-block-link" href="javascript:;"> △ </a></div>
+<div class="collapsible-block-content">
+<div class="side-box">
+<p><a href="_admin.html">Manage</a> | <a href="admin_themes.html">Theme</a> | <a href="nav_top.html">Top</a> | <a href="nav_top.html">Side</a></p>
+
+<div class="new-page-box" style="text-align: center; margin: 1em 0;">
+	<form action="http://hintjens.com/dummy.html" method="get" onsubmit="WIKIDOT.modules.NewPageHelperModule.listeners.create(event);">
+		<input class="text" name="pageName" type="text" size="40" maxlength="128" style="margin: 1px"/>
+				<input type="submit" class="button" value="New post" style="margin: 1px;"/>
+									<input type="hidden" name="categoryName" value="blog"/>
+													<input type="hidden" name="parent" value="blog:_start"/>
+				
+	</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                        
+
+
+                    </div>
+                
+                
+                <!-- google_ad_section_end -->
+                
+                <div id="main-content">
+                    <div id="action-area-top"></div>
+                    
+                    
+                        <div id="page-title">
+                            The PUB-SUB Hacks: Census
+                        </div>
+                    
+
+                    
+                        <div id="breadcrumbs">
+                            <a href="blog__start.html">All Articles</a> &raquo; The PUB-SUB Hacks: Census
+                        </div>
+                    
+
+                    
+
+
+
+                    <div id="page-content">
+                        
+
+<div style="overflow:hidden; font-size: 13px; margin: -26px 0 -22px 0">
+<div style="float:left"><div class="list-pages-box">    
+
+<p><a href="blog_37.html">&lt; Previous</a></p>
+
+    
+    
+    
+    </div></div>
+<div style="float:right"><div class="list-pages-box">    
+
+<p><a href="blog_39.html">Next &gt;</a></p>
+
+    
+    
+    
+    </div></div>
+</div>
+<div style="border: solid 1px #f00; padding:0 1em 0 1em; margin-bottom: 1em; margin-top:1em; min-height: 140px; overflow: hidden">
+<p><span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1473156444" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)" /></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;">pieterh</a></span> wrote on <span class="odate time_1364326093 format_%25e%20%25b%2C%20%25H%3A%25M%20%28%25O%20ago%29">26 Mar 2013 19:28</span></p>
+<div class="image-container floatleft"><a href="http://hintjens.wdfiles.com/local--files/blog:38/1_logo.png"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:38/1_logo.png/small.jpg" alt="1_logo.png" class="image" /></a></div>
+<p>In the first article on PUB-SUB hacks, we looked at the Meerkat pattern. In this second article I'll walk through a pattern—Census—that's loosely inspired by the &quot;Surveyor&quot; socket type from the defunct Crossroads fork of ZeroMQ. It's a fairly simple pattern. The code for this article is <a href="https://gist.github.com/hintjens/5248234">in a GitHub gist</a>.</p>
+<h3 id="toc0"><span>The Census Pattern</span></h3>
+<p>The <strong>Census Pattern</strong> is an evolution of Meerkat that solves the problem of monitoring or querying a set of nodes. The question part looks like a PUB-SUB broadcast and the answer part is similar to a PUSH-PULL sink in that it's a many-to-one flow. You can often simply hard-code the question so it's implied. For instance instead of asking a set of nodes, &quot;who is doing the least work right now?&quot; (to know who to send new work to), nodes could broadcast their availability without being asked.</p>
+<p>The advantage of explicitly asking the question is, of course, that you can do more sophisticated group queries. For instance, you could send a search pattern to a set of engines, and get back the first reply or all replies. So Census is like group request-reply, where the replies can be processed according to the use-case.</p>
+<p>Traditionally, we'd design Census using a PUB-SUB pattern for the question, and a PUSH-PULL pattern for the replies. In the old days this the advice we gave ØMQ developers: break a complex pattern into separate flows, use a specific socket type for each one.</p>
+<p>However it turns out that multiple sets of sockets gets complex and confusing. It's hard to synchronize things when you have multiple independent paths. It's hard to imagine a security model working over mixed socket flows. Using a single socket pair is, it turns out, simpler. And simpler is always better. So that's what we'll aim for: a single socket flow for group request-reply.</p>
+<p>Don't confuse &quot;censuses&quot; (if that is a proper word) with &quot;surveys&quot;. A census is what you do when you ask your kids, &quot;who wants burgers?&quot; A survey is what you do when you stop random people at the 11th Annual Vegan Life Festival and ask innocently, &quot;who wants burgers?&quot; (The answer might astonish you. Or not. I've never tried, but YouTubing ridiculous surveys conducted on self-selected samples suddenly seems quite fun. Next up, we survey the Papal convention for their opinions on whether burger makes a valid pizza topping, and then we extrapolate their answers to the whole world population.)</p>
+<p>Popes aside, here are some ground rules for conducting a census:</p>
+<ul>
+<li>We generally know in advance how many people we're speaking to. People may come and go randomly but unlike a survey, our goal is to count the heads we can see, not the ones we can't.</li>
+</ul>
+<ul>
+<li>We expect either an answer, or silence, within a certain time. On a computer network as in the real world, there's no such thing as perfection.</li>
+</ul>
+<ul>
+<li>Based on the results, we take some decision, which may be to repeat the question, ask a different question, to jump to a bogus forgone conclusion, etc.</li>
+</ul>
+<p>So parameters for a census are: the question we ask, the allowed answers, the time we allow for answers, and the total size of our target population. That last piece is, of course, where Meerkat comes in since it lets us conduct a census of a dynamic population that may be leaving and joining the network randomly.</p>
+<h4 id="toc1"><span>Census Over XPUB-XSUB</span></h4>
+<p>Clearly the PUB-SUB pattern is a good place to start with a census since we want to broadcast the question to everyone. We do have to use XPUB and XSUB since they give us extra superpowers we need. Two superpowers, in fact:</p>
+<ul>
+<li>We can send and receive subscription messages, which lets us do the Meerkat part.</li>
+</ul>
+<ul>
+<li>XSUB sockets can talk back to XPUB sockets, which lets us do the Census part.</li>
+</ul>
+<p>John Muehlhausen's <tt>libzmq</tt> <a href="https://github.com/zeromq/libzmq/commit/d32e3922785f170ce24159ab5e4b44badc473ec1">d32e39 commit</a> from 7 January 2013 is worth studying. If I taught computer science, I'd spend a few hours just boring my poor students with this one. His 14-line patch hacked XPUB and XSUB into becoming a two-way highway for messages. It's so simple and so very beautiful. I like the evolution of PUB and SUB from a one-way purist design (from the original one-way PGM-style financial data distribution) into more tactile and pragmatic two-way sockets.</p>
+<p>The patch is a minimal change, evolution in action. A subscription message starts with 0x01. An unsubscription message starts with 0x00. We discard any other message, right? That's how XPUB and XSUB were <em>designed</em>. But hang on, no, hang on&#8230; Let's not throw other messages away, let's pass them on up instead. Suddenly the gate opens to subscribers sending stuff back to their publishers.</p>
+<p>So, literally (and I mean this in the non-figurative sense), you can send a &quot;normal&quot; message to an XSUB socket, and you can receive &quot;normal&quot; messages off XPUB sockets. XPUB works like a sink, and will fair-queue incoming messages from its subscribers, while XSUB works like a copier, and will copy the message to each XPUB it's connected to. You don't need any special socket options for this, it's how the sockets work out of the box. If you don't want the functionality, just discard &quot;normal&quot; messages in code that reads from XPUB sockets.</p>
+<p><strong>Figure 1 - The Census Pattern</strong></p>
+<div class="image-container aligncenter"><img src="http://hintjens.wdfiles.com/local--files/blog:38/fig1.png" alt="fig1.png" class="image" /></div>
+<p>Enough ado already, let's take this pie out of the oven and see how it tastes. Here's my first attempt at the Census pattern:</p>
+<div class="code">
+<p><span style="color:#BC7A00"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The Census Pattern<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Model 1, over XPUB-XSUB</span></p>
+<p>#include &quot;czmq.h&quot;</p>
+<p><span style="color:#008000"><strong>static</strong></span> <span style="color:#B00040">void</span><br />
+<span style="color:#0000FF">counter_task</span> (<span style="color:#B00040">void</span> <span style="color:#666666">*</span>args, zctx_t <span style="color:#666666">*</span>ctx, <span style="color:#B00040">void</span> <span style="color:#666666">*</span>pipe)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>counter <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_XPUB);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_xpub_verbose (counter, <span style="color:#666666">1</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_bind (counter, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>*:6001&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The counter task is broken into two steps. First it allows</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>all targets to get ready and raise their hands, using the</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Meerkat pattern. Then it sends out its census question and</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>allows all targets time to reply:</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Parameters for the census</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> count_msec <span style="color:#666666">=</span> <span style="color:#666666">250</span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Msecs to settle down</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> think_msec <span style="color:#666666">=</span> <span style="color:#666666">250</span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Msecs for responses</em></span></p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Calling thread tells us the population size</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>population <span style="color:#666666">=</span> zstr_recv (pipe);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>All activity happens on our counter socket</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zmq_pollitem_t items <span style="white-space: pre-wrap;">[]</span> <span style="color:#666666">=</span> { { counter, <span style="color:#666666">0</span>, ZMQ_POLLIN, <span style="color:#666666">0</span> } };<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>byte meerkat <span style="white-space: pre-wrap;">[]</span> <span style="color:#666666">=</span> { <span style="color:#666666">1</span>, <span style="color:#BA2121">'M'</span>, <span style="color:#BA2121">'e'</span>, <span style="color:#BA2121">'e'</span>, <span style="color:#BA2121">'r'</span>, <span style="color:#BA2121">'k'</span>, <span style="color:#BA2121">'a'</span>, <span style="color:#BA2121">'t'</span> };<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Both steps are zmq_poll loops which exit either when we</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>get the expected number of responses, or we time-out. In</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>the first step we count only Meerkat subscriptions:</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> headcount <span style="color:#666666">=</span> <span style="color:#666666">0</span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Known target size</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int64_t</span> timer_end <span style="color:#666666">=</span> zclock_time () <span style="color:#666666">+</span> count_msec;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> still_waiting <span style="color:#666666">=</span> atoi (population);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>while</strong></span> (still_waiting) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int64_t</span> time_left <span style="color:#666666">=</span> timer_end <span style="color:#666666">-</span> zclock_time ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (time_left <span style="color:#666666">&lt;=</span> <span style="color:#666666">0</span>)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>break</strong></span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>We're done here</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> rc <span style="color:#666666">=</span> zmq_poll (items, <span style="color:#666666">1</span>, time_left <span style="color:#666666">*</span> ZMQ_POLL_MSEC);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (rc <span style="color:#666666">==</span> <span style="color:#666666">-</span><span style="color:#666666">1</span>)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>break</strong></span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Interrupted</em></span></p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (items <span style="white-space: pre-wrap;">[</span><span style="color:#666666">0</span><span style="white-space: pre-wrap;">]</span>.revents <span style="color:#666666">&amp;</span> ZMQ_POLLIN) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_t <span style="color:#666666">*</span>frame <span style="color:#666666">=</span> zframe_recv (counter);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (<span style="color:#666666">!</span>frame)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>break</strong></span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Interrupted</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (zframe_size (frame) <span style="color:#666666">==</span> <span style="color:#008000"><strong>sizeof</strong></span> (meerkat)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#666666">&amp;&amp;</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>memcmp (zframe_data (frame), meerkat,<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>sizeof</strong></span> (meerkat)) <span style="color:#666666">==</span> <span style="color:#666666">0</span>) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>still_waiting<span style="color:#666666"><span style="white-space: pre-wrap;">--</span></span>;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>headcount<span style="color:#666666">++</span>;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span>}</tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_destroy (<span style="color:#666666">&amp;</span>frame);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span>}</tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span>}</tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Now we've got our target population and we know they're</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>subscribed, we send out the census question:</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (counter, <span style="color:#BA2121">&quot;Who wants pizza?&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>In the second poll loop, we wait for valid answers to our</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>census question. We might still receive subscription</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>messages so we have to discount those:</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> positives <span style="color:#666666">=</span> <span style="color:#666666">0</span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>How many said &quot;yes&quot;</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>timer_end <span style="color:#666666">=</span> zclock_time () <span style="color:#666666">+</span> think_msec;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>still_waiting <span style="color:#666666">=</span> headcount;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>while</strong></span> (still_waiting) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int64_t</span> time_left <span style="color:#666666">=</span> timer_end <span style="color:#666666">-</span> zclock_time ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (time_left <span style="color:#666666">&lt;=</span> <span style="color:#666666">0</span>)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>break</strong></span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>We're done here</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> rc <span style="color:#666666">=</span> zmq_poll (items, <span style="color:#666666">1</span>, time_left <span style="color:#666666">*</span> ZMQ_POLL_MSEC);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (rc <span style="color:#666666">==</span> <span style="color:#666666">-</span><span style="color:#666666">1</span>)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>break</strong></span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Interrupted</em></span></p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (items <span style="white-space: pre-wrap;">[</span><span style="color:#666666">0</span><span style="white-space: pre-wrap;">]</span>.revents <span style="color:#666666">&amp;</span> ZMQ_POLLIN) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_t <span style="color:#666666">*</span>frame <span style="color:#666666">=</span> zframe_recv (counter);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (<span style="color:#666666">!</span>frame)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>break</strong></span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Interrupted</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>byte <span style="color:#666666">*</span>data <span style="color:#666666">=</span> zframe_data (frame);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Ignore any subscriptions we might still get</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (data <span style="white-space: pre-wrap;">[</span><span style="color:#666666">0</span><span style="white-space: pre-wrap;">]</span> <span style="color:#666666">&gt;</span> <span style="color:#666666">1</span>) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (streq ((<span style="color:#B00040">char</span> <span style="color:#666666">*</span>) data, <span style="color:#BA2121">&quot;Yes&quot;</span>))<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>positives<span style="color:#666666">++</span>;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>still_waiting<span style="color:#666666"><span style="white-space: pre-wrap;">--</span></span>;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span>}</tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_destroy (<span style="color:#666666">&amp;</span>frame);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span>}</tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span>}</tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>printf (<span style="color:#BA2121">&quot;Out of %d people, %d want pizza</span><span style="color:#BB6622"><strong>\n</strong></span><span style="color:#BA2121">&quot;</span>, headcount, positives);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (pipe, <span style="color:#BA2121">&quot;DONE&quot;</span>);<br />
+}</p>
+<p><span style="color:#408080"><span style="font-style:italic"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The target task starts by doing a Meerkat subscription, and then<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>subscribes to everything with a zero-sized subscription message.<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>It waits for the census question and answers Yes or No randomly:</span></span></p>
+<p><span style="color:#008000"><strong>static</strong></span> <span style="color:#B00040">void</span><br />
+<span style="color:#0000FF">target_task</span> (<span style="color:#B00040">void</span> <span style="color:#666666">*</span>args, zctx_t <span style="color:#666666">*</span>ctx, <span style="color:#B00040">void</span> <span style="color:#666666">*</span>pipe)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>target <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_XSUB);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_connect (target, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>localhost:6001&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Tell publisher we're here</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>byte meerkat <span style="white-space: pre-wrap;">[]</span> <span style="color:#666666">=</span> { <span style="color:#666666">1</span>, <span style="color:#BA2121">'M'</span>, <span style="color:#BA2121">'e'</span>, <span style="color:#BA2121">'e'</span>, <span style="color:#BA2121">'r'</span>, <span style="color:#BA2121">'k'</span>, <span style="color:#BA2121">'a'</span>, <span style="color:#BA2121">'t'</span> };<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zmq_send (target, <span style="color:#666666">&amp;</span>meerkat, <span style="color:#008000"><strong>sizeof</strong></span> (meerkat), <span style="color:#666666">0</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Subscribe to everything as well (empty subscription)</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zmq_send (target, <span style="color:#666666">&amp;</span>meerkat, <span style="color:#666666">1</span>, <span style="color:#666666">0</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>question <span style="color:#666666">=</span> zstr_recv (target);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>answer <span style="color:#666666">=</span> randof (<span style="color:#666666">2</span>) <span style="color:#666666">==</span> <span style="color:#666666">0</span><span style="color:#666666">?</span> <span style="color:#BA2121">&quot;Yes&quot;</span><span style="color:#666666">:</span> <span style="color:#BA2121">&quot;No&quot;</span>;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>printf (<span style="color:#BA2121">&quot;%s %s</span><span style="color:#BB6622"><strong>\n</strong></span><span style="color:#BA2121">&quot;</span>, question, answer);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>free (question);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (target, answer);<br />
+}</p>
+<p><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The main task starts a counter task and a set of target tasks:</em></span></p>
+<p><span style="color:#B00040">int</span> <span style="color:#0000FF">main</span> (<span style="color:#B00040">void</span>)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_t <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Size of target population</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>srand ((<span style="color:#B00040">unsigned</span>) time (<span style="color:#008000">NULL</span>));<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> population <span style="color:#666666">=</span> randof (<span style="color:#666666">10</span>) <span style="color:#666666">+</span> <span style="color:#666666">1</span>;</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Start counter task</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>pipe <span style="color:#666666">=</span> zthread_fork (ctx, counter_task, <span style="color:#008000">NULL</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (pipe, <span style="color:#BA2121">&quot;%d&quot;</span>, population);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Start target population</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>while</strong></span> (population<span style="color:#666666"><span style="white-space: pre-wrap;">--</span></span>)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zthread_fork (ctx, target_task, <span style="color:#008000">NULL</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Wait for census to complete</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>free (zstr_recv (pipe));<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#666666">0</span>;<br />
+}</p>
+</div>
+<br />
+<em>census1.c: Census Pattern over XSUB-XPUB</em>
+<p>It's not huge, 150 lines of code in C. The counter task has two steps. If all nodes are up and running, the whole thing runs with no delay. If there's a node broken or too busy to answer, each step will wait for a while before timing out. A census will still be valid if there are missing nodes. In a realistic implementation we could continue to ask more questions, and not need to wait for nodes to join again each time.</p>
+<h4 id="toc2"><span>Census Over ROUTER-DEALER</span></h4>
+<p>In the Big Black Book of Mad Science (originally it was a kind of light green but multiple incendiary near-misses gave it a charred exterior, and the general consensus was that &quot;The Big Kind of Light Green Book&quot; didn't have quite the same ring anyhow), rule number three is: &quot;If at first you succeed, try again with more gunpowder&quot;. (Rules one and two are, since you're asking, &quot;Bald is the new Evil&quot;, and &quot;If you laugh loudly, you can get away with almost anything&quot;. Protective eye-wear only merits rule number 24. Rule number five says, enigmatically, &quot;If you have to ask what rule #5 is, you can't afford it.&quot;)</p>
+<p>So, more gunpowder! XPUB-XSUB is neat, but how about ROUTER-DEALER? After all, the Census pattern requires a two-way many-to-one dialog, and ROUTER-DEALER are pretty good at that. As an experiment, let's rewrite the same Census example using ROUTER-DEALER, and see whether it's simpler or more complex.</p>
+<p><strong>Figure 2 - Census with More Gunpowder</strong></p>
+<div class="image-container aligncenter"><img src="http://hintjens.wdfiles.com/local--files/blog:38/fig2.png" alt="fig2.png" class="image" /></div>
+<p>Here's the code:</p>
+<div class="code">
+<p><span style="color:#BC7A00"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The Census Pattern<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Model 2, over ROUTER-DEALER</span></p>
+<p>#include &quot;czmq.h&quot;</p>
+<p><span style="color:#008000"><strong>static</strong></span> <span style="color:#B00040">void</span><br />
+<span style="color:#0000FF">counter_task</span> (<span style="color:#B00040">void</span> <span style="color:#666666">*</span>args, zctx_t <span style="color:#666666">*</span>ctx, <span style="color:#B00040">void</span> <span style="color:#666666">*</span>pipe)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>counter <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_ROUTER);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_bind (counter, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>*:6001&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Parameters for the census</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> census_msec <span style="color:#666666">=</span> <span style="color:#666666">250</span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Msecs to settle down</em></span></p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Calling thread tells us the population size</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>population <span style="color:#666666">=</span> zstr_recv (pipe);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>All activity happens on our counter socket</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zmq_pollitem_t items <span style="white-space: pre-wrap;">[]</span> <span style="color:#666666">=</span> { { counter, <span style="color:#666666">0</span>, ZMQ_POLLIN, <span style="color:#666666">0</span> } };</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> headcount <span style="color:#666666">=</span> <span style="color:#666666">0</span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Known target size</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> positives <span style="color:#666666">=</span> <span style="color:#666666">0</span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>How many said &quot;yes&quot;</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int64_t</span> timer_end <span style="color:#666666">=</span> zclock_time () <span style="color:#666666">+</span> census_msec;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> still_waiting <span style="color:#666666">=</span> atoi (population);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>while</strong></span> (still_waiting) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int64_t</span> time_left <span style="color:#666666">=</span> timer_end <span style="color:#666666">-</span> zclock_time ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (time_left <span style="color:#666666">&lt;=</span> <span style="color:#666666">0</span>)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>break</strong></span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>We're done here</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> rc <span style="color:#666666">=</span> zmq_poll (items, <span style="color:#666666">1</span>, time_left <span style="color:#666666">*</span> ZMQ_POLL_MSEC);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (rc <span style="color:#666666">==</span> <span style="color:#666666">-</span><span style="color:#666666">1</span>)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>break</strong></span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Interrupted</em></span></p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (items <span style="white-space: pre-wrap;">[</span><span style="color:#666666">0</span><span style="white-space: pre-wrap;">]</span>.revents <span style="color:#666666">&amp;</span> ZMQ_POLLIN) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_t <span style="color:#666666">*</span>address <span style="color:#666666">=</span> zframe_recv (counter);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>message <span style="color:#666666">=</span> zstr_recv (counter);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (streq (message, <span style="color:#BA2121">&quot;Hello&quot;</span>)) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>headcount<span style="color:#666666">++</span>;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_send (<span style="color:#666666">&amp;</span>address, counter, ZFRAME_MORE);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zstr_send (counter, <span style="color:#BA2121">&quot;Who wants pizza?&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span>}</tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>else</strong></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (streq (message, <span style="color:#BA2121">&quot;Yes&quot;</span>))<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>positives<span style="color:#666666">++</span>;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_destroy (<span style="color:#666666">&amp;</span>address);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>free (message);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span>}</tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span>}</tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>printf (<span style="color:#BA2121">&quot;Out of %d people, %d want pizza</span><span style="color:#BB6622"><strong>\n</strong></span><span style="color:#BA2121">&quot;</span>, headcount, positives);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (pipe, <span style="color:#BA2121">&quot;DONE&quot;</span>);<br />
+}</p>
+<p><span style="color:#408080"><span style="font-style:italic"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The target task starts by saying Hello, then it waits for the<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>census question and answers Yes or No randomly:</span></span></p>
+<p><span style="color:#008000"><strong>static</strong></span> <span style="color:#B00040">void</span><br />
+<span style="color:#0000FF">target_task</span> (<span style="color:#B00040">void</span> <span style="color:#666666">*</span>args, zctx_t <span style="color:#666666">*</span>ctx, <span style="color:#B00040">void</span> <span style="color:#666666">*</span>pipe)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>subscriber <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_DEALER);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_connect (subscriber, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>localhost:6001&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (subscriber, <span style="color:#BA2121">&quot;Hello&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>question <span style="color:#666666">=</span> zstr_recv (subscriber);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>answer <span style="color:#666666">=</span> randof (<span style="color:#666666">2</span>) <span style="color:#666666">==</span> <span style="color:#666666">0</span><span style="color:#666666">?</span> <span style="color:#BA2121">&quot;Yes&quot;</span><span style="color:#666666">:</span> <span style="color:#BA2121">&quot;No&quot;</span>;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>printf (<span style="color:#BA2121">&quot;%s %s</span><span style="color:#BB6622"><strong>\n</strong></span><span style="color:#BA2121">&quot;</span>, question, answer);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>free (question);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (subscriber, answer);<br />
+}</p>
+<p><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The main task starts a counter task and a set of target tasks:</em></span></p>
+<p><span style="color:#B00040">int</span> <span style="color:#0000FF">main</span> (<span style="color:#B00040">void</span>)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_t <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Size of target population</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>srand ((<span style="color:#B00040">unsigned</span>) time (<span style="color:#008000">NULL</span>));<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> population <span style="color:#666666">=</span> randof (<span style="color:#666666">10</span>) <span style="color:#666666">+</span> <span style="color:#666666">1</span>;</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Start counter task</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>pipe <span style="color:#666666">=</span> zthread_fork (ctx, counter_task, <span style="color:#008000">NULL</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (pipe, <span style="color:#BA2121">&quot;%d&quot;</span>, population);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Start target population</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>while</strong></span> (population<span style="color:#666666"><span style="white-space: pre-wrap;">--</span></span>)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zthread_fork (ctx, target_task, <span style="color:#008000">NULL</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Wait for census to complete</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>free (zstr_recv (pipe));<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#666666">0</span>;<br />
+}</p>
+</div>
+<br />
+<em>census2.c: Census Pattern over ROUTER-DEALER</em>
+<p>Quite shockingly, this worked first time and is only two-thirds the size of the XPUB-XSUB version. The code is quite a lot simpler. This teaches us a few things:</p>
+<ul>
+<li>ROUTER-DEALER is a powerful tool.</li>
+</ul>
+<ul>
+<li>Asynchronous beats synchronous. The main cost in the XPUB-XSUB model is the getting everyone to pay attention and listen to the question at the same time. This doubles the size of the publisher task and doubles the worst-case time for the census.</li>
+</ul>
+<ul>
+<li>Always try again, with more gunpowder.</li>
+</ul>
+<p>The next and final article in this little series of PUB-SUB Hacks will cover the Repeater pattern, which is an &quot;any-to-all pub-sub for Very Large Networks&quot; pattern.</p>
+<div style="float:left;width:33%; margin:-15px 0 0 0">
+<p><iframe src="http://hintjens.wdfiles.com/local--html/blog%3A38/50f531ffb97b3209739ae6f7132f95c10da7725d-19112564191886406803/hintjens.com/" allowtransparency="true" frameborder="0" class="html-block-iframe"></iframe></p>
+</div>
+<div style="float:right"><div class="page-rate-widget"><div class="page-rate-widget-start" data-rating="0"></div></div></div>
+</div>
+<p><a name="comments"></a></p>
+<div class="comments-box">
+	<h1>Comments</h1>	
+	<div class="options" id="comments-options-hidden" style="display: none">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.showComments(event)">Show Comments</a> 
+	</div>
+		
+	<div id="thread-container" class="thread-container reverse" style="margin-top: 1em">
+					
+
+
+<script type="text/javascript">
+	WIKIDOT.forumThreadId = 637250;
+</script>
+
+        <a href="javascript:;" id="new-post-button" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.newPost(event,null)"
+      style="display:  block ; margin-bottom:1em"
+    >Add a New Comment</a>
+
+ 
+
+	<div class="options" id="comments-options-shown">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.hideComments(event)" class="btn btn-default btn-small btn-sm">Hide All Comments</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.unfoldAll(event)" class="btn btn-default btn-small btn-sm">Unfold All</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.foldAll(event)" class="btn btn-default btn-small btn-sm">Fold All</a>
+	</div>
+
+<div id="thread-container-posts" style="display: none">
+    
+
+
+
+	
+					
+      
+    <div class="post-container" id="fpc-1828985">
+                      
+		<div class="post" id="post-1828985">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1828985)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1828985">
+																		What about the repeater pattern?
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/yariv-kimchi" onclick="WIKIDOT.page.listeners.userInfo(1692998); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1692998&amp;amp;size=small&amp;amp;timestamp=1570613249" alt="Yariv Kimchi" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1692998)"/></a><a href="http://www.wikidot.com/user:info/yariv-kimchi" onclick="WIKIDOT.page.listeners.userInfo(1692998); return false;" >Yariv Kimchi</a></span> <span class="odate time_1375976632 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">08 Aug 2013 15:43</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1828985">
+									
+
+<p>Couldn't find the article&#8230;.</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1828985)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1828985)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1828985" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1828985)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1828985)">What about the repeater pattern?</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/yariv-kimchi" onclick="WIKIDOT.page.listeners.userInfo(1692998); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1692998&amp;amp;size=small&amp;amp;timestamp=1570613249" alt="Yariv Kimchi" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1692998)"/></a><a href="http://www.wikidot.com/user:info/yariv-kimchi" onclick="WIKIDOT.page.listeners.userInfo(1692998); return false;" >Yariv Kimchi</a></span>, <span class="odate time_1375976632 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">08 Aug 2013 15:43</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+
+
+
+</div>
+
+
+<div style="display:none" id="post-options-template">
+	<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.showPermalink(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Permanent Link</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.editPost(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Edit</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.deletePost(event,'%POST_ID%')" class="btn btn-danger btn-small btn-sm">Delete</a>
+</div>
+	
+			</div>
+	
+	
+	
+</div>
+                    </div>
+
+                    
+
+
+
+                    
+                        <div class="page-tags">
+                            <span>
+                                <a href="system_page-tags/tag/zeromq.html#pages">zeromq</a>
+                            </span>
+                        </div>
+                    
+
+                    <div id="page-info-break"></div>
+                    
+                        <div id="page-options-container">
+                            
+                        </div>
+                    
+                    <div id="action-area" style="display: none;"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div id="footer" style="display: block; visibility: visible;">
+                <div class="options" style="display: block; visibility: visible;">
+    <a href="http://www.wikidot.com/doc" id="wikidot-help-button">Help</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:terms-of-service" id="wikidot-tos-button">Terms of Service</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:privacy-policy" id="wikidot-privacy-button">Privacy</a>
+    &nbsp;|
+    <a href="javascript:;" id="bug-report-button" onclick="WIKIDOT.page.listeners.pageBugReport(event)">Report a bug</a>
+    &nbsp;|
+    <a href="javascript:;" id="abuse-report-button" onclick="WIKIDOT.page.listeners.flagPageObjectionable(event)">Flag as objectionable</a>
+</div>
+Powered by <a href="http://www.wikidot.com/">Wikidot.com</a> 
+            </div>
+            
+                <div id="license-area" class="license-area">
+                    Unless otherwise stated, the content of this page is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>
+                </div>
+            
+            
+            
+
+
+
+            <div id="extrac-div-1"><span></span></div><div id="extrac-div-2"><span></span></div><div id="extrac-div-3"><span></span></div>
+            
+            
+            
+            
+                
+            
+        </div>
+        
+    </div>
+<!-- These extra divs/spans may be used as catch-alls to add extra imagery. -->
+<div id="extra-div-1"><span></span></div><div id="extra-div-2"><span></span></div><div id="extra-div-3"><span></span></div>
+<div id="extra-div-4"><span></span></div><div id="extra-div-5"><span></span></div><div id="extra-div-6"><span></span></div>
+</div>
+
+
+
+</div>
+<div id="dummy-ondomready-block" style="display: none;" ></div>
+    <!-- Google Analytics load -->
+    <script type="text/javascript">
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <!-- Quantcast -->
+    <script type="text/javascript">
+    _qoptions={
+        qacct:"p-edL3gsnUjJzw-"
+    };
+    (function() {
+        var qc = document.createElement('script'); qc.type = 'text/javascript'; qc.async = true;
+        qc.src = ('https:' == document.location.protocol ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(qc, s);
+    })();
+    </script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-edL3gsnUjJzw-.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+    </noscript>
+
+
+
+
+<div id="page-options-bottom-tips" style="display: none;">
+    <div id="edit-button-hovertip">
+        Click here to edit contents of this page.    </div>
+</div>
+<div id="page-options-bottom-2-tips"  style="display: none;">
+    <div id="edit-sections-button-hovertip">
+        Click here to toggle editing of individual sections of the page (if possible).         Watch headings for an &quot;edit&quot; link when available.    </div>
+    <div id="edit-append-button-hovertip">
+        Append content without editing the whole page source.    </div>
+    <div id="history-button-hovertip">
+        Check out how this page has evolved in the past.    </div>
+    <div id="discuss-button-hovertip">
+        If you want to discuss contents of this page - this is the easiest way to do it.    </div>
+    <div id="files-button-hovertip">
+        View and manage file attachments for this page.    </div>
+    <div id="site-tools-button-hovertip">
+        A few useful tools to manage this Site.    </div>
+    <div id="backlinks-button-hovertip">
+        See pages that link to and include this page.    </div>
+    <div id="rename-move-button-hovertip">
+        Change the name (also URL address, possibly the category) of the page.    </div>
+    <div id="view-source-button-hovertip">
+        View wiki source for this page without editing.    </div>
+    <div id="parent-page-button-hovertip">  
+        View/set parent page (used for creating breadcrumbs and structured layout).    </div>
+            <div id="abuse-report-button-hovertip">
+            Notify administrators if there is objectionable content in this page.        </div>
+        <div id="bug-report-button-hovertip">
+            Something does not work as expected? Find out what you can do.        </div>
+        <div id="wikidot-help-button-hovertip">
+            General Wikidot.com documentation and help section.        </div>
+        <div id="wikidot-tos-button-hovertip">
+            Wikidot.com Terms of Service - what you can, what you should not etc.        </div>
+        <div id="wikidot-privacy-button-hovertip">
+            Wikidot.com Privacy Policy.          
+        </div>
+    </div>
+</body>
+
+<!-- Mirrored from hintjens.com/blog:38 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:31:08 GMT -->
+</html>

@@ -1,0 +1,1801 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from hintjens.com/blog:49 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:30:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Using ZeroMQ Security (part 2) - Hintjens.com</title>
+    
+    	<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+    // DEFINE DFP SLOTS
+googletag.defineSlot('/1030917/wikidot_free_sites_top_728x90', [728, 90], 'div-gpt-ad-1410946564449-1').addService(googletag.pubads());
+googletag.defineSlot('/1030917/wikidot_free_sites_bottom_300x250', [300, 250], 'div-gpt-ad-1410946564449-0').addService(googletag.pubads());
+
+// googletag.pubads().enableSingleRequest();
+googletag.pubads().collapseEmptyDivs(true, true);
+googletag.pubads().setTargeting("w_name", "hintjens");
+googletag.pubads().setTargeting("w_domain", "com.hintjens");
+googletag.pubads().setTargeting("w_verified", "false");
+if(null){googletag.pubads().setTargeting("w_cats", null);}
+if(false){googletag.pubads().setTargeting("w_mn", "true");}
+googletag.enableServices();
+});
+</script>
+<script type="text/javascript" src="http://www.wikidot.com/default__flow/login__CustomDomainScript?site_id=352120"></script>
+
+    
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/init.combined.js"></script>
+    <script  type="text/javascript">
+        var URL_HOST = 'www.wikidot.com';
+        var URL_DOMAIN = 'wikidot.com';
+        var USE_SSL =  true ;
+        var URL_STATIC = 'http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade';
+        // global request information
+        
+        var WIKIREQUEST = {};
+        WIKIREQUEST.info = {};
+        
+        WIKIREQUEST.info.domain = "hintjens.com";
+        WIKIREQUEST.info.siteId = 352120;
+        WIKIREQUEST.info.siteUnixName = "hintjens";
+        WIKIREQUEST.info.categoryId = 1984291;
+        WIKIREQUEST.info.themeId = 1;
+        WIKIREQUEST.info.requestPageName = "blog:49";
+        OZONE.request.timestamp = 1570613237;
+        OZONE.request.date = new Date();
+        WIKIREQUEST.info.lang = 'en';
+                WIKIREQUEST.info.pageUnixName = "blog:49";
+        WIKIREQUEST.info.pageId = 19941455;
+                        WIKIREQUEST.info.lang = "en";
+        OZONE.lang = "en";
+        var isUAMobile = !!/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    </script>
+    
+    
+
+
+    
+        <script  type="text/javascript">
+    
+        require.config({
+            baseUrl: URL_STATIC + '/common--javascript',
+            paths: {
+                'jquery.ui': 'jquery-ui.min',
+                'jquery.form': 'jquery.form'
+            }
+        });
+    
+    </script>
+    
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+            
+    
+    
+    
+    
+    <meta http-equiv="content-language" content="en"/>
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/WIKIDOT.combined.js"></script>
+        
+    
+    <style type="text/css" id="internal-style">
+        
+        /* modules */
+@import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/css/pagerate/PageRateWidgetModule.css);
+
+
+        
+                
+        /* theme */
+                    @import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--theme/base/css/style.css);
+                    @import url(http://hintjens.wdfiles.com/local--code/admin%3Athemes/1);
+            </style>
+    
+        
+        
+        
+    <link rel="shortcut icon" href="local--favicon/favicon.gif"/>
+    <link rel="icon" type="image/gif" href="local--favicon/favicon.gif"/>
+    
+            <link rel="apple-touch-icon" href="common--images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="common--images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="common--images/apple-touch-icon-114x114.png" />
+        
+        
+            <link rel="alternate" type="application/wiki" title="Edit this page" href="javascript:WIKIDOT.page.listeners.editClick()"/>
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18234656-1']);
+        _gaq.push(['_setDomainName', 'none']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        _gaq.push(['old._setAccount', 'UA-68540-5']);
+        _gaq.push(['old._setDomainName', 'none']);
+        _gaq.push(['old._setAllowLinker', true]);
+        _gaq.push(['old._trackPageview']);
+
+                _gaq.push(['userTracker._setAccount', 'UA-623476-16']);
+        _gaq.push(['userTracker._trackPageview']);
+            </script>
+    
+    <script type="text/javascript">
+        window.google_analytics_uacct = 'UA-18234656-1';
+        window.google_analytics_domain_name = 'none';
+    </script>
+    
+        <link rel="manifest" href="onesignal/manifest.html" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" acync=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: null,
+          });
+        });
+    </script>
+        
+<link rel="alternate" type="application/rss+xml" title="Comments for the page &quot;Using ZeroMQ Security (part 2)&quot;" href="feed/page/comments-19941455.xml"/><script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/misc/NewPageHelperModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/list/ListPagesModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/pagerate/PageRateWidgetModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumCommentsModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/sub/ForumNewPostFormModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadPostsModule.js"></script>
+</head>
+<body id="html-body">
+<div id="skrollr-body">
+<a name="page-top"></a>
+
+<div id="container-wrap-wrap">
+    <div id="container-wrap">
+        <div id="container">
+            <div id="header">
+              <h1><a href="index.html"><span>Hintjens.com</span></a></h1>
+                
+                    <h2><span>Moving Pieces</span></h2>
+                
+                
+                <!-- google_ad_section_start(weight=ignore) -->
+                
+                <div id="search-top-box" class="form-search">
+    <form id="search-top-box-form" action="http://hintjens.com/dummy" class="input-append">
+        <input id="search-top-box-input" class="text empty search-query" type="text" size="15" name="query" value="Search this site" onfocus="if(YAHOO.util.Dom.hasClass(this, 'empty')){YAHOO.util.Dom.removeClass(this,'empty'); this.value='';}"/><input class="button btn" type="submit" name="search" value="Search"/>
+    </form>
+</div>
+                
+                
+                    <div id="top-bar">
+                        
+
+<ul>
+<li><a href="index.html">Front</a></li>
+<li><a href="blog__zeromq.html">ZeroMQ</a></li>
+<li><a href="blog__community.html">Community</a></li>
+<li><a href="blog__unprotocols.html">Unprotocols</a></li>
+<li><a href="blog__psychopaths.html">Psychopaths</a></li>
+</ul>
+
+                    </div>
+                
+                <div id="login-status"><a href="javascript:;" onclick="WIKIDOT.page.listeners.createAccount(event)" class="login-status-create-account btn">Create account</a> <span>or</span> <a href="javascript:;" onclick="WIKIDOT.page.listeners.loginClick(event)" class="login-status-sign-in btn btn-primary">Sign in</a> </div>
+                <div id="header-extra-div-1"><span></span></div><div id="header-extra-div-2"><span></span></div><div id="header-extra-div-3"><span></span></div>
+            </div>
+            
+            <div id="content-wrap">
+                
+                    <div id="side-bar">
+                        
+
+
+                        
+
+<p><a class="wiki-standalone-button" style="background-image: url(http://www.wikidot.com/local--files/files/document-print.png); background-repeat: no-repeat; background-position: bottom right; padding-right: 20px;color: #444" href="javascript:;" onclick="WIKIDOT.page.listeners.printClick(event)">print</a></p>
+<a href="http://hintjens.wdfiles.com/local--files/nav:side/culture.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/nav:side/culture.jpg/small.jpg" alt="culture.jpg" class="image" /></a>
+<p><strong>Pieter Hintjens</strong></p>
+<p><a href="main_biography.html">Biography</a> | <a href="main_portfolio.html">Portfolio</a> | <a href="https://github.com/hintjens">GitHub</a><br />
+<a href="books.html">Books</a> | <a href="https://vimeo.com/user10099130/videos">Videos</a> | <a href="http://www.slideshare.net/pieterh">Slides</a> | <a href="http://fiction.hintjens.com/">Stories</a> | <a href="http://wiki.hintjens.com/">Wiki</a><br />
+<a href="contact.html">Contact</a></p>
+<p><strong>Thank you for the gifts</strong></p>
+<p><a href="http://paypal.me/Hintjens">Kind people already sent donations</a> that will make my childrens' lives easier, when I'm not there any more. Thank you enormously! :-)</p>
+<p>Podcasts/Interviews</p>
+<p><a href="http://softwareengineeringdaily.com/2016/06/23/death-distributed-systems-pieter-hintjens/">Software Engineering Daily</a><br />
+<a href="https://www.youtube.com/watch?v=ApqI9XLRk4k">Interview by Adam Dymitruk</a><br />
+<a href="http://devchat.tv/ruby-rogues/188-rr-community-building-with-pieter-hintjens">Ruby Rogues #188, Community Building</a></p>
+<p>Talks on video</p>
+<p><a href="http://deredactie.be/cm/vrtnieuws/videozone/programmas/deafspraak/2.44331">&quot;De afspraak&quot;, VRT, May 2016</a> (panel discussion)<br />
+<a href="http://www.rtl.be/rtltvi/video/581260.aspx">RTL TV, May 2016</a> (panel discussion)<br />
+<a href="https://www.youtube.com/watch?v=uzxcILudFWM">DomCode 2015, Nov 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=7HECD3eLoVo">Coding Serbia, Oct 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=O8CbzKREAj4">Euroscipy, Cambridge, Aug 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=FKu09-_AaeM&amp;index=4&amp;list=PLFxMLyzsWeqr4SCyx0ZmFkVz2vZJk_CI5">PyGrunn, Groningen, May 2015</a><br />
+<a href="http://www.ustream.tv/recorded/61450822">Craft Conf, Budapest, Apr 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design-2015">QCon London, Mar 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design">Code Mesh London, Nov 2014</a><br />
+<a href="http://www.infoq.com/presentations/trick-better-software">Build Stuff, Vilnius 2014</a><br />
+<a href="https://www.youtube.com/watch?v=_QF9sFJGJuc">Build Stuff, Vilnius, Nov 2014</a> (interview)<br />
+<a href="https://www.youtube.com/watch?v=xFVDNTXIC_Y">Coding Serbia, Nov 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=DAOFZfSlFs0">Devnology, Leusden, Oct 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=QB7VXSc5H3A">EuroPython, Berlin, Jul 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=qTNqgwN5gzA&amp;feature=youtu.be">Build Stuff, Vilnius, Dec 2013</a> (interview)<br />
+<a href="http://www.infoq.com/presentations/digital-revolution-freedom">Build Stuff, Vilnius, Dec 2013</a> (keynote)<br />
+<a href="http://vimeo.com/82175816">Code Mesh London, Dec 2013</a><br />
+<a href="http://vimeo.com/79378301">DevOps Days, London, Nov 2013</a><br />
+<a href="https://vimeo.com/68236487">NDC Oslo, Jun 2013</a><br />
+<a href="https://vimeo.com/69666055">CERN - Geneva, Jun 2013</a><br />
+<a href="https://www.youtube.com/watch?v=uj-li0LO_2g">Tech Mesh, London, Dec 2012</a><br />
+<a href="http://www.infoq.com/presentations/Architecture-Scale-ZeroMQ">Strange Loop, St.Louis, Oct 2012</a><br />
+<a href="https://vimeo.com/37854675">ZeroMQ@PDX part 2 - Portland, Feb 2012</a><br />
+<a href="https://vimeo.com/38117896">ZeroMQ@PDX part 1 - Portland, Feb 2012</a><br />
+<a href="http://www.youtube.com/watch?gl=BE&amp;v=4II94h6-IFY">FLOSS Weekly, Petaliuma CA, Dec 2011</a><br />
+<a href="https://www.youtube.com/watch?v=CCBYzKfmQ4U">FOSDEM 2011, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=h0facLxJPUE">Berlin Buzzwords 2010</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=bQgPArfbXm4">FOSDEM 2009, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=fJo1jmuOuqQ">Hellenic FOSS Conference 2008, Athens part 1</a><br />
+<a href="https://www.youtube.com/watch?v=Hx6cS1VLhoo">Hellenic FOSS Conference 2008, Athens part 2</a></p>
+<p>Email me at <span class="wiki-email">moc.snejtnih|reteip#moc.snejtnih|reteip</span> if you'd like me to present at your event, or in your organization.</p>
+<a href="books.html"><img src="https://www.createspace.com/Img/T448/T45/T21/BookCoverImage.jpg?random=0.4431380270844333" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.4431380270844333" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/socarch.png" style="padding:5px" width="100" alt="socarch.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/confessions.jpg" style="padding:5px" width="100" alt="confessions.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/psccover.jpg" style="padding:5px" width="100" alt="psccover.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://akamaicovers.oreilly.com/images/0636920026136/cat.gif" style="padding:5px" width="100" alt="cat.gif" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/scalablec.png" style="padding:5px" width="100" alt="scalablec.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="https://www.createspace.com/Img/T409/T85/T11/BookCoverImage.jpg?random=0.7859812398986378" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.7859812398986378" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<p><strong><a href="books.html">Download and read online</a></strong></p>
+<p><strong><a href="legal_start.html">Legal</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></strong></p>
+<div class="collapsible-block">
+<div class="collapsible-block-folded"><a class="collapsible-block-link" href="javascript:;"> ▽ </a></div>
+<div class="collapsible-block-unfolded" style="display:none">
+<div class="collapsible-block-unfolded-link"><a class="collapsible-block-link" href="javascript:;"> △ </a></div>
+<div class="collapsible-block-content">
+<div class="side-box">
+<p><a href="_admin.html">Manage</a> | <a href="admin_themes.html">Theme</a> | <a href="nav_top.html">Top</a> | <a href="nav_top.html">Side</a></p>
+
+<div class="new-page-box" style="text-align: center; margin: 1em 0;">
+	<form action="http://hintjens.com/dummy.html" method="get" onsubmit="WIKIDOT.modules.NewPageHelperModule.listeners.create(event);">
+		<input class="text" name="pageName" type="text" size="40" maxlength="128" style="margin: 1px"/>
+				<input type="submit" class="button" value="New post" style="margin: 1px;"/>
+									<input type="hidden" name="categoryName" value="blog"/>
+													<input type="hidden" name="parent" value="blog:_start"/>
+				
+	</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                        
+
+
+                    </div>
+                
+                
+                <!-- google_ad_section_end -->
+                
+                <div id="main-content">
+                    <div id="action-area-top"></div>
+                    
+                    
+                        <div id="page-title">
+                            Using ZeroMQ Security (part 2)
+                        </div>
+                    
+
+                    
+                        <div id="breadcrumbs">
+                            <a href="blog__start.html">All Articles</a> &raquo; Using ZeroMQ Security (part 2)
+                        </div>
+                    
+
+                                    <!-- wikidot_top_728x90 -->
+<div id="div-gpt-ad-1410946564449-1" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-above_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-1'); });
+</script>
+</div>
+
+            
+    
+
+
+                    <div id="page-content">
+                        
+
+<div style="overflow:hidden; font-size: 13px; margin: -26px 0 -22px 0">
+<div style="float:left"><div class="list-pages-box">    
+
+<p><a href="blog_48.html">&lt; Previous</a></p>
+
+    
+    
+    
+    </div></div>
+<div style="float:right"><div class="list-pages-box">    
+
+<p><a href="blog_53.html">Next &gt;</a></p>
+
+    
+    
+    
+    </div></div>
+</div>
+<div style="border: solid 1px #f00; padding:0 1em 0 1em; margin-bottom: 1em; margin-top:1em; min-height: 140px; overflow: hidden">
+<p><span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1501891717" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)" /></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;">pieterh</a></span> wrote on <span class="odate time_1379624875 format_%25e%20%25b%2C%20%25H%3A%25M%20%28%25O%20ago%29">19 Sep 2013 21:07</span></p>
+<div class="image-container floatleft"><a href="http://hintjens.wdfiles.com/local--files/blog:49/0_look.png"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:49/0_look.png/small.jpg" alt="0_look.png" class="image" /></a></div>
+<p>In the <a href="blog_48.html">previous article</a> I gave an overview of how and why ZeroMQ's security layers work. In this article I'll develop a simple secure application, step by step. We'll use a simple example of a server PUSH socket sending &quot;Hello&quot; to a client PULL socket. We'll work through the ZeroMQ NULL, PLAIN, and CURVE security mechanisms, up to full authentication. The examples are in C but the principles apply to all languages.</p>
+<table style="margin:0; padding:0">
+<tr>
+<td style="margin:0; padding:0">
+<div id="toc">
+<div id="toc-action-bar"><a href="javascript:;" onclick="WIKIDOT.page.listeners.foldToc(event)">Fold</a><a style="display: none" href="javascript:;" onclick="WIKIDOT.page.listeners.unfoldToc(event)">Unfold</a></div>
+<div class="title">Table of Contents</div>
+<div id="toc-list">
+<div style="margin-left: 2em;"><a href="#toc0">Requirements &amp; Kicking Off</a></div>
+<div style="margin-left: 2em;"><a href="#toc1">What We'll Make</a></div>
+<div style="margin-left: 2em;"><a href="#toc2">The Grasslands Pattern</a></div>
+<div style="margin-left: 2em;"><a href="#toc3">The Strawhouse Pattern</a></div>
+<div style="margin-left: 2em;"><a href="#toc4">The Woodhouse Pattern</a></div>
+<div style="margin-left: 2em;"><a href="#toc5">The Stonehouse Pattern</a></div>
+<div style="margin-left: 2em;"><a href="#toc6">The Ironhouse Pattern</a></div>
+<div style="margin-left: 2em;"><a href="#toc7">The Ironhouse Pattern, Model 2</a></div>
+<div style="margin-left: 2em;"><a href="#toc8">Wrapping Up</a></div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<h2 id="toc0"><span>Requirements &amp; Kicking Off</span></h2>
+<p>For this tutorial you will ZeroMQ v4.0, CZMQ v2.0, and Sodium (the crypto library). We will build from source, since we're going to be coding anyhow. You can grab these either as download packages (here's <a href="https://download.libsodium.org/libsodium/releases/">Sodium</a>, <a href="http://zeromq.org/intro:get-the-software">ZeroMQ</a>, and <a href="http://czmq.zeromq.org/page:get-the-software">CZMQ</a>), or from GitHub (here's <a href="https://github.com/jedisct1/libsodium">Sodium</a>, <a href="https://github.com/zeromq/libzmq">ZeroMQ</a>, and <a href="https://github.com/zeromq/czmq">CZMQ</a>).</p>
+<p>Sodium is a packaging of the <a href="http://nacl.cr.yp.to/">NaCl crypto library</a>, which implements the Curve25519 elliptic curve cryptography (ECC) algorithm. It doesn't matter for this tutorial, but when you use ECC in real work, people will ask you (a) isn't ECC backdoored by the NSA?, and (b) how secure is this, and (c) how fast is it, and (d) who else uses it?</p>
+<p>The answers are, at least today, (a) some ECC curves may be, and older crypto like RSA probably is, but Curve25519 is not, (b) it provides 256 bit ECC keys which is as strong as 3072 RSA keys, and (c) it's one of the fastest elliptic curves out there. Also, (d) it's not exactly mainstream, but is gaining popularity and Google is using it for their Quik protocol.</p>
+<p>I'll assume you're working on Linux or OS/X and have gcc or similar installed, and some idea of how to compile and link C programs. The API I'll use is that provided by CZMQ. If you are working in another language, it may or may not provide the same level of abstraction. I'll explain what CZMQ is doing, in any case.</p>
+<p>Here's how to build from GitHub (building from packages is very similar, you don't clone a repo but unpack a tarball):</p>
+<div class="code">
+<pre>
+<code>git clone git://github.com/jedisct1/libsodium.git
+cd libsodium
+./autogen.sh
+./configure &amp;&amp; make check
+sudo make install
+sudo ldconfig
+cd ..
+
+git clone git://github.com/zeromq/libzmq.git
+cd libzmq
+./autogen.sh
+./configure &amp;&amp; make check
+sudo make install
+sudo ldconfig
+cd ..
+
+git clone git://github.com/zeromq/czmq.git
+cd czmq
+./autogen.sh
+./configure &amp;&amp; make check
+sudo make install
+sudo ldconfig
+cd ..</code>
+</pre></div>
+<p>Next, let's check that things are working, with a minimal example:</p>
+<div class="code">
+<p><span style="color:#BC7A00">#include &lt;czmq.h&gt;</span></p>
+<p><span style="color:#B00040">int</span> <span style="color:#0000FF">main</span> (<span style="color:#B00040">void</span>) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zctx_t</span> <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>publisher <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PUB);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_curve_server (publisher, <span style="color:#008000">true</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>puts (<span style="color:#BA2121">&quot;Hello, Curve!&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#666666">0</span>;<br />
+}</p>
+</div>
+<br />
+<em>hello.c: Hello, Curve</em>
+<p>Here's how I build and run this:</p>
+<div class="code">
+<pre>
+<code>gcc -o hello hello.c -lczmq -lzmq -lsodium
+./hello</code>
+</pre></div>
+<p>If that prints &quot;Hello, Curve&quot;, then you're on the road to success. If not, check you have the necessary packages. On Debian/Ubuntu, you'll need <tt>build-essential</tt>, for instance.</p>
+<h2 id="toc1"><span>What We'll Make</span></h2>
+<p>We'll make a minimal server-to-client PUSH-PULL flow with one server and one client. To make things really simple, the server will bind, the client will connect, and the server will send one message to the client:</p>
+<p><strong>Figure 1 - Minimal Server to Client</strong></p>
+<div class="image-container aligncenter"><img src="http://hintjens.wdfiles.com/local--files/blog:49/fig1.png" alt="fig1.png" class="image" /></div>
+<p>I'm going to make this in five steps, so you can see the different security patterns that are possible with today's ZeroMQ. To make it easy to remember these five patterns, I've given them mnemonic names:</p>
+<ul>
+<li><strong>Grasslands</strong>, which is plain text with no security at all. All connections are accepted, there is no authentication, and no privacy. This is how ZeroMQ always worked until we build security into the wire protocol in early 2013. Internally, it uses a security mechanism called &quot;NULL&quot;, but you don't even see that.</li>
+</ul>
+<ul>
+<li><strong>Strawhouse</strong>, which is plain text with filtering on IP addresses. We still use the NULL mechanism, but we install an authentication hook (I'll explain this in a second) that checks the IP address against a whitelist or blacklist and allows or denies it accordingly.</li>
+</ul>
+<ul>
+<li><strong>Woodhouse</strong>, which extends Strawhouse with a name and password check. For this, we use a mechanism called &quot;PLAIN&quot; (which does plain-text username and password authentication). It's still really not secure, and anyone sniffing the network (trivial with WiFi) can capture passwords and then login as if they were the real Joe.</li>
+</ul>
+<ul>
+<li><strong>Stonehouse</strong>, which switches to the &quot;CURVE&quot; security mechanism, giving us strong encryption on data, and (as far as we know) unbreakable authentication. Stonehouse is the minimum you would use over public networks, and assures clients that they are speaking to an authentic server, while allowing any client to connect.</li>
+</ul>
+<ul>
+<li><strong>Ironhouse</strong>, which extends Stonehouse with client public key authentication. This is the strongest security model we have today, protecting against every attack we know about, except end-point attacks (where an attacker plants spyware on a machine to capture data before it's encrypted, or after it's decrypted).</li>
+</ul>
+<p>As I said in my last article, privacy is about cost, and these patterns get increasingly expensive to use. Stonehouse and Ironhouse are not as easy to deploy as TLS, for instance. But they are also much more expensive to break, and for most ZeroMQ users that is a good tradeoff.</p>
+<h2 id="toc2"><span>The Grasslands Pattern</span></h2>
+<p>We'll kick off with the simplest possible example, which looks just like classic ZeroMQ code, because it is:</p>
+<div class="code">
+<p><span style="color:#408080"><span style="font-style:italic"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The Grasslands Pattern<br />
+<span style="white-space: pre-wrap;">//</span><br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The Classic ZeroMQ model, plain text with no protection at all.</span></span></p>
+<p><span style="color:#BC7A00">#include &lt;czmq.h&gt;</span></p>
+<p><span style="color:#B00040">int</span> <span style="color:#0000FF">main</span> (<span style="color:#B00040">void</span>)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create context</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zctx_t</span> <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create and bind server socket</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>server <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PUSH);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_bind (server, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>*:9000&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create and connect client socket</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>client <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PULL);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_connect (client, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>127.0.0.1:9000&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Send a single message from server to client</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (server, <span style="color:#BA2121">&quot;Hello&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>message <span style="color:#666666">=</span> zstr_recv (client);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (streq (message, <span style="color:#BA2121">&quot;Hello&quot;</span>));<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>free (message);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>puts (<span style="color:#BA2121">&quot;Grasslands test OK&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#666666">0</span>;<br />
+}</p>
+</div>
+<br />
+<em>grasslands.c: Grasslands Pattern</em>
+<p>To keep the code short and focus on the API calls, I'm not handling errors here. This is fun, but dangerous, like driving a motorbike without a seatbelt. In practice, since your code <em>will</em> fail in lots of unexpected places, it's wise to catch at least the more basic problems early on.</p>
+<p>When you start to use the ZeroMQ and CZMQ security APIs, the main symptom of confusion will be &quot;nothing happens&quot;, in other words, there's no connection when you expect one. To make sure it's not a basic bind/connect error, at least check the return codes from those two calls. For example:</p>
+<div class="code">
+<pre>
+<code>int rc = zsocket_bind (server, &quot;tcp://*:9000&quot;);
+//  If the bind fails, don't even attempt to recover
+assert (rc != -1);</code>
+</pre></div>
+<p>There are people who hate asserts, but they're an extremely useful and brutal tool for forcing your code through a single sane path, and giving you accurate and early proof of errors.</p>
+<h2 id="toc3"><span>The Strawhouse Pattern</span></h2>
+<p>Our next model takes the same code and adds address checking. I'll explain what we're doing and how it works in detail, first here is the application code:</p>
+<div class="code">
+<p><span style="color:#408080"><span style="font-style:italic"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The Strawhouse Pattern<br />
+<span style="white-space: pre-wrap;">//</span><br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>We allow or deny clients according to their IP address. It may keep<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>spammers and idiots away, but won't stop a real attacker for more<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>than a heartbeat.</span></span></p>
+<p><span style="color:#BC7A00">#include &lt;czmq.h&gt;</span></p>
+<p><span style="color:#B00040">int</span> <span style="color:#0000FF">main</span> (<span style="color:#B00040">void</span>)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create context</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zctx_t</span> <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Start an authentication engine for this context. This engine</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>allows or denies incoming connections (talking to the libzmq</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>core over a protocol called ZAP).</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zauth_t</span> <span style="color:#666666">*</span>auth <span style="color:#666666">=</span> zauth_new (ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Get some indication of what the authenticator is deciding</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_set_verbose (auth, <span style="color:#008000">true</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Whitelist our address; any other address will be rejected</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_allow (auth, <span style="color:#BA2121">&quot;127.0.0.1&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create and bind server socket</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>server <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PUSH);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_zap_domain (server, <span style="color:#BA2121">&quot;global&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_bind (server, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>*:9000&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create and connect client socket</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>client <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PULL);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_connect (client, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>127.0.0.1:9000&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Send a single message from server to client</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (server, <span style="color:#BA2121">&quot;Hello&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>message <span style="color:#666666">=</span> zstr_recv (client);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (streq (message, <span style="color:#BA2121">&quot;Hello&quot;</span>));<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>free (message);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>puts (<span style="color:#BA2121">&quot;Strawhouse test OK&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_destroy (<span style="color:#666666">&amp;</span>auth);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#666666">0</span>;<br />
+}</p>
+</div>
+<br />
+<em>strawhouse.c: Strawhouse Pattern</em>
+<p>When you use CZMQ, all authentication happens through a <tt>zauth</tt> object, aka an &quot;authenticator&quot;. In the Strawhouse code we create an authenticator, we enable verbose tracing (during development, at least), and we whitelist one address. Then we do the same work as Grasslands, and finally we destroy the authenticator:</p>
+<div class="code">
+<pre>
+<code>zauth_t *auth = zauth_new (ctx);
+zauth_set_verbose (auth, true);
+zauth_allow (auth, &quot;127.0.0.1&quot;);
+...
+zauth_destroy (&amp;auth);</code>
+</pre></div>
+<p>Internally, the authenticator talks to libzmq across <a href="http://rfc.zeromq.org/spec:27">a protocol called ZAP</a>, aka RFC 27. Every single time a client tries to connect to a server, libzmq asks the ZAP handler (the authenticator), if there is one installed, to allow or deny the connection.</p>
+<p>We tell libzmq that the server socket is in fact a &quot;server&quot; in the sense that it authenticates clients, by using this call:</p>
+<div class="code">
+<pre>
+<code>zsocket_set_zap_domain (server, &quot;global&quot;);</code>
+</pre></div>
+<p>The ZAP <em>domain</em> concept lets you define authentication groups. For instance a set of server sockets could say, &quot;We're in a domain called &quot;test&quot; and we only accept localhost IP addresses&quot;. CZMQ doesn't implement domains yet, and the &quot;global&quot; domain we use here has no significance at all. Remember that in this example we're using the NULL security mechanism, and by default libzmq just accepts NULL connections, period. But the simple fact of telling libzmq, &quot;Please set domain X on this socket (with the default NULL security mechanism)&quot; will cause it to act as a server, and call the ZAP handler for every client request.</p>
+<p>You can mix different kinds of security in one application, by using different sockets, and then configuring each security mechanism separately in the authenticator. So it will handle PLAIN in one way, CURVE another way, and so on.</p>
+<p>Now, to CZMQ's IP address filtering. This uses whitelisting and blacklisting, and works thus:</p>
+<ul>
+<li>You can whitelist one or more addresses, or blacklist one or more addresses. We do this through the zauth_allow() and zauth_deny() calls, rather than loading external files.</li>
+</ul>
+<ul>
+<li>The whitelist or blacklist applies to all requests that the authenticator gets from libzmq. That is, any NULL socket with a ZAP domain set, any PLAIN server socket, or any CURVE server socket, on that ZeroMQ context.</li>
+</ul>
+<ul>
+<li>If you have a whitelist (one or more addresses), that means, &quot;reject any address that's not in the whitelist&quot;. Think of a private party, a very large bouncer, and a sheet of paper with names on it. <em>&quot;Sorry, buddy, you're not on the list. Please move out of the way.&quot;</em></li>
+</ul>
+<ul>
+<li>If you have a blacklist (one or more addresses), that means, &quot;reject any address that's in the blacklist&quot;. Think of a public function with a couple of very large bouncers and a sheet of paper with names on it. <em>&quot;Hey buddy, didn't we tell you to never show your face here again?</em>&quot; You won't use both a whitelist and a blacklist, unless you want to make the bouncers confused, and angry.</li>
+</ul>
+<ul>
+<li>If not denied, and the security mechanism is NULL, then the connection is allowed.</li>
+</ul>
+<ul>
+<li>If not denied, and the mechanism is PLAIN or CURVE, then the authenticator carries on with its checking. So perhaps you're on the whitelist, or not on the blacklist, but now we need to see some identification, please.</li>
+</ul>
+<p>So in our example, where we allow &quot;127.0.0.1&quot;, we effectively deny every other client address.</p>
+<h2 id="toc4"><span>The Woodhouse Pattern</span></h2>
+<p>Next, let's see how to do username and password authentication. Here is the full example:</p>
+<div class="code">
+<p><span style="color:#408080"><span style="font-style:italic"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The Woodhouse Pattern<br />
+<span style="white-space: pre-wrap;">//</span><br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>It may keep some malicious people out but all it takes is a bit<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>of network sniffing, and they'll be able to fake their way in.</span></span></p>
+<p><span style="color:#BC7A00">#include &lt;czmq.h&gt;</span></p>
+<p><span style="color:#B00040">int</span> <span style="color:#0000FF">main</span> (<span style="color:#B00040">void</span>)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create context and start authentication engine</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zctx_t</span> <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zauth_t</span> <span style="color:#666666">*</span>auth <span style="color:#666666">=</span> zauth_new (ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_set_verbose (auth, <span style="color:#008000">true</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_allow (auth, <span style="color:#BA2121">&quot;127.0.0.1&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Tell the authenticator how to handle PLAIN requests</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_configure_plain (auth, <span style="color:#BA2121">&quot;*&quot;</span>, <span style="color:#BA2121">&quot;passwords&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create and bind server socket</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>server <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PUSH);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_plain_server (server, <span style="color:#666666">1</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_bind (server, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>*:9000&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create and connect client socket</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>client <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PULL);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_plain_username (client, <span style="color:#BA2121">&quot;admin&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_plain_password (client, <span style="color:#BA2121">&quot;secret&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_connect (client, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>127.0.0.1:9000&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Send a single message from server to client</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (server, <span style="color:#BA2121">&quot;Hello&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>message <span style="color:#666666">=</span> zstr_recv (client);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (streq (message, <span style="color:#BA2121">&quot;Hello&quot;</span>));<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>free (message);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>puts (<span style="color:#BA2121">&quot;Woodhouse test OK&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_destroy (<span style="color:#666666">&amp;</span>auth);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#666666">0</span>;<br />
+}</p>
+</div>
+<br />
+<em>woodhouse.c: Woodhouse Pattern</em>
+<p>Setting up the authenticator and the whitelist is the same as in Strawhouse, and I won't explain that again. The new API calls happen in three places in the code:</p>
+<div class="code">
+<pre>
+<code>//  Tell the authenticator how to handle PLAIN requests
+zauth_configure_plain (auth, &quot;*&quot;, &quot;passwords&quot;);
+...
+//  Before binding the server
+zsocket_set_plain_server (server, 1);
+...
+//  Before connecting the client
+zsocket_set_plain_username (client, &quot;admin&quot;);
+zsocket_set_plain_password (client, &quot;secret&quot;);</code>
+</pre></div>
+<p>Bear this in mind: you have to configure a socket before doing a _bind or _connect on it. If you run the Woodhouse example without a password file, it'll never complete. Since we enabled tracing, you'll see it print out this:</p>
+<div class="code">
+<pre>
+<code>I: PASSED (whitelist) address=127.0.0.1
+I: DENIED (PLAIN) username=admin password=secret</code>
+</pre></div>
+<p>The message in fact repeats because ZeroMQ re-tries the connection over and over. We mught change this behavior but it's not significant here. Let's create a password file, &quot;passwords&quot;, in the current directory, with some entries, one per line:</p>
+<div class="code">
+<pre>
+<code>guest=guest
+tourist=1234
+admin=secret</code>
+</pre></div>
+<p>Then run the Woodhouse example again, and it'll print this:</p>
+<div class="code">
+<pre>
+<code>I: PASSED (whitelist) address=127.0.0.1
+I: ALLOWED (PLAIN) username=admin password=secret
+Woodhouse test OK</code>
+</pre></div>
+<h2 id="toc5"><span>The Stonehouse Pattern</span></h2>
+<p>Plain text is what it is. Anyone with half a malicious intent can sniff traffic and impersonate real clients, and make a mockery of your so-called security. That may be fine, or it may be a problem. The next level up is Stonehouse, which changes the game somewhat. Here's the example code:</p>
+<div class="code">
+<p><span style="color:#408080"><span style="font-style:italic"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The Stonehouse Pattern<br />
+<span style="white-space: pre-wrap;">//</span><br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Where we allow any clients to connect, but we promise clients<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>that we are who we claim to be, and our conversations won't be<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>tampered with or modified, or spied on.</span></span></p>
+<p><span style="color:#BC7A00">#include &lt;czmq.h&gt;</span></p>
+<p><span style="color:#B00040">int</span> <span style="color:#0000FF">main</span> (<span style="color:#B00040">void</span>)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create context and start authentication engine</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zctx_t</span> <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zauth_t</span> <span style="color:#666666">*</span>auth <span style="color:#666666">=</span> zauth_new (ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_set_verbose (auth, <span style="color:#008000">true</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_allow (auth, <span style="color:#BA2121">&quot;127.0.0.1&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Tell the authenticator how to handle CURVE requests</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_configure_curve (auth, <span style="color:#BA2121">&quot;*&quot;</span>, CURVE_ALLOW_ANY);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>We need two certificates, one for the client and one for</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>the server. The client must know the server's public key</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>to make a CURVE connection.</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zcert_t</span> <span style="color:#666666">*</span>client_cert <span style="color:#666666">=</span> zcert_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zcert_t</span> <span style="color:#666666">*</span>server_cert <span style="color:#666666">=</span> zcert_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>server_key <span style="color:#666666">=</span> zcert_public_txt (server_cert);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create and bind server socket</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>server <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PUSH);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_apply (server_cert, server);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_curve_server (server, <span style="color:#666666">1</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_bind (server, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>*:9000&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create and connect client socket</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>client <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PULL);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_apply (client_cert, client);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_curve_serverkey (client, server_key);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_connect (client, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>127.0.0.1:9000&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Send a single message from server to client</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (server, <span style="color:#BA2121">&quot;Hello&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>message <span style="color:#666666">=</span> zstr_recv (client);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (streq (message, <span style="color:#BA2121">&quot;Hello&quot;</span>));<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>free (message);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>puts (<span style="color:#BA2121">&quot;Stonehouse test OK&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_destroy (<span style="color:#666666">&amp;</span>client_cert);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_destroy (<span style="color:#666666">&amp;</span>server_cert);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_destroy (<span style="color:#666666">&amp;</span>auth);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#666666">0</span>;<br />
+}</p>
+</div>
+<br />
+<em>stonehouse.c: Stonehouse Pattern</em>
+<p>Stonehouse starts with a single call to the authenticator that switches on the CURVE_ALLOW_ANY feature:</p>
+<div class="code">
+<pre>
+<code>zauth_configure_curve (auth, &quot;*&quot;, CURVE_ALLOW_ANY);</code>
+</pre></div>
+<p>Here we do that for the domain &quot;*&quot;, meaning all domains. Recall that CZMQ doesn't deal with domains yet, so if you use Stonehouse on one server socket, it will apply to all server sockets in the same context.</p>
+<p>Now, let's talk about certificates. For any CURVE security you need a &quot;long-term public / secret keypair&quot; for the client, and for the server. CZMQ wraps up a keypair along with metadata (a name, email address, etc.) as a &quot;certificate&quot;, which can be an in-memory object, or a disk file. Here is the explanation from the zcert class:</p>
+<blockquote>
+<p>The zcert class provides a way to create and work with security certificates for the ZMQ CURVE mechanism. A certificate contains a public + secret key pair, plus metadata. It can be used as a temporary object in memory, or persisted to disk. On disk, a certificate is stored as two files. One is public and contains only the public key. The second is secret and contains both keys. The two have the same filename, with the secret file adding &quot;_secret&quot;. To exchange certificates, send the public file via some secure route. Certificates are not signed but are text files that can be verified by eye.</p>
+</blockquote>
+<blockquote>
+<p>Certificates are stored in the ZPL (ZMQ RFC 4) format. They have two sections, &quot;metadata&quot; and &quot;curve&quot;. The first contains a list of 'name = value' pairs, one per line. Values may be enclosed in quotes. The curve section has a 'public-key = keyvalue' and, for secret certificates, a 'secret-key = keyvalue' line. The keyvalue is a Z85-encoded CURVE key.&quot;</p>
+</blockquote>
+<p>What you would do in practice is generate certificates up-front (and CZMQ provides a simple tool to do this, in addons/makecert), and then put them carefully on each node in your network. It's like handing out neat little membership cards for an exclusive club, up front. Makes life easier for guests and security alike.</p>
+<p>In the Ironhouse example we'll see how to work with &quot;real&quot; certificates on disk, using a so-called &quot;certificate store&quot;. However for this example, we can generate certificates on-the-fly, in memory, and pretend we got them from disk.</p>
+<p>We need a client certificate, a server certificate, and then we also have to pass the server's public key to the client. This is the total setup to use the Stonehouse pattern. CZMQ provides a zcert class that generates a new certificate, and which we can &quot;apply&quot; to a socket in order to enable it for CURVE security. Finally, we have to tell the client socket what our server public key is. Here are the relevant API calls:</p>
+<div class="code">
+<pre>
+<code>//  Generate certificates at runtime, since this is a test
+zcert_t *client_cert = zcert_new ();
+zcert_t *server_cert = zcert_new ();
+char *server_key = zcert_public_txt (server_cert);
+...        
+//  Before binding the server
+zcert_apply (server_cert, server);
+zsocket_set_curve_server (server, 1);
+...
+//  Before connecting the client
+zcert_apply (client_cert, client);
+zsocket_set_curve_serverkey (client, server_key);
+...
+//  Destroy these in-memory objects when done
+zcert_destroy (&amp;client_cert);
+zcert_destroy (&amp;server_cert);</code>
+</pre></div>
+<p>The zcert_new() call generates a public/secret key pair. We can ornament that with metadata, e.g. name, email, and organization, which can be helpful when managing certificates. Metadata doesn't play any role in authentication however.</p>
+<h2 id="toc6"><span>The Ironhouse Pattern</span></h2>
+<p>Now, let's explore full authentication of clients. I call this the Ironhouse pattern, just to remind us that security is never total or perfect. It's always about cost. Even an iron house may have holes in the floor, or the roof, and your security is only as good as the systems it runs on. If you run Ironhouse on a box with an insecure or outdated operating system, don't expect privacy.</p>
+<p>Here's the Ironhouse example:</p>
+<div class="code">
+<p><span style="color:#408080"><span style="font-style:italic"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The Ironhouse Pattern<br />
+<span style="white-space: pre-wrap;">//</span><br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Security doesn't get any stronger than this. An attacker is going to<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>have to break into your systems to see data before/after encryption.</span></span></p>
+<p><span style="color:#BC7A00">#include &lt;czmq.h&gt;</span></p>
+<p><span style="color:#B00040">int</span> <span style="color:#0000FF">main</span> (<span style="color:#B00040">void</span>)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create context and start authentication engine</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zctx_t</span> <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zauth_t</span> <span style="color:#666666">*</span>auth <span style="color:#666666">=</span> zauth_new (ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_set_verbose (auth, <span style="color:#008000">true</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_allow (auth, <span style="color:#BA2121">&quot;127.0.0.1&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Tell authenticator to use the certificate store in .curve</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_configure_curve (auth, <span style="color:#BA2121">&quot;*&quot;</span>, <span style="color:#BA2121">&quot;.curve&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>We'll generate a new client certificate and save the public part</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>in the certificate store (in practice this would be done by hand</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>or some out-of-band process).</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zcert_t</span> <span style="color:#666666">*</span>client_cert <span style="color:#666666">=</span> zcert_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsys_dir_create (<span style="color:#BA2121">&quot;.curve&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_set_meta (client_cert, <span style="color:#BA2121">&quot;name&quot;</span>, <span style="color:#BA2121">&quot;Client test certificate&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_save_public (client_cert, <span style="color:#BA2121">&quot;.curve/testcert.pub&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Prepare the server certificate as we did in Stonehouse</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zcert_t</span> <span style="color:#666666">*</span>server_cert <span style="color:#666666">=</span> zcert_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>server_key <span style="color:#666666">=</span> zcert_public_txt (server_cert);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create and bind server socket</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>server <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PUSH);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_apply (server_cert, server);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_curve_server (server, <span style="color:#666666">1</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_bind (server, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>*:9000&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create and connect client socket</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>client <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PULL);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_apply (client_cert, client);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_curve_serverkey (client, server_key);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_connect (client, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>127.0.0.1:9000&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Send a single message from server to client</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (server, <span style="color:#BA2121">&quot;Hello&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>message <span style="color:#666666">=</span> zstr_recv (client);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (streq (message, <span style="color:#BA2121">&quot;Hello&quot;</span>));<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>free (message);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>puts (<span style="color:#BA2121">&quot;Ironhouse test OK&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_destroy (<span style="color:#666666">&amp;</span>client_cert);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_destroy (<span style="color:#666666">&amp;</span>server_cert);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_destroy (<span style="color:#666666">&amp;</span>auth);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#666666">0</span>;<br />
+}</p>
+</div>
+<br />
+<em>ironhouse.c: Ironhouse Pattern</em>
+<p>Ironhouse is very similar to Stonehouse except it uses a &quot;certificate store&quot;. That is a directory somewhere on the server's file system that contains a set of client public certificates. This is the API we use:</p>
+<div class="code">
+<pre>
+<code>//  Tell authenticator to use the certificate store in .curve
+zauth_configure_curve (auth, &quot;*&quot;, &quot;.curve&quot;);
+...
+//  Stick the client public certificate into the directory
+zcert_t *client_cert = zcert_new ();
+zcert_save_public (client_cert, &quot;.curve/testcert.pub&quot;);</code>
+</pre></div>
+<p>For the client, nothing changes — it's the same code as for Stonehouse, as you'd expect. If this wasn't clear already, the zauth object belongs to the server, not the client.</p>
+<p>A word about certificate stores. This is a CZMQ concept, and implemented by the zcertstore class. Normally you won't use that class directly, but like this example, allow the authenticator to manage it. All we do is (a) tell the authenticator what directory will hold certificates, and then make sure our clients' public certificates end up safely there.</p>
+<p>In practice a server application will be a long-running process, so the certificate store reloads itself automatically if there is a change. This means we can copy new certificates into it at any time, to allow new clients, or remove certificates to reject clients.</p>
+<p>Certificate filenames don't matter. Here we use &quot;testcert.pub&quot; but in practice I'd use a filename which is based of the certificate public key, for instance, to ensure it's unique. In our example we create the directory, and add some meta data, before saving the certificate:</p>
+<div class="code">
+<pre>
+<code>//  Create the directory
+zsys_dir_create (&quot;.curve&quot;);
+zcert_set_meta (client_cert, &quot;name&quot;, &quot;Client test certificate&quot;);
+zcert_save_public (client_cert, &quot;.curve/testcert.pub&quot;);</code>
+</pre></div>
+<p>When you save a certificate using the zcert_save_public (or zcert_save) method, it looks like this:</p>
+<div class="code">
+<pre>
+<code>#   ****  Generated on 2013-09-19 21:25:34 by CZMQ  ****
+#   ZeroMQ CURVE Public Certificate
+#   Exchange securely, or use a secure mechanism to verify the contents
+#   of this file after exchange. Store public certificates in your home
+#   directory, in the .curve subdirectory.
+
+metadata
+    name = &quot;Client test certificate&quot;
+curve
+    public-key = &quot;I7[{YV4[}q[9a)]b&amp;d&gt;bisoT]UXa/7b$Tp:6yoyq&quot;</code>
+</pre></div>
+<p>In own applications I'm using $HOME/.curve to hold certificates, as zcert recommends, but you can put them anywhere. Some guidelines do apply:</p>
+<ul>
+<li>A certificate produced by makecert has a secret and a public file. Never share the secret file with anyone.</li>
+</ul>
+<ul>
+<li>When you transfer public certificates, use a secure route. If an attacker can modify this data without you knowing about it, they can construct a man-in-the-middle attack.</li>
+</ul>
+<ul>
+<li>For the same reason, make sure public certificates are not writeable by anyone except the current user.</li>
+</ul>
+<h2 id="toc7"><span>The Ironhouse Pattern, Model 2</span></h2>
+<p>When you read the examples so far, you might be tempted to copy the code for your own applications. However it's not meant for that. It doesn't have a clean separation into client and server, and doesn't do any error checking. Here's a reworking of the Ironhouse example that is much more explicit. It's also twice the amount of code:</p>
+<div class="code">
+<p><span style="color:#408080"><span style="font-style:italic"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The Ironhouse Pattern<br />
+<span style="white-space: pre-wrap;">//</span><br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>This is exactly the same example but broken into two threads<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>so you can better see what client and server do, separately.</span></span></p>
+<p><span style="color:#BC7A00">#include &lt;czmq.h&gt;</span></p>
+<p><span style="color:#408080"><span style="font-style:italic"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The client task runs in its own context, and receives the<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>server public key as an argument.</span></span></p>
+<p><span style="color:#008000"><strong>static</strong></span> <span style="color:#B00040">void</span> <span style="color:#666666">*</span><br />
+<span style="color:#0000FF">client_task</span> (<span style="color:#B00040">void</span> <span style="color:#666666">*</span>args)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Load our persistent certificate from disk</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zcert_t</span> <span style="color:#666666">*</span>client_cert <span style="color:#666666">=</span> zcert_load (<span style="color:#BA2121">&quot;client_cert.txt&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (client_cert);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create client socket and configure it to use full encryption</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zctx_t</span> <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>client <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PULL);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (client);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_apply (client_cert, client);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_curve_serverkey (client, (<span style="color:#B00040">char</span> <span style="color:#666666">*</span>) args);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> rc <span style="color:#666666">=</span> zsocket_connect (client, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>127.0.0.1:9000&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (rc <span style="color:#666666">==</span> <span style="color:#666666">0</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Wait for our message, that signals the test was successful</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>message <span style="color:#666666">=</span> zstr_recv (client);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (streq (message, <span style="color:#BA2121">&quot;Hello&quot;</span>));<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>free (message);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>puts (<span style="color:#BA2121">&quot;Ironhouse test OK&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Free all memory we used</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_destroy (<span style="color:#666666">&amp;</span>client_cert);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#008000">NULL</span>;<br />
+}</p>
+<p><span style="color:#008000"><strong>static</strong></span> <span style="color:#B00040">void</span> <span style="color:#666666">*</span><br />
+<span style="color:#0000FF">server_task</span> (<span style="color:#B00040">void</span> <span style="color:#666666">*</span>args)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zctx_t</span> <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Start the authenticator and tell it do authenticate clients</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>via the certificates stored in the .curve directory.</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zauth_t</span> <span style="color:#666666">*</span>auth <span style="color:#666666">=</span> zauth_new (ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (auth);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_set_verbose (auth, <span style="color:#008000">true</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_allow (auth, <span style="color:#BA2121">&quot;127.0.0.1&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_configure_curve (auth, <span style="color:#BA2121">&quot;*&quot;</span>, <span style="color:#BA2121">&quot;.curve&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create server socket and configure it to use full encryption</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>server <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_PUSH);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (server);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_apply ((<span style="color:#B00040">zcert_t</span> <span style="color:#666666">*</span>) args, server);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_curve_server (server, <span style="color:#666666">1</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> rc <span style="color:#666666">=</span> zsocket_bind (server, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>*:9000&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (rc <span style="color:#666666">!=</span> <span style="color:#666666">-</span><span style="color:#666666">1</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Send our test message, just once</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (server, <span style="color:#BA2121">&quot;Hello&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zclock_sleep (<span style="color:#666666">200</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Free all memory we used</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zauth_destroy (<span style="color:#666666">&amp;</span>auth);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#008000">NULL</span>;<br />
+}</p>
+<p><span style="color:#B00040">int</span> <span style="color:#0000FF">main</span> (<span style="color:#B00040">void</span>)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create the certificate store directory and client certs</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zcert_t</span> <span style="color:#666666">*</span>client_cert <span style="color:#666666">=</span> zcert_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> rc <span style="color:#666666">=</span> zsys_dir_create (<span style="color:#BA2121">&quot;.curve&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (rc <span style="color:#666666">==</span> <span style="color:#666666">0</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_set_meta (client_cert, <span style="color:#BA2121">&quot;name&quot;</span>, <span style="color:#BA2121">&quot;Client test certificate&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_save_public (client_cert, <span style="color:#BA2121">&quot;.curve/testcert.pub&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>rc <span style="color:#666666">=</span> zcert_save (client_cert, <span style="color:#BA2121">&quot;client_cert.txt&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (rc <span style="color:#666666">==</span> <span style="color:#666666">0</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_destroy (<span style="color:#666666">&amp;</span>client_cert);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Create the server certificate</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">zcert_t</span> <span style="color:#666666">*</span>server_cert <span style="color:#666666">=</span> zcert_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Now start the two detached threads; each of these has their</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>own ZeroMQ context.</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zthread_new (server_task, server_cert);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zthread_new (client_task, zcert_public_txt (server_cert));<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>As we're using detached threads this is the simplest way //</em><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>to ensure they both end, before we exit the process. 200<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>milliseconds should be enough for anyone. In real code,<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>you would use messages to synchronize threads.//</span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zclock_sleep (<span style="color:#666666">200</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Free the memory we used</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zcert_destroy (<span style="color:#666666">&amp;</span>server_cert);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#666666">0</span>;<br />
+}</p>
+</div>
+<br />
+<em>ironhouse2.c: Ironhouse Pattern, model 2</em>
+<p>Here we see how to save and load client certificates from disk, to create truly persistent certificates:</p>
+<div class="code">
+<pre>
+<code>zcert_t *client_cert = zcert_new ();
+zcert_save (client_cert, &quot;client_cert.txt&quot;);
+zcert_destroy (&amp;client_cert);</code>
+</pre></div>
+<p>And then, in a different place and time, or at least a separate thread:</p>
+<div class="code">
+<pre>
+<code>//  Load our persistent certificate from disk
+zcert_t *client_cert = zcert_load (&quot;client_cert.txt&quot;);</code>
+</pre></div>
+<h2 id="toc8"><span>Wrapping Up</span></h2>
+<p>OK, that's enough code. After half a dozen examples, we start to get code blindness. What is striking however is how short the code examples are, even in C. For me, this is success.</p>
+<p>There's one last thing I want to discuss about security, which is the constant harping on about &quot;server&quot; and &quot;client&quot;, which you may know are not ZeroMQ native concepts at all. The closest we get in ZeroMQ is having one side binding to an endpoint, and the other side connecting to it.</p>
+<p>When using the PLAIN or CURVE security mechanisms (wood, stone, or iron), you can bind the client and connect the server. You can try this in stonehouse.c for example. Simply switch the bind and connect statements (change the socket arguments :) and observe that it still works. The server still authenticates the client.</p>
+<p>You'll get the best results by typing the code, because muscle memory is a fantastic thing for programming. But if you're in a hurry, <a href="https://github.com/zeromq/czmq">it is in the CZMQ project</a>, in the examples/security directory. These examples are licensed under MIT/X11 so you can reuse the code in your own applications.</p>
+<p>Let me know how you get on. Comment below, or come to the <a href="http://zeromq.org/docs:mailing-lists">zeromq-dev mailing list</a>. If you need commercial support in using these new security tools, or you're an open source project that wants to use them, drop me an email at <span class="wiki-email">moc.xitami|hp#moc.xitami|hp</span> and tell me your use case.</p>
+<div style="float:left;width:33%; margin:-15px 0 0 0">
+<p><iframe src="http://hintjens.wdfiles.com/local--html/blog%3A49/3b0e308e0d80ec3201fbaefefa0cdcffc0421842-403810792120010450/hintjens.com/" allowtransparency="true" frameborder="0" class="html-block-iframe"></iframe></p>
+</div>
+<div style="float:right"><div class="page-rate-widget"><div class="page-rate-widget-start" data-rating="0"></div></div></div>
+</div>
+<p><a name="comments"></a></p>
+<div class="comments-box">
+	<h1>Comments</h1>	
+	<div class="options" id="comments-options-hidden" style="display: none">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.showComments(event)">Show Comments</a> 
+	</div>
+		
+	<div id="thread-container" class="thread-container reverse" style="margin-top: 1em">
+					
+
+
+<script type="text/javascript">
+	WIKIDOT.forumThreadId = 697740;
+</script>
+
+        <a href="javascript:;" id="new-post-button" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.newPost(event,null)"
+      style="display:  block ; margin-bottom:1em"
+    >Add a New Comment</a>
+
+ 
+
+	<div class="options" id="comments-options-shown">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.hideComments(event)" class="btn btn-default btn-small btn-sm">Hide All Comments</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.unfoldAll(event)" class="btn btn-default btn-small btn-sm">Unfold All</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.foldAll(event)" class="btn btn-default btn-small btn-sm">Fold All</a>
+	</div>
+
+<div id="thread-container-posts" style="display: none">
+    
+
+
+
+	
+					
+      
+    <div class="post-container" id="fpc-3565083">
+                      
+		<div class="post" id="post-3565083">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,3565083)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-3565083">
+																		Updated examples for CZMQ 4.x
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/alainodea" onclick="WIKIDOT.page.listeners.userInfo(3277607); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=3277607&amp;amp;size=small&amp;amp;timestamp=1570612241" alt="AlainODea" style="background-image:url(http://www.wikidot.com/userkarma.php?u=3277607)"/></a><a href="http://www.wikidot.com/user:info/alainodea" onclick="WIKIDOT.page.listeners.userInfo(3277607); return false;" >AlainODea</a></span> <span class="odate time_1501891716 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">05 Aug 2017 00:08</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-3565083">
+									
+
+<p>I've posted updated examples compatible with CZMQ 4.x here as a GitHub Gist:<br />
+/AlainODea/f247d8bc6c2e46e4899bdea86f8a9af4</p>
+<p>This particularly addresses the removal/hiding of zcontext and the switch from zsocket to zsock and from zthread to zactor.</p>
+<p>I'm not allowed to post links yet, so I'm stuck posting the path on Gist which hopefully will get you to my fixed examples.</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,3565083)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,3565083)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-3565083" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,3565083)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,3565083)">Updated examples for CZMQ 4.x</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/alainodea" onclick="WIKIDOT.page.listeners.userInfo(3277607); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=3277607&amp;amp;size=small&amp;amp;timestamp=1570612241" alt="AlainODea" style="background-image:url(http://www.wikidot.com/userkarma.php?u=3277607)"/></a><a href="http://www.wikidot.com/user:info/alainodea" onclick="WIKIDOT.page.listeners.userInfo(3277607); return false;" >AlainODea</a></span>, <span class="odate time_1501891716 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">05 Aug 2017 00:08</span>
+		</div>
+	</div>
+ 
+                
+                	
+
+
+        
+            </div>
+ 
+
+	
+					
+      
+    <div class="post-container" id="fpc-1969373">
+                      
+		<div class="post" id="post-1969373">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1969373)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1969373">
+																		Ironhouse2 doesn&#039;t use auth
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/alpo3z" onclick="WIKIDOT.page.listeners.userInfo(1835409); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1835409&amp;amp;size=small&amp;amp;timestamp=1570612241" alt="alpo3z" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1835409)"/></a><a href="http://www.wikidot.com/user:info/alpo3z" onclick="WIKIDOT.page.listeners.userInfo(1835409); return false;" >alpo3z</a></span> <span class="odate time_1392585730 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">16 Feb 2014 21:22</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1969373">
+									
+
+<p>Because auth is destroyed by zauth_destroy(&amp;auth) before connection. If I add zclock_sleep after zstr_send I can test authentification.</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1969373)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1969373)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1969373" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1969373)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1969373)">Ironhouse2 doesn&#039;t use auth</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/alpo3z" onclick="WIKIDOT.page.listeners.userInfo(1835409); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1835409&amp;amp;size=small&amp;amp;timestamp=1570612241" alt="alpo3z" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1835409)"/></a><a href="http://www.wikidot.com/user:info/alpo3z" onclick="WIKIDOT.page.listeners.userInfo(1835409); return false;" >alpo3z</a></span>, <span class="odate time_1392585730 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">16 Feb 2014 21:22</span>
+		</div>
+	</div>
+ 
+                
+        
+                      
+    <div class="post-container" id="fpc-1969376">
+                      
+		<div class="post" id="post-1969376">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1969376)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1969376">
+																		Re: Ironhouse2 doesn&#039;t use auth
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570612241" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span> <span class="odate time_1392586004 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">16 Feb 2014 21:26</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1969376">
+									
+
+<p>Thanks for finding this problem.</p>
+
+							</div>
+
+										<div class="signature">
+					<hr class="signature-separator"/>
+					
+
+<p><a href="http://ipocracy.wikidot.com/main:portfolio">Portfolio</a></p>
+
+				</div>
+					
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1969376)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1969376)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1969376" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1969376)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1969376)">Re: Ironhouse2 doesn&#039;t use auth</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span>, <span class="odate time_1392586004 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">16 Feb 2014 21:26</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+            </div>
+ 
+
+	
+					
+      
+    <div class="post-container" id="fpc-1908677">
+                      
+		<div class="post" id="post-1908677">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1908677)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1908677">
+																		Ironhouse2 not using auth?
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/spro" onclick="WIKIDOT.page.listeners.userInfo(1447205); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1447205&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="spro" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1447205)"/></a><a href="http://www.wikidot.com/user:info/spro" onclick="WIKIDOT.page.listeners.userInfo(1447205); return false;" >spro</a></span> <span class="odate time_1386239973 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">05 Dec 2013 10:39</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1908677">
+									
+
+<p>I just tried the ironhouse2.c example and it claimed to have passed but strangely did not print out the &quot;I: ALLOWED (CURVE) client_key=&#8230;&quot; bit that ironhouse.c did. Suspicious, I changed the zauth_allow whitelist to a random IP and it still let me go through with sending the message. It seems something is making the server not care about auth mechanisms. OS X 10.7.5</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1908677)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1908677)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1908677" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1908677)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1908677)">Ironhouse2 not using auth?</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/spro" onclick="WIKIDOT.page.listeners.userInfo(1447205); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1447205&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="spro" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1447205)"/></a><a href="http://www.wikidot.com/user:info/spro" onclick="WIKIDOT.page.listeners.userInfo(1447205); return false;" >spro</a></span>, <span class="odate time_1386239973 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">05 Dec 2013 10:39</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+
+	
+					
+      
+    <div class="post-container" id="fpc-1873868">
+                      
+		<div class="post" id="post-1873868">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1873868)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1873868">
+																		Two problems
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pebbe" onclick="WIKIDOT.page.listeners.userInfo(1639994); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1639994&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pebbe" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1639994)"/></a><a href="http://www.wikidot.com/user:info/pebbe" onclick="WIKIDOT.page.listeners.userInfo(1639994); return false;" >pebbe</a></span> <span class="odate time_1382182711 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">19 Oct 2013 11:38</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1873868">
+									
+
+<p>Problem 1:</p>
+<p>I had to remove all options &quot;-pedantic&quot; from the Makefiles of ZeroMQ (version 4.0.1) to get it to compile with libsodium (version 0.4.3). After that, 'make check' gave two fails, for test_linger and test_stream.</p>
+<p>Problem 2:</p>
+<p>I wrote Go bindings for ZeroMQ versions 2 and 3. With these, I implemented all examples from &quot;ØMQ - The Guide&quot; in Go.</p>
+<p>Now I want to do the same for version 4, including the examples on this page. But these examples all use czmq, without an explanation of what is going on under the hood, in core ZeroMQ.</p>
+<p>To get this stuff right, and secure, I really need C examples without czmq. I could poke around in the sources of czmq, but chances are, I will miss some important detail, and my implementation might seem to work, when actually it's full of security holes.</p>
+<p>I expect people who write bindings in other languages would need this too. Any change you can provide these examples without czmq?</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1873868)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1873868)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1873868" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1873868)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1873868)">Two problems</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pebbe" onclick="WIKIDOT.page.listeners.userInfo(1639994); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1639994&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pebbe" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1639994)"/></a><a href="http://www.wikidot.com/user:info/pebbe" onclick="WIKIDOT.page.listeners.userInfo(1639994); return false;" >pebbe</a></span>, <span class="odate time_1382182711 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">19 Oct 2013 11:38</span>
+		</div>
+	</div>
+ 
+                
+        
+                      
+    <div class="post-container" id="fpc-1873886">
+                      
+		<div class="post" id="post-1873886">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1873886)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1873886">
+																		Re: Two problems
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span> <span class="odate time_1382186021 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">19 Oct 2013 12:33</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1873886">
+									
+
+<p>For the compilation, could you start a thread on the zeromq-dev list?</p>
+<p>For understanding the security API, yes, I need to explain the low level mechanisms better. The place to start is tests/test_security_xxx.cpp, which show each model. What CZMQ does is build on top of that to e.g. manage and use keys. A binding just needs to export the libzmq, and it can leave key management and authentication to the application.</p>
+
+							</div>
+
+										<div class="signature">
+					<hr class="signature-separator"/>
+					
+
+<p><a href="http://ipocracy.wikidot.com/main:portfolio">Portfolio</a></p>
+
+				</div>
+					
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1873886)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1873886)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1873886" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1873886)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1873886)">Re: Two problems</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span>, <span class="odate time_1382186021 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">19 Oct 2013 12:33</span>
+		</div>
+	</div>
+ 
+                
+        
+                      
+    <div class="post-container" id="fpc-1876156">
+                      
+		<div class="post" id="post-1876156">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1876156)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1876156">
+																		Re: Two problems
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pebbe" onclick="WIKIDOT.page.listeners.userInfo(1639994); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1639994&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pebbe" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1639994)"/></a><a href="http://www.wikidot.com/user:info/pebbe" onclick="WIKIDOT.page.listeners.userInfo(1639994); return false;" >pebbe</a></span> <span class="odate time_1382476642 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">22 Oct 2013 21:17</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1876156">
+									
+
+<p>For 1:<br />
+A posted a message to the zeromq-dev list. I got a reply that the message was being held for review. I haven't seen it appear in the zeromq Google group.</p>
+<p>For 2:<br />
+First I translated the <tt>tests/test_security_xxx.cpp</tt> into Go. That gave me a good idea of how things work.<br />
+Then I wrote a version of the <tt>czmq xauth</tt> module in Go. I think it's a reasonable implementation. See <tt>pebbe/zmq4</tt> on github, subdirectory <tt>examples_security</tt>.</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+																					<a href="javascript:;" onclick="togglePostOptions(event,1876156)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1876156" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1876156)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1876156)">Re: Two problems</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pebbe" onclick="WIKIDOT.page.listeners.userInfo(1639994); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1639994&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pebbe" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1639994)"/></a><a href="http://www.wikidot.com/user:info/pebbe" onclick="WIKIDOT.page.listeners.userInfo(1639994); return false;" >pebbe</a></span>, <span class="odate time_1382476642 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">22 Oct 2013 21:17</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+                      
+    <div class="post-container" id="fpc-1876173">
+                      
+		<div class="post" id="post-1876173">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1876173)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1876173">
+																		Re: Two problems
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span> <span class="odate time_1382478173 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">22 Oct 2013 21:42</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1876173">
+									
+
+<p>I didn't see your message to the zeromq-dev list; if it's not there in a while could you resend it? If you join the email list, there's no moderation.</p>
+
+							</div>
+
+										<div class="signature">
+					<hr class="signature-separator"/>
+					
+
+<p><a href="http://ipocracy.wikidot.com/main:portfolio">Portfolio</a></p>
+
+				</div>
+					
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1876173)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1876173)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1876173" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1876173)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1876173)">Re: Two problems</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span>, <span class="odate time_1382478173 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">22 Oct 2013 21:42</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+            </div>
+ 
+            </div>
+ 
+
+	
+					
+      
+    <div class="post-container" id="fpc-1856320">
+                      
+		<div class="post" id="post-1856320">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1856320)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1856320">
+																		Oh dear, you fixed it :(
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/derde-olifant" onclick="WIKIDOT.page.listeners.userInfo(1730203); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1730203&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="Derde Olifant" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1730203)"/></a><a href="http://www.wikidot.com/user:info/derde-olifant" onclick="WIKIDOT.page.listeners.userInfo(1730203); return false;" >Derde Olifant</a></span> <span class="odate time_1379794022 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">21 Sep 2013 20:07</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1856320">
+									
+
+<p>My life was happy. Well, at least it was simple. ZeroMQ might saved us from being Iced up by Corba, but it wasn't an option. I reviewed them all, and ended up with a horrible implementation of AMQP, with SSL that makes it pretty much unusable in any real kind of code.</p>
+<p>ZeroMQ was an amazing academic toy for those having the luxury of an isolated and private network filled with only happy packets and gilded rainbows. It was unnecessary to even consider it for our applications, because it would get chewed up by the big scary internet unless we rolled out squabs of VPNs and stunnels.</p>
+<p>But now, oh dear, you have fixed it. Oh spite. I just wonder if hubris will beat laziness on this &#8230;</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1856320)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1856320)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1856320" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1856320)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1856320)">Oh dear, you fixed it :(</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/derde-olifant" onclick="WIKIDOT.page.listeners.userInfo(1730203); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1730203&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="Derde Olifant" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1730203)"/></a><a href="http://www.wikidot.com/user:info/derde-olifant" onclick="WIKIDOT.page.listeners.userInfo(1730203); return false;" >Derde Olifant</a></span>, <span class="odate time_1379794022 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">21 Sep 2013 20:07</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+
+	
+					
+      
+    <div class="post-container" id="fpc-1855603">
+                      
+		<div class="post" id="post-1855603">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1855603)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1855603">
+																		zmq ROUTER
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/gaby-64" onclick="WIKIDOT.page.listeners.userInfo(1729282); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1729282&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="Gaby_64" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1729282)"/></a><a href="http://www.wikidot.com/user:info/gaby-64" onclick="WIKIDOT.page.listeners.userInfo(1729282); return false;" >Gaby_64</a></span> <span class="odate time_1379689351 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">20 Sep 2013 15:02</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1855603">
+									
+
+<p>does it work for that?</p>
+<p>doesn't seem to be working</p>
+<p>i have a server application that tracks other server applications<br />
+i needed bi-directional targeted communication so i used ROUTER on both sides.</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1855603)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1855603)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1855603" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1855603)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1855603)">zmq ROUTER</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/gaby-64" onclick="WIKIDOT.page.listeners.userInfo(1729282); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1729282&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="Gaby_64" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1729282)"/></a><a href="http://www.wikidot.com/user:info/gaby-64" onclick="WIKIDOT.page.listeners.userInfo(1729282); return false;" >Gaby_64</a></span>, <span class="odate time_1379689351 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">20 Sep 2013 15:02</span>
+		</div>
+	</div>
+ 
+                
+        
+                      
+    <div class="post-container" id="fpc-1855615">
+                      
+		<div class="post" id="post-1855615">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1855615)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1855615">
+																		Re: zmq ROUTER
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span> <span class="odate time_1379690104 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">20 Sep 2013 15:15</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1855615">
+									
+
+<p>You won't be able to authenticate at both sides at the same time. Look at the Harmony pattern in the Guide, which is Router-to-Dealer in both directions. That will allow peer-to-peer authentication.</p>
+
+							</div>
+
+										<div class="signature">
+					<hr class="signature-separator"/>
+					
+
+<p><a href="http://ipocracy.wikidot.com/main:portfolio">Portfolio</a></p>
+
+				</div>
+					
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1855615)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1855615)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1855615" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1855615)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1855615)">Re: zmq ROUTER</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span>, <span class="odate time_1379690104 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">20 Sep 2013 15:15</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+                      
+    <div class="post-container" id="fpc-1855625">
+                      
+		<div class="post" id="post-1855625">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1855625)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1855625">
+																		Re: zmq ROUTER
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/gaby-64" onclick="WIKIDOT.page.listeners.userInfo(1729282); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1729282&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="Gaby_64" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1729282)"/></a><a href="http://www.wikidot.com/user:info/gaby-64" onclick="WIKIDOT.page.listeners.userInfo(1729282); return false;" >Gaby_64</a></span> <span class="odate time_1379691076 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">20 Sep 2013 15:31</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1855625">
+									
+
+<p>works fine, i only need to make sure its not rogue server applications that are connecting. my problem was with zcert_new_from(), which requires 32byte binary strings and not the z85 encoded strings provided by makecert.</p>
+
+							</div>
+
+								
+							<div class="changes">
+					Last edited on <span class="odate time_1379691102 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">20 Sep 2013 15:31</span>
+					by <span class="printuser"><a href="http://www.wikidot.com/user:info/gaby-64" onclick="WIKIDOT.page.listeners.userInfo(1729282); return false;" >Gaby_64</a></span>
+					<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.showHistory(event,1855625)"><i class="icon-plus"></i> Show more</a>
+				</div>
+				<div class="revisions" style="display: none"></div>
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1855625)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1855625)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1855625" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1855625)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1855625)">Re: zmq ROUTER</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/gaby-64" onclick="WIKIDOT.page.listeners.userInfo(1729282); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1729282&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="Gaby_64" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1729282)"/></a><a href="http://www.wikidot.com/user:info/gaby-64" onclick="WIKIDOT.page.listeners.userInfo(1729282); return false;" >Gaby_64</a></span>, <span class="odate time_1379691076 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">20 Sep 2013 15:31</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+                      
+    <div class="post-container" id="fpc-1855629">
+                      
+		<div class="post" id="post-1855629">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1855629)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1855629">
+																		Re: zmq ROUTER
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span> <span class="odate time_1379691940 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">20 Sep 2013 15:45</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1855629">
+									
+
+<p>Usually I'd load the certificate from disk with zcert_load(), or apply the keys directly to the socket with individual zsocket_set options.</p>
+
+							</div>
+
+										<div class="signature">
+					<hr class="signature-separator"/>
+					
+
+<p><a href="http://ipocracy.wikidot.com/main:portfolio">Portfolio</a></p>
+
+				</div>
+					
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1855629)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1855629)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1855629" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1855629)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1855629)">Re: zmq ROUTER</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570612242" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span>, <span class="odate time_1379691940 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">20 Sep 2013 15:45</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+            </div>
+ 
+
+
+
+</div>
+
+
+<div style="display:none" id="post-options-template">
+	<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.showPermalink(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Permanent Link</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.editPost(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Edit</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.deletePost(event,'%POST_ID%')" class="btn btn-danger btn-small btn-sm">Delete</a>
+</div>
+	
+			</div>
+	
+	
+	
+</div>
+                    </div>
+
+                                    <!-- wikidot_bottom_300x250 -->
+<div id="div-gpt-ad-1410946564449-0" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-below_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-0'); });
+</script>
+</div>
+
+            
+    
+
+
+                    
+                        <div class="page-tags">
+                            <span>
+                                <a href="system_page-tags/tag/security.html#pages">security</a><a href="system_page-tags/tag/zeromq.html#pages">zeromq</a>
+                            </span>
+                        </div>
+                    
+
+                    <div id="page-info-break"></div>
+                    
+                        <div id="page-options-container">
+                            
+                        </div>
+                    
+                    <div id="action-area" style="display: none;"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div id="footer" style="display: block; visibility: visible;">
+                <div class="options" style="display: block; visibility: visible;">
+    <a href="http://www.wikidot.com/doc" id="wikidot-help-button">Help</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:terms-of-service" id="wikidot-tos-button">Terms of Service</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:privacy-policy" id="wikidot-privacy-button">Privacy</a>
+    &nbsp;|
+    <a href="javascript:;" id="bug-report-button" onclick="WIKIDOT.page.listeners.pageBugReport(event)">Report a bug</a>
+    &nbsp;|
+    <a href="javascript:;" id="abuse-report-button" onclick="WIKIDOT.page.listeners.flagPageObjectionable(event)">Flag as objectionable</a>
+</div>
+Powered by <a href="http://www.wikidot.com/">Wikidot.com</a> 
+            </div>
+            
+                <div id="license-area" class="license-area">
+                    Unless otherwise stated, the content of this page is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>
+                </div>
+            
+            
+            
+
+
+
+            <div id="extrac-div-1"><span></span></div><div id="extrac-div-2"><span></span></div><div id="extrac-div-3"><span></span></div>
+            
+            
+            
+            
+                
+            
+        </div>
+        
+    </div>
+<!-- These extra divs/spans may be used as catch-alls to add extra imagery. -->
+<div id="extra-div-1"><span></span></div><div id="extra-div-2"><span></span></div><div id="extra-div-3"><span></span></div>
+<div id="extra-div-4"><span></span></div><div id="extra-div-5"><span></span></div><div id="extra-div-6"><span></span></div>
+</div>
+
+
+
+</div>
+<div id="dummy-ondomready-block" style="display: none;" ></div>
+    <!-- Google Analytics load -->
+    <script type="text/javascript">
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <!-- Quantcast -->
+    <script type="text/javascript">
+    _qoptions={
+        qacct:"p-edL3gsnUjJzw-"
+    };
+    (function() {
+        var qc = document.createElement('script'); qc.type = 'text/javascript'; qc.async = true;
+        qc.src = ('https:' == document.location.protocol ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(qc, s);
+    })();
+    </script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-edL3gsnUjJzw-.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+    </noscript>
+
+
+
+
+<div id="page-options-bottom-tips" style="display: none;">
+    <div id="edit-button-hovertip">
+        Click here to edit contents of this page.    </div>
+</div>
+<div id="page-options-bottom-2-tips"  style="display: none;">
+    <div id="edit-sections-button-hovertip">
+        Click here to toggle editing of individual sections of the page (if possible).         Watch headings for an &quot;edit&quot; link when available.    </div>
+    <div id="edit-append-button-hovertip">
+        Append content without editing the whole page source.    </div>
+    <div id="history-button-hovertip">
+        Check out how this page has evolved in the past.    </div>
+    <div id="discuss-button-hovertip">
+        If you want to discuss contents of this page - this is the easiest way to do it.    </div>
+    <div id="files-button-hovertip">
+        View and manage file attachments for this page.    </div>
+    <div id="site-tools-button-hovertip">
+        A few useful tools to manage this Site.    </div>
+    <div id="backlinks-button-hovertip">
+        See pages that link to and include this page.    </div>
+    <div id="rename-move-button-hovertip">
+        Change the name (also URL address, possibly the category) of the page.    </div>
+    <div id="view-source-button-hovertip">
+        View wiki source for this page without editing.    </div>
+    <div id="parent-page-button-hovertip">  
+        View/set parent page (used for creating breadcrumbs and structured layout).    </div>
+            <div id="abuse-report-button-hovertip">
+            Notify administrators if there is objectionable content in this page.        </div>
+        <div id="bug-report-button-hovertip">
+            Something does not work as expected? Find out what you can do.        </div>
+        <div id="wikidot-help-button-hovertip">
+            General Wikidot.com documentation and help section.        </div>
+        <div id="wikidot-tos-button-hovertip">
+            Wikidot.com Terms of Service - what you can, what you should not etc.        </div>
+        <div id="wikidot-privacy-button-hovertip">
+            Wikidot.com Privacy Policy.          
+        </div>
+    </div>
+</body>
+
+<!-- Mirrored from hintjens.com/blog:49 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:30:40 GMT -->
+</html>

@@ -1,0 +1,5 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+hintjens.com	TRUE	/	FALSE	1999999999	wikidot_token7	49d83329494b4b5b1e0fb3afc9fb77f6
+.hintjens.com	TRUE	/	FALSE	1999999999	WIKIDOT_SESSION_ID_5881e9f0	1570613285_35642450
+

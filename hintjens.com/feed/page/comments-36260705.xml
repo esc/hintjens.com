@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Requiem for Nanomsg&quot;</title>
+		<link>http://hintjens.com/blog:112/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:29:13 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:112/comments/show#post-2453665</guid>
+				<title>Re: Pugs</title>
+				<link>http://hintjens.com/blog:112/comments/show#post-2453665</link>
+				<description></description>
+				<pubDate>Mon, 08 Feb 2016 15:25:44 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Yes, even in ZeroMQ we were doing this in other projects. Like the Guide documentation, which from late 2010 was accepting all pull requests (and we got hundreds, with examples).</p> <p>The critical part is IMO writing it as a reusable contract between parties. &quot;Do you support C4?&quot; is a simpler question than &quot;is your contribution policy written down, and can I review it?&quot;</p> <p>By early 2012 we knew this process worked, didn't need speculation. Up until libzmq we'd not used it on a major project with a complex codebase. The first major project to use C4 was CZMQ.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:112/comments/show#post-2453640</guid>
+				<title>Pugs</title>
+				<link>http://hintjens.com/blog:112/comments/show#post-2453640</link>
+				<description></description>
+				<pubDate>Mon, 08 Feb 2016 14:24:35 +0000</pubDate>
+				<wikidot:authorName>Zellyn Hunter</wikidot:authorName>				<wikidot:authorUserId>2531086</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Ima let you finish, but the Pugs project beat you to the &quot;commit bits for everyone&quot; philosophy by a few years. Granted, not defined in a contract. :-)</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:112/comments/show#post-2453604</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:112/comments/show#post-2453604</link>
+				<description></description>
+				<pubDate>Mon, 08 Feb 2016 13:19:52 +0000</pubDate>
+				<wikidot:authorName>crocket</wikidot:authorName>				<wikidot:authorUserId>1794068</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <blockquote> <p>a strong bill of rights for contributors</p> </blockquote> <p>I think strong individual right or strong individual protection is important in every social system.</p> <p>In a company, open allocation supports and is supported by strong contributor rights.</p> <p>In a nation state, universal basic income(UBI) supports strong individual rights and prevents lots of abuse from employers. Also, UBI incentivizes people to stop hurting others to just make living. Lots of psychopaths will stop abusing people just to make living, too. UBI recognizes unpaid contributions from people.</p> <p>In open source projects, C4.1 makes it easy to work with others by undermining power inequality and boosting right of contributors.</p> <p>Arguably, a strong bill of right for contributors achieves its good effects by lowering inequality of power among contributors and protecting contributors from concensus and vulnerabilities.</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

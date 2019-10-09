@@ -1,0 +1,979 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from hintjens.com/blog:42 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:30:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>A Web Server in 30 Lines of C - Hintjens.com</title>
+    
+    	<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+    // DEFINE DFP SLOTS
+googletag.defineSlot('/1030917/wikidot_free_sites_top_728x90', [728, 90], 'div-gpt-ad-1410946564449-1').addService(googletag.pubads());
+googletag.defineSlot('/1030917/wikidot_free_sites_bottom_300x250', [300, 250], 'div-gpt-ad-1410946564449-0').addService(googletag.pubads());
+
+// googletag.pubads().enableSingleRequest();
+googletag.pubads().collapseEmptyDivs(true, true);
+googletag.pubads().setTargeting("w_name", "hintjens");
+googletag.pubads().setTargeting("w_domain", "com.hintjens");
+googletag.pubads().setTargeting("w_verified", "false");
+if(null){googletag.pubads().setTargeting("w_cats", null);}
+if(false){googletag.pubads().setTargeting("w_mn", "true");}
+googletag.enableServices();
+});
+</script>
+<script type="text/javascript" src="http://www.wikidot.com/default__flow/login__CustomDomainScript?site_id=352120"></script>
+
+    
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/init.combined.js"></script>
+    <script  type="text/javascript">
+        var URL_HOST = 'www.wikidot.com';
+        var URL_DOMAIN = 'wikidot.com';
+        var USE_SSL =  true ;
+        var URL_STATIC = 'http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade';
+        // global request information
+        
+        var WIKIREQUEST = {};
+        WIKIREQUEST.info = {};
+        
+        WIKIREQUEST.info.domain = "hintjens.com";
+        WIKIREQUEST.info.siteId = 352120;
+        WIKIREQUEST.info.siteUnixName = "hintjens";
+        WIKIREQUEST.info.categoryId = 1984291;
+        WIKIREQUEST.info.themeId = 1;
+        WIKIREQUEST.info.requestPageName = "blog:42";
+        OZONE.request.timestamp = 1570613244;
+        OZONE.request.date = new Date();
+        WIKIREQUEST.info.lang = 'en';
+                WIKIREQUEST.info.pageUnixName = "blog:42";
+        WIKIREQUEST.info.pageId = 17693841;
+                        WIKIREQUEST.info.lang = "en";
+        OZONE.lang = "en";
+        var isUAMobile = !!/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    </script>
+    
+    
+
+
+    
+        <script  type="text/javascript">
+    
+        require.config({
+            baseUrl: URL_STATIC + '/common--javascript',
+            paths: {
+                'jquery.ui': 'jquery-ui.min',
+                'jquery.form': 'jquery.form'
+            }
+        });
+    
+    </script>
+    
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+            
+    
+    
+    
+    
+    <meta http-equiv="content-language" content="en"/>
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/WIKIDOT.combined.js"></script>
+        
+    
+    <style type="text/css" id="internal-style">
+        
+        /* modules */
+@import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/css/pagerate/PageRateWidgetModule.css);
+
+
+        
+                
+        /* theme */
+                    @import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--theme/base/css/style.css);
+                    @import url(http://hintjens.wdfiles.com/local--code/admin%3Athemes/1);
+            </style>
+    
+        
+        
+        
+    <link rel="shortcut icon" href="local--favicon/favicon.gif"/>
+    <link rel="icon" type="image/gif" href="local--favicon/favicon.gif"/>
+    
+            <link rel="apple-touch-icon" href="common--images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="common--images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="common--images/apple-touch-icon-114x114.png" />
+        
+        
+            <link rel="alternate" type="application/wiki" title="Edit this page" href="javascript:WIKIDOT.page.listeners.editClick()"/>
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18234656-1']);
+        _gaq.push(['_setDomainName', 'none']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        _gaq.push(['old._setAccount', 'UA-68540-5']);
+        _gaq.push(['old._setDomainName', 'none']);
+        _gaq.push(['old._setAllowLinker', true]);
+        _gaq.push(['old._trackPageview']);
+
+                _gaq.push(['userTracker._setAccount', 'UA-623476-16']);
+        _gaq.push(['userTracker._trackPageview']);
+            </script>
+    
+    <script type="text/javascript">
+        window.google_analytics_uacct = 'UA-18234656-1';
+        window.google_analytics_domain_name = 'none';
+    </script>
+    
+        <link rel="manifest" href="onesignal/manifest.html" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" acync=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: null,
+          });
+        });
+    </script>
+        
+<link rel="alternate" type="application/rss+xml" title="Comments for the page &quot;A Web Server in 30 Lines of C&quot;" href="feed/page/comments-17693841.xml"/><script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/misc/NewPageHelperModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/list/ListPagesModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/pagerate/PageRateWidgetModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumCommentsModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/sub/ForumNewPostFormModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadPostsModule.js"></script>
+</head>
+<body id="html-body">
+<div id="skrollr-body">
+<a name="page-top"></a>
+
+<div id="container-wrap-wrap">
+    <div id="container-wrap">
+        <div id="container">
+            <div id="header">
+              <h1><a href="index.html"><span>Hintjens.com</span></a></h1>
+                
+                    <h2><span>Moving Pieces</span></h2>
+                
+                
+                <!-- google_ad_section_start(weight=ignore) -->
+                
+                <div id="search-top-box" class="form-search">
+    <form id="search-top-box-form" action="http://hintjens.com/dummy" class="input-append">
+        <input id="search-top-box-input" class="text empty search-query" type="text" size="15" name="query" value="Search this site" onfocus="if(YAHOO.util.Dom.hasClass(this, 'empty')){YAHOO.util.Dom.removeClass(this,'empty'); this.value='';}"/><input class="button btn" type="submit" name="search" value="Search"/>
+    </form>
+</div>
+                
+                
+                    <div id="top-bar">
+                        
+
+<ul>
+<li><a href="index.html">Front</a></li>
+<li><a href="blog__zeromq.html">ZeroMQ</a></li>
+<li><a href="blog__community.html">Community</a></li>
+<li><a href="blog__unprotocols.html">Unprotocols</a></li>
+<li><a href="blog__psychopaths.html">Psychopaths</a></li>
+</ul>
+
+                    </div>
+                
+                <div id="login-status"><a href="javascript:;" onclick="WIKIDOT.page.listeners.createAccount(event)" class="login-status-create-account btn">Create account</a> <span>or</span> <a href="javascript:;" onclick="WIKIDOT.page.listeners.loginClick(event)" class="login-status-sign-in btn btn-primary">Sign in</a> </div>
+                <div id="header-extra-div-1"><span></span></div><div id="header-extra-div-2"><span></span></div><div id="header-extra-div-3"><span></span></div>
+            </div>
+            
+            <div id="content-wrap">
+                
+                    <div id="side-bar">
+                        
+
+
+                        
+
+<p><a class="wiki-standalone-button" style="background-image: url(http://www.wikidot.com/local--files/files/document-print.png); background-repeat: no-repeat; background-position: bottom right; padding-right: 20px;color: #444" href="javascript:;" onclick="WIKIDOT.page.listeners.printClick(event)">print</a></p>
+<a href="http://hintjens.wdfiles.com/local--files/nav:side/culture.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/nav:side/culture.jpg/small.jpg" alt="culture.jpg" class="image" /></a>
+<p><strong>Pieter Hintjens</strong></p>
+<p><a href="main_biography.html">Biography</a> | <a href="main_portfolio.html">Portfolio</a> | <a href="https://github.com/hintjens">GitHub</a><br />
+<a href="books.html">Books</a> | <a href="https://vimeo.com/user10099130/videos">Videos</a> | <a href="http://www.slideshare.net/pieterh">Slides</a> | <a href="http://fiction.hintjens.com/">Stories</a> | <a href="http://wiki.hintjens.com/">Wiki</a><br />
+<a href="contact.html">Contact</a></p>
+<p><strong>Thank you for the gifts</strong></p>
+<p><a href="http://paypal.me/Hintjens">Kind people already sent donations</a> that will make my childrens' lives easier, when I'm not there any more. Thank you enormously! :-)</p>
+<p>Podcasts/Interviews</p>
+<p><a href="http://softwareengineeringdaily.com/2016/06/23/death-distributed-systems-pieter-hintjens/">Software Engineering Daily</a><br />
+<a href="https://www.youtube.com/watch?v=ApqI9XLRk4k">Interview by Adam Dymitruk</a><br />
+<a href="http://devchat.tv/ruby-rogues/188-rr-community-building-with-pieter-hintjens">Ruby Rogues #188, Community Building</a></p>
+<p>Talks on video</p>
+<p><a href="http://deredactie.be/cm/vrtnieuws/videozone/programmas/deafspraak/2.44331">&quot;De afspraak&quot;, VRT, May 2016</a> (panel discussion)<br />
+<a href="http://www.rtl.be/rtltvi/video/581260.aspx">RTL TV, May 2016</a> (panel discussion)<br />
+<a href="https://www.youtube.com/watch?v=uzxcILudFWM">DomCode 2015, Nov 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=7HECD3eLoVo">Coding Serbia, Oct 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=O8CbzKREAj4">Euroscipy, Cambridge, Aug 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=FKu09-_AaeM&amp;index=4&amp;list=PLFxMLyzsWeqr4SCyx0ZmFkVz2vZJk_CI5">PyGrunn, Groningen, May 2015</a><br />
+<a href="http://www.ustream.tv/recorded/61450822">Craft Conf, Budapest, Apr 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design-2015">QCon London, Mar 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design">Code Mesh London, Nov 2014</a><br />
+<a href="http://www.infoq.com/presentations/trick-better-software">Build Stuff, Vilnius 2014</a><br />
+<a href="https://www.youtube.com/watch?v=_QF9sFJGJuc">Build Stuff, Vilnius, Nov 2014</a> (interview)<br />
+<a href="https://www.youtube.com/watch?v=xFVDNTXIC_Y">Coding Serbia, Nov 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=DAOFZfSlFs0">Devnology, Leusden, Oct 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=QB7VXSc5H3A">EuroPython, Berlin, Jul 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=qTNqgwN5gzA&amp;feature=youtu.be">Build Stuff, Vilnius, Dec 2013</a> (interview)<br />
+<a href="http://www.infoq.com/presentations/digital-revolution-freedom">Build Stuff, Vilnius, Dec 2013</a> (keynote)<br />
+<a href="http://vimeo.com/82175816">Code Mesh London, Dec 2013</a><br />
+<a href="http://vimeo.com/79378301">DevOps Days, London, Nov 2013</a><br />
+<a href="https://vimeo.com/68236487">NDC Oslo, Jun 2013</a><br />
+<a href="https://vimeo.com/69666055">CERN - Geneva, Jun 2013</a><br />
+<a href="https://www.youtube.com/watch?v=uj-li0LO_2g">Tech Mesh, London, Dec 2012</a><br />
+<a href="http://www.infoq.com/presentations/Architecture-Scale-ZeroMQ">Strange Loop, St.Louis, Oct 2012</a><br />
+<a href="https://vimeo.com/37854675">ZeroMQ@PDX part 2 - Portland, Feb 2012</a><br />
+<a href="https://vimeo.com/38117896">ZeroMQ@PDX part 1 - Portland, Feb 2012</a><br />
+<a href="http://www.youtube.com/watch?gl=BE&amp;v=4II94h6-IFY">FLOSS Weekly, Petaliuma CA, Dec 2011</a><br />
+<a href="https://www.youtube.com/watch?v=CCBYzKfmQ4U">FOSDEM 2011, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=h0facLxJPUE">Berlin Buzzwords 2010</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=bQgPArfbXm4">FOSDEM 2009, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=fJo1jmuOuqQ">Hellenic FOSS Conference 2008, Athens part 1</a><br />
+<a href="https://www.youtube.com/watch?v=Hx6cS1VLhoo">Hellenic FOSS Conference 2008, Athens part 2</a></p>
+<p>Email me at <span class="wiki-email">moc.snejtnih|reteip#moc.snejtnih|reteip</span> if you'd like me to present at your event, or in your organization.</p>
+<a href="books.html"><img src="https://www.createspace.com/Img/T448/T45/T21/BookCoverImage.jpg?random=0.4431380270844333" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.4431380270844333" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/socarch.png" style="padding:5px" width="100" alt="socarch.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/confessions.jpg" style="padding:5px" width="100" alt="confessions.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/psccover.jpg" style="padding:5px" width="100" alt="psccover.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://akamaicovers.oreilly.com/images/0636920026136/cat.gif" style="padding:5px" width="100" alt="cat.gif" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/scalablec.png" style="padding:5px" width="100" alt="scalablec.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="https://www.createspace.com/Img/T409/T85/T11/BookCoverImage.jpg?random=0.7859812398986378" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.7859812398986378" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<p><strong><a href="books.html">Download and read online</a></strong></p>
+<p><strong><a href="legal_start.html">Legal</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></strong></p>
+<div class="collapsible-block">
+<div class="collapsible-block-folded"><a class="collapsible-block-link" href="javascript:;"> ▽ </a></div>
+<div class="collapsible-block-unfolded" style="display:none">
+<div class="collapsible-block-unfolded-link"><a class="collapsible-block-link" href="javascript:;"> △ </a></div>
+<div class="collapsible-block-content">
+<div class="side-box">
+<p><a href="_admin.html">Manage</a> | <a href="admin_themes.html">Theme</a> | <a href="nav_top.html">Top</a> | <a href="nav_top.html">Side</a></p>
+
+<div class="new-page-box" style="text-align: center; margin: 1em 0;">
+	<form action="http://hintjens.com/dummy.html" method="get" onsubmit="WIKIDOT.modules.NewPageHelperModule.listeners.create(event);">
+		<input class="text" name="pageName" type="text" size="40" maxlength="128" style="margin: 1px"/>
+				<input type="submit" class="button" value="New post" style="margin: 1px;"/>
+									<input type="hidden" name="categoryName" value="blog"/>
+													<input type="hidden" name="parent" value="blog:_start"/>
+				
+	</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                        
+
+
+                    </div>
+                
+                
+                <!-- google_ad_section_end -->
+                
+                <div id="main-content">
+                    <div id="action-area-top"></div>
+                    
+                    
+                        <div id="page-title">
+                            A Web Server in 30 Lines of C
+                        </div>
+                    
+
+                    
+                        <div id="breadcrumbs">
+                            <a href="blog__start.html">All Articles</a> &raquo; A Web Server in 30 Lines of C
+                        </div>
+                    
+
+                                    <!-- wikidot_top_728x90 -->
+<div id="div-gpt-ad-1410946564449-1" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-above_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-1'); });
+</script>
+</div>
+
+            
+    
+
+
+                    <div id="page-content">
+                        
+
+<div style="overflow:hidden; font-size: 13px; margin: -26px 0 -22px 0">
+<div style="float:left"><div class="list-pages-box">    
+
+<p><a href="blog_41.html">&lt; Previous</a></p>
+
+    
+    
+    
+    </div></div>
+<div style="float:right"><div class="list-pages-box">    
+
+<p><a href="blog_43.html">Next &gt;</a></p>
+
+    
+    
+    
+    </div></div>
+</div>
+<div style="border: solid 1px #f00; padding:0 1em 0 1em; margin-bottom: 1em; margin-top:1em; min-height: 140px; overflow: hidden">
+<p><span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1493683613" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)" /></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;">pieterh</a></span> wrote on <span class="odate time_1367229430 format_%25e%20%25b%2C%20%25H%3A%25M%20%28%25O%20ago%29">29 Apr 2013 09:57</span></p>
+<div class="image-container floatleft"><a href="http://hintjens.wdfiles.com/local--files/blog:42/forward_black.png"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:42/forward_black.png/small.jpg" alt="forward_black.png" class="image" /></a></div>
+<p>There are developers who never built distributed systems. Then there are developers who have done this before, using a messaging system. Then there are those who've done it the hard way, using BSD sockets. Privately, I call these the Good, the Bad, and the Ugly, because of how they respond when they meet ZeroMQ and read the Guide. Today, &quot;Getting Started with ZeroMQ for Uglies&quot;. With a &quot;Hello, World&quot; web server in —40— 30 lines of C, just for fun.</p>
+<h2 id="toc0"><span>The Good, the Bad, and the Ugly</span></h2>
+<p>First, a confession: I'm an Ugly, writing my first distributed fabric in 1990. This was for a pan-European tour operator app, running on Digital ACMS, and it ran for 20 years. It was quite a shock to see formal messaging systems when we started building AMQP for JPMorganChase around 2004. I've come to appreciate the abstractions but it took a long time.</p>
+<p>The Good, when they see ZeroMQ, don't come with preconceptions. They open a magic box, learn the different tools, and for the most part, experience the kind of euphoric empowerment we dream of when we make software for other people to use. The Good are the people I cherish the most, because their lack of previous experience keeps them open to doing the most exciting, aka crazy, things with ZeroMQ. They also often come from a generation that's used to GitHub, which enjoys making pull requests, and so on.</p>
+<p>The Bad, when they see ZeroMQ, immediately try to fit it into their view of How Things Work. I've called this the &quot;Fire vs. Electricity&quot; paradox. When you're used to Fire, and you enjoy your grilled mammoth burger, it's kind of freaky to hear someone explaining electricity. The more experience you have with Fire, the more you will dislike this new form of energy. When someone explains, &quot;Sure, you can make a grill, but you can also power your smartphone,&quot; the inclination is to hit the speaker over the head with the chewed-up remnants of a mammoth rib bone. The Bad tend to come to the zeromq-dev mailing list with long and unanswerable questions of the form, &quot;How do I use ZeroMQ to do such-and-such?&quot; which is like asking, &quot;how do I use this thing you call 'electricity' to set fire to the plains so that the mammoth will run over the cliff?&quot;</p>
+<p>Finally, we have the Ugly. We uglies are experienced technical developers, wise enough to not trust technology, especially technology that is boastful and arrogant enough to claim some kind of uniqueness. We uglies know that most technology is bullshit, and the louder the marketing, the worse it is. We make a lot of stuff ourselves because we like things to work for 20 years. When we come to ZeroMQ, we start trying to fit the Guide to our problems, and soon we give up in a mix of frustration and anger.</p>
+<p>Now I'm not calling Tavis Rudd &quot;ugly&quot;, and indeed he looks quite handsome in his <a href="https://twitter.com/tavisrudd">Twitter profile pic</a>, but as he says, &quot;<em>finding the ZeroMQ guide a very frustrating read. Great software, but the guide is too chatty, too boastful and poorly structured. True root of my frustration w the zeromq guide was wanting to use req/rep for something I'm much better off doing with plain bsd sockets</em>&quot;.</p>
+<p>A good designer always takes the blame. As ZeroMQ gets more popular, we get a bigger spread of reactions to the learning curve. Early users were a subset of the Bad (let's call them the Evil), who had already figured out why they wanted decentralized messaging. For them, ZeroMQ was a godsend, and they would have read the source code to figure out how to use it. The Guide was therefore aimed squarely at the other early users, the Good, who were new to messaging and wanted a full story to buy into. Good and Evil, the ingredients of every great creation myth.</p>
+<h2 id="toc1"><span>ZeroMQ Is Just Like BSD Sockets, But Better</span></h2>
+<p>The other essential ingredients of a creation myth are lies and deception. ZeroMQ is nothing at all like BSD sockets despite very insistent attempts from its early designers to make that. Yes, the API is vaguely socket-like. APIs are not the same as semantics. ZeroMQ patterns are weird and wonderful and delicate but they are not, and I'll repeat this, even marginally close to the BSD &quot;stream of bytes from sender to recipient&quot; pattern.</p>
+<p>It's worse than that. The closest match in ZeroMQ is the PAIR socket, which is kind of broken in <tt>libzmq</tt>, and which we use only for inter-thread pipes. So innocent Uglies like Tavis start with request-reply sockets, and soon discover that not only is ZeroMQ not like BSD sockets &quot;on steroids&quot; but the very simplest ZeroMQ patterns are useless for them. Request-reply isn't just contrived and weird, it's <em>also</em> broken in interesting ways and is really just a teaching tool for people to get into the <em>real</em> ZeroMQ socket patterns: publish-subscribe, push-pull, and router-dealer.</p>
+<p>Happily, sometime in 2012, one of the random passing geniuses who contributes to ZeroMQ came up with a patch that gave us raw STREAM sockets. It's about as sane as adding a lighter to your smartphone in an age where most people are just switching from coal to gas. The lighter is surprisingly useful when interfacing with primitive fire-based systems. It makes zero sense in an electricity-based world, but software is more like something from a steampunk comic, a mix of technologies of all ages.</p>
+<p>When we explain ZeroMQ to the Good, we start at the beginning with the request-reply pattern and move through hundreds of pages to the real gold. I can really imagine how frustrating it must be to come with decades of experience of networking and have to wade through hundreds of pages of explanation to come to the right answer.</p>
+<p>Of course, if everyone asked the right questions up-front, life would be simpler.</p>
+<p>The question Tavis didn't really ask was (afaics), &quot;how do I replace plain BSD sockets with ZeroMQ, gradually moving to more interesting use-cases?&quot;</p>
+<p>Which I'll try to answer, thanks to <a href="https://github.com/hshardeesi">hshardeesi</a> and his RAW patch. Let's assume we're talking about TCP, because UDP is special in its own cute ways.</p>
+<h2 id="toc2"><span>Moving from BSD Sockets to ZeroMQ Sockets</span></h2>
+<h3 id="toc3"><span>Step One: STREAM sockets</span></h3>
+<p>First, we'll get a ZeroMQ socket talking to a classic TCP socket. Then we'll morph that into a ZeroMQ-to-ZeroMQ connection. Let's break this down into steps:</p>
+<ul>
+<li>Forget REQ, REP, and PAIR sockets, We're going to use a ZMQ_STREAM socket. I'll show you code you can cut/paste in a second.</li>
+</ul>
+<ul>
+<li>The stream socket acts as a server, so bind it to a <tt>tcp://</tt> endpoint that you expect clients to connect to.</li>
+</ul>
+<ul>
+<li>You can talk to clients <em>after</em> they talk to you. Just like a TCP server socket. The RAW option doesn't let you talk to a TCP peer until it's talked to you.</li>
+</ul>
+<ul>
+<li>You read messages from the socket one after the other, either using blocking <tt>zmq_recv</tt> calls, or using <tt>zmq_poll</tt>. Each message has two frames. The first frame is the handle of the client (ZeroMQ calls this the &quot;identity&quot;). The second frame is the received data, which is 1 or more bytes.</li>
+</ul>
+<ul>
+<li>To send data back to a specific client, you first send the handle, and then the data, as two frames. If you want to close a client connection, send the handle and then an empty frame.</li>
+</ul>
+<p>That's it. The stream socket takes care of all the multiplexing, error handling, polling, and so on, and does this in a background I/O thread so it's fast.</p>
+<p>What kind of havoc can we create using a stream socket? How about a web server? That's always fun. OK, here's a 30-line HTTP server in C. This little animal doesn't do much real work. It reads requests, logs them, chucks them out, and answers &quot;Hello, World!&quot;:</p>
+<div class="code">
+<p><span style="color:#BC7A00"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Minimal HTTP server in 0MQ<br />
+#include &quot;czmq.h&quot;</span></p>
+<p><span style="color:#B00040">int</span> <span style="color:#0000FF">main</span> (<span style="color:#B00040">void</span>)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_t <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>stream <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_STREAM);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> rc <span style="color:#666666">=</span> zsocket_bind (stream, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>*:8080&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (rc <span style="color:#666666">!=</span> <span style="color:#666666">-</span><span style="color:#666666">1</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>while</strong></span> (<span style="color:#008000">true</span>) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Get HTTP request</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_t <span style="color:#666666">*</span>handle <span style="color:#666666">=</span> zframe_recv (stream);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (<span style="color:#666666">!</span>handle)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>break</strong></span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Ctrl-C interrupt</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>request <span style="color:#666666">=</span> zstr_recv (stream);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>puts (request);<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Professional Logging(TM)</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>free (request);<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>We throw this away</em></span></p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Send Hello World response</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_send (<span style="color:#666666">&amp;</span>handle, stream, ZFRAME_MORE <span style="color:#666666">+</span> ZFRAME_REUSE);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zstr_send (stream,<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#BA2121">&quot;HTTP/1.0&#160;200 OK</span><span style="color:#BB6622"><strong>\r\n</strong></span><span style="color:#BA2121">&quot;</span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#BA2121">&quot;Content-Type: text/plain</span><span style="color:#BB6622"><strong>\r\n</strong></span><span style="color:#BA2121">&quot;</span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#BA2121">&quot;</span><span style="color:#BB6622"><strong>\r\n</strong></span><span style="color:#BA2121">&quot;</span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#BA2121">&quot;Hello, World!&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Close connection to browser</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_send (<span style="color:#666666">&amp;</span>handle, stream, ZFRAME_MORE);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zmq_send (stream, <span style="color:#008000">NULL</span>, <span style="color:#666666">0</span>, <span style="color:#666666">0</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span>}</tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#666666">0</span>;<br />
+}</p>
+</div>
+<br />
+<em>zhttpd.c: HTTP Server</em>
+<p><a href="https://gist.github.com/hintjens/5480625">Get the code.</a></p>
+<p>To make this into a real server we'd have to add at least a few things:</p>
+<ul>
+<li>Read a full HTTP request header, which means keep reading and accumulating data until we find a blank line (two carriage-returns) in the data.</li>
+</ul>
+<ul>
+<li>Parse the HTTP request to see if the client has asked us for something we can handle, e.g. to GET a resource.</li>
+</ul>
+<ul>
+<li>Map that resource name into a real filename (if that's what we're trying to do).</li>
+</ul>
+<ul>
+<li>Open the file, and send its contents to the client.</li>
+</ul>
+<p>But that's classic RFC2616 stuff and not relevant to ZeroMQ, so not really worth talking about more. 2616ing used to be a full-time hobby but honestly, ZeroMQ is way more fun.</p>
+<h3 id="toc4"><span>Step Two: ROUTER to DEALER</span></h3>
+<p>So, you've now seen how ZeroMQ can talk to BSD sockets. It's not perfect: for one thing, we can't write clients like this. That sucks. If anyone wants to fix this, perhaps allow outgoing connections on a STREAM socket, resulting in a null message back to the caller, with an identity and zero body.</p>
+<p>Anyhow, what's the next step? Let's replace the BSD TCP socket with a DEALER socket. It's not a perfect match but it's close enough to make a good party. If we connect DEALER to exactly one ROUTER, the DEALER just reads and writes like a TCP socket, with some small but oh-so-valuable differences:</p>
+<ul>
+<li>We can write any amount of data <em>as a single message</em> and it will arrive <em>as a single message</em>. This is awesome because using a classic TCP protocol like HTTP means doing a lot of dancing around the pot to figure out when a request or response is finished. Framing, young man, the future is in framing!</li>
+</ul>
+<ul>
+<li>The DEALER socket will connect opportunistically. Again, a small but awesome improvement on the BSD style of networking. Just connect one time, then use the socket for ages. It'll disconnect and reconnect as the network shifts. Perhaps the ROUTER socket will decide it wants to flush connections. No problem! The DEALER will reconnect later.</li>
+</ul>
+<p>DEALER does quite a lot more than this. It can connect to many ROUTERs and will distribute requests among them. Load-balancing, for free. It does fair queuing on input, so if you're getting a gigabyte of messages from one ROUTER, and another sends you a 10-byte urgent message, that will sneak in front.</p>
+<p>Doing a DEALER-to-ROUTER pseudo-HTTP is of course weird, it's just an exercise. We'll call the protocol WTFP, and it looks (nothing at all) like HTTP over ZeroMQ framing:</p>
+<div class="code">
+<p><span style="color:#BC7A00"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Minimal WTFP server in 0MQ<br />
+#include &quot;czmq.h&quot;</span></p>
+<p><span style="color:#008000"><strong>static</strong></span> <span style="color:#B00040">void</span> <span style="color:#666666">*</span><br />
+<span style="color:#0000FF">wtfp_server</span> (<span style="color:#B00040">void</span> <span style="color:#666666">*</span>args)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_t <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>router <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_STREAM);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> rc <span style="color:#666666">=</span> zsocket_bind (router, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>*:8080&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (rc <span style="color:#666666">!=</span> <span style="color:#666666">-</span><span style="color:#666666">1</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>while</strong></span> (<span style="color:#008000">true</span>) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Get WTFP request</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_t <span style="color:#666666">*</span>handle <span style="color:#666666">=</span> zframe_recv (router);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (<span style="color:#666666">!</span>handle)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>break</strong></span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Ctrl-C interrupt</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>request <span style="color:#666666">=</span> zstr_recv (router);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>puts (request);<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Professional Logging(TM)</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>free (request);<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>We throw this away</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Send Hello World response</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_send (<span style="color:#666666">&amp;</span>handle, router, ZFRAME_MORE);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zstr_send (router, <span style="color:#BA2121">&quot;Hello, World!&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span>}</tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#008000">NULL</span>;<br />
+}</p>
+<p><span style="color:#B00040">int</span> <span style="color:#0000FF">main</span> (<span style="color:#B00040">void</span>)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zthread_new (wtfp_server, <span style="color:#008000">NULL</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_t <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>dealer <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_DEALER);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> rc <span style="color:#666666">=</span> zsocket_connect (dealer, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>localhost:8080&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>assert (rc <span style="color:#666666">!=</span> <span style="color:#666666">-</span><span style="color:#666666">1</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (dealer, <span style="color:#BA2121">&quot;GET /Hello&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>response <span style="color:#666666">=</span> zstr_recv (dealer);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>puts (response);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#666666">0</span>;<br />
+}</p>
+</div>
+<br />
+<em>zwtfpd.c: WTFP Server</em>
+<p><a href="https://gist.github.com/hintjens/5480688">Get the code.</a></p>
+<h3 id="toc5"><span>Satori</span></h3>
+<p>So now we've seen how ZeroMQ can roughly imitate BSD sockets, talk to them, and then fark them up beyond all recognition. DEALER-ROUTER is what we use in most real large-scale architectures, because it lets us build real bidirectional protocols. But there's also PUSH-PULL and PUB-SUB, which are fun. Not to mention using ZeroMQ for in-process multithreading. When you think of distribution not just as &quot;outer&quot; but also &quot;inner&quot;, you start to see just how ambitious and arrogant this library is.</p>
+<p>Hope you enjoyed the article. Let me know what you want me to write about next.</p>
+<div style="float:left;width:33%; margin:-15px 0 0 0">
+<p><iframe src="http://hintjens.wdfiles.com/local--html/blog%3A42/33df2b68f59e81232ae1b83a9844985965c4b305-1759763761119328880/hintjens.com/" allowtransparency="true" frameborder="0" class="html-block-iframe"></iframe></p>
+</div>
+<div style="float:right"><div class="page-rate-widget"><div class="page-rate-widget-start" data-rating="0"></div></div></div>
+</div>
+<p><a name="comments"></a></p>
+<div class="comments-box">
+	<h1>Comments</h1>	
+	<div class="options" id="comments-options-hidden" style="display: none">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.showComments(event)">Show Comments</a> 
+	</div>
+		
+	<div id="thread-container" class="thread-container reverse" style="margin-top: 1em">
+					
+
+
+<script type="text/javascript">
+	WIKIDOT.forumThreadId = 648407;
+</script>
+
+        <a href="javascript:;" id="new-post-button" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.newPost(event,null)"
+      style="display:  block ; margin-bottom:1em"
+    >Add a New Comment</a>
+
+ 
+
+	<div class="options" id="comments-options-shown">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.hideComments(event)" class="btn btn-default btn-small btn-sm">Hide All Comments</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.unfoldAll(event)" class="btn btn-default btn-small btn-sm">Unfold All</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.foldAll(event)" class="btn btn-default btn-small btn-sm">Fold All</a>
+	</div>
+
+<div id="thread-container-posts" style="display: none">
+    
+
+
+
+	
+					
+      
+    <div class="post-container" id="fpc-2807664">
+                      
+		<div class="post" id="post-2807664">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,2807664)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-2807664">
+																		czmq version
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/eipeace2u" onclick="WIKIDOT.page.listeners.userInfo(3094988); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=3094988&amp;amp;size=small&amp;amp;timestamp=1570612046" alt="eipeace2u" style="background-image:url(http://www.wikidot.com/userkarma.php?u=3094988)"/></a><a href="http://www.wikidot.com/user:info/eipeace2u" onclick="WIKIDOT.page.listeners.userInfo(3094988); return false;" >eipeace2u</a></span> <span class="odate time_1493683612 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">02 May 2017 00:06</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-2807664">
+									
+
+<p>What version of czmq/zmq did you use to compile this? 3.0.2 has ctx and doesn't have ZMQ_STREAM 4.0 has no ctx and ZMQ_STREAM</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,2807664)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,2807664)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-2807664" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,2807664)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,2807664)">czmq version</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/eipeace2u" onclick="WIKIDOT.page.listeners.userInfo(3094988); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=3094988&amp;amp;size=small&amp;amp;timestamp=1570612046" alt="eipeace2u" style="background-image:url(http://www.wikidot.com/userkarma.php?u=3094988)"/></a><a href="http://www.wikidot.com/user:info/eipeace2u" onclick="WIKIDOT.page.listeners.userInfo(3094988); return false;" >eipeace2u</a></span>, <span class="odate time_1493683612 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">02 May 2017 00:06</span>
+		</div>
+	</div>
+ 
+                
+                	
+
+
+        
+            </div>
+ 
+
+	
+					
+      
+    <div class="post-container" id="fpc-2020318">
+                      
+		<div class="post" id="post-2020318">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,2020318)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-2020318">
+																		stress test failure
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/gopalakrishna-palem" onclick="WIKIDOT.page.listeners.userInfo(1879390); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1879390&amp;amp;size=small&amp;amp;timestamp=1570612046" alt="GopalaKrishna Palem" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1879390)"/></a><a href="http://www.wikidot.com/user:info/gopalakrishna-palem" onclick="WIKIDOT.page.listeners.userInfo(1879390); return false;" >GopalaKrishna Palem</a></span> <span class="odate time_1398563507 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">27 Apr 2014 01:51</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-2020318">
+									
+
+<p>This code when tested, is not able to accept connections beyond 400 or 500 connections (from the same client). Its not a HWM problem.</p>
+<p>I have posted a question with some more details on this on Stack overflow. Hope some one is able to provide some insight into the behavior.</p>
+<p>question is available on:</p>
+<p>stackoverflow com/q/23305254/451456</p>
+<p>(unable to paste the link, hence mangled it)</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,2020318)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,2020318)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-2020318" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,2020318)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,2020318)">stress test failure</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/gopalakrishna-palem" onclick="WIKIDOT.page.listeners.userInfo(1879390); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1879390&amp;amp;size=small&amp;amp;timestamp=1570612046" alt="GopalaKrishna Palem" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1879390)"/></a><a href="http://www.wikidot.com/user:info/gopalakrishna-palem" onclick="WIKIDOT.page.listeners.userInfo(1879390); return false;" >GopalaKrishna Palem</a></span>, <span class="odate time_1398563507 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">27 Apr 2014 01:51</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+
+	
+					
+      
+    <div class="post-container" id="fpc-1808875">
+                      
+		<div class="post" id="post-1808875">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1808875)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1808875">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/porjo" onclick="WIKIDOT.page.listeners.userInfo(1474489); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1474489&amp;amp;size=small&amp;amp;timestamp=1570612046" alt="porjo" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1474489)"/></a><a href="http://www.wikidot.com/user:info/porjo" onclick="WIKIDOT.page.listeners.userInfo(1474489); return false;" >porjo</a></span> <span class="odate time_1372936890 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">04 Jul 2013 11:21</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1808875">
+									
+
+<p>I wonder if you could discuss the C10K problem and how ZeroMQ addresses this?</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1808875)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1808875)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1808875" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1808875)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1808875)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/porjo" onclick="WIKIDOT.page.listeners.userInfo(1474489); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1474489&amp;amp;size=small&amp;amp;timestamp=1570612046" alt="porjo" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1474489)"/></a><a href="http://www.wikidot.com/user:info/porjo" onclick="WIKIDOT.page.listeners.userInfo(1474489); return false;" >porjo</a></span>, <span class="odate time_1372936890 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">04 Jul 2013 11:21</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+
+	
+					
+      
+    <div class="post-container" id="fpc-1777402">
+                      
+		<div class="post" id="post-1777402">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1777402)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1777402">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/lalebarde" onclick="WIKIDOT.page.listeners.userInfo(1629498); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1629498&amp;amp;size=small&amp;amp;timestamp=1570612046" alt="lalebarde" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1629498)"/></a><a href="http://www.wikidot.com/user:info/lalebarde" onclick="WIKIDOT.page.listeners.userInfo(1629498); return false;" >lalebarde</a></span> <span class="odate time_1368801911 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">17 May 2013 14:45</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1777402">
+									
+
+<p>Sorry for this naive question, but it will help for my networking-newbby understanding: what is the added value of &quot;servers&quot; like apache/nginx/mongrel2 ?</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1777402)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1777402)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1777402" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1777402)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1777402)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/lalebarde" onclick="WIKIDOT.page.listeners.userInfo(1629498); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1629498&amp;amp;size=small&amp;amp;timestamp=1570612046" alt="lalebarde" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1629498)"/></a><a href="http://www.wikidot.com/user:info/lalebarde" onclick="WIKIDOT.page.listeners.userInfo(1629498); return false;" >lalebarde</a></span>, <span class="odate time_1368801911 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">17 May 2013 14:45</span>
+		</div>
+	</div>
+ 
+                
+        
+                      
+    <div class="post-container" id="fpc-1778675">
+                      
+		<div class="post" id="post-1778675">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1778675)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1778675">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570612046" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span> <span class="odate time_1368951085 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">19 May 2013 08:11</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1778675">
+									
+
+<p>Since there are hundreds of millions of devices (phones, laptops, etc.) that act as HTTP clients, you need HTTP servers for them to talk to. This was how we connected computers until messaging became freely available.</p>
+
+							</div>
+
+										<div class="signature">
+					<hr class="signature-separator"/>
+					
+
+<p><a href="http://ipocracy.wikidot.com/main:portfolio">Portfolio</a></p>
+
+				</div>
+					
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1778675)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1778675)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1778675" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1778675)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1778675)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570612046" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span>, <span class="odate time_1368951085 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">19 May 2013 08:11</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+                      
+    <div class="post-container" id="fpc-1779288">
+                      
+		<div class="post" id="post-1779288">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1779288)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1779288">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/lalebarde" onclick="WIKIDOT.page.listeners.userInfo(1629498); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1629498&amp;amp;size=small&amp;amp;timestamp=1570612046" alt="lalebarde" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1629498)"/></a><a href="http://www.wikidot.com/user:info/lalebarde" onclick="WIKIDOT.page.listeners.userInfo(1629498); return false;" >lalebarde</a></span> <span class="odate time_1369036696 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">20 May 2013 07:58</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1779288">
+									
+
+<p>Understood. Thanks a lot. I am digging into the 0MQ Guide, after having spent the last months to study &quot;classic&quot; IPC, that's tremendous. Huge thanks to making this available to everyone.</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1779288)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1779288)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1779288" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1779288)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1779288)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/lalebarde" onclick="WIKIDOT.page.listeners.userInfo(1629498); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1629498&amp;amp;size=small&amp;amp;timestamp=1570612046" alt="lalebarde" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1629498)"/></a><a href="http://www.wikidot.com/user:info/lalebarde" onclick="WIKIDOT.page.listeners.userInfo(1629498); return false;" >lalebarde</a></span>, <span class="odate time_1369036696 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">20 May 2013 07:58</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+            </div>
+ 
+
+
+
+</div>
+
+
+<div style="display:none" id="post-options-template">
+	<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.showPermalink(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Permanent Link</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.editPost(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Edit</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.deletePost(event,'%POST_ID%')" class="btn btn-danger btn-small btn-sm">Delete</a>
+</div>
+	
+			</div>
+	
+	
+	
+</div>
+                    </div>
+
+                                    <!-- wikidot_bottom_300x250 -->
+<div id="div-gpt-ad-1410946564449-0" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-below_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-0'); });
+</script>
+</div>
+
+            
+    
+
+
+                    
+                        <div class="page-tags">
+                            <span>
+                                <a href="system_page-tags/tag/zeromq.html#pages">zeromq</a>
+                            </span>
+                        </div>
+                    
+
+                    <div id="page-info-break"></div>
+                    
+                        <div id="page-options-container">
+                            
+                        </div>
+                    
+                    <div id="action-area" style="display: none;"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div id="footer" style="display: block; visibility: visible;">
+                <div class="options" style="display: block; visibility: visible;">
+    <a href="http://www.wikidot.com/doc" id="wikidot-help-button">Help</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:terms-of-service" id="wikidot-tos-button">Terms of Service</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:privacy-policy" id="wikidot-privacy-button">Privacy</a>
+    &nbsp;|
+    <a href="javascript:;" id="bug-report-button" onclick="WIKIDOT.page.listeners.pageBugReport(event)">Report a bug</a>
+    &nbsp;|
+    <a href="javascript:;" id="abuse-report-button" onclick="WIKIDOT.page.listeners.flagPageObjectionable(event)">Flag as objectionable</a>
+</div>
+Powered by <a href="http://www.wikidot.com/">Wikidot.com</a> 
+            </div>
+            
+                <div id="license-area" class="license-area">
+                    Unless otherwise stated, the content of this page is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>
+                </div>
+            
+            
+            
+
+
+
+            <div id="extrac-div-1"><span></span></div><div id="extrac-div-2"><span></span></div><div id="extrac-div-3"><span></span></div>
+            
+            
+            
+            
+                
+            
+        </div>
+        
+    </div>
+<!-- These extra divs/spans may be used as catch-alls to add extra imagery. -->
+<div id="extra-div-1"><span></span></div><div id="extra-div-2"><span></span></div><div id="extra-div-3"><span></span></div>
+<div id="extra-div-4"><span></span></div><div id="extra-div-5"><span></span></div><div id="extra-div-6"><span></span></div>
+</div>
+
+
+
+</div>
+<div id="dummy-ondomready-block" style="display: none;" ></div>
+    <!-- Google Analytics load -->
+    <script type="text/javascript">
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <!-- Quantcast -->
+    <script type="text/javascript">
+    _qoptions={
+        qacct:"p-edL3gsnUjJzw-"
+    };
+    (function() {
+        var qc = document.createElement('script'); qc.type = 'text/javascript'; qc.async = true;
+        qc.src = ('https:' == document.location.protocol ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(qc, s);
+    })();
+    </script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-edL3gsnUjJzw-.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+    </noscript>
+
+
+
+
+<div id="page-options-bottom-tips" style="display: none;">
+    <div id="edit-button-hovertip">
+        Click here to edit contents of this page.    </div>
+</div>
+<div id="page-options-bottom-2-tips"  style="display: none;">
+    <div id="edit-sections-button-hovertip">
+        Click here to toggle editing of individual sections of the page (if possible).         Watch headings for an &quot;edit&quot; link when available.    </div>
+    <div id="edit-append-button-hovertip">
+        Append content without editing the whole page source.    </div>
+    <div id="history-button-hovertip">
+        Check out how this page has evolved in the past.    </div>
+    <div id="discuss-button-hovertip">
+        If you want to discuss contents of this page - this is the easiest way to do it.    </div>
+    <div id="files-button-hovertip">
+        View and manage file attachments for this page.    </div>
+    <div id="site-tools-button-hovertip">
+        A few useful tools to manage this Site.    </div>
+    <div id="backlinks-button-hovertip">
+        See pages that link to and include this page.    </div>
+    <div id="rename-move-button-hovertip">
+        Change the name (also URL address, possibly the category) of the page.    </div>
+    <div id="view-source-button-hovertip">
+        View wiki source for this page without editing.    </div>
+    <div id="parent-page-button-hovertip">  
+        View/set parent page (used for creating breadcrumbs and structured layout).    </div>
+            <div id="abuse-report-button-hovertip">
+            Notify administrators if there is objectionable content in this page.        </div>
+        <div id="bug-report-button-hovertip">
+            Something does not work as expected? Find out what you can do.        </div>
+        <div id="wikidot-help-button-hovertip">
+            General Wikidot.com documentation and help section.        </div>
+        <div id="wikidot-tos-button-hovertip">
+            Wikidot.com Terms of Service - what you can, what you should not etc.        </div>
+        <div id="wikidot-privacy-button-hovertip">
+            Wikidot.com Privacy Policy.          
+        </div>
+    </div>
+</body>
+
+<!-- Mirrored from hintjens.com/blog:42 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:30:55 GMT -->
+</html>

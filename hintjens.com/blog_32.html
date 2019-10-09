@@ -1,0 +1,902 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from hintjens.com/blog:32 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:31:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Solving the Discovery Problem - Hintjens.com</title>
+    
+    	<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+    // DEFINE DFP SLOTS
+googletag.defineSlot('/1030917/wikidot_free_sites_top_728x90', [728, 90], 'div-gpt-ad-1410946564449-1').addService(googletag.pubads());
+googletag.defineSlot('/1030917/wikidot_free_sites_bottom_300x250', [300, 250], 'div-gpt-ad-1410946564449-0').addService(googletag.pubads());
+
+// googletag.pubads().enableSingleRequest();
+googletag.pubads().collapseEmptyDivs(true, true);
+googletag.pubads().setTargeting("w_name", "hintjens");
+googletag.pubads().setTargeting("w_domain", "com.hintjens");
+googletag.pubads().setTargeting("w_verified", "false");
+if(null){googletag.pubads().setTargeting("w_cats", null);}
+if(false){googletag.pubads().setTargeting("w_mn", "true");}
+googletag.enableServices();
+});
+</script>
+<script type="text/javascript" src="http://www.wikidot.com/default__flow/login__CustomDomainScript?site_id=352120"></script>
+
+    
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/init.combined.js"></script>
+    <script  type="text/javascript">
+        var URL_HOST = 'www.wikidot.com';
+        var URL_DOMAIN = 'wikidot.com';
+        var USE_SSL =  true ;
+        var URL_STATIC = 'http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade';
+        // global request information
+        
+        var WIKIREQUEST = {};
+        WIKIREQUEST.info = {};
+        
+        WIKIREQUEST.info.domain = "hintjens.com";
+        WIKIREQUEST.info.siteId = 352120;
+        WIKIREQUEST.info.siteUnixName = "hintjens";
+        WIKIREQUEST.info.categoryId = 1984291;
+        WIKIREQUEST.info.themeId = 1;
+        WIKIREQUEST.info.requestPageName = "blog:32";
+        OZONE.request.timestamp = 1570613254;
+        OZONE.request.date = new Date();
+        WIKIREQUEST.info.lang = 'en';
+                WIKIREQUEST.info.pageUnixName = "blog:32";
+        WIKIREQUEST.info.pageId = 16523038;
+                        WIKIREQUEST.info.lang = "en";
+        OZONE.lang = "en";
+        var isUAMobile = !!/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    </script>
+    
+    
+
+
+    
+        <script  type="text/javascript">
+    
+        require.config({
+            baseUrl: URL_STATIC + '/common--javascript',
+            paths: {
+                'jquery.ui': 'jquery-ui.min',
+                'jquery.form': 'jquery.form'
+            }
+        });
+    
+    </script>
+    
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+            
+    
+    
+    
+    
+    <meta http-equiv="content-language" content="en"/>
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/WIKIDOT.combined.js"></script>
+        
+    
+    <style type="text/css" id="internal-style">
+        
+        /* modules */
+@import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/css/pagerate/PageRateWidgetModule.css);
+
+
+        
+                
+        /* theme */
+                    @import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--theme/base/css/style.css);
+                    @import url(http://hintjens.wdfiles.com/local--code/admin%3Athemes/1);
+            </style>
+    
+        
+        
+        
+    <link rel="shortcut icon" href="local--favicon/favicon.gif"/>
+    <link rel="icon" type="image/gif" href="local--favicon/favicon.gif"/>
+    
+            <link rel="apple-touch-icon" href="common--images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="common--images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="common--images/apple-touch-icon-114x114.png" />
+        
+        
+            <link rel="alternate" type="application/wiki" title="Edit this page" href="javascript:WIKIDOT.page.listeners.editClick()"/>
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18234656-1']);
+        _gaq.push(['_setDomainName', 'none']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        _gaq.push(['old._setAccount', 'UA-68540-5']);
+        _gaq.push(['old._setDomainName', 'none']);
+        _gaq.push(['old._setAllowLinker', true]);
+        _gaq.push(['old._trackPageview']);
+
+                _gaq.push(['userTracker._setAccount', 'UA-623476-16']);
+        _gaq.push(['userTracker._trackPageview']);
+            </script>
+    
+    <script type="text/javascript">
+        window.google_analytics_uacct = 'UA-18234656-1';
+        window.google_analytics_domain_name = 'none';
+    </script>
+    
+        <link rel="manifest" href="onesignal/manifest.html" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" acync=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: null,
+          });
+        });
+    </script>
+        
+<link rel="alternate" type="application/rss+xml" title="Comments for the page &quot;Solving the Discovery Problem&quot;" href="feed/page/comments-16523038.xml"/><script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/misc/NewPageHelperModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/list/ListPagesModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/pagerate/PageRateWidgetModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumCommentsModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/sub/ForumNewPostFormModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadPostsModule.js"></script>
+</head>
+<body id="html-body">
+<div id="skrollr-body">
+<a name="page-top"></a>
+
+<div id="container-wrap-wrap">
+    <div id="container-wrap">
+        <div id="container">
+            <div id="header">
+              <h1><a href="index.html"><span>Hintjens.com</span></a></h1>
+                
+                    <h2><span>Moving Pieces</span></h2>
+                
+                
+                <!-- google_ad_section_start(weight=ignore) -->
+                
+                <div id="search-top-box" class="form-search">
+    <form id="search-top-box-form" action="http://hintjens.com/dummy" class="input-append">
+        <input id="search-top-box-input" class="text empty search-query" type="text" size="15" name="query" value="Search this site" onfocus="if(YAHOO.util.Dom.hasClass(this, 'empty')){YAHOO.util.Dom.removeClass(this,'empty'); this.value='';}"/><input class="button btn" type="submit" name="search" value="Search"/>
+    </form>
+</div>
+                
+                
+                    <div id="top-bar">
+                        
+
+<ul>
+<li><a href="index.html">Front</a></li>
+<li><a href="blog__zeromq.html">ZeroMQ</a></li>
+<li><a href="blog__community.html">Community</a></li>
+<li><a href="blog__unprotocols.html">Unprotocols</a></li>
+<li><a href="blog__psychopaths.html">Psychopaths</a></li>
+</ul>
+
+                    </div>
+                
+                <div id="login-status"><a href="javascript:;" onclick="WIKIDOT.page.listeners.createAccount(event)" class="login-status-create-account btn">Create account</a> <span>or</span> <a href="javascript:;" onclick="WIKIDOT.page.listeners.loginClick(event)" class="login-status-sign-in btn btn-primary">Sign in</a> </div>
+                <div id="header-extra-div-1"><span></span></div><div id="header-extra-div-2"><span></span></div><div id="header-extra-div-3"><span></span></div>
+            </div>
+            
+            <div id="content-wrap">
+                
+                    <div id="side-bar">
+                        
+
+
+                        
+
+<p><a class="wiki-standalone-button" style="background-image: url(http://www.wikidot.com/local--files/files/document-print.png); background-repeat: no-repeat; background-position: bottom right; padding-right: 20px;color: #444" href="javascript:;" onclick="WIKIDOT.page.listeners.printClick(event)">print</a></p>
+<a href="http://hintjens.wdfiles.com/local--files/nav:side/culture.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/nav:side/culture.jpg/small.jpg" alt="culture.jpg" class="image" /></a>
+<p><strong>Pieter Hintjens</strong></p>
+<p><a href="main_biography.html">Biography</a> | <a href="main_portfolio.html">Portfolio</a> | <a href="https://github.com/hintjens">GitHub</a><br />
+<a href="books.html">Books</a> | <a href="https://vimeo.com/user10099130/videos">Videos</a> | <a href="http://www.slideshare.net/pieterh">Slides</a> | <a href="http://fiction.hintjens.com/">Stories</a> | <a href="http://wiki.hintjens.com/">Wiki</a><br />
+<a href="contact.html">Contact</a></p>
+<p><strong>Thank you for the gifts</strong></p>
+<p><a href="http://paypal.me/Hintjens">Kind people already sent donations</a> that will make my childrens' lives easier, when I'm not there any more. Thank you enormously! :-)</p>
+<p>Podcasts/Interviews</p>
+<p><a href="http://softwareengineeringdaily.com/2016/06/23/death-distributed-systems-pieter-hintjens/">Software Engineering Daily</a><br />
+<a href="https://www.youtube.com/watch?v=ApqI9XLRk4k">Interview by Adam Dymitruk</a><br />
+<a href="http://devchat.tv/ruby-rogues/188-rr-community-building-with-pieter-hintjens">Ruby Rogues #188, Community Building</a></p>
+<p>Talks on video</p>
+<p><a href="http://deredactie.be/cm/vrtnieuws/videozone/programmas/deafspraak/2.44331">&quot;De afspraak&quot;, VRT, May 2016</a> (panel discussion)<br />
+<a href="http://www.rtl.be/rtltvi/video/581260.aspx">RTL TV, May 2016</a> (panel discussion)<br />
+<a href="https://www.youtube.com/watch?v=uzxcILudFWM">DomCode 2015, Nov 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=7HECD3eLoVo">Coding Serbia, Oct 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=O8CbzKREAj4">Euroscipy, Cambridge, Aug 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=FKu09-_AaeM&amp;index=4&amp;list=PLFxMLyzsWeqr4SCyx0ZmFkVz2vZJk_CI5">PyGrunn, Groningen, May 2015</a><br />
+<a href="http://www.ustream.tv/recorded/61450822">Craft Conf, Budapest, Apr 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design-2015">QCon London, Mar 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design">Code Mesh London, Nov 2014</a><br />
+<a href="http://www.infoq.com/presentations/trick-better-software">Build Stuff, Vilnius 2014</a><br />
+<a href="https://www.youtube.com/watch?v=_QF9sFJGJuc">Build Stuff, Vilnius, Nov 2014</a> (interview)<br />
+<a href="https://www.youtube.com/watch?v=xFVDNTXIC_Y">Coding Serbia, Nov 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=DAOFZfSlFs0">Devnology, Leusden, Oct 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=QB7VXSc5H3A">EuroPython, Berlin, Jul 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=qTNqgwN5gzA&amp;feature=youtu.be">Build Stuff, Vilnius, Dec 2013</a> (interview)<br />
+<a href="http://www.infoq.com/presentations/digital-revolution-freedom">Build Stuff, Vilnius, Dec 2013</a> (keynote)<br />
+<a href="http://vimeo.com/82175816">Code Mesh London, Dec 2013</a><br />
+<a href="http://vimeo.com/79378301">DevOps Days, London, Nov 2013</a><br />
+<a href="https://vimeo.com/68236487">NDC Oslo, Jun 2013</a><br />
+<a href="https://vimeo.com/69666055">CERN - Geneva, Jun 2013</a><br />
+<a href="https://www.youtube.com/watch?v=uj-li0LO_2g">Tech Mesh, London, Dec 2012</a><br />
+<a href="http://www.infoq.com/presentations/Architecture-Scale-ZeroMQ">Strange Loop, St.Louis, Oct 2012</a><br />
+<a href="https://vimeo.com/37854675">ZeroMQ@PDX part 2 - Portland, Feb 2012</a><br />
+<a href="https://vimeo.com/38117896">ZeroMQ@PDX part 1 - Portland, Feb 2012</a><br />
+<a href="http://www.youtube.com/watch?gl=BE&amp;v=4II94h6-IFY">FLOSS Weekly, Petaliuma CA, Dec 2011</a><br />
+<a href="https://www.youtube.com/watch?v=CCBYzKfmQ4U">FOSDEM 2011, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=h0facLxJPUE">Berlin Buzzwords 2010</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=bQgPArfbXm4">FOSDEM 2009, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=fJo1jmuOuqQ">Hellenic FOSS Conference 2008, Athens part 1</a><br />
+<a href="https://www.youtube.com/watch?v=Hx6cS1VLhoo">Hellenic FOSS Conference 2008, Athens part 2</a></p>
+<p>Email me at <span class="wiki-email">moc.snejtnih|reteip#moc.snejtnih|reteip</span> if you'd like me to present at your event, or in your organization.</p>
+<a href="books.html"><img src="https://www.createspace.com/Img/T448/T45/T21/BookCoverImage.jpg?random=0.4431380270844333" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.4431380270844333" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/socarch.png" style="padding:5px" width="100" alt="socarch.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/confessions.jpg" style="padding:5px" width="100" alt="confessions.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/psccover.jpg" style="padding:5px" width="100" alt="psccover.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://akamaicovers.oreilly.com/images/0636920026136/cat.gif" style="padding:5px" width="100" alt="cat.gif" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/scalablec.png" style="padding:5px" width="100" alt="scalablec.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="https://www.createspace.com/Img/T409/T85/T11/BookCoverImage.jpg?random=0.7859812398986378" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.7859812398986378" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<p><strong><a href="books.html">Download and read online</a></strong></p>
+<p><strong><a href="legal_start.html">Legal</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></strong></p>
+<div class="collapsible-block">
+<div class="collapsible-block-folded"><a class="collapsible-block-link" href="javascript:;"> ▽ </a></div>
+<div class="collapsible-block-unfolded" style="display:none">
+<div class="collapsible-block-unfolded-link"><a class="collapsible-block-link" href="javascript:;"> △ </a></div>
+<div class="collapsible-block-content">
+<div class="side-box">
+<p><a href="_admin.html">Manage</a> | <a href="admin_themes.html">Theme</a> | <a href="nav_top.html">Top</a> | <a href="nav_top.html">Side</a></p>
+
+<div class="new-page-box" style="text-align: center; margin: 1em 0;">
+	<form action="http://hintjens.com/dummy.html" method="get" onsubmit="WIKIDOT.modules.NewPageHelperModule.listeners.create(event);">
+		<input class="text" name="pageName" type="text" size="40" maxlength="128" style="margin: 1px"/>
+				<input type="submit" class="button" value="New post" style="margin: 1px;"/>
+									<input type="hidden" name="categoryName" value="blog"/>
+													<input type="hidden" name="parent" value="blog:_start"/>
+				
+	</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                        
+
+
+                    </div>
+                
+                
+                <!-- google_ad_section_end -->
+                
+                <div id="main-content">
+                    <div id="action-area-top"></div>
+                    
+                    
+                        <div id="page-title">
+                            Solving the Discovery Problem
+                        </div>
+                    
+
+                    
+                        <div id="breadcrumbs">
+                            <a href="blog__start.html">All Articles</a> &raquo; Solving the Discovery Problem
+                        </div>
+                    
+
+                                    <!-- wikidot_top_728x90 -->
+<div id="div-gpt-ad-1410946564449-1" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-above_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-1'); });
+</script>
+</div>
+
+            
+    
+
+
+                    <div id="page-content">
+                        
+
+<div style="overflow:hidden; font-size: 13px; margin: -26px 0 -22px 0">
+<div style="float:left"><div class="list-pages-box">    
+
+<p><a href="blog_31.html">&lt; Previous</a></p>
+
+    
+    
+    
+    </div></div>
+<div style="float:right"><div class="list-pages-box">    
+
+<p><a href="blog_33.html">Next &gt;</a></p>
+
+    
+    
+    
+    </div></div>
+</div>
+<div style="border: solid 1px #f00; padding:0 1em 0 1em; margin-bottom: 1em; margin-top:1em; min-height: 140px; overflow: hidden">
+<p><span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1473156445" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)" /></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;">pieterh</a></span> wrote on <span class="odate time_1361891151 format_%25e%20%25b%2C%20%25H%3A%25M%20%28%25O%20ago%29">26 Feb 2013 15:05</span></p>
+<div class="image-container floatleft"><a href="http://hintjens.wdfiles.com/local--files/blog:32/compass1.png"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:32/compass1.png/small.jpg" alt="compass1.png" class="image" /></a></div>
+<p>One long-standing question for 0MQ developers is how to discover services on the network. A lot of people have built answers to this, such as <a href="http://stackoverflow.com/search?page=2&amp;tab=relevance&amp;q=zeroconf">ZeroConf</a> and <a href="http://stackoverflow.com/search?q=upnp">UPnP</a>, or even DNS, but they tend to be over-complex and unfriendly to application developers. In this article I'll explain <a href="https://github.com/zeromq/czmq/blob/master/src/zbeacon.c">zbeacon</a>, which is a new module in the <a href="http://czmq.zeromq.org/">CZMQ binding for 0MQ</a> that does service discovery.</p>
+<table style="margin:0; padding:0">
+<tr>
+<td style="margin:0; padding:0">
+<div id="toc">
+<div id="toc-action-bar"><a href="javascript:;" onclick="WIKIDOT.page.listeners.foldToc(event)">Fold</a><a style="display: none" href="javascript:;" onclick="WIKIDOT.page.listeners.unfoldToc(event)">Unfold</a></div>
+<div class="title">Table of Contents</div>
+<div id="toc-list">
+<div style="margin-left: 2em;"><a href="#toc0">The Discovery Problem</a></div>
+<div style="margin-left: 2em;"><a href="#toc1">The Use Case</a></div>
+<div style="margin-left: 2em;"><a href="#toc2">Technical Requirements</a></div>
+<div style="margin-left: 2em;"><a href="#toc3">The zbeacon API</a></div>
+<div style="margin-left: 2em;"><a href="#toc4">Cross-Language Interoperability</a></div>
+<div style="margin-left: 2em;"><a href="#toc5">Discovery Protocols</a></div>
+<div style="margin-left: 3em;"><a href="#toc6">Reject Garbage</a></div>
+<div style="margin-left: 3em;"><a href="#toc7">Unique Identifiers</a></div>
+<div style="margin-left: 3em;"><a href="#toc8">Endpoint Specification</a></div>
+<div style="margin-left: 3em;"><a href="#toc9">Meta-Data</a></div>
+<div style="margin-left: 3em;"><a href="#toc10">Proxy Discovery</a></div>
+<div style="margin-left: 3em;"><a href="#toc11">Unreliable UDP</a></div>
+<div style="margin-left: 3em;"><a href="#toc12">Use of UDP Ports</a></div>
+<div style="margin-left: 2em;"><a href="#toc13">Worked Examples</a></div>
+<div style="margin-left: 3em;"><a href="#toc14">Publisher Service</a></div>
+<div style="margin-left: 3em;"><a href="#toc15">The ZRE Protocol</a></div>
+<div style="margin-left: 2em;"><a href="#toc16">Conclusions</a></div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<h2 id="toc0"><span>The Discovery Problem</span></h2>
+<p>Discovery is an essential part of network programming and a first-class problem for 0MQ developers. Every <tt>zmq_connect ()</tt> call has to provide an endpoint string and that has to come from somewhere. There are a lot of answers but none that work well across the board.</p>
+<div class="image-container aligncenter"><a href="http://hintjens.wdfiles.com/local--files/blog:32/image1.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:32/image1.jpg/medium.jpg" alt="image1.jpg" class="image" /></a></div>
+<p>Here is a list of the the solutions I know for discovery:</p>
+<ul>
+<li><em>Use hard-coded endpoint strings</em>, i.e., fixed IP addresses and agreed ports. This worked in internal networks a decade ago when there were a few &quot;big servers&quot; and they were so important they got static IP addresses. These days however it's no use except in examples or for in-process work (threads are the new Big Iron). You can make it hurt a little less by using DNS but this is still painful for anyone who's not also doing system administration as a side-job.</li>
+</ul>
+<ul>
+<li><em>Get endpoint strings from configuration files</em>. This shoves name resolution into user space, which hurts less than DNS but that's like saying a punch in the face hurts less than a kick in the groin. You now get a nonb-trivial management problem. Who updates the configuration files, and when? Where do they live? Do we install a distributed management tool like Salt Stack?</li>
+</ul>
+<ul>
+<li><em>Use a message broker</em>. You still need a hard-coded or configured endpoint string to connect to the broker, but this approach reduces the number of different endpoints in the network to one. That makes a real impact, and broker-based networks do scale nicely. However, brokers are single points of failure, and they bring their own set of worries about management and performance.</li>
+</ul>
+<ul>
+<li><em>Use an addressing broker</em>. In other words use a central service to mediate address information (like a dynamic DNS setup) but allow nodes to send each other messages directly. It's a good model but still creates a point of failure and management costs.</li>
+</ul>
+<ul>
+<li><em>Use helper libraries, like ZeroConf</em>, that provide DNS services without any centralized infrastructure. It's a good answer for certain applications but your mileage will vary. Helper libraries aren't zero cost: they make it more complex to build the software, they have their own restrictions, and they aren't necessarily portable.</li>
+</ul>
+<ul>
+<li><em>Build system-level discovery</em> by sending out ARP or ICMP ECHO packets and then querying every node that responds. You can query through a TCP connection, for example, or by sending UDP messages. Some products do this, like the Eye-Fi wireless card.</li>
+</ul>
+<ul>
+<li><em>Do user-level brute-force discovery</em> by trying to connect to every single address in the network segment. You can do this trivially in 0MQ since it handles connections in the background. You don't even need multiple threads. It's brutal but fun, and works very well in demos and workshops. However it doesn't scale, and annoys decent-thinking engineers.</li>
+</ul>
+<ul>
+<li><em>Roll your own UDP-based discovery protocol</em>. Lots of people do this (I counted about 80 questions on this topic on StackOverflow). UDP works well for this and it's technically clear. But it's technically tricky to get right, to the point where any developer doing this the first few times will get it dramatically wrong.</li>
+</ul>
+<h2 id="toc1"><span>The Use Case</span></h2>
+<p><span style="font-size:180%;">Our use case isn't here and now, it's ten or twenty years from today.</span></p>
+<div class="image-container aligncenter"><a href="http://hintjens.wdfiles.com/local--files/blog:32/image2.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:32/image2.jpg/medium.jpg" alt="image2.jpg" class="image" /></a></div>
+<p>Let's define our use case more explicitly. After all, all these different approaches have worked and still work to some extent. What interests me as architect is the future, and finding designs that can continue to work for more than a few years. This means identifying long term trends. Our use case isn't here and now, it's ten or twenty years from today.</p>
+<p>Here are the long term trends I see in distributed applications:</p>
+<ul>
+<li><em>The overall number of moving pieces keeps increasing</em>. My estimate is that it doubles every 24 months, but how fast it increases matters less than the fact that we keep adding more and more nodes to our networks. They're not just boxes but also processes and threads. The driver here is cost, <a href="http://softwareandsilicon.com/">which keeps falling</a>. In a decade, every person will have 30-50 devices on them, all the time.</li>
+</ul>
+<ul>
+<li><em>Control shifts away from the center</em>. Possibly data too, though we're still far from understanding how to build simple decentralized information stores. In any case, the star topology is slowly dying and being replaced by clouds of clouds. In the future there's going to be much more traffic within a local environment (home, office, school, bar) than between remote nodes and the center. The maths here are simple: remote communications cost more, run more slowly and are less natural than close-range communications. It's more accurate both technically and socially to share a holiday video with your friend over local WiFi than via Facebook.</li>
+</ul>
+<ul>
+<li><em>Networks are increasingly collaborative, less controlled</em>. This means people bringing their own devices and expecting them to work seamlessly. The Web showed one way to make this work but we're reaching the limits of what the Web can do, as we start to exceed the average of one device per person.</li>
+</ul>
+<ul>
+<li><em>The cost of connecting a new node to a network must fall proportionally</em>, if the network is to scale. This means reducing the amount of configuration a node needs: less pre-shared state, less context. Again, the Web solved this problem but at the cost of centralization. We want the same plug and play experience but without a central agency.</li>
+</ul>
+<p>In a world of trillions of nodes, the ones you talk to most are the ones closest to you. This is how it works in the real world and it's the sanest way of scaling large-scale architectures. Groups of nodes, logically or physically close, connected by bridges to other groups of nodes. A local group will be anything from half-a-dozen nodes to a few thousand nodes.</p>
+<p><span style="font-size:180%;">If you haven't simulated and fixed the three most likely failures, they'll still be there on opening day.</span></p>
+<p>So we have two basic use cases:</p>
+<ul>
+<li><strong>Discovery for proximity networks</strong>, that is, a set of nodes that find themselves close to each other. We can define &quot;close to each other&quot; as being &quot;on the same network segment&quot;. It's not going to be true in all cases but it's true enough to be a useful place to start.</li>
+</ul>
+<ul>
+<li><strong>Discovery across wide area networks</strong>, that is, bridging of proximity networks together. We sometimes call this &quot;federation&quot;. There are many ways to do federation but it's complex and something to cover elsewhere. For now, let's assume we do federation using a centralized broker or service.</li>
+</ul>
+<p>So we are left with the problem of proximity networking. I want to just plug things into the network and have them talking to each other. Whether they're tablets in a school or a bunch of servers in a cloud, the less upfront agreement and coordination, the cheaper it is to scale. So configuration files and brokers and any kind of centralized service are all out.</p>
+<p>I also want to allow any number of applications on a box, both because that's how the real world works (people download apps), and so that I can simulate large networks on my laptop. Upfront simulation is the only way I know to be sure a system will work when it's loaded in real-life. You'd be surprised how engineers just hope things will work. &quot;Oh, I'm sure that bridge will stay up when we open it to traffic&quot;. If you haven't simulated and fixed the three most likely failures, they'll still be there on opening day.</p>
+<p>Running multiple instances of a service on the same machine - without upfront coordination - means we have to use ephemeral ports, i.e., ports assigned randomly for services. Ephemeral ports rule out brute-force TCP discovery and any DNS solution including ZeroConf.</p>
+<p>Finally, discovery has to happen in user space because the apps we're building will be running on random boxes that we do not necessarily own and control. For example, other people's mobile devices. So any discovery that needs root permissions is excluded. This rules out ARP and ICMP and once again ZeroConf since that also needs root permissions for the service parts.</p>
+<h2 id="toc2"><span>Technical Requirements</span></h2>
+<p><span style="font-size:180%;">There are so many edge cases in ad-hoc networks that every extra feature or functionality becomes a risk.</span></p>
+<div class="image-container aligncenter"><a href="http://hintjens.wdfiles.com/local--files/blog:32/image3.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:32/image3.jpg/medium.jpg" alt="image3.jpg" class="image" /></a></div>
+<p>Let's recap the requirements:</p>
+<ul>
+<li><em>The simplest possible solution that works</em>. There are so many edge cases in ad-hoc networks that every extra feature or functionality becomes a risk.</li>
+</ul>
+<ul>
+<li><em>Supports ephemeral ports</em>, so that we can run realistic simulations. If the only way to test is to use real devices, it becomes impossibly expensive and slow to run tests.</li>
+</ul>
+<ul>
+<li><em>No root access needed</em>, it must run 100% in user space. We want to ship fully-packaged applications onto devices like mobile phones that we don't own and where root access isn't available.</li>
+</ul>
+<ul>
+<li><em>Invisible to system administrators</em>, so we do not need their help to run our applications. Whatever technique we use should be friendly to the network and available by default.</li>
+</ul>
+<ul>
+<li><em>Zero configuration</em> apart from installing the applications themselves. Asking the users to do any configuration is giving them an excuse to not use the applications.</li>
+</ul>
+<ul>
+<li><em>Fully portable</em> to all modern operating systems. We can't assume we'll be running on any specific OS. We can't assume any support from the operating system except standard user-space networking. We can assume 0MQ and CZMQ are available.</li>
+</ul>
+<ul>
+<li><em>Friendly to WiFi networks</em> with up to 100-150 participants. This means keeping messages small and being aware of how WiFi networks scale and how they break under pressure.</li>
+</ul>
+<ul>
+<li><em>Protocol-neutral</em>, i.e., our beaconing should not impose any specific discovery protocol. I'll explain what this means a little later.</li>
+</ul>
+<ul>
+<li><em>Easy to re-implement in any given language</em>. Sure, we have a nice C implementation, but if it takes too long to reimplement in another language, that excludes large chunks of the 0MQ community. So, again, simple.</li>
+</ul>
+<ul>
+<li><em>Fast response time</em>. By this, I mean a new node should be visible to its peers in a very short time, a second or two at most. Networks change shape rapidly. It's OK to take longer, even 30 seconds, to realize a peer has disappeared.</li>
+</ul>
+<h2 id="toc3"><span>The zbeacon API</span></h2>
+<p><span style="font-size:180%;">The only option that isn't disqualified is building our own UDP-based discovery stack.</span></p>
+<p>From the list of possible solutions I collected, the only option that isn't disqualified for one or more reasons is to build our own UDP-based discovery stack. It's a little disappointing that after so many decades of research into network discovery, this is where we end up. But the history of computing does seem to go from complex to simple, so maybe it's normal.</p>
+<p>Which brings us to zbeacon. This is a little decentralized pub-sub machine that uses UDP broadcast messages to discover peers on a local area network and bootstrap a 0MQ dialog. A beacon either listens, or broadcasts, or does both. I originally built this code as part of <a href="http://zyre.com/">the Zyre project</a>, and moved it into CZMQ when Michel Pelletier pointed out that it could be more generally useful to developers using 0MQ.</p>
+<p>The zbeacon module is in CZMQ/1.4.0 and later versions. Get this <a href="https://github.com/zeromq/czmq">from GitHub</a>. The module follows the standard conventions for creating and destroying instances:</p>
+<div class="code">
+<pre>
+<code>//  Create a new beacon on a certain UDP port
+zbeacon_t *
+    zbeacon_new (int port_nbr);
+
+//  Destroy a beacon
+void
+    zbeacon_destroy (zbeacon_t **self_p);</code>
+</pre></div>
+<p>On a new beacon you can ask for the hostname, which is the IP address the beacon actually uses. The zbeacon module will look for the best broadcast interface to use. This means: WiFi if that's available, otherwise the last Ethernet interface if there are several:</p>
+<div class="code">
+<pre>
+<code>//  Return our own IP address as printable string
+char *
+    zbeacon_hostname (zbeacon_t *self);</code>
+</pre></div>
+<p>You can create multiple beacons on the same port, but it's probably wisest to use one port for one application or discovery protocol. The way UDP broadcasts work, each socket bound to a port will receive all traffic coming into that port. It's somewhat like a 0MQ pub-sub model and the zbeacon module continues that pub-sub theme.</p>
+<p>A beacon can send and/or receive. We could have invented separate publisher and subscriber concepts but that would make a more complex API. Here's how you start and stop publishing data on a beacon:</p>
+<div class="code">
+<pre>
+<code>//  Start broadcasting beacon to peers at the specified interval
+void
+    zbeacon_publish (zbeacon_t *self, byte *transmit, size_t size);</code>
+</pre></div>
+<p>The data is a binary opaque blob. Each call to <tt>zbeacon_publish ()</tt> overwrites the previous one, so if you want to publish several different beacons for some reason, you should create multiple zbeacon instances. A beacon gets broadcast as soon as you call <tt>zbeacon_publish ()</tt>. The default interval is once per second but you can change this. You can set the interval before starting to publish, or afterwards:</p>
+<div class="code">
+<pre>
+<code>//  Set broadcast interval in milliseconds (default is 1000 msec)
+void
+    zbeacon_set_interval (zbeacon_t *self, int interval);</code>
+</pre></div>
+<p>To start receiving data on a beacon, you subscribe, and this works exactly like a 0MQ SUB socket subscription: you set a prefix that filters received messages. To get all beacons, set a filter of NULL and size 0:</p>
+<div class="code">
+<pre>
+<code>//  Start listening to other peers; zero-sized filter means get everything
+void
+    zbeacon_subscribe (zbeacon_t *self, byte *filter, size_t size);</code>
+</pre></div>
+<p><span style="font-size:180%;">Since zbeacon sends and receives raw data you can use it to talk to existing UDP-based discovery services.</span></p>
+<p>Since zbeacon sends and receives raw data (i.e., without imposing any wire format whatsover) you can use it to talk to existing UDP-based discovery services. I didn't list this as a requirement since it's not been raised by anyone, but it seems useful.</p>
+<p>Most applications will start broadcasting or listening and then continue forever. However you can switch either off if you need to:</p>
+<div class="code">
+<pre>
+<code>//  Stop broadcasting beacons
+void
+    zbeacon_silence (zbeacon_t *self);
+
+//  Stop listening to other peers
+void
+    zbeacon_unsubscribe (zbeacon_t *self);</code>
+</pre></div>
+<p>UDP broadcasts do have the annoying habit of coming back to the sender as if they came from other places on the network. This means you need to do some extra work to detect and throw away your own beacons. The usual technique to add a unique sender ID into each beacon, and then filter out received beacons that have your own ID. Since zbeacon doesn't impose any wire format, so you can design your own protocols cleanly, you must do the &quot;add unique ID&quot; part yourself. I'll explain in more detail what this involves, a little later.</p>
+<p>Note that although we do know the IP address of whomever sent us a UDP message, that doesn't map 1-to-1 to a sending node. All beacons on the same system will send out via the same IP address.</p>
+<p>What zbeacon can do to help is filter out our own beacons, which we call <em>echoes</em>, if you tell it to. Just make sure your <tt>zbeacon_publish ()</tt> data includes a unique identifier and then use this call:</p>
+<div class="code">
+<pre>
+<code>//  Filter out any beacon that looks exactly like ours
+void
+    zbeacon_noecho (zbeacon_t *self);</code>
+</pre></div>
+<p>Finally, we need a way to receive beacon messages. The zbeacon API delivers these on a <em>pipe</em>, which is a 0MQ socket. You poll this pipe and receive messages from it:</p>
+<div class="code">
+<pre>
+<code>//  Get beacon pipe, for polling or receiving messages
+void *
+    zbeacon_pipe (zbeacon_t *self);</code>
+</pre></div>
+<p>Do NOT send messages to the pipe, or bad things will happen. The pipe is in fact a PAIR socket that connects a zbeacon background thread with the foreground API. We use the pipe to send API commands through to the backend. However those commands are not documented, not part of any public contract, and are liable to change arbitrarily.</p>
+<p>All messages you receive off the pipe have two frames:</p>
+<ul>
+<li>The IP address of the sender, formatted as a string.</li>
+<li>The beacon data itself.</li>
+</ul>
+<h2 id="toc4"><span>Cross-Language Interoperability</span></h2>
+<p>The actual protocol zbeacon uses is simple to describe and should be doable in other languages:</p>
+<ul>
+<li>We open a UDP broadcast socket and bind to a selected network interface.</li>
+<li>We send a message to that socket at the configured interval.</li>
+<li>We receive messages from that socket, filter them, and pass them to our application.</li>
+</ul>
+<p>The hardest work, which forms a large chunk of the zbeacon code, is getting the right interface to send on. It's not portable. So an alternative to re-implementing zbeacon in another language would be to wrap this module.</p>
+<h2 id="toc5"><span>Discovery Protocols</span></h2>
+<div class="image-container aligncenter"><a href="http://hintjens.wdfiles.com/local--files/blog:32/image4.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:32/image4.jpg/medium.jpg" alt="image4.jpg" class="image" /></a></div>
+<p>While zbeacon does a lot of the ugly non-portable work, it's most definitely not a discovery protocol. There are a number of things you will want to add to make a viable protocol. A lot of these are already done in <a href="http://rfc.zeromq.org/spec:20">ZRE</a> so you could use that as an inspiration. I'll explain anyhow.</p>
+<p>Before getting into the technical meat, I'll share one thing we learned from Zyre: a good mix of UDP broadcasts plus 0MQ-over-TCP works nicely. Trying to build the whole discovery protocol in UDP would not be so simple, and would probably not scale well, due to packet loss as networks get saturated.</p>
+<p>Let me work through the problems you will or may need to solve, with a solution for each one. This design could be abstracted into a separate discovery protocol that underlies ZRE, and one day we might do that. It could be nice to have a single reusable discovery protocol for all 0MQ applications.</p>
+<h3 id="toc6"><span>Reject Garbage</span></h3>
+<ul>
+<li>Problem: anyone can send garbage to the UDP broadcast port, which we have to filter.</li>
+<li>Solution: start each beacon with some constant data which we can check for.</li>
+</ul>
+<p>In ZRE we place the three bytes &quot;ZRE&quot; at the start of every UDP message. Usually a check on this header, and on the message size is enough to filter out garbage. Note that &quot;garbage&quot; can be other applications innocently using the same UDP port, different versions of the same application, or rogue applications looking for vulnerabilities.</p>
+<h3 id="toc7"><span>Unique Identifiers</span></h3>
+<ul>
+<li>Problem: we receive our own UDP broadcast messages.</li>
+<li>Solution: add a unique identifier to the beacon, and throw away beacons that contain this identifier.</li>
+</ul>
+<p>The difficulty is that a globally unique identifier is 16 bytes, which is a little long. It's certainly not optimal when our networks can hold at most a few hundred devices before breaking for other reasons. In ZRE we use a GUID just because it's boring and safe but since on WiFi there's a direct trade-off between beacon size and responsiveness (you can afford to send shorter beacons more frequently), it would be worth studying how to make shorter unique IDs. One plausible strategy would be to use the last two bytes of the IP address, and a system-wide unique identifier (also two bytes).</p>
+<h3 id="toc8"><span>Endpoint Specification</span></h3>
+<ul>
+<li>Problem: the sender IP address isn't sufficient to identify an endpoint.</li>
+<li>Solution: add endpoint information into the beacon.</li>
+</ul>
+<p>At the least, you may want to specify a port number to connect to, which will often be an ephemeral port. You can extend the endpoint information in whatever direction your architecture needs, of course. For instance, providing a PGM endpoint, or adding socket type information if that's not hard-coded in your protocol.</p>
+<h3 id="toc9"><span>Meta-Data</span></h3>
+<ul>
+<li>Problem: we want to provide more information than just the endpoint.</li>
+<li>Solution: bootstrap into a TCP connection using 0MQ and extend the conversation there.</li>
+</ul>
+<p>You really don't want to add meta-data to the UDP beacon. If you're sending the same data over and over then you're wasting bandwidth in ways that can break your network as you scale to more peers. And if you're changing the meta-data regularly, then you're assuming UDP broadcasts are reliable, which they are <em>most definitely not</em>.</p>
+<p>This is the logic we use in ZRE:</p>
+<ul>
+<li>Get a beacon message.</li>
+<li>Is this a new peer? If so, open a connection to it and send a HELLO command.</li>
+<li>If not, treat this as a heartbeat from an existing peer.</li>
+</ul>
+<p>The HELLO command holds the meta-data in a key-value table and since this command is sent only once per discovery, it can be much larger than a beacon without doing harm. ZRE for example lets you say things like, &quot;this node also supports the logging service on port 9898&quot;.</p>
+<h3 id="toc10"><span>Proxy Discovery</span></h3>
+<ul>
+<li>Problem: I want to try to reduce the number of beacons to a real minimum.</li>
+<li>Solution: allow nodes to delegate their beaconing to other nodes.</li>
+</ul>
+<p>For example, in the HELLO command, a peer could say, &quot;and here are the other nodes I know about&quot;. Then, if you see yourself in that list, you could stop broadcasting your own beacon, at least for a while. Is this worth doing? Honestly, I don't think it is. Just keep the UDP beacon as small as it can be, and don't create dependencies between nodes that you can avoid.</p>
+<h3 id="toc11"><span>Unreliable UDP</span></h3>
+<ul>
+<li>Problem: as my network gets loaded, UDP messages get dropped.</li>
+<li>Solution: use TCP to recover from dropped UDP beacons.</li>
+</ul>
+<p>Trying to do too much with UDP on WiFi networks is a bad idea unless you're happy with losing chunks of data. TCP will either work, or fail, but won't &quot;kind of work&quot;. That means your states with TCP are clear: either you get the next message, or you get a timeout, or you get an error. The standard access point strategy of disconnecting clients when there's not enough bandwidth reinforces this &quot;everything or nothing&quot; outcome. But UDP is essentially a fuzzy state protocol that just gets fuzzier as the network gets stressed.</p>
+<p>The solution is to do the strict minimum with UDP (just beaconing), and switch to TCP as soon as possible. Now our only UDP failures will be dropped beacons. The classic outcome is that node A may see node B (having received its beacon) but B won't see A (the access point dropped A's beacon). To recover from this, we add endpoint information (IP address and port) into the HELLO command that a node sends to a new peer. The peer that receives HELLO can then check if it knows the sender and if not, treat that as a new peer (and send it HELLO back).</p>
+<h3 id="toc12"><span>Use of UDP Ports</span></h3>
+<ul>
+<li>Problem: we need an agreed UDP port number to work on.</li>
+<li>Solution: use port 5670 and the ZRE discovery protocol.</li>
+</ul>
+<p>We got port 5670 from <a href="http://www.iana.org/">IANA</a> for the ZRE-DISC protocol, i.e., UDP discovery for the ZRE protocol. In fact you can use this for any kind of discovery if you're prepared to either use the Zyre library, or take some of its code. Note, the Zyre code is LGPL, so that means you can't simply reuse it in your apps if they aren't LGPL. However, you can use the example code here freely.</p>
+<p>The way to extend ZRE-DISC with your own data is to bootstrap into a 0MQ (over TCP) dialog and send data in the first command. Personally, I'd just use Zyre for this.</p>
+<h2 id="toc13"><span>Worked Examples</span></h2>
+<p>This sample code is put into the public domain: use it without worries.</p>
+<h3 id="toc14"><span>Publisher Service</span></h3>
+<p>Here's a minimal example that creates a ZMQ_PUB socket on a fixed port and then announces it using zbeacon:</p>
+<div class="code">
+<pre>
+<code>zctx_t *ctx = zctx_new ();
+
+//  Create a service socket and bind to an ephemeral port
+void *service = zsocket_new (ctx, ZMQ_PUB);
+int port_nbr = zsocket_bind (service, &quot;tcp://*:*&quot;);
+
+//  Broadcast on UDP port 9999
+byte announcement [2] = { (port_nbr &gt;&gt; 8) &amp; 0xFF, port_nbr &amp; 0xFF };
+zbeacon_t *service_beacon = zbeacon_new (9999);
+zbeacon_publish (service_beacon, announcement, 2);</code>
+</pre></div>
+<p>Now, to do service lookup, we also use a beacon, but instead of publishing, we subscribe:</p>
+<div class="code">
+<pre>
+<code>//  Create beacon to look up the service
+zbeacon_t *client_beacon = zbeacon_new (9999);
+zbeacon_subscribe (client_beacon, NULL, 0);
+
+char *ipaddress = zstr_recv (zbeacon_pipe (client_beacon));
+zframe_t *content = zframe_recv (zbeacon_pipe (client_beacon));
+int port_nbr = (zframe_data (content) [0] &lt;&lt; 8) + zframe_data (content) [1];</code>
+</pre></div>
+<h3 id="toc15"><span>The ZRE Protocol</span></h3>
+<p>Here's how Zyre implements its ZRE beacons, which provide a more robust protocol than simply sending a 2-byte port number into the aether. The full code is in <a href="https://github.com/zeromq/zyre/blob/master/src/zre_node.c#L281">zre_node.c</a> but we can cover the highlights here. First we define the beacon as a structure that maps directly to the binary beacon data:</p>
+<div class="code">
+<pre>
+<code>#define ZRE_DISCOVERY_PORT 5670
+#define BEACON_VERSION     0x01
+
+typedef struct {
+    byte protocol [3];
+    byte version;
+    byte uuid [ZRE_UUID_LEN];
+    uint16_t port;
+} beacon_t;</code>
+</pre></div>
+<p>And then each node sets-up a two-way beacon when it initializes:</p>
+<div class="code">
+<pre>
+<code>//  Set broadcast/listen beacon
+beacon_t beacon;
+beacon.protocol [0] = 'Z';
+beacon.protocol [1] = 'R';
+beacon.protocol [2] = 'E';
+beacon.version = BEACON_VERSION;
+beacon.port = htons (self-&gt;port);
+self-&gt;uuid = zre_uuid_new ();
+zre_uuid_cpy (self-&gt;uuid, beacon.uuid);
+
+self-&gt;beacon = zbeacon_new (ZRE_DISCOVERY_PORT);
+zbeacon_noecho (self-&gt;beacon);
+zbeacon_publish (self-&gt;beacon, (byte *) &amp;beacon, sizeof (beacon_t));
+zbeacon_subscribe (self-&gt;beacon, (byte *) &quot;ZRE&quot;, 3);</code>
+</pre></div>
+<p>In our main poll loop, we poll on <tt>zbeacon_pipe (self-&gt;beacon)</tt> and when there's activity on that socket we read the beacon data:</p>
+<div class="code">
+<pre>
+<code>//  Get IP address and beacon of peer
+char *ipaddress = zstr_recv (zbeacon_pipe (self-&gt;beacon));
+zframe_t *frame = zframe_recv (zbeacon_pipe (self-&gt;beacon));
+
+//  Ignore anything that isn't a valid beacon
+bool is_valid = true;
+beacon_t beacon;
+if (zframe_size (frame) == sizeof (beacon_t)) {
+    memcpy (&amp;beacon, zframe_data (frame), zframe_size (frame));
+    if (beacon.version != BEACON_VERSION)
+        is_valid = false;
+}
+else
+    is_valid = false;
+
+//  Check that the peer, identified by its UUID, exists
+if (is_valid) {
+    zre_uuid_t *uuid = zre_uuid_new ();
+    zre_uuid_set (uuid, beacon.uuid);
+    zre_peer_t *peer = s_require_peer (
+        self, zre_uuid_str (uuid), ipaddress, ntohs (beacon.port));
+    zre_peer_refresh (peer);
+    zre_uuid_destroy (&amp;uuid);
+}
+free (ipaddress);
+zframe_destroy (&amp;frame);</code>
+</pre></div>
+<h2 id="toc16"><span>Conclusions</span></h2>
+<p><span style="font-size:180%;">zbeacon provides a basic service for UDP-based local network discovery that needs no central brokers and lets you build fully plug-and-play architectures.</span></p>
+<p>The zbeacon module in the <a href="http://czmq.zeromq.org/">CZMQ library</a> provides a basic service for UDP-based local network discovery that needs no central brokers and lets you build fully plug-and-play architectures. It's simple to use. You can use zbeacon by itself, or you can go further and use the whole Zyre library, which gives you a distributed plug-and-play message bus.</p>
+<p>Can UDP-based discovery scale to billions of nodes? By itself, no. But it solves the puzzle for proximity networking, where a set of mobile devices or cloud nodes are on the same local network. This is a good building block for larger decentralized applications. We can use other discovery techniques, such as brokers, DNS, and configured endpoints to bridge together networks of local groups.</p>
+<div style="float:left;width:33%; margin:-15px 0 0 0">
+<p><iframe src="http://hintjens.wdfiles.com/local--html/blog%3A32/f1ea4eeecc054041b0d3da4f2932c6153c9564f5-1881064297781361186/hintjens.com/" allowtransparency="true" frameborder="0" class="html-block-iframe"></iframe></p>
+</div>
+<div style="float:right"><div class="page-rate-widget"><div class="page-rate-widget-start" data-rating="0"></div></div></div>
+</div>
+<p><a name="comments"></a></p>
+<div class="comments-box">
+	<h1>Comments</h1>	
+	<div class="options" id="comments-options-hidden" style="display: none">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.showComments(event)">Show Comments</a> 
+	</div>
+		
+	<div id="thread-container" class="thread-container reverse" style="margin-top: 1em">
+					
+
+
+<script type="text/javascript">
+	WIKIDOT.forumThreadId = 628640;
+</script>
+
+        <a href="javascript:;" id="new-post-button" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.newPost(event,null)"
+      style="display:  block ; margin-bottom:1em"
+    >Add a New Comment</a>
+
+ 
+
+
+<div id="thread-container-posts" style="display: none">
+    
+
+
+
+
+
+</div>
+
+
+<div style="display:none" id="post-options-template">
+	<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.showPermalink(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Permanent Link</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.editPost(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Edit</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.deletePost(event,'%POST_ID%')" class="btn btn-danger btn-small btn-sm">Delete</a>
+</div>
+	
+			</div>
+	
+	
+	
+</div>
+                    </div>
+
+                                    <!-- wikidot_bottom_300x250 -->
+<div id="div-gpt-ad-1410946564449-0" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-below_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-0'); });
+</script>
+</div>
+
+            
+    
+
+
+                    
+                        <div class="page-tags">
+                            <span>
+                                <a href="system_page-tags/tag/zeromq.html#pages">zeromq</a>
+                            </span>
+                        </div>
+                    
+
+                    <div id="page-info-break"></div>
+                    
+                        <div id="page-options-container">
+                            
+                        </div>
+                    
+                    <div id="action-area" style="display: none;"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div id="footer" style="display: block; visibility: visible;">
+                <div class="options" style="display: block; visibility: visible;">
+    <a href="http://www.wikidot.com/doc" id="wikidot-help-button">Help</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:terms-of-service" id="wikidot-tos-button">Terms of Service</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:privacy-policy" id="wikidot-privacy-button">Privacy</a>
+    &nbsp;|
+    <a href="javascript:;" id="bug-report-button" onclick="WIKIDOT.page.listeners.pageBugReport(event)">Report a bug</a>
+    &nbsp;|
+    <a href="javascript:;" id="abuse-report-button" onclick="WIKIDOT.page.listeners.flagPageObjectionable(event)">Flag as objectionable</a>
+</div>
+Powered by <a href="http://www.wikidot.com/">Wikidot.com</a> 
+            </div>
+            
+                <div id="license-area" class="license-area">
+                    Unless otherwise stated, the content of this page is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>
+                </div>
+            
+            
+            
+
+
+
+            <div id="extrac-div-1"><span></span></div><div id="extrac-div-2"><span></span></div><div id="extrac-div-3"><span></span></div>
+            
+            
+            
+            
+                
+            
+        </div>
+        
+    </div>
+<!-- These extra divs/spans may be used as catch-alls to add extra imagery. -->
+<div id="extra-div-1"><span></span></div><div id="extra-div-2"><span></span></div><div id="extra-div-3"><span></span></div>
+<div id="extra-div-4"><span></span></div><div id="extra-div-5"><span></span></div><div id="extra-div-6"><span></span></div>
+</div>
+
+
+
+</div>
+<div id="dummy-ondomready-block" style="display: none;" ></div>
+    <!-- Google Analytics load -->
+    <script type="text/javascript">
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <!-- Quantcast -->
+    <script type="text/javascript">
+    _qoptions={
+        qacct:"p-edL3gsnUjJzw-"
+    };
+    (function() {
+        var qc = document.createElement('script'); qc.type = 'text/javascript'; qc.async = true;
+        qc.src = ('https:' == document.location.protocol ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(qc, s);
+    })();
+    </script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-edL3gsnUjJzw-.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+    </noscript>
+
+
+
+
+<div id="page-options-bottom-tips" style="display: none;">
+    <div id="edit-button-hovertip">
+        Click here to edit contents of this page.    </div>
+</div>
+<div id="page-options-bottom-2-tips"  style="display: none;">
+    <div id="edit-sections-button-hovertip">
+        Click here to toggle editing of individual sections of the page (if possible).         Watch headings for an &quot;edit&quot; link when available.    </div>
+    <div id="edit-append-button-hovertip">
+        Append content without editing the whole page source.    </div>
+    <div id="history-button-hovertip">
+        Check out how this page has evolved in the past.    </div>
+    <div id="discuss-button-hovertip">
+        If you want to discuss contents of this page - this is the easiest way to do it.    </div>
+    <div id="files-button-hovertip">
+        View and manage file attachments for this page.    </div>
+    <div id="site-tools-button-hovertip">
+        A few useful tools to manage this Site.    </div>
+    <div id="backlinks-button-hovertip">
+        See pages that link to and include this page.    </div>
+    <div id="rename-move-button-hovertip">
+        Change the name (also URL address, possibly the category) of the page.    </div>
+    <div id="view-source-button-hovertip">
+        View wiki source for this page without editing.    </div>
+    <div id="parent-page-button-hovertip">  
+        View/set parent page (used for creating breadcrumbs and structured layout).    </div>
+            <div id="abuse-report-button-hovertip">
+            Notify administrators if there is objectionable content in this page.        </div>
+        <div id="bug-report-button-hovertip">
+            Something does not work as expected? Find out what you can do.        </div>
+        <div id="wikidot-help-button-hovertip">
+            General Wikidot.com documentation and help section.        </div>
+        <div id="wikidot-tos-button-hovertip">
+            Wikidot.com Terms of Service - what you can, what you should not etc.        </div>
+        <div id="wikidot-privacy-button-hovertip">
+            Wikidot.com Privacy Policy.          
+        </div>
+    </div>
+</body>
+
+<!-- Mirrored from hintjens.com/blog:32 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:31:18 GMT -->
+</html>

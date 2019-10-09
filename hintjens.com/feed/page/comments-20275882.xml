@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;ZeroMQ Certificates, Design Iteration 1&quot;</title>
+		<link>http://hintjens.com/blog:62/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:30:33 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:62/comments/show#post-1875840</guid>
+				<title>design principle : keep every possible fence up</title>
+				<link>http://hintjens.com/blog:62/comments/show#post-1875840</link>
+				<description></description>
+				<pubDate>Tue, 22 Oct 2013 12:39:09 +0000</pubDate>
+				<wikidot:authorName>lalebarde</wikidot:authorName>				<wikidot:authorUserId>1629498</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>&quot;Use Cases&quot;: Why storing the public key in plain text when it does not hurt to crypt it ? It is a question of philosophy. One of my design principle for everything is to not degrade performance, even when it looks not hurting, as far as it is cheap.<br /> I know some people consider that having public keys in plain text and even public do not degrade security, but I do still consider we have to keep all possible fence up. Security do not depends on the secrecy of public keys, but keeping them secret whenever possible makes attacks certainly more expensive.<br /> Though, I am not an expert&#8230;..</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

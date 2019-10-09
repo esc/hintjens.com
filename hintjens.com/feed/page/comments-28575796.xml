@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Why Optimistic Merging Works Better&quot;</title>
+		<link>http://hintjens.com/blog:106/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:29:28 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:106/comments/show#post-2430242</guid>
+				<title>Re: How would you apply the principle of optimistic merge to corporations?</title>
+				<link>http://hintjens.com/blog:106/comments/show#post-2430242</link>
+				<description></description>
+				<pubDate>Mon, 28 Dec 2015 20:07:21 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>You normally get email notifications for comments to a page here you've commented on, edited, or have Watched. Maybe they end up in your spam&#8230;</p> <p>I've no recommendations for enforcing trust in corporations except to use the old technique of competition in a free market. Smaller independent businesses that compete will always build better products than large monopolists.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:106/comments/show#post-2411306</guid>
+				<title>How would you apply the principle of optimistic merge to corporations?</title>
+				<link>http://hintjens.com/blog:106/comments/show#post-2411306</link>
+				<description></description>
+				<pubDate>Sat, 21 Nov 2015 13:20:58 +0000</pubDate>
+				<wikidot:authorName>crocket</wikidot:authorName>				<wikidot:authorUserId>1794068</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I am always grateful for your guidance via emails and blog articles.</p> <p>Since most of the humanity are tied to corporate jobs, designing a better corporate model will certainly help.</p> <p>The principle of optimistic merge seems to be to enforce trust.<br /> In corporations, to enforce trust usually means to enforce open allocation. However, I think there's more to enforcing trust in corporations.</p> <p>How would you enforce trust in corporations in addition to declaring open allocation as a set of rules if you are designing a new corporate architecture?</p> <p>Note : It would be better if people are notified of replies via emails or whatnot. After a while, I forget to revisit this page. I don't trust my memory.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:106/comments/show#post-2410228</guid>
+				<title>Re: Malicious Patches</title>
+				<link>http://hintjens.com/blog:106/comments/show#post-2410228</link>
+				<description></description>
+				<pubDate>Thu, 19 Nov 2015 10:17:37 +0000</pubDate>
+				<wikidot:authorName>Sekenre</wikidot:authorName>				<wikidot:authorUserId>2344493</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Thanks for such a clear answer. I agree.</p> <p>So what you're trying to do with OM is optimize for the common case (people want to contribute) while requiring small, clear problem solving patches that restrict the scope of malice and/or incompetence (rare).</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:106/comments/show#post-2410107</guid>
+				<title>Re: Tarballs, no GIT</title>
+				<link>http://hintjens.com/blog:106/comments/show#post-2410107</link>
+				<description></description>
+				<pubDate>Thu, 19 Nov 2015 05:29:12 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I'm sorry if we caused stress when we renamed the git repository some years ago (is this what you're referring to). Yet we've always provided tarballs via zeromq.org, which most packagers use.</p> <p>Indeed every version ever released is on <a href="http://download.zeromq.org/">http://download.zeromq.org/</a> so your builds should never break.</p> <p>Yet, getting the source (or a tarball) from github is going to be more secure than getting it from anywhere else.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:106/comments/show#post-2410100</guid>
+				<title>Re: Malicious Patches</title>
+				<link>http://hintjens.com/blog:106/comments/show#post-2410100</link>
+				<description></description>
+				<pubDate>Thu, 19 Nov 2015 05:24:21 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Yes, this a threat that I'm aware of, and it has always been a concern.</p> <p>It affects all open source, indeed all software development. I believe closed software is more at risk of backdoors than open source, and this is I think what we've seen as an industry. It's relatively simple for Mallory to get vulnerabilities into a closed project, and extremely hard to find them afterwards.</p> <p>So the economics of open source, with thousands of people able to look at the code and spot anomalies, works against Mallory.</p> <p>Let's assume Mallory is patient and deceitful and acts like a valid contributor long enough to get control over a project, and then slowly builds in his/her backdoors. Then careful code review won't help you. Mallory simply has to gain enough trust to become a maintainer, which is a matter of how, not if.</p> <p>What does help is:</p> <ul> <li>Forcing all patches to be small, clear, and expressed as answers to identifiable problems. This means that when people review changes (and they do, it's just not a blocking process), they will see strangeness.</li> </ul> <ul> <li>Forcing clear coding style; it seems pedantic, yet maliciousness hides in chaos. A well structured and clear code base (and OM leads to this, rather than mess as you might expect) makes it hard to hide malicious code.</li> </ul> <p>Maliciousness often hides as incompetence, so any practice that catches accidental vulnerabilities will make it harder to be malicious. E.g. in our C code we use a strict allocation model that gets rid of buffer overflows. Any code that doesn't respect this stands out, and gets fixed.</p> <p>The best defense against Mallory is size and diversity of the community. So in this respect, OM should deliver more secure software.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:106/comments/show#post-2409627</guid>
+				<title>Malicious Patches</title>
+				<link>http://hintjens.com/blog:106/comments/show#post-2409627</link>
+				<description></description>
+				<pubDate>Wed, 18 Nov 2015 11:44:59 +0000</pubDate>
+				<wikidot:authorName>Sekenre</wikidot:authorName>				<wikidot:authorUserId>2344493</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I think there's a 5th category that you've missed, that of an ostensibly good contributor who appears as 1. or 2. on your list but only does so to build trust.</p> <p>If &quot;Mallory&quot; then puts in a patch to CurveZMQ that mails all private keys to a server they control and does so in a way that is obfuscated so all tests continue to pass, it may get missed for a long time with an optimistic merge strategy.</p> <p>However unlikely this is, my point is that the reason optimistic merging is not done is the fear that nasty hidden behaviours are added to the project, and the belief that the maintainers have enough intelligence and experience to catch such behaviour before it enters the project.</p> <p>I do get your point though that if &quot;Mallory&quot; did try this, it would be permanently part of the project's history and after discovery it would provide a useful example of &quot;Here's when someone tried to break our security model, here's how long it took us to revert it&quot;</p> <p>I'd like to know your thoughts on dealing with hidden malice of this type instead of overt intrapersonal malice.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:106/comments/show#post-2409609</guid>
+				<title>Tarballs, no GIT</title>
+				<link>http://hintjens.com/blog:106/comments/show#post-2409609</link>
+				<description></description>
+				<pubDate>Wed, 18 Nov 2015 10:55:57 +0000</pubDate>
+				<wikidot:authorName>zoobab</wikidot:authorName>				<wikidot:authorUserId>2946</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>When you moved the Github repo of zeromq, my builds suddenly failed.</p> <p>We have to learn from the previous mistakes of a &quot;human in the middle&quot;, such as people who can have modify content.</p> <p>IPFS to the rescue: <a href="https://ipfs.io/">https://ipfs.io/</a></p> <p>Tarballs, no GIT!</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:106/comments/show#post-2409562</guid>
+				<title>Re: Reverts aren&#039;t friendly</title>
+				<link>http://hintjens.com/blog:106/comments/show#post-2409562</link>
+				<description></description>
+				<pubDate>Wed, 18 Nov 2015 08:02:37 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I've contributed often to Wikipedia, as a newbie, and sometimes experienced this yet not always. It depends on the page. Some pages are hostile, like some open source projects.</p> <p>If a project is hostile, it makes no difference what rules you offer: those in power will be aggressive and offensive. The solution then is to fork the project and be a better owner. This is hard on Wikipedia because you can only have one page for a topic. For open source it's trivial.</p> <p>I think the rules we develop (like <a href="http://rfc.zeromq.org/spec:22">C4</a>, the umbrella contract we use) are more to help the majority of decent people work together than to educate abusive people into behaving.</p> <p>So in practice what you describe happens, yes, yet not because of OM. A precondition for successful OM is decent owners who want their projects to grow.</p> <p>Which is what we see in practice: many ZeroMQ projects practice this, and it works nicely, delivers stable growth and happiness. (And we do not see patch wars.)</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:106/comments/show#post-2409192</guid>
+				<title>Re: Reverts aren&#039;t friendly</title>
+				<link>http://hintjens.com/blog:106/comments/show#post-2409192</link>
+				<description></description>
+				<pubDate>Tue, 17 Nov 2015 17:36:13 +0000</pubDate>
+				<wikidot:authorName>neilkandalgaonkar</wikidot:authorName>				<wikidot:authorUserId>2343686</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I can't edit my post, so an addendum: on Wikipedia, people set up automatic notifications for this sort of thing, so they can quickly revert. It's even easier to do that on Github. So you're not only setting yourself up for random contributions, you're setting yourself up for random vigilantes to revert every new contribution.</p> <p>Long story short there isn't any particular set of *technical* practices that is going to make people treat contributors well.</p> <p>What you need there are cultural practices. For instance, some of the Wikipedias like the Russian Wikipedia, will randomly assign an experienced editor to help with a new contribution. That creates a learning community more like what you are after.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:106/comments/show#post-2409189</guid>
+				<title>Reverts aren&#039;t friendly</title>
+				<link>http://hintjens.com/blog:106/comments/show#post-2409189</link>
+				<description></description>
+				<pubDate>Tue, 17 Nov 2015 17:30:00 +0000</pubDate>
+				<wikidot:authorName>neilkandalgaonkar</wikidot:authorName>				<wikidot:authorUserId>2343686</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>You're describing something similar to how Wikipedia pages work, and that is admitted by all to be one of the more newbie-hostile sites on the internet.</p> <p>Consider that you are creating the conditions for something like this, which is all too common on Wikipedia:</p> <p>- new contributors invariably commit without a full understanding of what they are doing</p> <p>- those who appoint themselves protectors of the code will revert the new contributor's work *instantly* if it doesn't meet any one of their capricious objections, often because of unconscious biases. The reverter will often feel no obligation to explain why. If they do, they will at best refer the contributor to a list of policies</p> <p>- (side effect: the list of policies will expand infinitely until it is an effective way to repulse any outsider)</p> <p>- new contributors feel slapped in the face and never come back</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

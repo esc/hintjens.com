@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Revisting ZeroMQ Multipart&quot;</title>
+		<link>http://hintjens.com/blog:84/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:30:03 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:84/comments/show#post-2248009</guid>
+				<title>zproto as a facade over multipart</title>
+				<link>http://hintjens.com/blog:84/comments/show#post-2248009</link>
+				<description></description>
+				<pubDate>Mon, 09 Mar 2015 23:14:10 +0000</pubDate>
+				<wikidot:authorName>Drew Noakes</wikidot:authorName>				<wikidot:authorUserId>2073608</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Could zproto be used as a façade over multipart messages, providing compatibility with legacy peers?</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:84/comments/show#post-2233514</guid>
+				<title>Thank you for this long waited move</title>
+				<link>http://hintjens.com/blog:84/comments/show#post-2233514</link>
+				<description></description>
+				<pubDate>Mon, 16 Feb 2015 05:01:35 +0000</pubDate>
+				<wikidot:authorName>Brugeman</wikidot:authorName>				<wikidot:authorUserId>459422</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Finally, good old client-server apps won't look awkward in zmq, thank you for this initiative, hope the shifts will be successful!</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:84/comments/show#post-2224032</guid>
+				<title>Thanks for the heads-up</title>
+				<link>http://hintjens.com/blog:84/comments/show#post-2224032</link>
+				<description></description>
+				<pubDate>Tue, 03 Feb 2015 18:48:58 +0000</pubDate>
+				<wikidot:authorName>greggirwin</wikidot:authorName>				<wikidot:authorUserId>583361</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>While change can be scary and painful, you've laid out the reasoning clearly, along with reassurance that things will continue to work for now. It's this kind of management that makes 0MQ more than just a great piece of technology. Thanks for making it so.</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

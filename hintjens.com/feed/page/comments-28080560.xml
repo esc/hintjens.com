@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Ten Tips for Young Programmers&quot;</title>
+		<link>http://hintjens.com/blog:101/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:29:39 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:101/comments/show#post-2397127</guid>
+				<title>All great advice, but a correction for #9</title>
+				<link>http://hintjens.com/blog:101/comments/show#post-2397127</link>
+				<description></description>
+				<pubDate>Mon, 26 Oct 2015 01:27:22 +0000</pubDate>
+				<wikidot:authorName>SirBill</wikidot:authorName>				<wikidot:authorUserId>2316078</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Cheap is important, but remember that buying really cheap computer hardware means you'll be paying more over time than if you get something built to last.</p> <p>In particular a refurbished Mac of any sort is a great idea, you can still use UNIX tools with it and the build quality means you can use it for a long, long time if needed.</p> <p>I'm also not sure why the item about learning small languages instead of C++ is stuck in &quot;costs low&quot;. I think it's good to try a variety of languages and see what ends up appealing to you&#8230; although I would agree that C++ is really a better second language attempt if you want to try it, rather than a first&#8230; but you should also research what is popular in terms of languages around what you want to do. If you want to make games, C++ is probably a good choice.</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Social Architecture FAQ&quot;</title>
+		<link>http://hintjens.com/blog:120/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:28:57 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:120/comments/show#post-2513749</guid>
+				<title>Re: How do you deal with rude people who may or may not be highly skilled on forums and chatting channels?</title>
+				<link>http://hintjens.com/blog:120/comments/show#post-2513749</link>
+				<description></description>
+				<pubDate>Tue, 24 May 2016 10:19:56 +0000</pubDate>
+				<wikidot:authorName>crocket</wikidot:authorName>				<wikidot:authorUserId>1794068</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>In some subreddits like dataisbeautiful, rude people are deliberately weeded out. I wouldn't say its membership is unmoderated. Try leaving a comment on dataisbeautiful subreddit, and you see rules on the style of discussion in the comment box.</p> <p>When you said moderated membership, I imagined a group where joining requires spending a lot of energy like passing exams and membership is cancelled based on violation of group ethics or for being rude. To join society of actuaries and maintain membership, one has to pass a series of exams continually for a while. Medical doctors also maintain moderated membership and expel unethical members.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:120/comments/show#post-2513736</guid>
+				<title>Re: How do you deal with rude people who may or may not be highly skilled on forums and chatting channels?</title>
+				<link>http://hintjens.com/blog:120/comments/show#post-2513736</link>
+				<description></description>
+				<pubDate>Tue, 24 May 2016 09:25:08 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <ul> <li>moderated membership means someone is weeding out troublemakers deliberately.</li> <li>yes, a subreddit. You can create a new one trivially.</li> <li>twitter has a simple block feature.</li> </ul> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:120/comments/show#post-2513709</guid>
+				<title>Re: How do you deal with rude people who may or may not be highly skilled on forums and chatting channels?</title>
+				<link>http://hintjens.com/blog:120/comments/show#post-2513709</link>
+				<description></description>
+				<pubDate>Tue, 24 May 2016 08:32:45 +0000</pubDate>
+				<wikidot:authorName>crocket</wikidot:authorName>				<wikidot:authorUserId>1794068</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I just left a comment on dataisbeautiful subreddit, and dataisbeautiful subreddit seems to be the state of the art in forum management. It has unambiguous rules for detecting rude comments.</p> <p>I have a few more questions.</p> <p>1) What do you mean by moderated membership?<br /> 2) How do people fork subreddits or a group? In particular, I don't know what reddit group means. Does it mean a subreddit?<br /> 3) How does twitter deal with rude comments? I didn't know twitter had any machinery for that.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:120/comments/show#post-2513655</guid>
+				<title>Re: How do you deal with rude people who may or may not be highly skilled on forums and chatting channels?</title>
+				<link>http://hintjens.com/blog:120/comments/show#post-2513655</link>
+				<description></description>
+				<pubDate>Tue, 24 May 2016 05:37:03 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I suspect in terms of public forums with unmoderated membership, what we have in terms of Twitter, Reddit, etc. is the best of the art. Reddit is interesting because when moderators of a particular group are bad actors, the group can easily fork.</p> <p>In terms of groups with moderated membership, you can IMO apply C4-like principles: clear rules on the style of discussion, promotion of good participants, eventual banning of bad ones (which will be rare because they won't be attracted to such groups for the most part).</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:120/comments/show#post-2513608</guid>
+				<title>How do you deal with rude people who may or may not be highly skilled on forums and chatting channels?</title>
+				<link>http://hintjens.com/blog:120/comments/show#post-2513608</link>
+				<description></description>
+				<pubDate>Tue, 24 May 2016 04:16:03 +0000</pubDate>
+				<wikidot:authorName>crocket</wikidot:authorName>				<wikidot:authorUserId>1794068</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Discussion forums are often moderated by rude people who have poor justifications for their decisions.<br /> A lot of IRC channels are infested and run by trolls. The troll infection on IRC is beyond repair. Slack is somewhat better since slack groups have super admins who can ban people from all channels on the group. In my experience, those admins tend to be a bit too indifferent. They have hard time separating good actors from bad actors, so they are inclined to just ban everyone involved in conflicts.</p> <p>How would you design discussion forums and chatting services so that they are mostly free of trolls and rude people? I'm starting to think that we need more advanced types of communication systems than the current forms of discussion forums and chatting services.</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

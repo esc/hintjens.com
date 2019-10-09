@@ -1,0 +1,715 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from hintjens.com/blog:37 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:31:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>The PUB-SUB Hacks: Meerkat - Hintjens.com</title>
+    
+    	<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+    // DEFINE DFP SLOTS
+googletag.defineSlot('/1030917/wikidot_free_sites_top_728x90', [728, 90], 'div-gpt-ad-1410946564449-1').addService(googletag.pubads());
+googletag.defineSlot('/1030917/wikidot_free_sites_bottom_300x250', [300, 250], 'div-gpt-ad-1410946564449-0').addService(googletag.pubads());
+
+// googletag.pubads().enableSingleRequest();
+googletag.pubads().collapseEmptyDivs(true, true);
+googletag.pubads().setTargeting("w_name", "hintjens");
+googletag.pubads().setTargeting("w_domain", "com.hintjens");
+googletag.pubads().setTargeting("w_verified", "false");
+if(null){googletag.pubads().setTargeting("w_cats", null);}
+if(false){googletag.pubads().setTargeting("w_mn", "true");}
+googletag.enableServices();
+});
+</script>
+<script type="text/javascript" src="http://www.wikidot.com/default__flow/login__CustomDomainScript?site_id=352120"></script>
+
+    
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/init.combined.js"></script>
+    <script  type="text/javascript">
+        var URL_HOST = 'www.wikidot.com';
+        var URL_DOMAIN = 'wikidot.com';
+        var USE_SSL =  true ;
+        var URL_STATIC = 'http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade';
+        // global request information
+        
+        var WIKIREQUEST = {};
+        WIKIREQUEST.info = {};
+        
+        WIKIREQUEST.info.domain = "hintjens.com";
+        WIKIREQUEST.info.siteId = 352120;
+        WIKIREQUEST.info.siteUnixName = "hintjens";
+        WIKIREQUEST.info.categoryId = 1984291;
+        WIKIREQUEST.info.themeId = 1;
+        WIKIREQUEST.info.requestPageName = "blog:37";
+        OZONE.request.timestamp = 1570613250;
+        OZONE.request.date = new Date();
+        WIKIREQUEST.info.lang = 'en';
+                WIKIREQUEST.info.pageUnixName = "blog:37";
+        WIKIREQUEST.info.pageId = 16979726;
+                        WIKIREQUEST.info.lang = "en";
+        OZONE.lang = "en";
+        var isUAMobile = !!/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    </script>
+    
+    
+
+
+    
+        <script  type="text/javascript">
+    
+        require.config({
+            baseUrl: URL_STATIC + '/common--javascript',
+            paths: {
+                'jquery.ui': 'jquery-ui.min',
+                'jquery.form': 'jquery.form'
+            }
+        });
+    
+    </script>
+    
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+            
+    
+    
+    
+    
+    <meta http-equiv="content-language" content="en"/>
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/WIKIDOT.combined.js"></script>
+        
+    
+    <style type="text/css" id="internal-style">
+        
+        /* modules */
+@import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/css/pagerate/PageRateWidgetModule.css);
+
+
+        
+                
+        /* theme */
+                    @import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--theme/base/css/style.css);
+                    @import url(http://hintjens.wdfiles.com/local--code/admin%3Athemes/1);
+            </style>
+    
+        
+        
+        
+    <link rel="shortcut icon" href="local--favicon/favicon.gif"/>
+    <link rel="icon" type="image/gif" href="local--favicon/favicon.gif"/>
+    
+            <link rel="apple-touch-icon" href="common--images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="common--images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="common--images/apple-touch-icon-114x114.png" />
+        
+        
+            <link rel="alternate" type="application/wiki" title="Edit this page" href="javascript:WIKIDOT.page.listeners.editClick()"/>
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18234656-1']);
+        _gaq.push(['_setDomainName', 'none']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        _gaq.push(['old._setAccount', 'UA-68540-5']);
+        _gaq.push(['old._setDomainName', 'none']);
+        _gaq.push(['old._setAllowLinker', true]);
+        _gaq.push(['old._trackPageview']);
+
+                _gaq.push(['userTracker._setAccount', 'UA-623476-16']);
+        _gaq.push(['userTracker._trackPageview']);
+            </script>
+    
+    <script type="text/javascript">
+        window.google_analytics_uacct = 'UA-18234656-1';
+        window.google_analytics_domain_name = 'none';
+    </script>
+    
+        <link rel="manifest" href="onesignal/manifest.html" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" acync=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: null,
+          });
+        });
+    </script>
+        
+<link rel="alternate" type="application/rss+xml" title="Comments for the page &quot;The PUB-SUB Hacks: Meerkat&quot;" href="feed/page/comments-16979726.xml"/><script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/misc/NewPageHelperModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/list/ListPagesModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/pagerate/PageRateWidgetModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumCommentsModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/sub/ForumNewPostFormModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadPostsModule.js"></script>
+</head>
+<body id="html-body">
+<div id="skrollr-body">
+<a name="page-top"></a>
+
+<div id="container-wrap-wrap">
+    <div id="container-wrap">
+        <div id="container">
+            <div id="header">
+              <h1><a href="index.html"><span>Hintjens.com</span></a></h1>
+                
+                    <h2><span>Moving Pieces</span></h2>
+                
+                
+                <!-- google_ad_section_start(weight=ignore) -->
+                
+                <div id="search-top-box" class="form-search">
+    <form id="search-top-box-form" action="http://hintjens.com/dummy" class="input-append">
+        <input id="search-top-box-input" class="text empty search-query" type="text" size="15" name="query" value="Search this site" onfocus="if(YAHOO.util.Dom.hasClass(this, 'empty')){YAHOO.util.Dom.removeClass(this,'empty'); this.value='';}"/><input class="button btn" type="submit" name="search" value="Search"/>
+    </form>
+</div>
+                
+                
+                    <div id="top-bar">
+                        
+
+<ul>
+<li><a href="index.html">Front</a></li>
+<li><a href="blog__zeromq.html">ZeroMQ</a></li>
+<li><a href="blog__community.html">Community</a></li>
+<li><a href="blog__unprotocols.html">Unprotocols</a></li>
+<li><a href="blog__psychopaths.html">Psychopaths</a></li>
+</ul>
+
+                    </div>
+                
+                <div id="login-status"><a href="javascript:;" onclick="WIKIDOT.page.listeners.createAccount(event)" class="login-status-create-account btn">Create account</a> <span>or</span> <a href="javascript:;" onclick="WIKIDOT.page.listeners.loginClick(event)" class="login-status-sign-in btn btn-primary">Sign in</a> </div>
+                <div id="header-extra-div-1"><span></span></div><div id="header-extra-div-2"><span></span></div><div id="header-extra-div-3"><span></span></div>
+            </div>
+            
+            <div id="content-wrap">
+                
+                    <div id="side-bar">
+                        
+
+
+                        
+
+<p><a class="wiki-standalone-button" style="background-image: url(http://www.wikidot.com/local--files/files/document-print.png); background-repeat: no-repeat; background-position: bottom right; padding-right: 20px;color: #444" href="javascript:;" onclick="WIKIDOT.page.listeners.printClick(event)">print</a></p>
+<a href="http://hintjens.wdfiles.com/local--files/nav:side/culture.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/nav:side/culture.jpg/small.jpg" alt="culture.jpg" class="image" /></a>
+<p><strong>Pieter Hintjens</strong></p>
+<p><a href="main_biography.html">Biography</a> | <a href="main_portfolio.html">Portfolio</a> | <a href="https://github.com/hintjens">GitHub</a><br />
+<a href="books.html">Books</a> | <a href="https://vimeo.com/user10099130/videos">Videos</a> | <a href="http://www.slideshare.net/pieterh">Slides</a> | <a href="http://fiction.hintjens.com/">Stories</a> | <a href="http://wiki.hintjens.com/">Wiki</a><br />
+<a href="contact.html">Contact</a></p>
+<p><strong>Thank you for the gifts</strong></p>
+<p><a href="http://paypal.me/Hintjens">Kind people already sent donations</a> that will make my childrens' lives easier, when I'm not there any more. Thank you enormously! :-)</p>
+<p>Podcasts/Interviews</p>
+<p><a href="http://softwareengineeringdaily.com/2016/06/23/death-distributed-systems-pieter-hintjens/">Software Engineering Daily</a><br />
+<a href="https://www.youtube.com/watch?v=ApqI9XLRk4k">Interview by Adam Dymitruk</a><br />
+<a href="http://devchat.tv/ruby-rogues/188-rr-community-building-with-pieter-hintjens">Ruby Rogues #188, Community Building</a></p>
+<p>Talks on video</p>
+<p><a href="http://deredactie.be/cm/vrtnieuws/videozone/programmas/deafspraak/2.44331">&quot;De afspraak&quot;, VRT, May 2016</a> (panel discussion)<br />
+<a href="http://www.rtl.be/rtltvi/video/581260.aspx">RTL TV, May 2016</a> (panel discussion)<br />
+<a href="https://www.youtube.com/watch?v=uzxcILudFWM">DomCode 2015, Nov 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=7HECD3eLoVo">Coding Serbia, Oct 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=O8CbzKREAj4">Euroscipy, Cambridge, Aug 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=FKu09-_AaeM&amp;index=4&amp;list=PLFxMLyzsWeqr4SCyx0ZmFkVz2vZJk_CI5">PyGrunn, Groningen, May 2015</a><br />
+<a href="http://www.ustream.tv/recorded/61450822">Craft Conf, Budapest, Apr 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design-2015">QCon London, Mar 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design">Code Mesh London, Nov 2014</a><br />
+<a href="http://www.infoq.com/presentations/trick-better-software">Build Stuff, Vilnius 2014</a><br />
+<a href="https://www.youtube.com/watch?v=_QF9sFJGJuc">Build Stuff, Vilnius, Nov 2014</a> (interview)<br />
+<a href="https://www.youtube.com/watch?v=xFVDNTXIC_Y">Coding Serbia, Nov 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=DAOFZfSlFs0">Devnology, Leusden, Oct 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=QB7VXSc5H3A">EuroPython, Berlin, Jul 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=qTNqgwN5gzA&amp;feature=youtu.be">Build Stuff, Vilnius, Dec 2013</a> (interview)<br />
+<a href="http://www.infoq.com/presentations/digital-revolution-freedom">Build Stuff, Vilnius, Dec 2013</a> (keynote)<br />
+<a href="http://vimeo.com/82175816">Code Mesh London, Dec 2013</a><br />
+<a href="http://vimeo.com/79378301">DevOps Days, London, Nov 2013</a><br />
+<a href="https://vimeo.com/68236487">NDC Oslo, Jun 2013</a><br />
+<a href="https://vimeo.com/69666055">CERN - Geneva, Jun 2013</a><br />
+<a href="https://www.youtube.com/watch?v=uj-li0LO_2g">Tech Mesh, London, Dec 2012</a><br />
+<a href="http://www.infoq.com/presentations/Architecture-Scale-ZeroMQ">Strange Loop, St.Louis, Oct 2012</a><br />
+<a href="https://vimeo.com/37854675">ZeroMQ@PDX part 2 - Portland, Feb 2012</a><br />
+<a href="https://vimeo.com/38117896">ZeroMQ@PDX part 1 - Portland, Feb 2012</a><br />
+<a href="http://www.youtube.com/watch?gl=BE&amp;v=4II94h6-IFY">FLOSS Weekly, Petaliuma CA, Dec 2011</a><br />
+<a href="https://www.youtube.com/watch?v=CCBYzKfmQ4U">FOSDEM 2011, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=h0facLxJPUE">Berlin Buzzwords 2010</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=bQgPArfbXm4">FOSDEM 2009, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=fJo1jmuOuqQ">Hellenic FOSS Conference 2008, Athens part 1</a><br />
+<a href="https://www.youtube.com/watch?v=Hx6cS1VLhoo">Hellenic FOSS Conference 2008, Athens part 2</a></p>
+<p>Email me at <span class="wiki-email">moc.snejtnih|reteip#moc.snejtnih|reteip</span> if you'd like me to present at your event, or in your organization.</p>
+<a href="books.html"><img src="https://www.createspace.com/Img/T448/T45/T21/BookCoverImage.jpg?random=0.4431380270844333" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.4431380270844333" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/socarch.png" style="padding:5px" width="100" alt="socarch.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/confessions.jpg" style="padding:5px" width="100" alt="confessions.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/psccover.jpg" style="padding:5px" width="100" alt="psccover.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://akamaicovers.oreilly.com/images/0636920026136/cat.gif" style="padding:5px" width="100" alt="cat.gif" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/scalablec.png" style="padding:5px" width="100" alt="scalablec.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="https://www.createspace.com/Img/T409/T85/T11/BookCoverImage.jpg?random=0.7859812398986378" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.7859812398986378" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<p><strong><a href="books.html">Download and read online</a></strong></p>
+<p><strong><a href="legal_start.html">Legal</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></strong></p>
+<div class="collapsible-block">
+<div class="collapsible-block-folded"><a class="collapsible-block-link" href="javascript:;"> ▽ </a></div>
+<div class="collapsible-block-unfolded" style="display:none">
+<div class="collapsible-block-unfolded-link"><a class="collapsible-block-link" href="javascript:;"> △ </a></div>
+<div class="collapsible-block-content">
+<div class="side-box">
+<p><a href="_admin.html">Manage</a> | <a href="admin_themes.html">Theme</a> | <a href="nav_top.html">Top</a> | <a href="nav_top.html">Side</a></p>
+
+<div class="new-page-box" style="text-align: center; margin: 1em 0;">
+	<form action="http://hintjens.com/dummy.html" method="get" onsubmit="WIKIDOT.modules.NewPageHelperModule.listeners.create(event);">
+		<input class="text" name="pageName" type="text" size="40" maxlength="128" style="margin: 1px"/>
+				<input type="submit" class="button" value="New post" style="margin: 1px;"/>
+									<input type="hidden" name="categoryName" value="blog"/>
+													<input type="hidden" name="parent" value="blog:_start"/>
+				
+	</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                        
+
+
+                    </div>
+                
+                
+                <!-- google_ad_section_end -->
+                
+                <div id="main-content">
+                    <div id="action-area-top"></div>
+                    
+                    
+                        <div id="page-title">
+                            The PUB-SUB Hacks: Meerkat
+                        </div>
+                    
+
+                    
+                        <div id="breadcrumbs">
+                            <a href="blog__start.html">All Articles</a> &raquo; The PUB-SUB Hacks: Meerkat
+                        </div>
+                    
+
+                                    <!-- wikidot_top_728x90 -->
+<div id="div-gpt-ad-1410946564449-1" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-above_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-1'); });
+</script>
+</div>
+
+            
+    
+
+
+                    <div id="page-content">
+                        
+
+<div style="overflow:hidden; font-size: 13px; margin: -26px 0 -22px 0">
+<div style="float:left"><div class="list-pages-box">    
+
+<p><a href="blog_36.html">&lt; Previous</a></p>
+
+    
+    
+    
+    </div></div>
+<div style="float:right"><div class="list-pages-box">    
+
+<p><a href="blog_38.html">Next &gt;</a></p>
+
+    
+    
+    
+    </div></div>
+</div>
+<div style="border: solid 1px #f00; padding:0 1em 0 1em; margin-bottom: 1em; margin-top:1em; min-height: 140px; overflow: hidden">
+<p><span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1473156445" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)" /></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;">pieterh</a></span> wrote on <span class="odate time_1364323479 format_%25e%20%25b%2C%20%25H%3A%25M%20%28%25O%20ago%29">26 Mar 2013 18:44</span></p>
+<div class="image-container floatleft"><a href="http://hintjens.wdfiles.com/local--files/blog:37/1_logo.png"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:37/1_logo.png/small.jpg" alt="1_logo.png" class="image" /></a></div>
+<p>While the ØMQ pub-sub pattern is well-known for being a one-way pattern, it does in fact support a two-way flow of information. SUB sockets (or more accurately, XSUB sockets) can send messages to XPUB sockets. This week, I'll post a series of short articles that cover different patterns—Meerkat, Census, and Repeater—we can build using this functionality. As usual, I'll demonstrate each pattern with code you can download and run.</p>
+<h3 id="toc0"><span>The Meerkat Pattern</span></h3>
+<p>One of the common questions from ØMQ developers (until they learn that there's no good answer and retreat into a kind of Stockholmesque &quot;if it hurts it must be for our own good&quot; acceptance) is &quot;how can a publisher know when subscribers are present?&quot; However as I've written elsewhere, pain is not a good sign.</p>
+<p>It is true that for certain use cases, the answer is, &quot;you don't want to know&quot;. It's true that for very large scale publishers, the raw cost of tracking individual subscribers in real time is not worth the effort. The BBC doesn't wait until everyone's ready with their telly before starting Blue Peter. So, the argument goes, why should we?</p>
+<p>But I'm suspicious of people who tell me what I should think. Particularly since, as a writer, propaganda is <em>my job</em>. And I know just how much rubbish people say when they're being especially serious. But kidding aside, the question is valid, and the &quot;no, you don't want to do this&quot; answer seems bogus and somewhat lazy. We know that publishers can benefit greatly from tracking individual subscribers. This was after all the major improvement in version 3 of ØMQ: much faster PUB-SUB thanks to &quot;upstreaming&quot;, where subscribers actually tell publishers what data they want.</p>
+<p>If it's good for XPUB and XSUB sockets, why not for applications too? This was the question that innocently entered my mind one spring morning in Brussels, as we watched yet another snowstorm unfold. Innocence is all relative, of course, as they say in Rome. The question hooked into some unfinished thoughts and formed a flash mob of irritation that forced me to stop working briefly on more interesting topics. The <strong>Meerkat Pattern</strong> is what came out.</p>
+<div class="image-container floatright"><a href="http://hintjens.wdfiles.com/local--files/blog:37/meerkats.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:37/meerkats.jpg/small.jpg" alt="meerkats.jpg" class="image" /></a></div>
+<p>This is one of the real pleasures of using a technology: to twist and distort it into shapes its original designers never thought of, and see what comes out. So let's distort and abuse the XPUB-XSUB upstreaming functionality to answer that question and give publishers a way to know what subscribers are around.</p>
+<p>I once had a friend and mentor, the larger-than-life Leif Svalgaard, who would work secretly on some amazing code and then show the finished results to general astonishment. When we asked him how he did it, he invariably answered with a huge Santa Clause grin, palms up innocently, saying, &quot;it's magic!&quot; Once Leif wrote a tiny but working multitasking system for DOS over the weekend, just to disprove Microsoft's claims that OS/2 (yes, this was some time ago) needed 8 Megabytes of memory &quot;because it did multitasking&quot;. As he started a compilation in one window, and edited a file in another, I asked him, &quot;how did you do this?&quot; &quot;Ah, it's magic!&quot; he answered.</p>
+<p>Incidentally, that tiny multitasking system (1,000 lines of x86 assembly) inspired my multithreading SMT kernel in 1995, which became the heart of our server technology and then OpenAMQ, which led the way to ZeroMQ. So it goes in the history of software, a chain of inspiration and culture leading back to the first time primitive man told his wife, &quot;just going down to the cave to paint some pr0&#8230; ugh&#8230; hunting scenes, honey. BRB!&quot;</p>
+<p><strong>Figure 1 - The Meerkat Pattern</strong></p>
+<div class="image-container aligncenter"><img src="http://hintjens.wdfiles.com/local--files/blog:37/fig1.png" alt="fig1.png" class="image" /></div>
+<h4 id="toc1"><span>Step 1: Counting Subscriptions</span></h4>
+<p>What if a publisher (suitably wearing an &quot;X&quot; on its torso to mark it with XPUB superpowers) simply counted the number of subscriptions it received? Perhaps surprisingly, this works for all values of N on the condition that N is equal to one. To say this in English, an XPUB tracks subscriptions and only tells you of the first one. So, on to attempt 2.</p>
+<h4 id="toc2"><span>Step 2: Using the Verbose Option</span></h4>
+<p>A few months ago we added a neat little option (ZMQ_XPUB_VERBOSE) to XPUB sockets that disables its filtering of duplicate subscriptions. This now works for any number of subscribers. We use this as follows:</p>
+<div class="code">
+<p><span style="color:#B00040">void</span> <span style="color:#666666">*</span>publisher <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_XPUB);<br />
+zsocket_set_xpub_verbose (publisher, <span style="color:#666666">1</span>);<br />
+zsocket_bind (publisher, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>*:6001&quot;</span>);</p>
+</div>
+<br />
+<em>fragments/xpub-verbose-option.c: Listing 1</em>
+<p>However we still have a problem. Subscribers may subscribe any number of times. We need some devious trick to distinguish different kinds of subscriptions.</p>
+<h4 id="toc3"><span>Step 3: Sending 'Special' Subscriptions</span></h4>
+<p>My first idea was to use the empty subscription, but of course this doesn't play well with real use. Let's say I have two subscribers that subscribe to a series of topics:</p>
+<ul>
+<li>A subscribes to &quot;USD&quot;, &quot;JPY&quot;, and &quot;EUR&quot;</li>
+<li>B subscribes to &quot;JPY&quot; and &quot;KRW&quot;</li>
+</ul>
+<p>How do I know how many subscribers I have?</p>
+<p>My answer, which is not very beautiful but works, is to send a &quot;special&quot; subscription that doesn't match any real data but which tells my application what it needs to know:</p>
+<ul>
+<li>A subscribes to &quot;USD&quot;, &quot;JPY&quot;, &quot;EUR&quot;, and &quot;Meerkat&quot;</li>
+<li>B subscribes to &quot;JPY&quot;, &quot;KRW&quot;, and &quot;Meerkat&quot;</li>
+</ul>
+<p>So this brings us to an example of Meerkat in action:</p>
+<div class="code">
+<p><span style="color:#BC7A00"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The Meerkat Pattern<br />
+<span style="white-space: pre-wrap;">//</span><br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>In which we address the slow subscriber problem by asking for<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>a show of hands before we start publishing.</span></p>
+<p>#include &quot;czmq.h&quot;</p>
+<p><span style="color:#008000"><strong>static</strong></span> <span style="color:#B00040">void</span><br />
+<span style="color:#0000FF">publisher_task</span> (<span style="color:#B00040">void</span> <span style="color:#666666">*</span>args, zctx_t <span style="color:#666666">*</span>ctx, <span style="color:#B00040">void</span> <span style="color:#666666">*</span>pipe)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_set_linger (ctx, <span style="color:#666666">1000</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>publisher <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_XPUB);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_set_xpub_verbose (publisher, <span style="color:#666666">1</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_bind (publisher, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>*:6001&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Calling thread tells us the population size</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>population <span style="color:#666666">=</span> zstr_recv (pipe);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> still_waiting <span style="color:#666666">=</span> atoi (population);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>byte meerkat <span style="white-space: pre-wrap;">[]</span> <span style="color:#666666">=</span> { <span style="color:#666666">1</span>, <span style="color:#BA2121">'M'</span>, <span style="color:#BA2121">'e'</span>, <span style="color:#BA2121">'e'</span>, <span style="color:#BA2121">'r'</span>, <span style="color:#BA2121">'k'</span>, <span style="color:#BA2121">'a'</span>, <span style="color:#BA2121">'t'</span> };<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>while</strong></span> (still_waiting) {<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_t <span style="color:#666666">*</span>frame <span style="color:#666666">=</span> zframe_recv (publisher);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (<span style="color:#666666">!</span>frame)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>break</strong></span>;<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Interrupted</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>if</strong></span> (zframe_size (frame) <span style="color:#666666">==</span> <span style="color:#008000"><strong>sizeof</strong></span> (meerkat)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#666666">&amp;&amp;</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>memcmp (zframe_data (frame), meerkat, <span style="color:#008000"><strong>sizeof</strong></span> (meerkat)) <span style="color:#666666">==</span> <span style="color:#666666">0</span>)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>still_waiting<span style="color:#666666"><span style="white-space: pre-wrap;">--</span></span>;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Dump the frame contents for the benefit of the reader</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_print (frame, <span style="color:#008000">NULL</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zframe_destroy (<span style="color:#666666">&amp;</span>frame);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span>}</tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Now broadcast our message</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (publisher, <span style="color:#BA2121">&quot;Hello, World!&quot;</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zclock_sleep (<span style="color:#666666">250</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (pipe, <span style="color:#BA2121">&quot;DONE&quot;</span>);<br />
+}</p>
+<p><span style="color:#408080"><span style="font-style:italic"><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The subscriber sends a &quot;Meerkat&quot; subscription and then<br />
+<span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>any other subscriptions it wants:</span></span></p>
+<p><span style="color:#008000"><strong>static</strong></span> <span style="color:#B00040">void</span><br />
+<span style="color:#0000FF">subscriber_task</span> (<span style="color:#B00040">void</span> <span style="color:#666666">*</span>args, zctx_t <span style="color:#666666">*</span>ctx, <span style="color:#B00040">void</span> <span style="color:#666666">*</span>pipe)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>subscriber <span style="color:#666666">=</span> zsocket_new (ctx, ZMQ_XSUB);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zsocket_connect (subscriber, <span style="color:#BA2121">&quot;tcp:<span style="white-space: pre-wrap;">//</span>localhost:6001&quot;</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Tell publisher we're here</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>byte meerkat <span style="white-space: pre-wrap;">[]</span> <span style="color:#666666">=</span> { <span style="color:#666666">1</span>, <span style="color:#BA2121">'M'</span>, <span style="color:#BA2121">'e'</span>, <span style="color:#BA2121">'e'</span>, <span style="color:#BA2121">'r'</span>, <span style="color:#BA2121">'k'</span>, <span style="color:#BA2121">'a'</span>, <span style="color:#BA2121">'t'</span> };<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zmq_send (subscriber, <span style="color:#666666">&amp;</span>meerkat, <span style="color:#008000"><strong>sizeof</strong></span> (meerkat), <span style="color:#666666">0</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Subscribe to everything as well (empty subscription)</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zmq_send (subscriber, <span style="color:#666666">&amp;</span>meerkat, <span style="color:#666666">1</span>, <span style="color:#666666">0</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">char</span> <span style="color:#666666">*</span>hello <span style="color:#666666">=</span> zstr_recv (subscriber);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>puts (hello);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>free (hello);<br />
+}</p>
+<p><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>The main task starts publisher task and then the subscribers:</em></span></p>
+<p><span style="color:#B00040">int</span> <span style="color:#0000FF">main</span> (<span style="color:#B00040">void</span>)<br />
+{<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_t <span style="color:#666666">*</span>ctx <span style="color:#666666">=</span> zctx_new ();</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Size of target population</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>srand ((<span style="color:#B00040">unsigned</span>) time (<span style="color:#008000">NULL</span>));<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">int</span> population <span style="color:#666666">=</span> randof (<span style="color:#666666">10</span>) <span style="color:#666666">+</span> <span style="color:#666666">1</span>;<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Start publisher task</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#B00040">void</span> <span style="color:#666666">*</span>pipe <span style="color:#666666">=</span> zthread_fork (ctx, publisher_task, <span style="color:#008000">NULL</span>);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zstr_send (pipe, <span style="color:#BA2121">&quot;%d&quot;</span>, population);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Start target population</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>while</strong></span> (population<span style="color:#666666"><span style="white-space: pre-wrap;">--</span></span>)<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</span></tt>zthread_fork (ctx, subscriber_task, <span style="color:#008000">NULL</span>);</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#408080"><em><span style="white-space: pre-wrap;">//</span><tt><span style="white-space: pre-wrap;">&#32;&#32;</span></tt>Wait for publisher to complete</em></span><br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>free (zstr_recv (pipe));</p>
+<p><tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt>zctx_destroy (<span style="color:#666666">&amp;</span>ctx);<br />
+<tt><span style="white-space: pre-wrap;">&#32;&#32;&#32;&#32;</span></tt><span style="color:#008000"><strong>return</strong></span> <span style="color:#666666">0</span>;<br />
+}</p>
+</div>
+<br />
+<em>meerkat.c: Meerkat Pattern</em>
+<p><a href="https://gist.github.com/hintjens/5248065">Get the code.</a></p>
+<p>When you run this code you'll see it starts a random number of subscribers, waits until they all wake up, and then sends &quot;Hello, World&quot; to everyone.</p>
+<h4 id="toc4"><span>Step 4: Ridiculous Optimization</span></h4>
+<p>If you look a little closer at the code you'll see a possible optimization. Instead of sending a <em>subscription</em> message to signal presence, how about an <em>unsubscription</em> message?</p>
+<p>It's a great idea except (at time of writing), XPUB sockets don't verbosely send you unsubscribe messages. There are reasons for this (there are <em>always</em> reasons, he said darkly, to no-one in particular) but it's minor. Perfection is, sometimes, just a waste of time, and sending subscribe messages seems fine.</p>
+<h4 id="toc5"><span>Step 5: Robustness</span></h4>
+<p>The Meerkat example will occasionally fail in the real world because it doesn't distinguish between a subscriber saying &quot;I'm here&quot; for the first time from one who comes back several times. We're basically counting the heads that pop-up, not the bodies that are really present on the field. The same head can pop-up over and over, and like idiots we'll count it multiple times.</p>
+<p>There's an answer—there always is—but it makes things more complex. Each subscriber has to identify itself uniquely and the server has to track this. Subscribers could for instance send a UUID as part of their &quot;special&quot; subscription. The server would track these in a hash table, and count only new entries.</p>
+<p>It's the kind of boring grunt work we invented ØMQ to get away from, so I'm not going to feed you an example. Let's just agree that making things more complex is easy. My next article will cover the Census pattern, which extends Meerkat into a group query pattern.</p>
+<div style="float:left;width:33%; margin:-15px 0 0 0">
+<p><iframe src="http://hintjens.wdfiles.com/local--html/blog%3A37/7d02d37a39e0fa3166f4a6d8aad41f0fa5932dfb-10269079442003456220/hintjens.com/" allowtransparency="true" frameborder="0" class="html-block-iframe"></iframe></p>
+</div>
+<div style="float:right"><div class="page-rate-widget"><div class="page-rate-widget-start" data-rating="0"></div></div></div>
+</div>
+<p><a name="comments"></a></p>
+<div class="comments-box">
+	<h1>Comments</h1>	
+	<div class="options" id="comments-options-hidden" style="display: none">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.showComments(event)">Show Comments</a> 
+	</div>
+		
+	<div id="thread-container" class="thread-container reverse" style="margin-top: 1em">
+					
+
+
+<script type="text/javascript">
+	WIKIDOT.forumThreadId = 637241;
+</script>
+
+        <a href="javascript:;" id="new-post-button" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.newPost(event,null)"
+      style="display:  block ; margin-bottom:1em"
+    >Add a New Comment</a>
+
+ 
+
+	<div class="options" id="comments-options-shown">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.hideComments(event)" class="btn btn-default btn-small btn-sm">Hide All Comments</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.unfoldAll(event)" class="btn btn-default btn-small btn-sm">Unfold All</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.foldAll(event)" class="btn btn-default btn-small btn-sm">Fold All</a>
+	</div>
+
+<div id="thread-container-posts" style="display: none">
+    
+
+
+
+	
+					
+      
+    <div class="post-container" id="fpc-2032587">
+                      
+		<div class="post" id="post-2032587">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,2032587)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-2032587">
+																		meerkat pattern in java
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/nshaha" onclick="WIKIDOT.page.listeners.userInfo(1890489); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1890489&amp;amp;size=small&amp;amp;timestamp=1570613250" alt="nshaha" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1890489)"/></a><a href="http://www.wikidot.com/user:info/nshaha" onclick="WIKIDOT.page.listeners.userInfo(1890489); return false;" >nshaha</a></span> <span class="odate time_1400166078 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">15 May 2014 15:01</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-2032587">
+									
+
+<p>Wonder if anyone has attempted java implementation of meerkat pattern</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,2032587)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,2032587)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-2032587" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,2032587)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,2032587)">meerkat pattern in java</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/nshaha" onclick="WIKIDOT.page.listeners.userInfo(1890489); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1890489&amp;amp;size=small&amp;amp;timestamp=1570613250" alt="nshaha" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1890489)"/></a><a href="http://www.wikidot.com/user:info/nshaha" onclick="WIKIDOT.page.listeners.userInfo(1890489); return false;" >nshaha</a></span>, <span class="odate time_1400166078 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">15 May 2014 15:01</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+
+
+
+</div>
+
+
+<div style="display:none" id="post-options-template">
+	<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.showPermalink(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Permanent Link</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.editPost(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Edit</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.deletePost(event,'%POST_ID%')" class="btn btn-danger btn-small btn-sm">Delete</a>
+</div>
+	
+			</div>
+	
+	
+	
+</div>
+                    </div>
+
+                                    <!-- wikidot_bottom_300x250 -->
+<div id="div-gpt-ad-1410946564449-0" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-below_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-0'); });
+</script>
+</div>
+
+            
+    
+
+
+                    
+                        <div class="page-tags">
+                            <span>
+                                <a href="system_page-tags/tag/zeromq.html#pages">zeromq</a>
+                            </span>
+                        </div>
+                    
+
+                    <div id="page-info-break"></div>
+                    
+                        <div id="page-options-container">
+                            
+                        </div>
+                    
+                    <div id="action-area" style="display: none;"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div id="footer" style="display: block; visibility: visible;">
+                <div class="options" style="display: block; visibility: visible;">
+    <a href="http://www.wikidot.com/doc" id="wikidot-help-button">Help</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:terms-of-service" id="wikidot-tos-button">Terms of Service</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:privacy-policy" id="wikidot-privacy-button">Privacy</a>
+    &nbsp;|
+    <a href="javascript:;" id="bug-report-button" onclick="WIKIDOT.page.listeners.pageBugReport(event)">Report a bug</a>
+    &nbsp;|
+    <a href="javascript:;" id="abuse-report-button" onclick="WIKIDOT.page.listeners.flagPageObjectionable(event)">Flag as objectionable</a>
+</div>
+Powered by <a href="http://www.wikidot.com/">Wikidot.com</a> 
+            </div>
+            
+                <div id="license-area" class="license-area">
+                    Unless otherwise stated, the content of this page is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>
+                </div>
+            
+            
+            
+
+
+
+            <div id="extrac-div-1"><span></span></div><div id="extrac-div-2"><span></span></div><div id="extrac-div-3"><span></span></div>
+            
+            
+            
+            
+                
+            
+        </div>
+        
+    </div>
+<!-- These extra divs/spans may be used as catch-alls to add extra imagery. -->
+<div id="extra-div-1"><span></span></div><div id="extra-div-2"><span></span></div><div id="extra-div-3"><span></span></div>
+<div id="extra-div-4"><span></span></div><div id="extra-div-5"><span></span></div><div id="extra-div-6"><span></span></div>
+</div>
+
+
+
+</div>
+<div id="dummy-ondomready-block" style="display: none;" ></div>
+    <!-- Google Analytics load -->
+    <script type="text/javascript">
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <!-- Quantcast -->
+    <script type="text/javascript">
+    _qoptions={
+        qacct:"p-edL3gsnUjJzw-"
+    };
+    (function() {
+        var qc = document.createElement('script'); qc.type = 'text/javascript'; qc.async = true;
+        qc.src = ('https:' == document.location.protocol ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(qc, s);
+    })();
+    </script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-edL3gsnUjJzw-.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+    </noscript>
+
+
+
+
+<div id="page-options-bottom-tips" style="display: none;">
+    <div id="edit-button-hovertip">
+        Click here to edit contents of this page.    </div>
+</div>
+<div id="page-options-bottom-2-tips"  style="display: none;">
+    <div id="edit-sections-button-hovertip">
+        Click here to toggle editing of individual sections of the page (if possible).         Watch headings for an &quot;edit&quot; link when available.    </div>
+    <div id="edit-append-button-hovertip">
+        Append content without editing the whole page source.    </div>
+    <div id="history-button-hovertip">
+        Check out how this page has evolved in the past.    </div>
+    <div id="discuss-button-hovertip">
+        If you want to discuss contents of this page - this is the easiest way to do it.    </div>
+    <div id="files-button-hovertip">
+        View and manage file attachments for this page.    </div>
+    <div id="site-tools-button-hovertip">
+        A few useful tools to manage this Site.    </div>
+    <div id="backlinks-button-hovertip">
+        See pages that link to and include this page.    </div>
+    <div id="rename-move-button-hovertip">
+        Change the name (also URL address, possibly the category) of the page.    </div>
+    <div id="view-source-button-hovertip">
+        View wiki source for this page without editing.    </div>
+    <div id="parent-page-button-hovertip">  
+        View/set parent page (used for creating breadcrumbs and structured layout).    </div>
+            <div id="abuse-report-button-hovertip">
+            Notify administrators if there is objectionable content in this page.        </div>
+        <div id="bug-report-button-hovertip">
+            Something does not work as expected? Find out what you can do.        </div>
+        <div id="wikidot-help-button-hovertip">
+            General Wikidot.com documentation and help section.        </div>
+        <div id="wikidot-tos-button-hovertip">
+            Wikidot.com Terms of Service - what you can, what you should not etc.        </div>
+        <div id="wikidot-privacy-button-hovertip">
+            Wikidot.com Privacy Policy.          
+        </div>
+    </div>
+</body>
+
+<!-- Mirrored from hintjens.com/blog:37 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:31:10 GMT -->
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;The PUB-SUB Hacks: Meerkat&quot;</title>
+		<link>http://hintjens.com/blog:37/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:31:08 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:37/comments/show#post-2032587</guid>
+				<title>meerkat pattern in java</title>
+				<link>http://hintjens.com/blog:37/comments/show#post-2032587</link>
+				<description></description>
+				<pubDate>Thu, 15 May 2014 15:01:18 +0000</pubDate>
+				<wikidot:authorName>nshaha</wikidot:authorName>				<wikidot:authorUserId>1890489</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Wonder if anyone has attempted java implementation of meerkat pattern</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

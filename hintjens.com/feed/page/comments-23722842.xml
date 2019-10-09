@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Hacking the Edges&quot;</title>
+		<link>http://hintjens.com/blog:76/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:30:16 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:76/comments/show#post-2233597</guid>
+				<title>Re: Did you hack the Edges?</title>
+				<link>http://hintjens.com/blog:76/comments/show#post-2233597</link>
+				<description></description>
+				<pubDate>Mon, 16 Feb 2015 07:37:58 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Sure, the repository is at <a href="https://github.com/edgenet/hydra">https://github.com/edgenet/hydra</a></p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:76/comments/show#post-2233519</guid>
+				<title>Did you hack the Edges?</title>
+				<link>http://hintjens.com/blog:76/comments/show#post-2233519</link>
+				<description></description>
+				<pubDate>Mon, 16 Feb 2015 05:16:57 +0000</pubDate>
+				<wikidot:authorName>Brugeman</wikidot:authorName>				<wikidot:authorUserId>459422</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Could you please post some links to results of the hackathon? Thanks!</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

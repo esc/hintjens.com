@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Ten Rules for Open Source Success&quot;</title>
+		<link>http://hintjens.com/blog:95/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:29:51 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:95/comments/show#post-2645117</guid>
+				<title>Outstanding Advice!</title>
+				<link>http://hintjens.com/blog:95/comments/show#post-2645117</link>
+				<description></description>
+				<pubDate>Wed, 21 Sep 2016 01:08:46 +0000</pubDate>
+				<wikidot:authorName>Joshua Darby</wikidot:authorName>				<wikidot:authorUserId>1974781</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I have been looking for this kind of stuff for years. Thank you for writing about this as it will help me in the future and I will definitely pass this page on to other people.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:95/comments/show#post-2379795</guid>
+				<title>Great!!</title>
+				<link>http://hintjens.com/blog:95/comments/show#post-2379795</link>
+				<description></description>
+				<pubDate>Tue, 22 Sep 2015 12:47:10 +0000</pubDate>
+				<wikidot:authorName>crocket</wikidot:authorName>				<wikidot:authorUserId>1794068</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I think I will experiment with this guideline in my future commercial open source projects.</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

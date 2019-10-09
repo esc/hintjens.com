@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Using ZeroMQ Security (part 2)&quot;</title>
+		<link>http://hintjens.com/blog:49/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:30:37 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-3565083</guid>
+				<title>Updated examples for CZMQ 4.x</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-3565083</link>
+				<description></description>
+				<pubDate>Sat, 05 Aug 2017 00:08:36 +0000</pubDate>
+				<wikidot:authorName>AlainODea</wikidot:authorName>				<wikidot:authorUserId>3277607</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I've posted updated examples compatible with CZMQ 4.x here as a GitHub Gist:<br /> /AlainODea/f247d8bc6c2e46e4899bdea86f8a9af4</p> <p>This particularly addresses the removal/hiding of zcontext and the switch from zsocket to zsock and from zthread to zactor.</p> <p>I'm not allowed to post links yet, so I'm stuck posting the path on Gist which hopefully will get you to my fixed examples.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-1969376</guid>
+				<title>Re: Ironhouse2 doesn&#039;t use auth</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-1969376</link>
+				<description></description>
+				<pubDate>Sun, 16 Feb 2014 21:26:44 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Thanks for finding this problem.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-1969373</guid>
+				<title>Ironhouse2 doesn&#039;t use auth</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-1969373</link>
+				<description></description>
+				<pubDate>Sun, 16 Feb 2014 21:22:10 +0000</pubDate>
+				<wikidot:authorName>alpo3z</wikidot:authorName>				<wikidot:authorUserId>1835409</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Because auth is destroyed by zauth_destroy(&amp;auth) before connection. If I add zclock_sleep after zstr_send I can test authentification.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-1908677</guid>
+				<title>Ironhouse2 not using auth?</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-1908677</link>
+				<description></description>
+				<pubDate>Thu, 05 Dec 2013 10:39:33 +0000</pubDate>
+				<wikidot:authorName>spro</wikidot:authorName>				<wikidot:authorUserId>1447205</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I just tried the ironhouse2.c example and it claimed to have passed but strangely did not print out the &quot;I: ALLOWED (CURVE) client_key=&#8230;&quot; bit that ironhouse.c did. Suspicious, I changed the zauth_allow whitelist to a random IP and it still let me go through with sending the message. It seems something is making the server not care about auth mechanisms. OS X 10.7.5</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-1876173</guid>
+				<title>Re: Two problems</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-1876173</link>
+				<description></description>
+				<pubDate>Tue, 22 Oct 2013 21:42:53 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I didn't see your message to the zeromq-dev list; if it's not there in a while could you resend it? If you join the email list, there's no moderation.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-1876156</guid>
+				<title>Re: Two problems</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-1876156</link>
+				<description></description>
+				<pubDate>Tue, 22 Oct 2013 21:17:22 +0000</pubDate>
+				<wikidot:authorName>pebbe</wikidot:authorName>				<wikidot:authorUserId>1639994</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>For 1:<br /> A posted a message to the zeromq-dev list. I got a reply that the message was being held for review. I haven't seen it appear in the zeromq Google group.</p> <p>For 2:<br /> First I translated the <tt>tests/test_security_xxx.cpp</tt> into Go. That gave me a good idea of how things work.<br /> Then I wrote a version of the <tt>czmq xauth</tt> module in Go. I think it's a reasonable implementation. See <tt>pebbe/zmq4</tt> on github, subdirectory <tt>examples_security</tt>.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-1873886</guid>
+				<title>Re: Two problems</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-1873886</link>
+				<description></description>
+				<pubDate>Sat, 19 Oct 2013 12:33:41 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>For the compilation, could you start a thread on the zeromq-dev list?</p> <p>For understanding the security API, yes, I need to explain the low level mechanisms better. The place to start is tests/test_security_xxx.cpp, which show each model. What CZMQ does is build on top of that to e.g. manage and use keys. A binding just needs to export the libzmq, and it can leave key management and authentication to the application.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-1873868</guid>
+				<title>Two problems</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-1873868</link>
+				<description></description>
+				<pubDate>Sat, 19 Oct 2013 11:38:31 +0000</pubDate>
+				<wikidot:authorName>pebbe</wikidot:authorName>				<wikidot:authorUserId>1639994</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Problem 1:</p> <p>I had to remove all options &quot;-pedantic&quot; from the Makefiles of ZeroMQ (version 4.0.1) to get it to compile with libsodium (version 0.4.3). After that, 'make check' gave two fails, for test_linger and test_stream.</p> <p>Problem 2:</p> <p>I wrote Go bindings for ZeroMQ versions 2 and 3. With these, I implemented all examples from &quot;ØMQ - The Guide&quot; in Go.</p> <p>Now I want to do the same for version 4, including the examples on this page. But these examples all use czmq, without an explanation of what is going on under the hood, in core ZeroMQ.</p> <p>To get this stuff right, and secure, I really need C examples without czmq. I could poke around in the sources of czmq, but chances are, I will miss some important detail, and my implementation might seem to work, when actually it's full of security holes.</p> <p>I expect people who write bindings in other languages would need this too. Any change you can provide these examples without czmq?</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-1856320</guid>
+				<title>Oh dear, you fixed it :(</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-1856320</link>
+				<description></description>
+				<pubDate>Sat, 21 Sep 2013 20:07:02 +0000</pubDate>
+				<wikidot:authorName>Derde Olifant</wikidot:authorName>				<wikidot:authorUserId>1730203</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>My life was happy. Well, at least it was simple. ZeroMQ might saved us from being Iced up by Corba, but it wasn't an option. I reviewed them all, and ended up with a horrible implementation of AMQP, with SSL that makes it pretty much unusable in any real kind of code.</p> <p>ZeroMQ was an amazing academic toy for those having the luxury of an isolated and private network filled with only happy packets and gilded rainbows. It was unnecessary to even consider it for our applications, because it would get chewed up by the big scary internet unless we rolled out squabs of VPNs and stunnels.</p> <p>But now, oh dear, you have fixed it. Oh spite. I just wonder if hubris will beat laziness on this &#8230;</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-1855629</guid>
+				<title>Re: zmq ROUTER</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-1855629</link>
+				<description></description>
+				<pubDate>Fri, 20 Sep 2013 15:45:40 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Usually I'd load the certificate from disk with zcert_load(), or apply the keys directly to the socket with individual zsocket_set options.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-1855625</guid>
+				<title>Re: zmq ROUTER</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-1855625</link>
+				<description></description>
+				<pubDate>Fri, 20 Sep 2013 15:31:16 +0000</pubDate>
+				<wikidot:authorName>Gaby_64</wikidot:authorName>				<wikidot:authorUserId>1729282</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>works fine, i only need to make sure its not rogue server applications that are connecting. my problem was with zcert_new_from(), which requires 32byte binary strings and not the z85 encoded strings provided by makecert.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-1855615</guid>
+				<title>Re: zmq ROUTER</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-1855615</link>
+				<description></description>
+				<pubDate>Fri, 20 Sep 2013 15:15:04 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>You won't be able to authenticate at both sides at the same time. Look at the Harmony pattern in the Guide, which is Router-to-Dealer in both directions. That will allow peer-to-peer authentication.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:49/comments/show#post-1855603</guid>
+				<title>zmq ROUTER</title>
+				<link>http://hintjens.com/blog:49/comments/show#post-1855603</link>
+				<description></description>
+				<pubDate>Fri, 20 Sep 2013 15:02:31 +0000</pubDate>
+				<wikidot:authorName>Gaby_64</wikidot:authorName>				<wikidot:authorUserId>1729282</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>does it work for that?</p> <p>doesn't seem to be working</p> <p>i have a server application that tracks other server applications<br /> i needed bi-directional targeted communication so i used ROUTER on both sides.</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

@@ -1,0 +1,821 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from hintjens.com/blog:62 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:30:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>ZeroMQ Certificates, Design Iteration 1 - Hintjens.com</title>
+    
+    	<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+    // DEFINE DFP SLOTS
+googletag.defineSlot('/1030917/wikidot_free_sites_top_728x90', [728, 90], 'div-gpt-ad-1410946564449-1').addService(googletag.pubads());
+googletag.defineSlot('/1030917/wikidot_free_sites_bottom_300x250', [300, 250], 'div-gpt-ad-1410946564449-0').addService(googletag.pubads());
+
+// googletag.pubads().enableSingleRequest();
+googletag.pubads().collapseEmptyDivs(true, true);
+googletag.pubads().setTargeting("w_name", "hintjens");
+googletag.pubads().setTargeting("w_domain", "com.hintjens");
+googletag.pubads().setTargeting("w_verified", "false");
+if(null){googletag.pubads().setTargeting("w_cats", null);}
+if(false){googletag.pubads().setTargeting("w_mn", "true");}
+googletag.enableServices();
+});
+</script>
+<script type="text/javascript" src="http://www.wikidot.com/default__flow/login__CustomDomainScript?site_id=352120"></script>
+
+    
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/init.combined.js"></script>
+    <script  type="text/javascript">
+        var URL_HOST = 'www.wikidot.com';
+        var URL_DOMAIN = 'wikidot.com';
+        var USE_SSL =  true ;
+        var URL_STATIC = 'http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade';
+        // global request information
+        
+        var WIKIREQUEST = {};
+        WIKIREQUEST.info = {};
+        
+        WIKIREQUEST.info.domain = "hintjens.com";
+        WIKIREQUEST.info.siteId = 352120;
+        WIKIREQUEST.info.siteUnixName = "hintjens";
+        WIKIREQUEST.info.categoryId = 1984291;
+        WIKIREQUEST.info.themeId = 1;
+        WIKIREQUEST.info.requestPageName = "blog:62";
+        OZONE.request.timestamp = 1570613235;
+        OZONE.request.date = new Date();
+        WIKIREQUEST.info.lang = 'en';
+                WIKIREQUEST.info.pageUnixName = "blog:62";
+        WIKIREQUEST.info.pageId = 20275882;
+                        WIKIREQUEST.info.lang = "en";
+        OZONE.lang = "en";
+        var isUAMobile = !!/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    </script>
+    
+    
+
+
+    
+        <script  type="text/javascript">
+    
+        require.config({
+            baseUrl: URL_STATIC + '/common--javascript',
+            paths: {
+                'jquery.ui': 'jquery-ui.min',
+                'jquery.form': 'jquery.form'
+            }
+        });
+    
+    </script>
+    
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+            
+    
+    
+    
+    
+    <meta http-equiv="content-language" content="en"/>
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/WIKIDOT.combined.js"></script>
+        
+    
+    <style type="text/css" id="internal-style">
+        
+        /* modules */
+@import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/css/pagerate/PageRateWidgetModule.css);
+
+
+        
+                
+        /* theme */
+                    @import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--theme/base/css/style.css);
+                    @import url(http://hintjens.wdfiles.com/local--code/admin%3Athemes/1);
+            </style>
+    
+        
+        
+        
+    <link rel="shortcut icon" href="local--favicon/favicon.gif"/>
+    <link rel="icon" type="image/gif" href="local--favicon/favicon.gif"/>
+    
+            <link rel="apple-touch-icon" href="common--images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="common--images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="common--images/apple-touch-icon-114x114.png" />
+        
+        
+            <link rel="alternate" type="application/wiki" title="Edit this page" href="javascript:WIKIDOT.page.listeners.editClick()"/>
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18234656-1']);
+        _gaq.push(['_setDomainName', 'none']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        _gaq.push(['old._setAccount', 'UA-68540-5']);
+        _gaq.push(['old._setDomainName', 'none']);
+        _gaq.push(['old._setAllowLinker', true]);
+        _gaq.push(['old._trackPageview']);
+
+                _gaq.push(['userTracker._setAccount', 'UA-623476-16']);
+        _gaq.push(['userTracker._trackPageview']);
+            </script>
+    
+    <script type="text/javascript">
+        window.google_analytics_uacct = 'UA-18234656-1';
+        window.google_analytics_domain_name = 'none';
+    </script>
+    
+        <link rel="manifest" href="onesignal/manifest.html" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" acync=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: null,
+          });
+        });
+    </script>
+        
+<link rel="alternate" type="application/rss+xml" title="Comments for the page &quot;ZeroMQ Certificates, Design Iteration 1&quot;" href="feed/page/comments-20275882.xml"/><script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/misc/NewPageHelperModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/list/ListPagesModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/pagerate/PageRateWidgetModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumCommentsModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/sub/ForumNewPostFormModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadPostsModule.js"></script>
+</head>
+<body id="html-body">
+<div id="skrollr-body">
+<a name="page-top"></a>
+
+<div id="container-wrap-wrap">
+    <div id="container-wrap">
+        <div id="container">
+            <div id="header">
+              <h1><a href="index.html"><span>Hintjens.com</span></a></h1>
+                
+                    <h2><span>Moving Pieces</span></h2>
+                
+                
+                <!-- google_ad_section_start(weight=ignore) -->
+                
+                <div id="search-top-box" class="form-search">
+    <form id="search-top-box-form" action="http://hintjens.com/dummy" class="input-append">
+        <input id="search-top-box-input" class="text empty search-query" type="text" size="15" name="query" value="Search this site" onfocus="if(YAHOO.util.Dom.hasClass(this, 'empty')){YAHOO.util.Dom.removeClass(this,'empty'); this.value='';}"/><input class="button btn" type="submit" name="search" value="Search"/>
+    </form>
+</div>
+                
+                
+                    <div id="top-bar">
+                        
+
+<ul>
+<li><a href="index.html">Front</a></li>
+<li><a href="blog__zeromq.html">ZeroMQ</a></li>
+<li><a href="blog__community.html">Community</a></li>
+<li><a href="blog__unprotocols.html">Unprotocols</a></li>
+<li><a href="blog__psychopaths.html">Psychopaths</a></li>
+</ul>
+
+                    </div>
+                
+                <div id="login-status"><a href="javascript:;" onclick="WIKIDOT.page.listeners.createAccount(event)" class="login-status-create-account btn">Create account</a> <span>or</span> <a href="javascript:;" onclick="WIKIDOT.page.listeners.loginClick(event)" class="login-status-sign-in btn btn-primary">Sign in</a> </div>
+                <div id="header-extra-div-1"><span></span></div><div id="header-extra-div-2"><span></span></div><div id="header-extra-div-3"><span></span></div>
+            </div>
+            
+            <div id="content-wrap">
+                
+                    <div id="side-bar">
+                        
+
+
+                        
+
+<p><a class="wiki-standalone-button" style="background-image: url(http://www.wikidot.com/local--files/files/document-print.png); background-repeat: no-repeat; background-position: bottom right; padding-right: 20px;color: #444" href="javascript:;" onclick="WIKIDOT.page.listeners.printClick(event)">print</a></p>
+<a href="http://hintjens.wdfiles.com/local--files/nav:side/culture.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/nav:side/culture.jpg/small.jpg" alt="culture.jpg" class="image" /></a>
+<p><strong>Pieter Hintjens</strong></p>
+<p><a href="main_biography.html">Biography</a> | <a href="main_portfolio.html">Portfolio</a> | <a href="https://github.com/hintjens">GitHub</a><br />
+<a href="books.html">Books</a> | <a href="https://vimeo.com/user10099130/videos">Videos</a> | <a href="http://www.slideshare.net/pieterh">Slides</a> | <a href="http://fiction.hintjens.com/">Stories</a> | <a href="http://wiki.hintjens.com/">Wiki</a><br />
+<a href="contact.html">Contact</a></p>
+<p><strong>Thank you for the gifts</strong></p>
+<p><a href="http://paypal.me/Hintjens">Kind people already sent donations</a> that will make my childrens' lives easier, when I'm not there any more. Thank you enormously! :-)</p>
+<p>Podcasts/Interviews</p>
+<p><a href="http://softwareengineeringdaily.com/2016/06/23/death-distributed-systems-pieter-hintjens/">Software Engineering Daily</a><br />
+<a href="https://www.youtube.com/watch?v=ApqI9XLRk4k">Interview by Adam Dymitruk</a><br />
+<a href="http://devchat.tv/ruby-rogues/188-rr-community-building-with-pieter-hintjens">Ruby Rogues #188, Community Building</a></p>
+<p>Talks on video</p>
+<p><a href="http://deredactie.be/cm/vrtnieuws/videozone/programmas/deafspraak/2.44331">&quot;De afspraak&quot;, VRT, May 2016</a> (panel discussion)<br />
+<a href="http://www.rtl.be/rtltvi/video/581260.aspx">RTL TV, May 2016</a> (panel discussion)<br />
+<a href="https://www.youtube.com/watch?v=uzxcILudFWM">DomCode 2015, Nov 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=7HECD3eLoVo">Coding Serbia, Oct 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=O8CbzKREAj4">Euroscipy, Cambridge, Aug 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=FKu09-_AaeM&amp;index=4&amp;list=PLFxMLyzsWeqr4SCyx0ZmFkVz2vZJk_CI5">PyGrunn, Groningen, May 2015</a><br />
+<a href="http://www.ustream.tv/recorded/61450822">Craft Conf, Budapest, Apr 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design-2015">QCon London, Mar 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design">Code Mesh London, Nov 2014</a><br />
+<a href="http://www.infoq.com/presentations/trick-better-software">Build Stuff, Vilnius 2014</a><br />
+<a href="https://www.youtube.com/watch?v=_QF9sFJGJuc">Build Stuff, Vilnius, Nov 2014</a> (interview)<br />
+<a href="https://www.youtube.com/watch?v=xFVDNTXIC_Y">Coding Serbia, Nov 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=DAOFZfSlFs0">Devnology, Leusden, Oct 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=QB7VXSc5H3A">EuroPython, Berlin, Jul 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=qTNqgwN5gzA&amp;feature=youtu.be">Build Stuff, Vilnius, Dec 2013</a> (interview)<br />
+<a href="http://www.infoq.com/presentations/digital-revolution-freedom">Build Stuff, Vilnius, Dec 2013</a> (keynote)<br />
+<a href="http://vimeo.com/82175816">Code Mesh London, Dec 2013</a><br />
+<a href="http://vimeo.com/79378301">DevOps Days, London, Nov 2013</a><br />
+<a href="https://vimeo.com/68236487">NDC Oslo, Jun 2013</a><br />
+<a href="https://vimeo.com/69666055">CERN - Geneva, Jun 2013</a><br />
+<a href="https://www.youtube.com/watch?v=uj-li0LO_2g">Tech Mesh, London, Dec 2012</a><br />
+<a href="http://www.infoq.com/presentations/Architecture-Scale-ZeroMQ">Strange Loop, St.Louis, Oct 2012</a><br />
+<a href="https://vimeo.com/37854675">ZeroMQ@PDX part 2 - Portland, Feb 2012</a><br />
+<a href="https://vimeo.com/38117896">ZeroMQ@PDX part 1 - Portland, Feb 2012</a><br />
+<a href="http://www.youtube.com/watch?gl=BE&amp;v=4II94h6-IFY">FLOSS Weekly, Petaliuma CA, Dec 2011</a><br />
+<a href="https://www.youtube.com/watch?v=CCBYzKfmQ4U">FOSDEM 2011, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=h0facLxJPUE">Berlin Buzzwords 2010</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=bQgPArfbXm4">FOSDEM 2009, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=fJo1jmuOuqQ">Hellenic FOSS Conference 2008, Athens part 1</a><br />
+<a href="https://www.youtube.com/watch?v=Hx6cS1VLhoo">Hellenic FOSS Conference 2008, Athens part 2</a></p>
+<p>Email me at <span class="wiki-email">moc.snejtnih|reteip#moc.snejtnih|reteip</span> if you'd like me to present at your event, or in your organization.</p>
+<a href="books.html"><img src="https://www.createspace.com/Img/T448/T45/T21/BookCoverImage.jpg?random=0.4431380270844333" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.4431380270844333" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/socarch.png" style="padding:5px" width="100" alt="socarch.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/confessions.jpg" style="padding:5px" width="100" alt="confessions.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/psccover.jpg" style="padding:5px" width="100" alt="psccover.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://akamaicovers.oreilly.com/images/0636920026136/cat.gif" style="padding:5px" width="100" alt="cat.gif" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/scalablec.png" style="padding:5px" width="100" alt="scalablec.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="https://www.createspace.com/Img/T409/T85/T11/BookCoverImage.jpg?random=0.7859812398986378" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.7859812398986378" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<p><strong><a href="books.html">Download and read online</a></strong></p>
+<p><strong><a href="legal_start.html">Legal</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></strong></p>
+<div class="collapsible-block">
+<div class="collapsible-block-folded"><a class="collapsible-block-link" href="javascript:;"> ▽ </a></div>
+<div class="collapsible-block-unfolded" style="display:none">
+<div class="collapsible-block-unfolded-link"><a class="collapsible-block-link" href="javascript:;"> △ </a></div>
+<div class="collapsible-block-content">
+<div class="side-box">
+<p><a href="_admin.html">Manage</a> | <a href="admin_themes.html">Theme</a> | <a href="nav_top.html">Top</a> | <a href="nav_top.html">Side</a></p>
+
+<div class="new-page-box" style="text-align: center; margin: 1em 0;">
+	<form action="http://hintjens.com/dummy.html" method="get" onsubmit="WIKIDOT.modules.NewPageHelperModule.listeners.create(event);">
+		<input class="text" name="pageName" type="text" size="40" maxlength="128" style="margin: 1px"/>
+				<input type="submit" class="button" value="New post" style="margin: 1px;"/>
+									<input type="hidden" name="categoryName" value="blog"/>
+													<input type="hidden" name="parent" value="blog:_start"/>
+				
+	</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                        
+
+
+                    </div>
+                
+                
+                <!-- google_ad_section_end -->
+                
+                <div id="main-content">
+                    <div id="action-area-top"></div>
+                    
+                    
+                        <div id="page-title">
+                            ZeroMQ Certificates, Design Iteration 1
+                        </div>
+                    
+
+                    
+                        <div id="breadcrumbs">
+                            <a href="blog__start.html">All Articles</a> &raquo; ZeroMQ Certificates, Design Iteration 1
+                        </div>
+                    
+
+                                    <!-- wikidot_top_728x90 -->
+<div id="div-gpt-ad-1410946564449-1" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-above_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-1'); });
+</script>
+</div>
+
+            
+    
+
+
+                    <div id="page-content">
+                        
+
+<div style="overflow:hidden; font-size: 13px; margin: -26px 0 -22px 0">
+<div style="float:left"><div class="list-pages-box">    
+
+<p><a href="blog_53.html">&lt; Previous</a></p>
+
+    
+    
+    
+    </div></div>
+<div style="float:right"><div class="list-pages-box">    
+
+<p><a href="blog_68.html">Next &gt;</a></p>
+
+    
+    
+    
+    </div></div>
+</div>
+<div style="border: solid 1px #f00; padding:0 1em 0 1em; margin-bottom: 1em; margin-top:1em; min-height: 140px; overflow: hidden">
+<p><span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1473156443" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)" /></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;">pieterh</a></span> wrote on <span class="odate time_1381753249 format_%25e%20%25b%2C%20%25H%3A%25M%20%28%25O%20ago%29">14 Oct 2013 12:20</span></p>
+<div class="image-container floatleft"><a href="http://hintjens.wdfiles.com/local--files/blog:62/aaicon.png"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:62/aaicon.png/small.jpg" alt="aaicon.png" class="image" /></a></div>
+<p>In the ongoing search for a new certificate format for ZeroMQ, I kicked off a <a href="http://thread.gmane.org/gmane.network.zeromq.devel/20532">nice lively thread on zeromq-dev</a> with some to and for, little agreement, and lots of ideas. In this article I'll present Design Iteration 1, a strawman that people can beat up. The format is inspired by the <a href="http://www.ietf.org/rfc/rfc4716.txt">SSH2 public key format</a>.</p>
+<h2 id="toc0"><span>Goals and Requirements</span></h2>
+<p>These are the requirements I wrote down when designing this certificate format:</p>
+<ul>
+<li>The core goal is to give people a format they can reuse, rather than ask every project that uses ZeroMQ security to invent their own format. A single format lets different applications <em>interoperate</em>, and lets us make a few 10-day projects that work together instead of 100&#160;2-day projects that cannot.</li>
+</ul>
+<ul>
+<li>The format we use has to be <em>simple</em> and <em>human readable</em>. It has to be <em>portable</em> to any system and <em>obvious</em> to implement, and <em>language-neutral</em>.</li>
+</ul>
+<ul>
+<li>A certificate must be capable of carrying at least the CURVE security keys, but should be <em>extensible</em> to any security mechanism, given that ZeroMQ is itself extensible to new security mechanisms.</li>
+</ul>
+<ul>
+<li>A certificate may be <em>symmetrically encrypted with a passphrase</em>, if it holds secret information. We should use a standard encryption algorithm to ensure interoperability.</li>
+</ul>
+<ul>
+<li>A certificate may be <em>asymmetrically encrypted to a recipient</em>, when it will be sent across an untrusted channel. We should use a standard authentication and encryption mechanism to ensure interoperability.</li>
+</ul>
+<ul>
+<li>The certificate must be <em>safe to copy/paste into email</em>, and it must be possible to <em>automatically extract one or more certificates</em> from an email message.</li>
+</ul>
+<ul>
+<li>The certificate should be <em>easy to verify</em> by hand (e.g. over a voice call), using a text fingerprint.</li>
+</ul>
+<h2 id="toc1"><span>Use Cases</span></h2>
+<p>These are the use cases I know about for the CURVE security mechanism:</p>
+<ul>
+<li>A server generates a public + secret keypair, stores the secret key securely, using a passphrase, and stores the public key in clear text. This creates two certificate files, one meant to be kept locally, and one meant to be published.</li>
+</ul>
+<ul>
+<li>A client receives a public certificate from a server. It stores this in a location where it can access it at run time, when it needs that server's public key.</li>
+</ul>
+<ul>
+<li>A client generates a public + secret keypair, stores the secret key securely, using a passphrase, and encrypts and signs the public key from its own secret key to the server's public key.</li>
+</ul>
+<ul>
+<li>A server receives a signed and encrypted public certificate from a client. It stores this in a location where it can access it at run time, when the client makes a new connection.</li>
+</ul>
+<h2 id="toc2"><span>Argumentation</span></h2>
+<h3 id="toc3"><span>One Envelope, many Contents</span></h3>
+<p>To support arbitrary security mechanisms, it seems useful to split the envelope (how the certificate is represented) from the content (the security keys and metadata). Specifically:</p>
+<ul>
+<li>The envelope will always be in clear text, while the content may be encrypted.</li>
+<li>The envelope will have a small set of standard properties, while the content should be fully extensible.</li>
+<li>The envelope will rarely change, while the content will change frequently over time as we refine our security mechanisms.</li>
+<li>We would create and process the envelope, and contents, at two different layers, a generic certificate codec, and a specific layer for each different mechanism.</li>
+</ul>
+<p><strong>Figure 1 - Two-layer Certificate</strong></p>
+<div class="image-container aligncenter"><img src="http://hintjens.wdfiles.com/local--files/blog:62/fig1.png" alt="fig1.png" class="image" /></div>
+<p>So, in this article I'll aim towards (a) a certificate envelope format and (b) a certificate content format for CURVE.</p>
+<h3 id="toc4"><span>Email Armoring</span></h3>
+<p>This is a common problem with a well-known solution. To let us copy/paste a certificate into an email, and extract certificates from emails, we put a special marker before and after the certificate. Let's use this style:</p>
+<div class="code">
+<pre>
+<code>-----BEGIN ZEROMQ CERTIFICATE-----
+...
+-----END ZEROMQ CERTIFICATE-----</code>
+</pre></div>
+<p>Further, lines must be at most 72 characters long, and we should use only 7-bit ASCII.</p>
+<h3 id="toc5"><span>Envelope Format</span></h3>
+<p>In the envelope we will want to note:</p>
+<ul>
+<li>The version number for the envelope, so we can assure forward compatibility.</li>
+<li>The mechanism name, so that the codec can pass decrypted content to the correct mechanism.</li>
+<li>Whether the content is encrypted, and if so, using what algorithm.</li>
+<li>Whether the content is signed, and if so, using what algorithm and public key.</li>
+</ul>
+<p>A simple and well-understood format for the envelope is HTTP-style headers, e.g.:</p>
+<div class="code">
+<pre>
+<code>Version: 0.1
+Mechanism: CURVE
+Comment: The certificate content is signed by the sender using their s\
+ecret key and encrypted to the recipient's public key. We put both pub\
+lic keys into the envelope so the reader can decrypt using the right s\
+ecret key. Here, the &quot;Content-security&quot; header is actually redundant.
+Content-security: signed
+Content-signed-by: Yne@$w-vo&lt;fVvi]a&lt;NY6T1ed:M$fCG*[IaLV{hID
+Content-signed-to: rq:rM&gt;}U?@Lns47E1%kR.o@n%FcmmsL/@{H8]yf7</code>
+</pre></div>
+<p>Note that we're splitting long lines at column 72 and using a backwards slash to indicate that the line continues. This makes the text safe to send in emails.</p>
+<h3 id="toc6"><span>Content Format</span></h3>
+<p>ZeroMQ is notable for transporting opaque frames without trying to define their internal structure. We can do the same here and reuse the successful pattern where the content consists of zero or more opaque frames. Having said that, we should also standardize the content for at least the CURVE mechanism we want to support today. Presumably in two separate RFCs.</p>
+<p>We will want a consistent syntax for content framing so the codec can do its work. Since we're building a text format, we can define a frame as a single line of text. We can use the same continuation line style as we did with headers.</p>
+<p>In ZeroMQ's security model, all mechanisms have metadata, which consists of zero or more name=value pairs. We can specify that the metadata sits in the first frame, and that other mechanism-specific properties follow in further frames. To indicate an empty frame, let's use a single hyphen, &quot;-&quot;.</p>
+<p>Here is the sketch of a PLAIN certificate with metadata, name, and password as three frames:</p>
+<div class="code">
+<pre>
+<code>-----BEGIN ZEROMQ CERTIFICATE-----
+Version: 0.1
+Mechanism: PLAIN
+Uuid=b19e19a0-34aa-11e3-aa6e-0800200c9a66;Date-created=14 October, 2013\
+;Created-by=Pieter Hintjens;Email=ph@imatix.com
+admin
+topsecret
+-----END ZEROMQ CERTIFICATE-----</code>
+</pre></div>
+<p>Note that the metadata is using a <em>name=value</em> format, with semicolons to separate pairs. In ZMQ RFC 23, metadata names are case-insensitive, so we'll use that convention here too.</p>
+<p>Overall this looks somewhat like the SSH 2 public key format (<a href="http://www.ietf.org/rfc/rfc4716.txt">IETF RFC 4716</a>), but is adapted to the ZeroMQ extensible security model. As in IETF RFC 4716 we do not use a blank line between headers and content since it serves no purpose. The headers continue as long as there is a line containing &quot;: &quot;.</p>
+<h3 id="toc7"><span>Binary Content Encoding</span></h3>
+<p>When we encrypt the content, all frames have to be encrypted the same way. We could encrypt each frame individually but this exposes the frame structure to anyone who reads the certificate. Instead, we'll write the whole content (all frames) into a buffer, including line endings, and then encrypt that whole buffer. We will then use the ZMQ RFC 32 (Z85) encoding to represent the binary data safely as text. Z85 is more compact than Base16 or Base64, and the ZeroMQ core API provides encoding and decoding methods. Like all ASCII armoring, Z85 requires padding. To allow safe decoding of Z85 data we need to know the size of the data, excluding any padding. For double-checking we also need the padded length, i.e. the actual number of characters in the encoded content.</p>
+<p>To authenticate a certificate, we need to verify the encrypted content, e.g. over the phone. This is not practical for typically long encrypted content. We thus use the SSH standard for generating an MD5 digest of the content. MD5 has known security weaknesses: you can modify a content and generate the same hash, if you can insert 128 bytes of data at some point. Since our encrypted content has a structure that is unknowable without decryption, it cannot be successfully modified. Thus, MD5 provides an acceptable signature. We will use the SSH-style signature consisting of a sequence of 16 octets printed as lower-case hexadecimal and separated by colons.</p>
+<p>We can place the content sizes and signature in a first frame, and the armored text into a second frame. As before, we can continue long frames over multiple lines. So this gives us, for example:</p>
+<div class="code">
+<pre>
+<code>381,384,c1:b1:30:29:d7:b8:de:6c:97:77:10:d7:46:41:63:87
+nP2U)xK@r8zF9)4zF78kwNPQ?xDQ]9AV!^kzE[2mv}xX5x&gt;z6?vru66w]zZbvrrS7z/M$7w\
+PzY-q7J?YazUX3yH}30z!pb2ax@J3Bz%n]fly(FwNPa4xkI6{wId[wxd)[mvqYTezE){lz/\
+PRCDs.bnze?gswP?T3fetjsgCQ7&lt;x&gt;7Y%y?X67y&lt;vdBxMvV)wft/daBmQtz/6FCwmY{&amp;aA}\
+KwxDRwmzdK&amp;izY&amp;FawftG5AX5tHx([DkwGUz]A+e*0wO#PvayPd#az+$rB0bykazCv$vrj4\
+znP2U)xLzJgvrcE7v@bZ0nHFs&lt;aAhvjB7GlhayMylBAg/laz&gt;L8aARp9BrCKlz/xJ7ay!?$\
+ayX[&lt;Bs[WUra]?=w]zZbvrrSaB0a}2B7F(8z/cXtxK@q&lt;xMOuniXJdgCxUVNwPRJpz/PFzA\
++n/mA+n/rh.^iyBA?)Iq=ujxaAhEjy?Wx4yH}=lw]zZbvrt^c3ig5a</code>
+</pre></div>
+<p>To ensure that the same content survives decoding and re-encoding across multiple platforms, we will specify that the buffered content may only contain LF as its end of line marker. Carriage return characters in the decoded content should be treated as a fatal error, and the certificate rejected.</p>
+<h2 id="toc8"><span>Technical Proposal - Certificate Envelope Format</span></h2>
+<h3 id="toc9"><span>Syntax and Grammar</span></h3>
+<p>Here's a <a href="http://en.wikipedia.org/wiki/Augmented_Backus–Naur_Form">ABNF grammar</a> for the certificate envelope format:</p>
+<div class="code">
+<pre>
+<code>certificate = begin *header content end
+
+begin = &quot;-----BEGIN ZEROMQ CERTIFICATE-----&quot; eoln
+eoln = CR | LF | CRLF
+
+header = header-name &quot;: &quot; header-value eoln
+header-name = defined-header / extension-header
+defined-header = &quot;Version&quot;
+               / &quot;Mechanism&quot;
+               / &quot;Content-security&quot;
+               / &quot;Content-signed-by&quot;
+               / &quot;Content-signed-to&quot;
+               / &quot;Comment&quot;
+extension-header = &quot;X-&quot; 1*62(LETTER / DIGIT / &quot;-&quot;)
+header-value = *header-cont header-last
+header-cont = 1*CHAR &quot;\&quot; eoln
+header-last = 1*CHAR eoln
+
+content = *clear-frame / content-crypt
+clear-frame = &quot;-&quot; / (*clear-cont clear-last)
+clear-cont = 1*71CHAR &quot;\&quot; eoln
+clear-last = 1*72CHAR eoln
+
+content-crypt = length-frame armored-frame
+length-frame = 1*DIGIT &quot;,&quot; 1*DIGIT &quot;,&quot; signature
+signature = 15(signature-octet &quot;:&quot;) signature-octet
+signature-octet = 2(DIGIT / &quot;a&quot; / &quot;b&quot; / &quot;c&quot; / &quot;d&quot; / &quot;e&quot; / &quot;f&quot; )
+
+armored-frame = *armored-cont armored-last
+armored-cont = 1*71armored-char &quot;\&quot; eoln
+armored-last = 1*72armored-char eoln
+armored-char = DIGIT / LETTER
+             / &quot;.&quot; / &quot;-&quot; / &quot;:&quot; / &quot;+&quot; / &quot;=&quot; / &quot;^&quot; / &quot;!&quot; / &quot;/&quot;
+             / &quot;*&quot; / &quot;?&quot; / &quot;&amp;&quot; / &quot;&lt;&quot; / &quot;&gt;&quot; / &quot;(&quot; / &quot;)&quot; / &quot;[&quot;
+             / &quot;]&quot; / &quot;{&quot; / &quot;}&quot; / &quot;@&quot; / &quot;%&quot; / &quot;$&quot; / &quot;#&quot;
+
+end = &quot;-----END ZEROMQ CERTIFICATE-----&quot; eoln</code>
+</pre></div>
+<p>Notes on this syntax:</p>
+<ul>
+<li>Header names are case-insensitive, while header values are case-sensitive.</li>
+<li>The order of headers is not relevant except that a second header with the same name as the first will override the first header.</li>
+<li>Header values are limited to 1,024 characters. RFC 4716 allows quoted values but this adds nothing so I've not allowed that.</li>
+<li>The content starts on the first line not containing &quot;: &quot;.</li>
+</ul>
+<h3 id="toc10"><span>The Version Header</span></h3>
+<p>Specifies the version of the certificate format used. This header is mandatory. It may have these values:</p>
+<ul>
+<li>0.1 - specifies draft version 1. Draft versions do not provide any guarantee of backwards compatibility.</li>
+</ul>
+<h3 id="toc11"><span>The Mechanism Header</span></h3>
+<p>Specifies the security mechanism that the certificate implements. This header is mandatory. It may have these values:</p>
+<ul>
+<li>PLAIN - implements the ZeroMQ PLAIN mechanism, as defined by ZMQ RFCs 24.</li>
+<li>CURVE - implements the ZeroMQ CURVE mechanism, as defined by ZMQ RFCs 25 and 26.</li>
+</ul>
+<p>The content depends on the mechanism and will be defined separately for each standardized mechanism.</p>
+<h3 id="toc12"><span>The Content-security Header</span></h3>
+<p>Specifies whether the content is encrypted and how. This header is optional. It may have these values:</p>
+<ul>
+<li>clear - the content is carried as clear text.</li>
+<li>password - the content is encrypted using a symmetric key derived from a user-supplied password, using the scrypt algorithm. <em>Note: this needs more study and explanation.</em></li>
+<li>signed - the content is authenticated and encrypted using the <tt>crypto_box</tt> function of NaCl or libsodium.</li>
+</ul>
+<p>If the Content-signed-by and Content-signed-to headers are present, Content-security defaults to &quot;signed&quot;, else to &quot;plain&quot;.</p>
+<h3 id="toc13"><span>The Content-signed-by Header</span></h3>
+<p>When Content-security is &quot;signed&quot;, specifies the sender's public key used to authenticate the content. The key is provided in Z85 format and must be 40 characters long. The recipient uses this to authenticate the certificate content (not the certificate itself, which must be authenticated by some other channel).</p>
+<h3 id="toc14"><span>The Content-signed-to Header</span></h3>
+<p>When Content-security is &quot;signed&quot;, specifies the recipient's public key used to encrypt the content. The key is provided in Z85 format and must be 40 characters long. The recipient uses this to find the correct secret key to decrypt the content.</p>
+<h3 id="toc15"><span>The Comment Header</span></h3>
+<p>Contains a user-specified comment. The comment MAY be displayed when using the key. The comment MUST be stored with the certificate and copied if the certificate is recreated on disk.</p>
+<h3 id="toc16"><span>Validating a Certificate</span></h3>
+<p>When reading a certificate, these are the minimum set of validations the code should do. A certificate that fails any of these checks can be considered invalid:</p>
+<ul>
+<li>The certificate has valid begin and end lines.</li>
+<li>The version and mechanism headers are present, and have valid values.</li>
+<li>The content, if encrypted, has a valid size and fingerprint.</li>
+</ul>
+<h2 id="toc17"><span>Technical Proposal - PLAIN Certificate Content Format</span></h2>
+<p>The PLAIN mechanism uses these frames:</p>
+<ul>
+<li>Frame 1 is metadata, as with all mechanisms.</li>
+<li>Frame 2 is the username.</li>
+<li>Frame 3 is the password.</li>
+</ul>
+<p>A PLAIN certificate:</p>
+<ul>
+<li>MAY use signed content security when it is sent across insecure channels.</li>
+</ul>
+<h2 id="toc18"><span>Technical Proposal - CURVE Certificate Content Format</span></h2>
+<p>The CURVE mechanism uses these frames:</p>
+<ul>
+<li>Frame 1 is metadata, as with all mechanisms.</li>
+<li>Frame 2 is the public key, and is always present.</li>
+<li>Frame 3 is the matching secret key, and is optional.</li>
+</ul>
+<p>A CURVE certificate:</p>
+<ul>
+<li>MUST use signed content security, and MUST not contain a secret key, when it is sent across insecure channels.</li>
+<li>MAY use password security, when it is held for a peer's own use.</li>
+<li>MUST use clear security when it is meant to be published openly to all recipients.</li>
+</ul>
+<h2 id="toc19"><span>Conclusions</span></h2>
+<p>I've presented a hopefully simple certificate format that can store anything we need to implement ZeroMQ mechanisms at server or client, and which can be extended to new mechanisms. What's missing here is some proposal for standard filenames and certificate locations on disk. This should be part of a standard specification, I think.</p>
+<div style="float:left;width:33%; margin:-15px 0 0 0">
+<p><iframe src="http://hintjens.wdfiles.com/local--html/blog%3A62/6c0fd7e9eae537bfaf0381a4a10a1201db00d219-13575928121266055369/hintjens.com/" allowtransparency="true" frameborder="0" class="html-block-iframe"></iframe></p>
+</div>
+<div style="float:right"><div class="page-rate-widget"><div class="page-rate-widget-start" data-rating="0"></div></div></div>
+</div>
+<p><a name="comments"></a></p>
+<div class="comments-box">
+	<h1>Comments</h1>	
+	<div class="options" id="comments-options-hidden" style="display: none">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.showComments(event)">Show Comments</a> 
+	</div>
+		
+	<div id="thread-container" class="thread-container reverse" style="margin-top: 1em">
+					
+
+
+<script type="text/javascript">
+	WIKIDOT.forumThreadId = 709069;
+</script>
+
+        <a href="javascript:;" id="new-post-button" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.newPost(event,null)"
+      style="display:  block ; margin-bottom:1em"
+    >Add a New Comment</a>
+
+ 
+
+	<div class="options" id="comments-options-shown">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.hideComments(event)" class="btn btn-default btn-small btn-sm">Hide All Comments</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.unfoldAll(event)" class="btn btn-default btn-small btn-sm">Unfold All</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.foldAll(event)" class="btn btn-default btn-small btn-sm">Fold All</a>
+	</div>
+
+<div id="thread-container-posts" style="display: none">
+    
+
+
+
+	
+					
+      
+    <div class="post-container" id="fpc-1875840">
+                      
+		<div class="post" id="post-1875840">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1875840)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1875840">
+																		design principle : keep every possible fence up
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/lalebarde" onclick="WIKIDOT.page.listeners.userInfo(1629498); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1629498&amp;amp;size=small&amp;amp;timestamp=1570613235" alt="lalebarde" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1629498)"/></a><a href="http://www.wikidot.com/user:info/lalebarde" onclick="WIKIDOT.page.listeners.userInfo(1629498); return false;" >lalebarde</a></span> <span class="odate time_1382445549 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">22 Oct 2013 12:39</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1875840">
+									
+
+<p>&quot;Use Cases&quot;: Why storing the public key in plain text when it does not hurt to crypt it ? It is a question of philosophy. One of my design principle for everything is to not degrade performance, even when it looks not hurting, as far as it is cheap.<br />
+I know some people consider that having public keys in plain text and even public do not degrade security, but I do still consider we have to keep all possible fence up. Security do not depends on the secrecy of public keys, but keeping them secret whenever possible makes attacks certainly more expensive.<br />
+Though, I am not an expert&#8230;..</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1875840)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1875840)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1875840" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1875840)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1875840)">design principle : keep every possible fence up</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/lalebarde" onclick="WIKIDOT.page.listeners.userInfo(1629498); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1629498&amp;amp;size=small&amp;amp;timestamp=1570613235" alt="lalebarde" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1629498)"/></a><a href="http://www.wikidot.com/user:info/lalebarde" onclick="WIKIDOT.page.listeners.userInfo(1629498); return false;" >lalebarde</a></span>, <span class="odate time_1382445549 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">22 Oct 2013 12:39</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+
+
+
+</div>
+
+
+<div style="display:none" id="post-options-template">
+	<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.showPermalink(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Permanent Link</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.editPost(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Edit</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.deletePost(event,'%POST_ID%')" class="btn btn-danger btn-small btn-sm">Delete</a>
+</div>
+	
+			</div>
+	
+	
+	
+</div>
+                    </div>
+
+                                    <!-- wikidot_bottom_300x250 -->
+<div id="div-gpt-ad-1410946564449-0" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-below_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-0'); });
+</script>
+</div>
+
+            
+    
+
+
+                    
+                        <div class="page-tags">
+                            <span>
+                                <a href="system_page-tags/tag/zeromq.html#pages">zeromq</a>
+                            </span>
+                        </div>
+                    
+
+                    <div id="page-info-break"></div>
+                    
+                        <div id="page-options-container">
+                            
+                        </div>
+                    
+                    <div id="action-area" style="display: none;"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div id="footer" style="display: block; visibility: visible;">
+                <div class="options" style="display: block; visibility: visible;">
+    <a href="http://www.wikidot.com/doc" id="wikidot-help-button">Help</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:terms-of-service" id="wikidot-tos-button">Terms of Service</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:privacy-policy" id="wikidot-privacy-button">Privacy</a>
+    &nbsp;|
+    <a href="javascript:;" id="bug-report-button" onclick="WIKIDOT.page.listeners.pageBugReport(event)">Report a bug</a>
+    &nbsp;|
+    <a href="javascript:;" id="abuse-report-button" onclick="WIKIDOT.page.listeners.flagPageObjectionable(event)">Flag as objectionable</a>
+</div>
+Powered by <a href="http://www.wikidot.com/">Wikidot.com</a> 
+            </div>
+            
+                <div id="license-area" class="license-area">
+                    Unless otherwise stated, the content of this page is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>
+                </div>
+            
+            
+            
+
+
+
+            <div id="extrac-div-1"><span></span></div><div id="extrac-div-2"><span></span></div><div id="extrac-div-3"><span></span></div>
+            
+            
+            
+            
+                
+            
+        </div>
+        
+    </div>
+<!-- These extra divs/spans may be used as catch-alls to add extra imagery. -->
+<div id="extra-div-1"><span></span></div><div id="extra-div-2"><span></span></div><div id="extra-div-3"><span></span></div>
+<div id="extra-div-4"><span></span></div><div id="extra-div-5"><span></span></div><div id="extra-div-6"><span></span></div>
+</div>
+
+
+
+</div>
+<div id="dummy-ondomready-block" style="display: none;" ></div>
+    <!-- Google Analytics load -->
+    <script type="text/javascript">
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <!-- Quantcast -->
+    <script type="text/javascript">
+    _qoptions={
+        qacct:"p-edL3gsnUjJzw-"
+    };
+    (function() {
+        var qc = document.createElement('script'); qc.type = 'text/javascript'; qc.async = true;
+        qc.src = ('https:' == document.location.protocol ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(qc, s);
+    })();
+    </script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-edL3gsnUjJzw-.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+    </noscript>
+
+
+
+
+<div id="page-options-bottom-tips" style="display: none;">
+    <div id="edit-button-hovertip">
+        Click here to edit contents of this page.    </div>
+</div>
+<div id="page-options-bottom-2-tips"  style="display: none;">
+    <div id="edit-sections-button-hovertip">
+        Click here to toggle editing of individual sections of the page (if possible).         Watch headings for an &quot;edit&quot; link when available.    </div>
+    <div id="edit-append-button-hovertip">
+        Append content without editing the whole page source.    </div>
+    <div id="history-button-hovertip">
+        Check out how this page has evolved in the past.    </div>
+    <div id="discuss-button-hovertip">
+        If you want to discuss contents of this page - this is the easiest way to do it.    </div>
+    <div id="files-button-hovertip">
+        View and manage file attachments for this page.    </div>
+    <div id="site-tools-button-hovertip">
+        A few useful tools to manage this Site.    </div>
+    <div id="backlinks-button-hovertip">
+        See pages that link to and include this page.    </div>
+    <div id="rename-move-button-hovertip">
+        Change the name (also URL address, possibly the category) of the page.    </div>
+    <div id="view-source-button-hovertip">
+        View wiki source for this page without editing.    </div>
+    <div id="parent-page-button-hovertip">  
+        View/set parent page (used for creating breadcrumbs and structured layout).    </div>
+            <div id="abuse-report-button-hovertip">
+            Notify administrators if there is objectionable content in this page.        </div>
+        <div id="bug-report-button-hovertip">
+            Something does not work as expected? Find out what you can do.        </div>
+        <div id="wikidot-help-button-hovertip">
+            General Wikidot.com documentation and help section.        </div>
+        <div id="wikidot-tos-button-hovertip">
+            Wikidot.com Terms of Service - what you can, what you should not etc.        </div>
+        <div id="wikidot-privacy-button-hovertip">
+            Wikidot.com Privacy Policy.          
+        </div>
+    </div>
+</body>
+
+<!-- Mirrored from hintjens.com/blog:62 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:30:35 GMT -->
+</html>

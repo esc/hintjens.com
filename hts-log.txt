@@ -1,0 +1,16 @@
+HTTrack3.49-2 launched on Wed, 09 Oct 2019 11:25:32 at http://hintjens.com/
+(httrack http://hintjens.com/ -O hintjens.com )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+11:25:32	Warning: 	Cache: damaged cache, trying to repair
+11:25:32	Warning: 	Cache: 0 bytes successfully recovered in 0 entries
+11:25:32	Warning: 	Cache: error trying to open the cache
+11:28:07	Error: 	"Not Found" (404) at link hintjens.com/onesignal/manifest.json (from hintjens.com/)
+11:32:56	Error: 	"Not Found" (404) at link hintjens.com/common--images/apple-touch-icon-57x57 (from hintjens.com/_admin)
+
+HTTrack Website Copier/3.49-2 mirror complete in 7 minutes 26 seconds : 268 links scanned, 265 files written (9299225 bytes overall) [3273422 bytes received at 7339 bytes/sec], 9227823 bytes transferred using HTTP compression in 261 files, ratio 32%
+(2 errors, 3 warnings, 0 messages)

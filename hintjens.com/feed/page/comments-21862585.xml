@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Generating Servers with zproto&quot;</title>
+		<link>http://hintjens.com/blog:75/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:30:19 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:75/comments/show#post-2419961</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:75/comments/show#post-2419961</link>
+				<description></description>
+				<pubDate>Wed, 09 Dec 2015 16:05:05 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>It is a matter of experience. It is like designing a language or an API: keep the level of abstraction high enough that you don't have to be repetitive, yet keep it simple enough that people don't go crazy trying to understand it.</p> <p>Good models are hard to make. Happily with MOP it's cheap to make and test models.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:75/comments/show#post-2419954</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:75/comments/show#post-2419954</link>
+				<description></description>
+				<pubDate>Wed, 09 Dec 2015 15:50:14 +0000</pubDate>
+				<wikidot:authorName>Strahlexus</wikidot:authorName>				<wikidot:authorUserId>2363239</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>MOP seems to be the right tool to create new protocols. I discovered it when reading through the zguide. I am working on a new protocol based on ZMQ and Protobuf.</p> <p>Do you have some tips for creating good models or is this a matter of experience?</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:75/comments/show#post-2094893</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:75/comments/show#post-2094893</link>
+				<description></description>
+				<pubDate>Fri, 22 Aug 2014 18:19:33 +0000</pubDate>
+				<wikidot:authorName>Apostolis Xekoukoul</wikidot:authorName>				<wikidot:authorUserId>1959035</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>There is an xml parser in nodejs ,cheerio, which can be used to metacompile xml documents to servers.</p> <p>Cheerio uses the jquery syntax who is widely known to people.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:75/comments/show#post-2005355</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:75/comments/show#post-2005355</link>
+				<description></description>
+				<pubDate>Thu, 03 Apr 2014 10:48:11 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Since we put GSL onto github, it's gotten a small but growing community. Still arcane stuff, though :)</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:75/comments/show#post-2005320</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:75/comments/show#post-2005320</link>
+				<description></description>
+				<pubDate>Thu, 03 Apr 2014 09:18:13 +0000</pubDate>
+				<wikidot:authorName>martin_sustrik</wikidot:authorName>				<wikidot:authorUserId>939</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>The GSL tool is something that's badly missing in every programmer's toolbox. What prevents it to catch on IMO is the syntax is kind of inconsistent and hard to learn and use. And of course, dealing with XML is pain it the ass. If it was based on JSON, it would improve the usability of the tool by an order of magnitude.</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

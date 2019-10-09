@@ -1,0 +1,1071 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from hintjens.com/blog:24 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Git Branches Considered Harmful - Hintjens.com</title>
+    
+    	<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+    // DEFINE DFP SLOTS
+googletag.defineSlot('/1030917/wikidot_free_sites_top_728x90', [728, 90], 'div-gpt-ad-1410946564449-1').addService(googletag.pubads());
+googletag.defineSlot('/1030917/wikidot_free_sites_bottom_300x250', [300, 250], 'div-gpt-ad-1410946564449-0').addService(googletag.pubads());
+
+// googletag.pubads().enableSingleRequest();
+googletag.pubads().collapseEmptyDivs(true, true);
+googletag.pubads().setTargeting("w_name", "hintjens");
+googletag.pubads().setTargeting("w_domain", "com.hintjens");
+googletag.pubads().setTargeting("w_verified", "false");
+if(null){googletag.pubads().setTargeting("w_cats", null);}
+if(false){googletag.pubads().setTargeting("w_mn", "true");}
+googletag.enableServices();
+});
+</script>
+<script type="text/javascript" src="http://www.wikidot.com/default__flow/login__CustomDomainScript?site_id=352120"></script>
+
+    
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/init.combined.js"></script>
+    <script  type="text/javascript">
+        var URL_HOST = 'www.wikidot.com';
+        var URL_DOMAIN = 'wikidot.com';
+        var USE_SSL =  true ;
+        var URL_STATIC = 'http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade';
+        // global request information
+        
+        var WIKIREQUEST = {};
+        WIKIREQUEST.info = {};
+        
+        WIKIREQUEST.info.domain = "hintjens.com";
+        WIKIREQUEST.info.siteId = 352120;
+        WIKIREQUEST.info.siteUnixName = "hintjens";
+        WIKIREQUEST.info.categoryId = 1984291;
+        WIKIREQUEST.info.themeId = 1;
+        WIKIREQUEST.info.requestPageName = "blog:24";
+        OZONE.request.timestamp = 1570613262;
+        OZONE.request.date = new Date();
+        WIKIREQUEST.info.lang = 'en';
+                WIKIREQUEST.info.pageUnixName = "blog:24";
+        WIKIREQUEST.info.pageId = 13304156;
+                        WIKIREQUEST.info.lang = "en";
+        OZONE.lang = "en";
+        var isUAMobile = !!/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    </script>
+    
+    
+
+
+    
+        <script  type="text/javascript">
+    
+        require.config({
+            baseUrl: URL_STATIC + '/common--javascript',
+            paths: {
+                'jquery.ui': 'jquery-ui.min',
+                'jquery.form': 'jquery.form'
+            }
+        });
+    
+    </script>
+    
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+            
+    
+    
+    
+    
+    <meta http-equiv="content-language" content="en"/>
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/WIKIDOT.combined.js"></script>
+        
+    
+    <style type="text/css" id="internal-style">
+        
+        /* modules */
+@import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/css/pagerate/PageRateWidgetModule.css);
+
+
+        
+                
+        /* theme */
+                    @import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--theme/base/css/style.css);
+                    @import url(http://hintjens.wdfiles.com/local--code/admin%3Athemes/1);
+            </style>
+    
+        
+        
+        
+    <link rel="shortcut icon" href="local--favicon/favicon.gif"/>
+    <link rel="icon" type="image/gif" href="local--favicon/favicon.gif"/>
+    
+            <link rel="apple-touch-icon" href="common--images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="common--images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="common--images/apple-touch-icon-114x114.png" />
+        
+        
+            <link rel="alternate" type="application/wiki" title="Edit this page" href="javascript:WIKIDOT.page.listeners.editClick()"/>
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18234656-1']);
+        _gaq.push(['_setDomainName', 'none']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        _gaq.push(['old._setAccount', 'UA-68540-5']);
+        _gaq.push(['old._setDomainName', 'none']);
+        _gaq.push(['old._setAllowLinker', true]);
+        _gaq.push(['old._trackPageview']);
+
+                _gaq.push(['userTracker._setAccount', 'UA-623476-16']);
+        _gaq.push(['userTracker._trackPageview']);
+            </script>
+    
+    <script type="text/javascript">
+        window.google_analytics_uacct = 'UA-18234656-1';
+        window.google_analytics_domain_name = 'none';
+    </script>
+    
+        <link rel="manifest" href="onesignal/manifest.html" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" acync=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: null,
+          });
+        });
+    </script>
+        
+<link rel="alternate" type="application/rss+xml" title="Comments for the page &quot;Git Branches Considered Harmful&quot;" href="feed/page/comments-13304156.xml"/><script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/misc/NewPageHelperModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/list/ListPagesModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/pagerate/PageRateWidgetModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumCommentsModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/sub/ForumNewPostFormModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadPostsModule.js"></script>
+</head>
+<body id="html-body">
+<div id="skrollr-body">
+<a name="page-top"></a>
+
+<div id="container-wrap-wrap">
+    <div id="container-wrap">
+        <div id="container">
+            <div id="header">
+              <h1><a href="index.html"><span>Hintjens.com</span></a></h1>
+                
+                    <h2><span>Moving Pieces</span></h2>
+                
+                
+                <!-- google_ad_section_start(weight=ignore) -->
+                
+                <div id="search-top-box" class="form-search">
+    <form id="search-top-box-form" action="http://hintjens.com/dummy" class="input-append">
+        <input id="search-top-box-input" class="text empty search-query" type="text" size="15" name="query" value="Search this site" onfocus="if(YAHOO.util.Dom.hasClass(this, 'empty')){YAHOO.util.Dom.removeClass(this,'empty'); this.value='';}"/><input class="button btn" type="submit" name="search" value="Search"/>
+    </form>
+</div>
+                
+                
+                    <div id="top-bar">
+                        
+
+<ul>
+<li><a href="index.html">Front</a></li>
+<li><a href="blog__zeromq.html">ZeroMQ</a></li>
+<li><a href="blog__community.html">Community</a></li>
+<li><a href="blog__unprotocols.html">Unprotocols</a></li>
+<li><a href="blog__psychopaths.html">Psychopaths</a></li>
+</ul>
+
+                    </div>
+                
+                <div id="login-status"><a href="javascript:;" onclick="WIKIDOT.page.listeners.createAccount(event)" class="login-status-create-account btn">Create account</a> <span>or</span> <a href="javascript:;" onclick="WIKIDOT.page.listeners.loginClick(event)" class="login-status-sign-in btn btn-primary">Sign in</a> </div>
+                <div id="header-extra-div-1"><span></span></div><div id="header-extra-div-2"><span></span></div><div id="header-extra-div-3"><span></span></div>
+            </div>
+            
+            <div id="content-wrap">
+                
+                    <div id="side-bar">
+                        
+
+
+                        
+
+<p><a class="wiki-standalone-button" style="background-image: url(http://www.wikidot.com/local--files/files/document-print.png); background-repeat: no-repeat; background-position: bottom right; padding-right: 20px;color: #444" href="javascript:;" onclick="WIKIDOT.page.listeners.printClick(event)">print</a></p>
+<a href="http://hintjens.wdfiles.com/local--files/nav:side/culture.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/nav:side/culture.jpg/small.jpg" alt="culture.jpg" class="image" /></a>
+<p><strong>Pieter Hintjens</strong></p>
+<p><a href="main_biography.html">Biography</a> | <a href="main_portfolio.html">Portfolio</a> | <a href="https://github.com/hintjens">GitHub</a><br />
+<a href="books.html">Books</a> | <a href="https://vimeo.com/user10099130/videos">Videos</a> | <a href="http://www.slideshare.net/pieterh">Slides</a> | <a href="http://fiction.hintjens.com/">Stories</a> | <a href="http://wiki.hintjens.com/">Wiki</a><br />
+<a href="contact.html">Contact</a></p>
+<p><strong>Thank you for the gifts</strong></p>
+<p><a href="http://paypal.me/Hintjens">Kind people already sent donations</a> that will make my childrens' lives easier, when I'm not there any more. Thank you enormously! :-)</p>
+<p>Podcasts/Interviews</p>
+<p><a href="http://softwareengineeringdaily.com/2016/06/23/death-distributed-systems-pieter-hintjens/">Software Engineering Daily</a><br />
+<a href="https://www.youtube.com/watch?v=ApqI9XLRk4k">Interview by Adam Dymitruk</a><br />
+<a href="http://devchat.tv/ruby-rogues/188-rr-community-building-with-pieter-hintjens">Ruby Rogues #188, Community Building</a></p>
+<p>Talks on video</p>
+<p><a href="http://deredactie.be/cm/vrtnieuws/videozone/programmas/deafspraak/2.44331">&quot;De afspraak&quot;, VRT, May 2016</a> (panel discussion)<br />
+<a href="http://www.rtl.be/rtltvi/video/581260.aspx">RTL TV, May 2016</a> (panel discussion)<br />
+<a href="https://www.youtube.com/watch?v=uzxcILudFWM">DomCode 2015, Nov 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=7HECD3eLoVo">Coding Serbia, Oct 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=O8CbzKREAj4">Euroscipy, Cambridge, Aug 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=FKu09-_AaeM&amp;index=4&amp;list=PLFxMLyzsWeqr4SCyx0ZmFkVz2vZJk_CI5">PyGrunn, Groningen, May 2015</a><br />
+<a href="http://www.ustream.tv/recorded/61450822">Craft Conf, Budapest, Apr 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design-2015">QCon London, Mar 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design">Code Mesh London, Nov 2014</a><br />
+<a href="http://www.infoq.com/presentations/trick-better-software">Build Stuff, Vilnius 2014</a><br />
+<a href="https://www.youtube.com/watch?v=_QF9sFJGJuc">Build Stuff, Vilnius, Nov 2014</a> (interview)<br />
+<a href="https://www.youtube.com/watch?v=xFVDNTXIC_Y">Coding Serbia, Nov 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=DAOFZfSlFs0">Devnology, Leusden, Oct 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=QB7VXSc5H3A">EuroPython, Berlin, Jul 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=qTNqgwN5gzA&amp;feature=youtu.be">Build Stuff, Vilnius, Dec 2013</a> (interview)<br />
+<a href="http://www.infoq.com/presentations/digital-revolution-freedom">Build Stuff, Vilnius, Dec 2013</a> (keynote)<br />
+<a href="http://vimeo.com/82175816">Code Mesh London, Dec 2013</a><br />
+<a href="http://vimeo.com/79378301">DevOps Days, London, Nov 2013</a><br />
+<a href="https://vimeo.com/68236487">NDC Oslo, Jun 2013</a><br />
+<a href="https://vimeo.com/69666055">CERN - Geneva, Jun 2013</a><br />
+<a href="https://www.youtube.com/watch?v=uj-li0LO_2g">Tech Mesh, London, Dec 2012</a><br />
+<a href="http://www.infoq.com/presentations/Architecture-Scale-ZeroMQ">Strange Loop, St.Louis, Oct 2012</a><br />
+<a href="https://vimeo.com/37854675">ZeroMQ@PDX part 2 - Portland, Feb 2012</a><br />
+<a href="https://vimeo.com/38117896">ZeroMQ@PDX part 1 - Portland, Feb 2012</a><br />
+<a href="http://www.youtube.com/watch?gl=BE&amp;v=4II94h6-IFY">FLOSS Weekly, Petaliuma CA, Dec 2011</a><br />
+<a href="https://www.youtube.com/watch?v=CCBYzKfmQ4U">FOSDEM 2011, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=h0facLxJPUE">Berlin Buzzwords 2010</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=bQgPArfbXm4">FOSDEM 2009, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=fJo1jmuOuqQ">Hellenic FOSS Conference 2008, Athens part 1</a><br />
+<a href="https://www.youtube.com/watch?v=Hx6cS1VLhoo">Hellenic FOSS Conference 2008, Athens part 2</a></p>
+<p>Email me at <span class="wiki-email">moc.snejtnih|reteip#moc.snejtnih|reteip</span> if you'd like me to present at your event, or in your organization.</p>
+<a href="books.html"><img src="https://www.createspace.com/Img/T448/T45/T21/BookCoverImage.jpg?random=0.4431380270844333" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.4431380270844333" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/socarch.png" style="padding:5px" width="100" alt="socarch.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/confessions.jpg" style="padding:5px" width="100" alt="confessions.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/psccover.jpg" style="padding:5px" width="100" alt="psccover.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://akamaicovers.oreilly.com/images/0636920026136/cat.gif" style="padding:5px" width="100" alt="cat.gif" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/scalablec.png" style="padding:5px" width="100" alt="scalablec.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="https://www.createspace.com/Img/T409/T85/T11/BookCoverImage.jpg?random=0.7859812398986378" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.7859812398986378" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<p><strong><a href="books.html">Download and read online</a></strong></p>
+<p><strong><a href="legal_start.html">Legal</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></strong></p>
+<div class="collapsible-block">
+<div class="collapsible-block-folded"><a class="collapsible-block-link" href="javascript:;"> ▽ </a></div>
+<div class="collapsible-block-unfolded" style="display:none">
+<div class="collapsible-block-unfolded-link"><a class="collapsible-block-link" href="javascript:;"> △ </a></div>
+<div class="collapsible-block-content">
+<div class="side-box">
+<p><a href="_admin.html">Manage</a> | <a href="admin_themes.html">Theme</a> | <a href="nav_top.html">Top</a> | <a href="nav_top.html">Side</a></p>
+
+<div class="new-page-box" style="text-align: center; margin: 1em 0;">
+	<form action="http://hintjens.com/dummy.html" method="get" onsubmit="WIKIDOT.modules.NewPageHelperModule.listeners.create(event);">
+		<input class="text" name="pageName" type="text" size="40" maxlength="128" style="margin: 1px"/>
+				<input type="submit" class="button" value="New post" style="margin: 1px;"/>
+									<input type="hidden" name="categoryName" value="blog"/>
+													<input type="hidden" name="parent" value="blog:_start"/>
+				
+	</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                        
+
+
+                    </div>
+                
+                
+                <!-- google_ad_section_end -->
+                
+                <div id="main-content">
+                    <div id="action-area-top"></div>
+                    
+                    
+                        <div id="page-title">
+                            Git Branches Considered Harmful
+                        </div>
+                    
+
+                    
+                        <div id="breadcrumbs">
+                            <a href="blog__start.html">All Articles</a> &raquo; Git Branches Considered Harmful
+                        </div>
+                    
+
+                                    <!-- wikidot_top_728x90 -->
+<div id="div-gpt-ad-1410946564449-1" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-above_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-1'); });
+</script>
+</div>
+
+            
+    
+
+
+                    <div id="page-content">
+                        
+
+<div style="overflow:hidden; font-size: 13px; margin: -26px 0 -22px 0">
+<div style="float:left"><div class="list-pages-box">    
+
+<p><a href="blog_23.html">&lt; Previous</a></p>
+
+    
+    
+    
+    </div></div>
+<div style="float:right"><div class="list-pages-box">    
+
+<p><a href="blog_25.html">Next &gt;</a></p>
+
+    
+    
+    
+    </div></div>
+</div>
+<div style="border: solid 1px #f00; padding:0 1em 0 1em; margin-bottom: 1em; margin-top:1em; min-height: 140px; overflow: hidden">
+<p><span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1473156443" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)" /></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;">pieterh</a></span> wrote on <span class="odate time_1336600187 format_%25e%20%25b%2C%20%25H%3A%25M%20%28%25O%20ago%29">09 May 2012 21:49</span></p>
+<div class="image-container floatleft"><a href="http://hintjens.wdfiles.com/local--files/blog:24/forbidden.png"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:24/forbidden.png/small.jpg" alt="forbidden.png" class="image" /></a></div>
+<p>One of git's great features is how easy it makes branches. Almost all git projects use branches, and the selection of the &quot;best&quot; branching strategy is like a rite of passage for an open source project. Vincent Driessen's git-flow is maybe the best known. It has 'base' branches (master, develop), 'feature' branches, 'release' branches, 'hotfix' branches, and 'support' branches. Many teams have adopted git-flow, which even has git extensions to support it. However, in this article I'll argue that public git branches are harmful, based on experience and evidence, and propose a branch-free approach, based on forks.</p>
+<h2 id="toc0"><span>Background</span></h2>
+<p>Let me start with my credentials. My first open source project was <a href="http://legacy.imatix.com/html/libero/">Libero</a> from 1991. I wrote <a href="http://en.wikipedia.org/wiki/Xitami">Xitami</a>, a popular open source web server, and killed that in 2001. I wrote most of <a href="http://www.openamq.org/">OpenAMQ</a>, the first AMQP implementation. I founded and steered the ZeroMQ community and have maintained its stable releases for years. If there is one thing I know really well, it's how to build excellent software.</p>
+<p>Git is a revolution, especially when combined with github. In the last year or two, the github/git combination has become a key tool for organizing teams, and building processes like <a href="http://rfc.zeromq.org/spec:16">C4</a> and <a href="http://unprotocols.org/blog:23">PC3</a> that are (as far as I know) the first reusable contracts of their kind.</p>
+<p>Here is a section of PC3 that will shock some people:</p>
+<blockquote>
+<ul>
+<li>The project SHALL have one branch (&quot;master&quot;) that always holds the latest in-progress version and SHOULD always build.</li>
+<li>The project SHALL NOT use topic branches for any reason. Personal forks MAY use topic branches.</li>
+<li>To make a stable release someone SHALL fork the repository by copying it and thus become maintainer of this repository.</li>
+</ul>
+</blockquote>
+<p>To be clear, it's <em>public branches in shared repositories</em> that I'm talking about. Using branches for private work, e.g. to work on different issues, appears to work just fine.</p>
+<p>The PC3 text is not accidental. This section came from trial-and-error, mainly in the ZeroMQ community. Originally, when Martin Sustrik and I (the pragmatic core developers) started using forks instead of branches for ZeroMQ's stable versions, many people reacted with shock and horror. Today, people have less emotional response. Tomorrow, I think it'll be clear that branches were, in fact, an entirely wrong approach inherited from the days of Subversion and monolithic repositories.</p>
+<p>More profoundly, the branches vs. forks argument is really a wider design vs. evolve argument about how to make software optimally (both PC3 and C4 fully embrace the &quot;evolve&quot; approach). I may address that wider argument in a future article.</p>
+<p>To make my argument here, I'll look at a number of criteria, and compare branches and forks in each one.</p>
+<h2 id="toc1"><span>Complexity</span></h2>
+<p>The simpler, the better.</p>
+<p>There is no inherent reason branches are more complex than forks. However, git-flow uses five <em>types</em> of branch, whereas PC3 uses two types of fork (development, and stable) and one branch (master). Circumstantial evidence is that branches lead to more complexity than forks. For naive users, it is definitely easier to learn to work with many repositories and no branches.</p>
+<h2 id="toc2"><span>Learning Curve</span></h2>
+<p>The smoother the learning curve, the better.</p>
+<p>Evidence definitely shows that learning to use git branches is complex. For some people this is OK. For most developers, every cycle spent learning git is a cycle lost on more productive things. I've been told several times, by different people, that I do not like branches because I &quot;never properly learned git&quot;. That is fair but it is a criticism of the tool, not the human.</p>
+<h2 id="toc3"><span>Cost of Failure</span></h2>
+<p>The lower the cost of failure, the better.</p>
+<p>Branches demand more perfection from developers since mistakes potentially affect others. This raises the cost of failure. Forks make failure extremely cheap since nothing that happens in a fork can affect others not using that fork.</p>
+<h2 id="toc4"><span>Upfront Coordination</span></h2>
+<p>The less need for upfront coordination, the better.</p>
+<p>You can do a hostile fork. You cannot do a hostile branch. Branches depend on upfront coordination, which is expensive and fragile. One person can veto the desires of a whole group. In the ZeroMQ community for example we were unable to agree on a git branching model for a year. We solved that by using forking instead. The problem went away.</p>
+<h2 id="toc5"><span>Scalability</span></h2>
+<p>The more you can scale a project, the better.</p>
+<p>The strong assumption in all branch strategies is that the repository <em>is</em> the project. But there is a limit to how many people you can get in agreement to work together in one repository. As I explained, the cost of upfront coordination can become fatal. A more realistic project scales by allowing anyone to start their own repositories, and ensuring these can work together. A project like ZeroMQ has dozens of repositories. Forking looks more scalable than branching.</p>
+<h2 id="toc6"><span>Surprise and Expectations</span></h2>
+<p>The less surprising, the better.</p>
+<p>People expect branches and find forks to be uncommon and thus confusing. This is the one aspect where branches win. However, it's also a reason for sticking to FORTRAN and COBOL. We do not refuse innovation just because it's surprising.</p>
+<h2 id="toc7"><span>Economics of Participation</span></h2>
+<p>The more tangible the rewards, the better.</p>
+<p>A fully free process like PC3/C4 lets people organize around problems. Most organizations are not ready for such a radical management approach. But even a top-down approach needs people to feel rewarded for their work. Branches don't act like &quot;product&quot; but like &quot;discrete variations of product&quot;. People have less interest in contributing to a discrete variation. Whereas everyone wants their name on a successful product. So the economics of branches are worse than the economics of forks.</p>
+<h2 id="toc8"><span>Robustness in Conflict</span></h2>
+<p>The more a model can survive conflict, the better.</p>
+<p>Like it or not, people fight over ego, status, belief. If your organizational model depends on agreement, you won't survive the first real fight. Branches do not survive real arguments and fights. Whereas forks can be hostile, and still benefit all parties. And this is indeed how free software works. Score one for forks, zero for braches.</p>
+<h2 id="toc9"><span>Guarantees of Isolation</span></h2>
+<p>The stronger the isolation between production code and experiment, the better.</p>
+<p>People make mistakes. I've seen experimental code pushed to mainline production by error. I've seen people make bad panic changes under stress. But the real fault is in allowing two entirely separate generations of product to exist in the same protected space. If you can push to random-branch-x you can push to master. Branches do not guarantee isolation of production critical code. Forks do.</p>
+<h2 id="toc10"><span>Visibility</span></h2>
+<p>The more visible our work, the better.</p>
+<p>Forks have watchers, issues, a README, a wiki. Branches have none of these. People try forks, build them, break them, patch them. Forks sit there until someone remembers to work on them. Forks have downloads and tarballs. Branches do not. When we look for self-organization, the more visible and declarative the problems, the faster and more accurately we can work.</p>
+<h2 id="toc11"><span>Conclusions</span></h2>
+<p>Git branches are, in my experience and in shared repositories, harmful. It is better to work with a branch-free process that uses forks for stabilization. This comes from some years of trial and error on a wide range of projects. We have systematically found forks to be cheaper and safer and easier than branches. Branch-free processes like C4 and PC3 are real, and they work, in anger, both on closed source and open source projects. The only downside of a branch-free process seems to be that it shocks people with previous git experience. This is a passing effect, in our experience.</p>
+<div style="float:left;width:33%; margin:-15px 0 0 0">
+<p><iframe src="http://hintjens.wdfiles.com/local--html/blog%3A24/41f30bdce26be2b6255ab5f810b7ceff3ba8e887-1168785847837276841/hintjens.com/" allowtransparency="true" frameborder="0" class="html-block-iframe"></iframe></p>
+</div>
+<div style="float:right"><div class="page-rate-widget"><div class="page-rate-widget-start" data-rating="0"></div></div></div>
+</div>
+<p><a name="comments"></a></p>
+<div class="comments-box">
+	<h1>Comments</h1>	
+	<div class="options" id="comments-options-hidden" style="display: none">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.showComments(event)">Show Comments</a> 
+	</div>
+		
+	<div id="thread-container" class="thread-container reverse" style="margin-top: 1em">
+					
+
+
+<script type="text/javascript">
+	WIKIDOT.forumThreadId = 467384;
+</script>
+
+        <a href="javascript:;" id="new-post-button" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.newPost(event,null)"
+      style="display:  block ; margin-bottom:1em"
+    >Add a New Comment</a>
+
+ 
+
+	<div class="options" id="comments-options-shown">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.hideComments(event)" class="btn btn-default btn-small btn-sm">Hide All Comments</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.unfoldAll(event)" class="btn btn-default btn-small btn-sm">Unfold All</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.foldAll(event)" class="btn btn-default btn-small btn-sm">Fold All</a>
+	</div>
+
+<div id="thread-container-posts" style="display: none">
+    
+
+
+
+	
+					
+      
+    <div class="post-container" id="fpc-2393302">
+                      
+		<div class="post" id="post-2393302">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,2393302)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-2393302">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/nicki208" onclick="WIKIDOT.page.listeners.userInfo(2223930); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=2223930&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="Nicki208" style="background-image:url(http://www.wikidot.com/userkarma.php?u=2223930)"/></a><a href="http://www.wikidot.com/user:info/nicki208" onclick="WIKIDOT.page.listeners.userInfo(2223930); return false;" >Nicki208</a></span> <span class="odate time_1445154892 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">18 Oct 2015 07:54</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-2393302">
+									
+
+<p>How much complexity do you really save?</p>
+<p>With branching:</p>
+<ol>
+<li>fork through Platform</li>
+<li>git clone</li>
+<li>git checkout -b new_branch</li>
+<li>git add</li>
+<li>git commit</li>
+<li>git push</li>
+<li>merge request through Platform</li>
+<li>git branch -d new_branch</li>
+</ol>
+<p>Without branching:</p>
+<ol>
+<li>fork through Platform</li>
+<li>git clone</li>
+<li>git add</li>
+<li>git commit</li>
+<li>git push</li>
+<li>merge request through Platform</li>
+</ol>
+<p>Save two trivial steps? Am I missing something?</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,2393302)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,2393302)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-2393302" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,2393302)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,2393302)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/nicki208" onclick="WIKIDOT.page.listeners.userInfo(2223930); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=2223930&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="Nicki208" style="background-image:url(http://www.wikidot.com/userkarma.php?u=2223930)"/></a><a href="http://www.wikidot.com/user:info/nicki208" onclick="WIKIDOT.page.listeners.userInfo(2223930); return false;" >Nicki208</a></span>, <span class="odate time_1445154892 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">18 Oct 2015 07:54</span>
+		</div>
+	</div>
+ 
+                
+                	
+
+
+        
+                      
+    <div class="post-container" id="fpc-2393316">
+                      
+		<div class="post" id="post-2393316">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,2393316)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-2393316">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span> <span class="odate time_1445160498 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">18 Oct 2015 09:28</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-2393316">
+									
+
+<p>You're describing a local branch, aren't you? As I said at the start of the post,</p>
+<blockquote>
+<p>To be clear, it's public branches in shared repositories that I'm talking about. Using branches for private work, e.g. to work on different issues, appears to work just fine.</p>
+</blockquote>
+<p>Furthermore, what are those two extra steps for? If they're not solving a real problem, then it's just dancing around for nothing.</p>
+
+							</div>
+
+										<div class="signature">
+					<hr class="signature-separator"/>
+					
+
+<p><a href="http://ipocracy.wikidot.com/main:portfolio">Portfolio</a></p>
+
+				</div>
+					
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,2393316)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,2393316)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-2393316" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,2393316)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,2393316)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span>, <span class="odate time_1445160498 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">18 Oct 2015 09:28</span>
+		</div>
+	</div>
+ 
+                
+        
+                      
+    <div class="post-container" id="fpc-2393420">
+                      
+		<div class="post" id="post-2393420">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,2393420)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-2393420">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/nicki208" onclick="WIKIDOT.page.listeners.userInfo(2223930); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=2223930&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="Nicki208" style="background-image:url(http://www.wikidot.com/userkarma.php?u=2223930)"/></a><a href="http://www.wikidot.com/user:info/nicki208" onclick="WIKIDOT.page.listeners.userInfo(2223930); return false;" >Nicki208</a></span> <span class="odate time_1445182738 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">18 Oct 2015 15:38</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-2393420">
+									
+
+<p>No, I was talking about the workflow of first forking the project, then creating a new branch in your fork, pushing that branch to your public fork, and doing a pull request from that public branch. That seems to be the recommended workflow on most projects. Those two steps allow you to work in your own branch so you aren't messing with master. But probably what I describe above is still a &quot;forking&quot; workflow and what you recommend. I guess I have misread what you are suggesting.</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+																					<a href="javascript:;" onclick="togglePostOptions(event,2393420)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-2393420" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,2393420)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,2393420)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/nicki208" onclick="WIKIDOT.page.listeners.userInfo(2223930); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=2223930&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="Nicki208" style="background-image:url(http://www.wikidot.com/userkarma.php?u=2223930)"/></a><a href="http://www.wikidot.com/user:info/nicki208" onclick="WIKIDOT.page.listeners.userInfo(2223930); return false;" >Nicki208</a></span>, <span class="odate time_1445182738 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">18 Oct 2015 15:38</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+                      
+    <div class="post-container" id="fpc-2393529">
+                      
+		<div class="post" id="post-2393529">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,2393529)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-2393529">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span> <span class="odate time_1445203230 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">18 Oct 2015 21:20</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-2393529">
+									
+
+<p>Right, this is the forking workflow plus the extra (and IMO useless) private branch. It's now been&#8230; 750 days since I wrote this article and I've not needed to use branches once. Two things, above all else, appear when you eliminate branches:</p>
+<ol>
+<li>You get a single state for your work, which encourages small atomic changes, and flushes out errors much faster.</li>
+<li>You remove most of the git ugliness.</li>
+</ol>
+<p>I think I'm even more fanatical than before on this: even private branches are a Bad Thing because they break the model of &quot;small atomic changes for small explicit problems&quot; that we've learned works best for software development.</p>
+
+							</div>
+
+										<div class="signature">
+					<hr class="signature-separator"/>
+					
+
+<p><a href="http://ipocracy.wikidot.com/main:portfolio">Portfolio</a></p>
+
+				</div>
+					
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,2393529)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,2393529)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-2393529" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,2393529)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,2393529)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span>, <span class="odate time_1445203230 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">18 Oct 2015 21:20</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+            </div>
+ 
+            </div>
+ 
+
+	
+					
+      
+    <div class="post-container" id="fpc-1528219">
+                      
+		<div class="post" id="post-1528219">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1528219)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1528219">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span> <span class="odate time_1344139889 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">05 Aug 2012 04:11</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1528219">
+									
+
+<p>Here is <a href="http://steveko.wordpress.com/2012/02/24/10-things-i-hate-about-git/">an interesting (if slightly dramatic) post</a> from Steve Bennett about the ways Git is needlessly difficult to learn and use. It turns out that by not using branches, and sticking to a fork + pull request model, we no longer need to learn much about Git's internal model.</p>
+
+							</div>
+
+										<div class="signature">
+					<hr class="signature-separator"/>
+					
+
+<p><a href="http://ipocracy.wikidot.com/main:portfolio">Portfolio</a></p>
+
+				</div>
+					
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1528219)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1528219)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1528219" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1528219)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1528219)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span>, <span class="odate time_1344139889 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">05 Aug 2012 04:11</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+
+	
+					
+      
+    <div class="post-container" id="fpc-1443846">
+                      
+		<div class="post" id="post-1443846">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1443846)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1443846">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/jhawk28" onclick="WIKIDOT.page.listeners.userInfo(865475); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=865475&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="jhawk28" style="background-image:url(http://www.wikidot.com/userkarma.php?u=865475)"/></a><a href="http://www.wikidot.com/user:info/jhawk28" onclick="WIKIDOT.page.listeners.userInfo(865475); return false;" >jhawk28</a></span> <span class="odate time_1336610743 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">10 May 2012 00:45</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1443846">
+									
+
+<p>I don't think I would say that branches are evil. I consider how people use branches evil. There needs to be a balance. I find branches work best when they are short lived. Forks work best for long lived &quot;branches&quot;. In a sense, they are branches. If you don't use branches, it can make Git painful to work with when you have a number of people touching the same set of files. The temporary branches make the merges explicit (instead of trying to fast forward automatically).</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1443846)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1443846)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1443846" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1443846)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1443846)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/jhawk28" onclick="WIKIDOT.page.listeners.userInfo(865475); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=865475&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="jhawk28" style="background-image:url(http://www.wikidot.com/userkarma.php?u=865475)"/></a><a href="http://www.wikidot.com/user:info/jhawk28" onclick="WIKIDOT.page.listeners.userInfo(865475); return false;" >jhawk28</a></span>, <span class="odate time_1336610743 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">10 May 2012 00:45</span>
+		</div>
+	</div>
+ 
+                
+        
+                      
+    <div class="post-container" id="fpc-1444842">
+                      
+		<div class="post" id="post-1444842">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1444842)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1444842">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span> <span class="odate time_1336686236 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">10 May 2012 21:43</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1444842">
+									
+
+<p>I think you're right&#8230; short-lived branches can work, whereas long-lived ones are needlessly expensive. Your last sentence however blew my git fuse, it suggests that in order to collaborate I need to learn what &quot;fast forward&quot; vs &quot;explicit merge&quot; means, and that is a real problem when we try to use git for a wider audience.</p>
+
+							</div>
+
+										<div class="signature">
+					<hr class="signature-separator"/>
+					
+
+<p><a href="http://ipocracy.wikidot.com/main:portfolio">Portfolio</a></p>
+
+				</div>
+					
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1444842)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1444842)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1444842" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1444842)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1444842)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span>, <span class="odate time_1336686236 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">10 May 2012 21:43</span>
+		</div>
+	</div>
+ 
+                
+        
+                      
+    <div class="post-container" id="fpc-1937274">
+                      
+		<div class="post" id="post-1937274">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1937274)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1937274">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/lindleyf" onclick="WIKIDOT.page.listeners.userInfo(1771010); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1771010&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="LindleyF" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1771010)"/></a><a href="http://www.wikidot.com/user:info/lindleyf" onclick="WIKIDOT.page.listeners.userInfo(1771010); return false;" >LindleyF</a></span> <span class="odate time_1389882369 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">16 Jan 2014 14:26</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1937274">
+									
+
+<p>Without trying to explain what those mean, I will point out something fairly important.</p>
+<p>Pulling from a fork (or from *any* other repo) automatically creates an explicit merge.<br />
+Merging a branch *might* create an explicit merge or it might fast-forward. However, if you use the &#8212;no-ff flag, it will always create an explicit merge.</p>
+<p>Therefore, pulling from a fork is functionally identical to merging from a branch with &#8212;no-ff.</p>
+<p>There's a bit of a holy war on whether &#8212;no-ff should be the default behavior for merges.</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+																					<a href="javascript:;" onclick="togglePostOptions(event,1937274)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1937274" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1937274)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1937274)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/lindleyf" onclick="WIKIDOT.page.listeners.userInfo(1771010); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1771010&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="LindleyF" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1771010)"/></a><a href="http://www.wikidot.com/user:info/lindleyf" onclick="WIKIDOT.page.listeners.userInfo(1771010); return false;" >LindleyF</a></span>, <span class="odate time_1389882369 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">16 Jan 2014 14:26</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+                      
+    <div class="post-container" id="fpc-1952827">
+                      
+		<div class="post" id="post-1952827">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1952827)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1952827">
+																		
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span> <span class="odate time_1391176375 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">31 Jan 2014 13:52</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1952827">
+									
+
+<p>So the holy war on &#8212;no-ff goes away when we stop using branches. Seems right.</p>
+
+							</div>
+
+										<div class="signature">
+					<hr class="signature-separator"/>
+					
+
+<p><a href="http://ipocracy.wikidot.com/main:portfolio">Portfolio</a></p>
+
+				</div>
+					
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1952827)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1952827)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1952827" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1952827)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1952827)"></a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570613262" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span>, <span class="odate time_1391176375 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">31 Jan 2014 13:52</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+            </div>
+ 
+            </div>
+ 
+
+
+
+</div>
+
+
+<div style="display:none" id="post-options-template">
+	<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.showPermalink(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Permanent Link</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.editPost(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Edit</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.deletePost(event,'%POST_ID%')" class="btn btn-danger btn-small btn-sm">Delete</a>
+</div>
+	
+			</div>
+	
+	
+	
+</div>
+                    </div>
+
+                                    <!-- wikidot_bottom_300x250 -->
+<div id="div-gpt-ad-1410946564449-0" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-below_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-0'); });
+</script>
+</div>
+
+            
+    
+
+
+                    
+                        <div class="page-tags">
+                            <span>
+                                <a href="system_page-tags/tag/community.html#pages">community</a><a href="system_page-tags/tag/git.html#pages">git</a>
+                            </span>
+                        </div>
+                    
+
+                    <div id="page-info-break"></div>
+                    
+                        <div id="page-options-container">
+                            
+                        </div>
+                    
+                    <div id="action-area" style="display: none;"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div id="footer" style="display: block; visibility: visible;">
+                <div class="options" style="display: block; visibility: visible;">
+    <a href="http://www.wikidot.com/doc" id="wikidot-help-button">Help</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:terms-of-service" id="wikidot-tos-button">Terms of Service</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:privacy-policy" id="wikidot-privacy-button">Privacy</a>
+    &nbsp;|
+    <a href="javascript:;" id="bug-report-button" onclick="WIKIDOT.page.listeners.pageBugReport(event)">Report a bug</a>
+    &nbsp;|
+    <a href="javascript:;" id="abuse-report-button" onclick="WIKIDOT.page.listeners.flagPageObjectionable(event)">Flag as objectionable</a>
+</div>
+Powered by <a href="http://www.wikidot.com/">Wikidot.com</a> 
+            </div>
+            
+                <div id="license-area" class="license-area">
+                    Unless otherwise stated, the content of this page is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>
+                </div>
+            
+            
+            
+
+
+
+            <div id="extrac-div-1"><span></span></div><div id="extrac-div-2"><span></span></div><div id="extrac-div-3"><span></span></div>
+            
+            
+            
+            
+                
+            
+        </div>
+        
+    </div>
+<!-- These extra divs/spans may be used as catch-alls to add extra imagery. -->
+<div id="extra-div-1"><span></span></div><div id="extra-div-2"><span></span></div><div id="extra-div-3"><span></span></div>
+<div id="extra-div-4"><span></span></div><div id="extra-div-5"><span></span></div><div id="extra-div-6"><span></span></div>
+</div>
+
+
+
+</div>
+<div id="dummy-ondomready-block" style="display: none;" ></div>
+    <!-- Google Analytics load -->
+    <script type="text/javascript">
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <!-- Quantcast -->
+    <script type="text/javascript">
+    _qoptions={
+        qacct:"p-edL3gsnUjJzw-"
+    };
+    (function() {
+        var qc = document.createElement('script'); qc.type = 'text/javascript'; qc.async = true;
+        qc.src = ('https:' == document.location.protocol ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(qc, s);
+    })();
+    </script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-edL3gsnUjJzw-.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+    </noscript>
+
+
+
+
+<div id="page-options-bottom-tips" style="display: none;">
+    <div id="edit-button-hovertip">
+        Click here to edit contents of this page.    </div>
+</div>
+<div id="page-options-bottom-2-tips"  style="display: none;">
+    <div id="edit-sections-button-hovertip">
+        Click here to toggle editing of individual sections of the page (if possible).         Watch headings for an &quot;edit&quot; link when available.    </div>
+    <div id="edit-append-button-hovertip">
+        Append content without editing the whole page source.    </div>
+    <div id="history-button-hovertip">
+        Check out how this page has evolved in the past.    </div>
+    <div id="discuss-button-hovertip">
+        If you want to discuss contents of this page - this is the easiest way to do it.    </div>
+    <div id="files-button-hovertip">
+        View and manage file attachments for this page.    </div>
+    <div id="site-tools-button-hovertip">
+        A few useful tools to manage this Site.    </div>
+    <div id="backlinks-button-hovertip">
+        See pages that link to and include this page.    </div>
+    <div id="rename-move-button-hovertip">
+        Change the name (also URL address, possibly the category) of the page.    </div>
+    <div id="view-source-button-hovertip">
+        View wiki source for this page without editing.    </div>
+    <div id="parent-page-button-hovertip">  
+        View/set parent page (used for creating breadcrumbs and structured layout).    </div>
+            <div id="abuse-report-button-hovertip">
+            Notify administrators if there is objectionable content in this page.        </div>
+        <div id="bug-report-button-hovertip">
+            Something does not work as expected? Find out what you can do.        </div>
+        <div id="wikidot-help-button-hovertip">
+            General Wikidot.com documentation and help section.        </div>
+        <div id="wikidot-tos-button-hovertip">
+            Wikidot.com Terms of Service - what you can, what you should not etc.        </div>
+        <div id="wikidot-privacy-button-hovertip">
+            Wikidot.com Privacy Policy.          
+        </div>
+    </div>
+</body>
+
+<!-- Mirrored from hintjens.com/blog:24 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:31:39 GMT -->
+</html>

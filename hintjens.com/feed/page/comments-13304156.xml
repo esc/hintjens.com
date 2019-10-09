@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Git Branches Considered Harmful&quot;</title>
+		<link>http://hintjens.com/blog:24/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:31:36 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:24/comments/show#post-2393529</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:24/comments/show#post-2393529</link>
+				<description></description>
+				<pubDate>Sun, 18 Oct 2015 21:20:30 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Right, this is the forking workflow plus the extra (and IMO useless) private branch. It's now been&#8230; 750 days since I wrote this article and I've not needed to use branches once. Two things, above all else, appear when you eliminate branches:</p> <ol> <li>You get a single state for your work, which encourages small atomic changes, and flushes out errors much faster.</li> <li>You remove most of the git ugliness.</li> </ol> <p>I think I'm even more fanatical than before on this: even private branches are a Bad Thing because they break the model of &quot;small atomic changes for small explicit problems&quot; that we've learned works best for software development.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:24/comments/show#post-2393420</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:24/comments/show#post-2393420</link>
+				<description></description>
+				<pubDate>Sun, 18 Oct 2015 15:38:58 +0000</pubDate>
+				<wikidot:authorName>Nicki208</wikidot:authorName>				<wikidot:authorUserId>2223930</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>No, I was talking about the workflow of first forking the project, then creating a new branch in your fork, pushing that branch to your public fork, and doing a pull request from that public branch. That seems to be the recommended workflow on most projects. Those two steps allow you to work in your own branch so you aren't messing with master. But probably what I describe above is still a &quot;forking&quot; workflow and what you recommend. I guess I have misread what you are suggesting.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:24/comments/show#post-2393316</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:24/comments/show#post-2393316</link>
+				<description></description>
+				<pubDate>Sun, 18 Oct 2015 09:28:18 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>You're describing a local branch, aren't you? As I said at the start of the post,</p> <blockquote> <p>To be clear, it's public branches in shared repositories that I'm talking about. Using branches for private work, e.g. to work on different issues, appears to work just fine.</p> </blockquote> <p>Furthermore, what are those two extra steps for? If they're not solving a real problem, then it's just dancing around for nothing.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:24/comments/show#post-2393302</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:24/comments/show#post-2393302</link>
+				<description></description>
+				<pubDate>Sun, 18 Oct 2015 07:54:52 +0000</pubDate>
+				<wikidot:authorName>Nicki208</wikidot:authorName>				<wikidot:authorUserId>2223930</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>How much complexity do you really save?</p> <p>With branching:</p> <ol> <li>fork through Platform</li> <li>git clone</li> <li>git checkout -b new_branch</li> <li>git add</li> <li>git commit</li> <li>git push</li> <li>merge request through Platform</li> <li>git branch -d new_branch</li> </ol> <p>Without branching:</p> <ol> <li>fork through Platform</li> <li>git clone</li> <li>git add</li> <li>git commit</li> <li>git push</li> <li>merge request through Platform</li> </ol> <p>Save two trivial steps? Am I missing something?</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:24/comments/show#post-1952827</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:24/comments/show#post-1952827</link>
+				<description></description>
+				<pubDate>Fri, 31 Jan 2014 13:52:55 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>So the holy war on &#8212;no-ff goes away when we stop using branches. Seems right.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:24/comments/show#post-1937274</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:24/comments/show#post-1937274</link>
+				<description></description>
+				<pubDate>Thu, 16 Jan 2014 14:26:09 +0000</pubDate>
+				<wikidot:authorName>LindleyF</wikidot:authorName>				<wikidot:authorUserId>1771010</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Without trying to explain what those mean, I will point out something fairly important.</p> <p>Pulling from a fork (or from *any* other repo) automatically creates an explicit merge.<br /> Merging a branch *might* create an explicit merge or it might fast-forward. However, if you use the &#8212;no-ff flag, it will always create an explicit merge.</p> <p>Therefore, pulling from a fork is functionally identical to merging from a branch with &#8212;no-ff.</p> <p>There's a bit of a holy war on whether &#8212;no-ff should be the default behavior for merges.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:24/comments/show#post-1528219</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:24/comments/show#post-1528219</link>
+				<description></description>
+				<pubDate>Sun, 05 Aug 2012 04:11:29 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Here is <a href="http://steveko.wordpress.com/2012/02/24/10-things-i-hate-about-git/">an interesting (if slightly dramatic) post</a> from Steve Bennett about the ways Git is needlessly difficult to learn and use. It turns out that by not using branches, and sticking to a fork + pull request model, we no longer need to learn much about Git's internal model.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:24/comments/show#post-1444842</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:24/comments/show#post-1444842</link>
+				<description></description>
+				<pubDate>Thu, 10 May 2012 21:43:56 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I think you're right&#8230; short-lived branches can work, whereas long-lived ones are needlessly expensive. Your last sentence however blew my git fuse, it suggests that in order to collaborate I need to learn what &quot;fast forward&quot; vs &quot;explicit merge&quot; means, and that is a real problem when we try to use git for a wider audience.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:24/comments/show#post-1443846</guid>
+				<title>(no title)</title>
+				<link>http://hintjens.com/blog:24/comments/show#post-1443846</link>
+				<description></description>
+				<pubDate>Thu, 10 May 2012 00:45:43 +0000</pubDate>
+				<wikidot:authorName>jhawk28</wikidot:authorName>				<wikidot:authorUserId>865475</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I don't think I would say that branches are evil. I consider how people use branches evil. There needs to be a balance. I find branches work best when they are short lived. Forks work best for long lived &quot;branches&quot;. In a sense, they are branches. If you don't use branches, it can make Git painful to work with when you have a number of people touching the same set of files. The temporary branches make the merges explicit (instead of trying to fast forward automatically).</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>

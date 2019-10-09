@@ -1,0 +1,677 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from hintjens.com/blog:34 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:31:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Securing ZeroMQ: CurveCP and NaCl - Hintjens.com</title>
+    
+    	<script type="text/javascript" src="http://www.wikidot.com/default__flow/login__CustomDomainScript?site_id=352120"></script>
+
+    
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/init.combined.js"></script>
+    <script  type="text/javascript">
+        var URL_HOST = 'www.wikidot.com';
+        var URL_DOMAIN = 'wikidot.com';
+        var USE_SSL =  true ;
+        var URL_STATIC = 'http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade';
+        // global request information
+        
+        var WIKIREQUEST = {};
+        WIKIREQUEST.info = {};
+        
+        WIKIREQUEST.info.domain = "hintjens.com";
+        WIKIREQUEST.info.siteId = 352120;
+        WIKIREQUEST.info.siteUnixName = "hintjens";
+        WIKIREQUEST.info.categoryId = 1984291;
+        WIKIREQUEST.info.themeId = 1;
+        WIKIREQUEST.info.requestPageName = "blog:34";
+        OZONE.request.timestamp = 1570613252;
+        OZONE.request.date = new Date();
+        WIKIREQUEST.info.lang = 'en';
+                WIKIREQUEST.info.pageUnixName = "blog:34";
+        WIKIREQUEST.info.pageId = 16676891;
+                        WIKIREQUEST.info.lang = "en";
+        OZONE.lang = "en";
+        var isUAMobile = !!/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    </script>
+    
+    
+
+
+    
+        <script  type="text/javascript">
+    
+        require.config({
+            baseUrl: URL_STATIC + '/common--javascript',
+            paths: {
+                'jquery.ui': 'jquery-ui.min',
+                'jquery.form': 'jquery.form'
+            }
+        });
+    
+    </script>
+    
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+            
+    
+    
+    
+    
+    <meta http-equiv="content-language" content="en"/>
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/WIKIDOT.combined.js"></script>
+        
+    
+    <style type="text/css" id="internal-style">
+        
+        /* modules */
+@import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/css/pagerate/PageRateWidgetModule.css);
+
+
+        
+                
+        /* theme */
+                    @import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--theme/base/css/style.css);
+                    @import url(http://hintjens.wdfiles.com/local--code/admin%3Athemes/1);
+            </style>
+    
+        
+        
+        
+    <link rel="shortcut icon" href="local--favicon/favicon.gif"/>
+    <link rel="icon" type="image/gif" href="local--favicon/favicon.gif"/>
+    
+            <link rel="apple-touch-icon" href="common--images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="common--images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="common--images/apple-touch-icon-114x114.png" />
+        
+        
+            <link rel="alternate" type="application/wiki" title="Edit this page" href="javascript:WIKIDOT.page.listeners.editClick()"/>
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18234656-1']);
+        _gaq.push(['_setDomainName', 'none']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        _gaq.push(['old._setAccount', 'UA-68540-5']);
+        _gaq.push(['old._setDomainName', 'none']);
+        _gaq.push(['old._setAllowLinker', true]);
+        _gaq.push(['old._trackPageview']);
+
+                _gaq.push(['userTracker._setAccount', 'UA-623476-16']);
+        _gaq.push(['userTracker._trackPageview']);
+            </script>
+    
+    <script type="text/javascript">
+        window.google_analytics_uacct = 'UA-18234656-1';
+        window.google_analytics_domain_name = 'none';
+    </script>
+    
+        <link rel="manifest" href="onesignal/manifest.html" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" acync=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: null,
+          });
+        });
+    </script>
+        
+<link rel="alternate" type="application/rss+xml" title="Comments for the page &quot;Securing ZeroMQ: CurveCP and NaCl&quot;" href="feed/page/comments-16676891.xml"/><script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/misc/NewPageHelperModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/list/ListPagesModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/pagerate/PageRateWidgetModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumCommentsModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/sub/ForumNewPostFormModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadPostsModule.js"></script>
+</head>
+<body id="html-body">
+<div id="skrollr-body">
+<a name="page-top"></a>
+
+<div id="container-wrap-wrap">
+    <div id="container-wrap">
+        <div id="container">
+            <div id="header">
+              <h1><a href="index.html"><span>Hintjens.com</span></a></h1>
+                
+                    <h2><span>Moving Pieces</span></h2>
+                
+                
+                <!-- google_ad_section_start(weight=ignore) -->
+                
+                <div id="search-top-box" class="form-search">
+    <form id="search-top-box-form" action="http://hintjens.com/dummy" class="input-append">
+        <input id="search-top-box-input" class="text empty search-query" type="text" size="15" name="query" value="Search this site" onfocus="if(YAHOO.util.Dom.hasClass(this, 'empty')){YAHOO.util.Dom.removeClass(this,'empty'); this.value='';}"/><input class="button btn" type="submit" name="search" value="Search"/>
+    </form>
+</div>
+                
+                
+                    <div id="top-bar">
+                        
+
+<ul>
+<li><a href="index.html">Front</a></li>
+<li><a href="blog__zeromq.html">ZeroMQ</a></li>
+<li><a href="blog__community.html">Community</a></li>
+<li><a href="blog__unprotocols.html">Unprotocols</a></li>
+<li><a href="blog__psychopaths.html">Psychopaths</a></li>
+</ul>
+
+                    </div>
+                
+                <div id="login-status"><a href="javascript:;" onclick="WIKIDOT.page.listeners.createAccount(event)" class="login-status-create-account btn">Create account</a> <span>or</span> <a href="javascript:;" onclick="WIKIDOT.page.listeners.loginClick(event)" class="login-status-sign-in btn btn-primary">Sign in</a> </div>
+                <div id="header-extra-div-1"><span></span></div><div id="header-extra-div-2"><span></span></div><div id="header-extra-div-3"><span></span></div>
+            </div>
+            
+            <div id="content-wrap">
+                
+                    <div id="side-bar">
+                        
+
+
+                        
+
+<p><a class="wiki-standalone-button" style="background-image: url(http://www.wikidot.com/local--files/files/document-print.png); background-repeat: no-repeat; background-position: bottom right; padding-right: 20px;color: #444" href="javascript:;" onclick="WIKIDOT.page.listeners.printClick(event)">print</a></p>
+<a href="http://hintjens.wdfiles.com/local--files/nav:side/culture.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/nav:side/culture.jpg/small.jpg" alt="culture.jpg" class="image" /></a>
+<p><strong>Pieter Hintjens</strong></p>
+<p><a href="main_biography.html">Biography</a> | <a href="main_portfolio.html">Portfolio</a> | <a href="https://github.com/hintjens">GitHub</a><br />
+<a href="books.html">Books</a> | <a href="https://vimeo.com/user10099130/videos">Videos</a> | <a href="http://www.slideshare.net/pieterh">Slides</a> | <a href="http://fiction.hintjens.com/">Stories</a> | <a href="http://wiki.hintjens.com/">Wiki</a><br />
+<a href="contact.html">Contact</a></p>
+<p><strong>Thank you for the gifts</strong></p>
+<p><a href="http://paypal.me/Hintjens">Kind people already sent donations</a> that will make my childrens' lives easier, when I'm not there any more. Thank you enormously! :-)</p>
+<p>Podcasts/Interviews</p>
+<p><a href="http://softwareengineeringdaily.com/2016/06/23/death-distributed-systems-pieter-hintjens/">Software Engineering Daily</a><br />
+<a href="https://www.youtube.com/watch?v=ApqI9XLRk4k">Interview by Adam Dymitruk</a><br />
+<a href="http://devchat.tv/ruby-rogues/188-rr-community-building-with-pieter-hintjens">Ruby Rogues #188, Community Building</a></p>
+<p>Talks on video</p>
+<p><a href="http://deredactie.be/cm/vrtnieuws/videozone/programmas/deafspraak/2.44331">&quot;De afspraak&quot;, VRT, May 2016</a> (panel discussion)<br />
+<a href="http://www.rtl.be/rtltvi/video/581260.aspx">RTL TV, May 2016</a> (panel discussion)<br />
+<a href="https://www.youtube.com/watch?v=uzxcILudFWM">DomCode 2015, Nov 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=7HECD3eLoVo">Coding Serbia, Oct 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=O8CbzKREAj4">Euroscipy, Cambridge, Aug 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=FKu09-_AaeM&amp;index=4&amp;list=PLFxMLyzsWeqr4SCyx0ZmFkVz2vZJk_CI5">PyGrunn, Groningen, May 2015</a><br />
+<a href="http://www.ustream.tv/recorded/61450822">Craft Conf, Budapest, Apr 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design-2015">QCon London, Mar 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design">Code Mesh London, Nov 2014</a><br />
+<a href="http://www.infoq.com/presentations/trick-better-software">Build Stuff, Vilnius 2014</a><br />
+<a href="https://www.youtube.com/watch?v=_QF9sFJGJuc">Build Stuff, Vilnius, Nov 2014</a> (interview)<br />
+<a href="https://www.youtube.com/watch?v=xFVDNTXIC_Y">Coding Serbia, Nov 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=DAOFZfSlFs0">Devnology, Leusden, Oct 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=QB7VXSc5H3A">EuroPython, Berlin, Jul 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=qTNqgwN5gzA&amp;feature=youtu.be">Build Stuff, Vilnius, Dec 2013</a> (interview)<br />
+<a href="http://www.infoq.com/presentations/digital-revolution-freedom">Build Stuff, Vilnius, Dec 2013</a> (keynote)<br />
+<a href="http://vimeo.com/82175816">Code Mesh London, Dec 2013</a><br />
+<a href="http://vimeo.com/79378301">DevOps Days, London, Nov 2013</a><br />
+<a href="https://vimeo.com/68236487">NDC Oslo, Jun 2013</a><br />
+<a href="https://vimeo.com/69666055">CERN - Geneva, Jun 2013</a><br />
+<a href="https://www.youtube.com/watch?v=uj-li0LO_2g">Tech Mesh, London, Dec 2012</a><br />
+<a href="http://www.infoq.com/presentations/Architecture-Scale-ZeroMQ">Strange Loop, St.Louis, Oct 2012</a><br />
+<a href="https://vimeo.com/37854675">ZeroMQ@PDX part 2 - Portland, Feb 2012</a><br />
+<a href="https://vimeo.com/38117896">ZeroMQ@PDX part 1 - Portland, Feb 2012</a><br />
+<a href="http://www.youtube.com/watch?gl=BE&amp;v=4II94h6-IFY">FLOSS Weekly, Petaliuma CA, Dec 2011</a><br />
+<a href="https://www.youtube.com/watch?v=CCBYzKfmQ4U">FOSDEM 2011, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=h0facLxJPUE">Berlin Buzzwords 2010</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=bQgPArfbXm4">FOSDEM 2009, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=fJo1jmuOuqQ">Hellenic FOSS Conference 2008, Athens part 1</a><br />
+<a href="https://www.youtube.com/watch?v=Hx6cS1VLhoo">Hellenic FOSS Conference 2008, Athens part 2</a></p>
+<p>Email me at <span class="wiki-email">moc.snejtnih|reteip#moc.snejtnih|reteip</span> if you'd like me to present at your event, or in your organization.</p>
+<a href="books.html"><img src="https://www.createspace.com/Img/T448/T45/T21/BookCoverImage.jpg?random=0.4431380270844333" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.4431380270844333" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/socarch.png" style="padding:5px" width="100" alt="socarch.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/confessions.jpg" style="padding:5px" width="100" alt="confessions.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/psccover.jpg" style="padding:5px" width="100" alt="psccover.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://akamaicovers.oreilly.com/images/0636920026136/cat.gif" style="padding:5px" width="100" alt="cat.gif" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/scalablec.png" style="padding:5px" width="100" alt="scalablec.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="https://www.createspace.com/Img/T409/T85/T11/BookCoverImage.jpg?random=0.7859812398986378" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.7859812398986378" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<p><strong><a href="books.html">Download and read online</a></strong></p>
+<p><strong><a href="legal_start.html">Legal</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></strong></p>
+<div class="collapsible-block">
+<div class="collapsible-block-folded"><a class="collapsible-block-link" href="javascript:;"> ▽ </a></div>
+<div class="collapsible-block-unfolded" style="display:none">
+<div class="collapsible-block-unfolded-link"><a class="collapsible-block-link" href="javascript:;"> △ </a></div>
+<div class="collapsible-block-content">
+<div class="side-box">
+<p><a href="_admin.html">Manage</a> | <a href="admin_themes.html">Theme</a> | <a href="nav_top.html">Top</a> | <a href="nav_top.html">Side</a></p>
+
+<div class="new-page-box" style="text-align: center; margin: 1em 0;">
+	<form action="http://hintjens.com/dummy.html" method="get" onsubmit="WIKIDOT.modules.NewPageHelperModule.listeners.create(event);">
+		<input class="text" name="pageName" type="text" size="40" maxlength="128" style="margin: 1px"/>
+				<input type="submit" class="button" value="New post" style="margin: 1px;"/>
+									<input type="hidden" name="categoryName" value="blog"/>
+													<input type="hidden" name="parent" value="blog:_start"/>
+				
+	</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                        
+
+
+                    </div>
+                
+                
+                <!-- google_ad_section_end -->
+                
+                <div id="main-content">
+                    <div id="action-area-top"></div>
+                    
+                    
+                        <div id="page-title">
+                            Securing ZeroMQ: CurveCP and NaCl
+                        </div>
+                    
+
+                    
+                        <div id="breadcrumbs">
+                            <a href="blog__start.html">All Articles</a> &raquo; Securing ZeroMQ: CurveCP and NaCl
+                        </div>
+                    
+
+                    
+
+
+
+                    <div id="page-content">
+                        
+
+<div style="overflow:hidden; font-size: 13px; margin: -26px 0 -22px 0">
+<div style="float:left"><div class="list-pages-box">    
+
+<p><a href="blog_33.html">&lt; Previous</a></p>
+
+    
+    
+    
+    </div></div>
+<div style="float:right"><div class="list-pages-box">    
+
+<p><a href="blog_35.html">Next &gt;</a></p>
+
+    
+    
+    
+    </div></div>
+</div>
+<div style="border: solid 1px #f00; padding:0 1em 0 1em; margin-bottom: 1em; margin-top:1em; min-height: 140px; overflow: hidden">
+<p><span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1473156445" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)" /></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;">pieterh</a></span> wrote on <span class="odate time_1363037341 format_%25e%20%25b%2C%20%25H%3A%25M%20%28%25O%20ago%29">11 Mar 2013 21:29</span></p>
+<div class="image-container floatleft"><a href="http://hintjens.wdfiles.com/local--files/blog:34/lock_closed.png"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:34/lock_closed.png/small.jpg" alt="lock_closed.png" class="image" /></a></div>
+<p>One of the biggest user requests for ØMQ is a good security layer. Mainstream options like TLS/SSL are complex, slow and designed for web browsing, not high-speed messaging. In this article I'll present <a href="http://curvecp.org/">CurveCP</a>, one of the most exciting security developments in recent years. It's part of the <a href="http://nacl.cr.yp.to/">NaCl</a> networking and cryptography library and looks perfectly suited to ØMQ. To demonstrate this, I've made a <a href="https://gist.github.com/hintjens/5137685">&quot;Hello World&quot; proof of concept</a> that shows an authenticated, confidential connection from one client to one server, over ØMQ.</p>
+<h2 id="toc0"><span>What's Special About CurveCP and NaCl?</span></h2>
+<p>NaCl, the lower-level library, is the ØMQ of security libraries. It has two outstanding features. One, it's very fast. Two, it has a simple API that hides everything except literally what you need to encrypt and decrypt data. Security is not an easy subject but NaCl makes it as easy as I've ever seen. Hiding the algorithms means as a developer I can't get it wrong. The site says:</p>
+<blockquote>
+<p>The following report specifies NaCl's default mechanism for public-key authenticated encryption, and along the way specifies NaCl's default mechanisms for scalar multiplication (Curve25519), secret-key authenticated encryption, secret-key encryption (Salsa20), and one-time authentication (Poly1305): (PDF) Daniel J. Bernstein, &quot;Cryptography in NaCl&quot;, 45pp.</p>
+</blockquote>
+<p>A simple <a href="https://gist.github.com/hintjens/5137671">encryption/decryption test</a> shows I can do 1.4M encryptions or 750K decryptions per second. This is of a short text but it's still impressive.</p>
+<p>Now CurveCP, which is packaged with NaCl. This is quite the beast! It's not just a security layer, it's a full replacement for TCP and includes a full protocol client and server using UDP. The interesting thing for us ØMQ programmers is how CurveCP steps aside from TCP's connection model, and creates its own logical, secured connections.</p>
+<p>There is one &quot;gotcha&quot; with CurveCP, you have to handle your own key distribution. Peers have to know each others' public keys in advance. This is a challenge we'll solve later. CurveCP is asymmetric, so a peer is either a &quot;client&quot; or a &quot;server&quot;. Nothing unusual here. The freaky part (which I appreciate) is how carefully Daniel J.Bernstein, the mathematician, cryptologist, and programmer behind this animal has designed it to stand up to a range of attacks.</p>
+<p>CurveCP authenticates servers and clients, stops replay and man-in-the-middle attacks, and provides active and passive forward secrecy, which means even if you capture traffic, you can't do anything with it. The client's long-term public key is safe from snoopers: connections use short-term keys.</p>
+<p>The list of goodies goes on: CurveCP is a fully disconnected protocol. So a client can move around and switch IP addresses and continue to work. It's route independent: any connection, any transport, any intermediaries. If you're a ØMQ developer you should be drooling by now. This is sexy stuff!</p>
+<p>So CurveCP looks really attractive. Next question, can we use it for ØMQ dialogues, and if so, how?</p>
+<h2 id="toc1"><span>Taking CurveCP Apart</span></h2>
+<p>As provided, CurveCP is really two things. One, a set of specifications for the protocol, and second, an implementation of the client and server. The protocol isn't a single document like an RFC but a set of web pages. It's immediately clear that DJB has bitten off rather a lot with CurveCP. There's no layering. My mind reels as I read the protocol description and then the source code. It's C, but barely comprehensible.</p>
+<p>There's no way I can see to use the CurveCP implementation, not any of the source code, nor the protocol as-is, for anything ØMQ-related.</p>
+<p>Luckily Grant Rodgers, who works at GitHub (I think), wrote <a href="https://gist.github.com/grantr/4757832">a Ruby implementation</a> of just the CurveCP handshake. This is a great tutorial for the inner workings of CurveCP's security. The Ruby code uses some functions from <a href="https://github.com/cryptosphere/rbnacl">RbNaCl</a> so I ended up reading that code too.</p>
+<p>ØMQ has many echoes of UDP, with its disconnected message passing so it seemed natural to build a CurveCP handshake above ØMQ. The handshake is pretty simple (at the surface):</p>
+<ul>
+<li>Client sends HELLO</li>
+<li>Server sends COOKIE</li>
+<li>Client sends INITIATE</li>
+<li>Server or Client sends 0 or more MESSAGEs</li>
+</ul>
+<p>The hard work is in the details of each command but to be honest, except for the boring business of pushing bytes around and managing various sets of keys, and making some good choices, it's quite straight-forward. The <a href="https://gist.github.com/hintjens/5137685">code is about 450 lines</a> and I've made no attempt to create abstractions. This is a straight unfolded step-by-step implementation.</p>
+<p>When I run this, it does a handshake and a &quot;Hello World&quot; exchange:</p>
+<div class="code">
+<pre>
+<code>C:HELLO: OK
+S:COOKIE: OK
+C:INITIATE: (host=localhost) OK
+C:MESSAGE: (request=Hello) OK
+S:MESSAGE: (reply=World) OK
+-&gt; 'Hello World' test successful</code>
+</pre></div>
+<h2 id="toc2"><span>Installing NaCl</span></h2>
+<p>If you want to try the PoC you'll have to install NaCl. Here's how I did this on my Linux box. First we build the library:</p>
+<div class="code">
+<pre>
+<code>wget http://hyperelliptic.org/nacl/nacl-20110221.tar.bz2
+bunzip2 &lt; nacl-20110221.tar.bz2 | tar -xf -
+cd nacl-20110221
+./do</code>
+</pre></div>
+<p>Then we install into /usr/local:</p>
+<div class="code">
+<pre>
+<code>cd build/myboxname
+sudo cp include/amd64/*.h /usr/local/include
+cd lib/amd64
+ar r libnacl.a randombytes.o
+sudo cp libnacl.a /usr/local/lib
+cd ../..
+sudo cp bin/amd64/bin/curve* /usr/local/bin
+cd ../..</code>
+</pre></div>
+<h2 id="toc3"><span>Details of the Proof-of-Concept</span></h2>
+<p>Though CurveCP hides the dirty choices of what primitives to use, we need to choose good &quot;nonces&quot;. A nonce is a &quot;number used once&quot; and it's the caller that has to provide these. If you reuse the same nonce, you're effectively opening a crack that will leak data and/or public keys.</p>
+<p>CurveCP uses two kinds of nonces:</p>
+<ul>
+<li>Long-term nonces (16 bytes), used with the client and server long-term keys. The website describes a few strategies for choosing these. In the proof-of-concept I used random bytes from /dev/random. This is the simplest option and the chance of duplicate nonces is so low that at this stage, that's the choice I'll keep for real code.</li>
+</ul>
+<ul>
+<li>Short-term nonces (8 bytes), used with short-term keys (CurveCP uses a new key set for each connection). These are just incrementing 64-bit integers, which even I can produce.</li>
+</ul>
+<p>The CurveCP INITIATE command in theory can carry a message (that is, user data). I didn't implement this for the example. Instead the client sends INITIATE and then immediately a MESSAGE carrying the &quot;Hello&quot; string.</p>
+<p>The PoC also sends fixed-sized MESSAGE commands but this is just to keep it simple. In reality we'd want variable length MESSAGE commands.</p>
+<p>The PoC is filled with magic numbers like the sizes of keys (32 bytes), nonces (24 bytes) and so on. This sucks but it seems unavoidable at least for now.</p>
+<h2 id="toc4"><span>Next Steps</span></h2>
+<p>The code needs packaging; there's a lot of repetition and I'd like to turn this into a CZMQ-like module. The CurveCP handshake can be fully hidden. It could maybe look like SASL, that is, a client and server exchanging opaque blobs until they're satisfied (or they break the connection).</p>
+<p>In the <a href="https://github.com/zeromq/filemq">FileMQ project</a> I used SASL for security, and CurveCP seems like a perfect fit into that. So that'll be my next step: secure file transfer.</p>
+<p>At this stage the rest is just ideas. But I'd like to experiment with multiple routes between clients and servers. So, for instance, start a secure connection over DEALER-ROUTER, then continue it over PUB-SUB. If we can create a nice module, it could go into CZMQ so it becomes available to a wide set of developers.</p>
+<p>Then, key distribution. I'm thinking, the Clone pattern from Chapter 5 of the Guide, combined with CurveCP security.</p>
+<p>I'd also like to make a proper RFC for CurveCP-derived security over ØMQ. What I implemented in the PoC <em>isn't</em> the CurveCP protocol, it's a subset of that. For example there are no <em>extensions</em>, and the MESSAGE command lacks all the flow-control fields. This needs to be documented so that other people (e.g. Ruby programmers who are lucky enough to have RbNaCl) can make interoperable code.</p>
+<h2 id="toc5"><span>Conclusions</span></h2>
+<p>ØMQ doesn't play nicely with the old-fashioned connected security model of TLS/SSL. Luckily there's something better in the shape of CurveCP, a fast peer-to-peer security layer that promises authentication and confidentiality, speed, and simplicity. I've written a <a href="https://gist.github.com/hintjens/5137685">simple proof-of-concept</a> that demonstrates the CurveCP handshake running over ØMQ.</p>
+<p>Edit: Marc Falzon points out that <a href="https://github.com/jedisct1/libsodium">libsodium</a> is a rather nicer, API compatible repackaging of NaCl which also runs on Windows.</p>
+<div style="float:left;width:33%; margin:-15px 0 0 0">
+<p><iframe src="http://hintjens.wdfiles.com/local--html/blog%3A34/caeb96b27838304c1e7d0a9e19f9d3cfaeea9a02-947447658923534345/hintjens.com/" allowtransparency="true" frameborder="0" class="html-block-iframe"></iframe></p>
+</div>
+<div style="float:right"><div class="page-rate-widget"><div class="page-rate-widget-start" data-rating="0"></div></div></div>
+</div>
+<p><a name="comments"></a></p>
+<div class="comments-box">
+	<h1>Comments</h1>	
+	<div class="options" id="comments-options-hidden" style="display: none">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.showComments(event)">Show Comments</a> 
+	</div>
+		
+	<div id="thread-container" class="thread-container reverse" style="margin-top: 1em">
+					
+
+
+<script type="text/javascript">
+	WIKIDOT.forumThreadId = 632845;
+</script>
+
+        <a href="javascript:;" id="new-post-button" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.newPost(event,null)"
+      style="display:  block ; margin-bottom:1em"
+    >Add a New Comment</a>
+
+ 
+
+	<div class="options" id="comments-options-shown">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.hideComments(event)" class="btn btn-default btn-small btn-sm">Hide All Comments</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.unfoldAll(event)" class="btn btn-default btn-small btn-sm">Unfold All</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.foldAll(event)" class="btn btn-default btn-small btn-sm">Fold All</a>
+	</div>
+
+<div id="thread-container-posts" style="display: none">
+    
+
+
+
+	
+					
+      
+    <div class="post-container" id="fpc-1788774">
+                      
+		<div class="post" id="post-1788774">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1788774)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1788774">
+																		MinimaLT
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/silentlennie" onclick="WIKIDOT.page.listeners.userInfo(1643763); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1643763&amp;amp;size=small&amp;amp;timestamp=1570613252" alt="SilentLennie" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1643763)"/></a><a href="http://www.wikidot.com/user:info/silentlennie" onclick="WIKIDOT.page.listeners.userInfo(1643763); return false;" >SilentLennie</a></span> <span class="odate time_1370258609 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">03 Jun 2013 11:23</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1788774">
+									
+
+<p>Have you seen what Bernsteins recently helped to create ?</p>
+<p>It's called MinimaLT. As my account is a new account I can't post a link. But you can search for it on Google and find it with the keywords: MinimaLT Bernstein PDF</p>
+<p>That solves the keydistribution I believe.</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1788774)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1788774)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1788774" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1788774)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1788774)">MinimaLT</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/silentlennie" onclick="WIKIDOT.page.listeners.userInfo(1643763); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=1643763&amp;amp;size=small&amp;amp;timestamp=1570613252" alt="SilentLennie" style="background-image:url(http://www.wikidot.com/userkarma.php?u=1643763)"/></a><a href="http://www.wikidot.com/user:info/silentlennie" onclick="WIKIDOT.page.listeners.userInfo(1643763); return false;" >SilentLennie</a></span>, <span class="odate time_1370258609 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">03 Jun 2013 11:23</span>
+		</div>
+	</div>
+ 
+                
+        
+                      
+    <div class="post-container" id="fpc-1788783">
+                      
+		<div class="post" id="post-1788783">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,1788783)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-1788783">
+																		Re: MinimaLT
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570613252" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span> <span class="odate time_1370259575 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">03 Jun 2013 11:39</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-1788783">
+									
+
+<p>Yes, I've read the MinimalT paper. It's a very nice design and I think will form the basis of the next design version of CurveZMQ.</p>
+
+							</div>
+
+										<div class="signature">
+					<hr class="signature-separator"/>
+					
+
+<p><a href="http://ipocracy.wikidot.com/main:portfolio">Portfolio</a></p>
+
+				</div>
+					
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,1788783)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,1788783)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-1788783" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,1788783)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,1788783)">Re: MinimaLT</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1570613252" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)"/></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;" >pieterh</a></span>, <span class="odate time_1370259575 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">03 Jun 2013 11:39</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+            </div>
+ 
+
+
+
+</div>
+
+
+<div style="display:none" id="post-options-template">
+	<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.showPermalink(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Permanent Link</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.editPost(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Edit</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.deletePost(event,'%POST_ID%')" class="btn btn-danger btn-small btn-sm">Delete</a>
+</div>
+	
+			</div>
+	
+	
+	
+</div>
+                    </div>
+
+                    
+
+
+
+                    
+                        <div class="page-tags">
+                            <span>
+                                <a href="system_page-tags/tag/security.html#pages">security</a><a href="system_page-tags/tag/zeromq.html#pages">zeromq</a>
+                            </span>
+                        </div>
+                    
+
+                    <div id="page-info-break"></div>
+                    
+                        <div id="page-options-container">
+                            
+                        </div>
+                    
+                    <div id="action-area" style="display: none;"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div id="footer" style="display: block; visibility: visible;">
+                <div class="options" style="display: block; visibility: visible;">
+    <a href="http://www.wikidot.com/doc" id="wikidot-help-button">Help</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:terms-of-service" id="wikidot-tos-button">Terms of Service</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:privacy-policy" id="wikidot-privacy-button">Privacy</a>
+    &nbsp;|
+    <a href="javascript:;" id="bug-report-button" onclick="WIKIDOT.page.listeners.pageBugReport(event)">Report a bug</a>
+    &nbsp;|
+    <a href="javascript:;" id="abuse-report-button" onclick="WIKIDOT.page.listeners.flagPageObjectionable(event)">Flag as objectionable</a>
+</div>
+Powered by <a href="http://www.wikidot.com/">Wikidot.com</a> 
+            </div>
+            
+                <div id="license-area" class="license-area">
+                    Unless otherwise stated, the content of this page is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>
+                </div>
+            
+            
+            
+
+
+
+            <div id="extrac-div-1"><span></span></div><div id="extrac-div-2"><span></span></div><div id="extrac-div-3"><span></span></div>
+            
+            
+            
+            
+                
+            
+        </div>
+        
+    </div>
+<!-- These extra divs/spans may be used as catch-alls to add extra imagery. -->
+<div id="extra-div-1"><span></span></div><div id="extra-div-2"><span></span></div><div id="extra-div-3"><span></span></div>
+<div id="extra-div-4"><span></span></div><div id="extra-div-5"><span></span></div><div id="extra-div-6"><span></span></div>
+</div>
+
+
+
+</div>
+<div id="dummy-ondomready-block" style="display: none;" ></div>
+    <!-- Google Analytics load -->
+    <script type="text/javascript">
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <!-- Quantcast -->
+    <script type="text/javascript">
+    _qoptions={
+        qacct:"p-edL3gsnUjJzw-"
+    };
+    (function() {
+        var qc = document.createElement('script'); qc.type = 'text/javascript'; qc.async = true;
+        qc.src = ('https:' == document.location.protocol ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(qc, s);
+    })();
+    </script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-edL3gsnUjJzw-.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+    </noscript>
+
+
+
+
+<div id="page-options-bottom-tips" style="display: none;">
+    <div id="edit-button-hovertip">
+        Click here to edit contents of this page.    </div>
+</div>
+<div id="page-options-bottom-2-tips"  style="display: none;">
+    <div id="edit-sections-button-hovertip">
+        Click here to toggle editing of individual sections of the page (if possible).         Watch headings for an &quot;edit&quot; link when available.    </div>
+    <div id="edit-append-button-hovertip">
+        Append content without editing the whole page source.    </div>
+    <div id="history-button-hovertip">
+        Check out how this page has evolved in the past.    </div>
+    <div id="discuss-button-hovertip">
+        If you want to discuss contents of this page - this is the easiest way to do it.    </div>
+    <div id="files-button-hovertip">
+        View and manage file attachments for this page.    </div>
+    <div id="site-tools-button-hovertip">
+        A few useful tools to manage this Site.    </div>
+    <div id="backlinks-button-hovertip">
+        See pages that link to and include this page.    </div>
+    <div id="rename-move-button-hovertip">
+        Change the name (also URL address, possibly the category) of the page.    </div>
+    <div id="view-source-button-hovertip">
+        View wiki source for this page without editing.    </div>
+    <div id="parent-page-button-hovertip">  
+        View/set parent page (used for creating breadcrumbs and structured layout).    </div>
+            <div id="abuse-report-button-hovertip">
+            Notify administrators if there is objectionable content in this page.        </div>
+        <div id="bug-report-button-hovertip">
+            Something does not work as expected? Find out what you can do.        </div>
+        <div id="wikidot-help-button-hovertip">
+            General Wikidot.com documentation and help section.        </div>
+        <div id="wikidot-tos-button-hovertip">
+            Wikidot.com Terms of Service - what you can, what you should not etc.        </div>
+        <div id="wikidot-privacy-button-hovertip">
+            Wikidot.com Privacy Policy.          
+        </div>
+    </div>
+</body>
+
+<!-- Mirrored from hintjens.com/blog:34 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:31:14 GMT -->
+</html>

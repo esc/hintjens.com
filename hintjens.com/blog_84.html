@@ -1,0 +1,841 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from hintjens.com/blog:84 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:30:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Revisting ZeroMQ Multipart - Hintjens.com</title>
+    
+    	<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+    // DEFINE DFP SLOTS
+googletag.defineSlot('/1030917/wikidot_free_sites_top_728x90', [728, 90], 'div-gpt-ad-1410946564449-1').addService(googletag.pubads());
+googletag.defineSlot('/1030917/wikidot_free_sites_bottom_300x250', [300, 250], 'div-gpt-ad-1410946564449-0').addService(googletag.pubads());
+
+// googletag.pubads().enableSingleRequest();
+googletag.pubads().collapseEmptyDivs(true, true);
+googletag.pubads().setTargeting("w_name", "hintjens");
+googletag.pubads().setTargeting("w_domain", "com.hintjens");
+googletag.pubads().setTargeting("w_verified", "false");
+if(null){googletag.pubads().setTargeting("w_cats", null);}
+if(false){googletag.pubads().setTargeting("w_mn", "true");}
+googletag.enableServices();
+});
+</script>
+<script type="text/javascript" src="http://www.wikidot.com/default__flow/login__CustomDomainScript?site_id=352120"></script>
+
+    
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/init.combined.js"></script>
+    <script  type="text/javascript">
+        var URL_HOST = 'www.wikidot.com';
+        var URL_DOMAIN = 'wikidot.com';
+        var USE_SSL =  true ;
+        var URL_STATIC = 'http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade';
+        // global request information
+        
+        var WIKIREQUEST = {};
+        WIKIREQUEST.info = {};
+        
+        WIKIREQUEST.info.domain = "hintjens.com";
+        WIKIREQUEST.info.siteId = 352120;
+        WIKIREQUEST.info.siteUnixName = "hintjens";
+        WIKIREQUEST.info.categoryId = 1984291;
+        WIKIREQUEST.info.themeId = 1;
+        WIKIREQUEST.info.requestPageName = "blog:84";
+        OZONE.request.timestamp = 1570613220;
+        OZONE.request.date = new Date();
+        WIKIREQUEST.info.lang = 'en';
+                WIKIREQUEST.info.pageUnixName = "blog:84";
+        WIKIREQUEST.info.pageId = 24609095;
+                        WIKIREQUEST.info.lang = "en";
+        OZONE.lang = "en";
+        var isUAMobile = !!/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    </script>
+    
+    
+
+
+    
+        <script  type="text/javascript">
+    
+        require.config({
+            baseUrl: URL_STATIC + '/common--javascript',
+            paths: {
+                'jquery.ui': 'jquery-ui.min',
+                'jquery.form': 'jquery.form'
+            }
+        });
+    
+    </script>
+    
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+            
+    
+    
+    
+    
+    <meta http-equiv="content-language" content="en"/>
+    <script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--javascript/WIKIDOT.combined.js"></script>
+        
+    
+    <style type="text/css" id="internal-style">
+        
+        /* modules */
+@import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/css/pagerate/PageRateWidgetModule.css);
+
+
+        
+                
+        /* theme */
+                    @import url(http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--theme/base/css/style.css);
+                    @import url(http://hintjens.wdfiles.com/local--code/admin%3Athemes/1);
+            </style>
+    
+        
+        
+        
+    <link rel="shortcut icon" href="local--favicon/favicon.gif"/>
+    <link rel="icon" type="image/gif" href="local--favicon/favicon.gif"/>
+    
+            <link rel="apple-touch-icon" href="common--images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="common--images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="common--images/apple-touch-icon-114x114.png" />
+        
+        
+            <link rel="alternate" type="application/wiki" title="Edit this page" href="javascript:WIKIDOT.page.listeners.editClick()"/>
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18234656-1']);
+        _gaq.push(['_setDomainName', 'none']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        _gaq.push(['old._setAccount', 'UA-68540-5']);
+        _gaq.push(['old._setDomainName', 'none']);
+        _gaq.push(['old._setAllowLinker', true]);
+        _gaq.push(['old._trackPageview']);
+
+                _gaq.push(['userTracker._setAccount', 'UA-623476-16']);
+        _gaq.push(['userTracker._trackPageview']);
+            </script>
+    
+    <script type="text/javascript">
+        window.google_analytics_uacct = 'UA-18234656-1';
+        window.google_analytics_domain_name = 'none';
+    </script>
+    
+        <link rel="manifest" href="onesignal/manifest.html" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" acync=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: null,
+          });
+        });
+    </script>
+        
+<link rel="alternate" type="application/rss+xml" title="Comments for the page &quot;Revisting ZeroMQ Multipart&quot;" href="feed/page/comments-24609095.xml"/><script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/misc/NewPageHelperModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/list/ListPagesModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/pagerate/PageRateWidgetModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumCommentsModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/sub/ForumNewPostFormModule.js"></script>
+<script type="text/javascript" src="http://d3g0gp89917ko0.cloudfront.net/v--b23e476b7ade/common--modules/js/forum/ForumViewThreadPostsModule.js"></script>
+</head>
+<body id="html-body">
+<div id="skrollr-body">
+<a name="page-top"></a>
+
+<div id="container-wrap-wrap">
+    <div id="container-wrap">
+        <div id="container">
+            <div id="header">
+              <h1><a href="index.html"><span>Hintjens.com</span></a></h1>
+                
+                    <h2><span>Moving Pieces</span></h2>
+                
+                
+                <!-- google_ad_section_start(weight=ignore) -->
+                
+                <div id="search-top-box" class="form-search">
+    <form id="search-top-box-form" action="http://hintjens.com/dummy" class="input-append">
+        <input id="search-top-box-input" class="text empty search-query" type="text" size="15" name="query" value="Search this site" onfocus="if(YAHOO.util.Dom.hasClass(this, 'empty')){YAHOO.util.Dom.removeClass(this,'empty'); this.value='';}"/><input class="button btn" type="submit" name="search" value="Search"/>
+    </form>
+</div>
+                
+                
+                    <div id="top-bar">
+                        
+
+<ul>
+<li><a href="index.html">Front</a></li>
+<li><a href="blog__zeromq.html">ZeroMQ</a></li>
+<li><a href="blog__community.html">Community</a></li>
+<li><a href="blog__unprotocols.html">Unprotocols</a></li>
+<li><a href="blog__psychopaths.html">Psychopaths</a></li>
+</ul>
+
+                    </div>
+                
+                <div id="login-status"><a href="javascript:;" onclick="WIKIDOT.page.listeners.createAccount(event)" class="login-status-create-account btn">Create account</a> <span>or</span> <a href="javascript:;" onclick="WIKIDOT.page.listeners.loginClick(event)" class="login-status-sign-in btn btn-primary">Sign in</a> </div>
+                <div id="header-extra-div-1"><span></span></div><div id="header-extra-div-2"><span></span></div><div id="header-extra-div-3"><span></span></div>
+            </div>
+            
+            <div id="content-wrap">
+                
+                    <div id="side-bar">
+                        
+
+
+                        
+
+<p><a class="wiki-standalone-button" style="background-image: url(http://www.wikidot.com/local--files/files/document-print.png); background-repeat: no-repeat; background-position: bottom right; padding-right: 20px;color: #444" href="javascript:;" onclick="WIKIDOT.page.listeners.printClick(event)">print</a></p>
+<a href="http://hintjens.wdfiles.com/local--files/nav:side/culture.jpg"><img src="http://hintjens.wdfiles.com/local--resized-images/nav:side/culture.jpg/small.jpg" alt="culture.jpg" class="image" /></a>
+<p><strong>Pieter Hintjens</strong></p>
+<p><a href="main_biography.html">Biography</a> | <a href="main_portfolio.html">Portfolio</a> | <a href="https://github.com/hintjens">GitHub</a><br />
+<a href="books.html">Books</a> | <a href="https://vimeo.com/user10099130/videos">Videos</a> | <a href="http://www.slideshare.net/pieterh">Slides</a> | <a href="http://fiction.hintjens.com/">Stories</a> | <a href="http://wiki.hintjens.com/">Wiki</a><br />
+<a href="contact.html">Contact</a></p>
+<p><strong>Thank you for the gifts</strong></p>
+<p><a href="http://paypal.me/Hintjens">Kind people already sent donations</a> that will make my childrens' lives easier, when I'm not there any more. Thank you enormously! :-)</p>
+<p>Podcasts/Interviews</p>
+<p><a href="http://softwareengineeringdaily.com/2016/06/23/death-distributed-systems-pieter-hintjens/">Software Engineering Daily</a><br />
+<a href="https://www.youtube.com/watch?v=ApqI9XLRk4k">Interview by Adam Dymitruk</a><br />
+<a href="http://devchat.tv/ruby-rogues/188-rr-community-building-with-pieter-hintjens">Ruby Rogues #188, Community Building</a></p>
+<p>Talks on video</p>
+<p><a href="http://deredactie.be/cm/vrtnieuws/videozone/programmas/deafspraak/2.44331">&quot;De afspraak&quot;, VRT, May 2016</a> (panel discussion)<br />
+<a href="http://www.rtl.be/rtltvi/video/581260.aspx">RTL TV, May 2016</a> (panel discussion)<br />
+<a href="https://www.youtube.com/watch?v=uzxcILudFWM">DomCode 2015, Nov 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=7HECD3eLoVo">Coding Serbia, Oct 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=O8CbzKREAj4">Euroscipy, Cambridge, Aug 2015</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=FKu09-_AaeM&amp;index=4&amp;list=PLFxMLyzsWeqr4SCyx0ZmFkVz2vZJk_CI5">PyGrunn, Groningen, May 2015</a><br />
+<a href="http://www.ustream.tv/recorded/61450822">Craft Conf, Budapest, Apr 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design-2015">QCon London, Mar 2015</a><br />
+<a href="http://www.infoq.com/presentations/protocol-design">Code Mesh London, Nov 2014</a><br />
+<a href="http://www.infoq.com/presentations/trick-better-software">Build Stuff, Vilnius 2014</a><br />
+<a href="https://www.youtube.com/watch?v=_QF9sFJGJuc">Build Stuff, Vilnius, Nov 2014</a> (interview)<br />
+<a href="https://www.youtube.com/watch?v=xFVDNTXIC_Y">Coding Serbia, Nov 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=DAOFZfSlFs0">Devnology, Leusden, Oct 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=QB7VXSc5H3A">EuroPython, Berlin, Jul 2014</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=qTNqgwN5gzA&amp;feature=youtu.be">Build Stuff, Vilnius, Dec 2013</a> (interview)<br />
+<a href="http://www.infoq.com/presentations/digital-revolution-freedom">Build Stuff, Vilnius, Dec 2013</a> (keynote)<br />
+<a href="http://vimeo.com/82175816">Code Mesh London, Dec 2013</a><br />
+<a href="http://vimeo.com/79378301">DevOps Days, London, Nov 2013</a><br />
+<a href="https://vimeo.com/68236487">NDC Oslo, Jun 2013</a><br />
+<a href="https://vimeo.com/69666055">CERN - Geneva, Jun 2013</a><br />
+<a href="https://www.youtube.com/watch?v=uj-li0LO_2g">Tech Mesh, London, Dec 2012</a><br />
+<a href="http://www.infoq.com/presentations/Architecture-Scale-ZeroMQ">Strange Loop, St.Louis, Oct 2012</a><br />
+<a href="https://vimeo.com/37854675">ZeroMQ@PDX part 2 - Portland, Feb 2012</a><br />
+<a href="https://vimeo.com/38117896">ZeroMQ@PDX part 1 - Portland, Feb 2012</a><br />
+<a href="http://www.youtube.com/watch?gl=BE&amp;v=4II94h6-IFY">FLOSS Weekly, Petaliuma CA, Dec 2011</a><br />
+<a href="https://www.youtube.com/watch?v=CCBYzKfmQ4U">FOSDEM 2011, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=h0facLxJPUE">Berlin Buzzwords 2010</a> (keynote)<br />
+<a href="https://www.youtube.com/watch?v=bQgPArfbXm4">FOSDEM 2009, Brussels</a><br />
+<a href="https://www.youtube.com/watch?v=fJo1jmuOuqQ">Hellenic FOSS Conference 2008, Athens part 1</a><br />
+<a href="https://www.youtube.com/watch?v=Hx6cS1VLhoo">Hellenic FOSS Conference 2008, Athens part 2</a></p>
+<p>Email me at <span class="wiki-email">moc.snejtnih|reteip#moc.snejtnih|reteip</span> if you'd like me to present at your event, or in your organization.</p>
+<a href="books.html"><img src="https://www.createspace.com/Img/T448/T45/T21/BookCoverImage.jpg?random=0.4431380270844333" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.4431380270844333" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/socarch.png" style="padding:5px" width="100" alt="socarch.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/confessions.jpg" style="padding:5px" width="100" alt="confessions.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/psccover.jpg" style="padding:5px" width="100" alt="psccover.jpg" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://akamaicovers.oreilly.com/images/0636920026136/cat.gif" style="padding:5px" width="100" alt="cat.gif" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="http://hintjens.wdfiles.com/local--files/nav:side/scalablec.png" style="padding:5px" width="100" alt="scalablec.png" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<a href="books.html"><img src="https://www.createspace.com/Img/T409/T85/T11/BookCoverImage.jpg?random=0.7859812398986378" style="padding:5px" width="100" alt="BookCoverImage.jpg?random=0.7859812398986378" class="image" /></a>
+<div style="clear:both; height: 0px; font-size: 1px"></div>
+<p><strong><a href="books.html">Download and read online</a></strong></p>
+<p><strong><a href="legal_start.html">Legal</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></strong></p>
+<div class="collapsible-block">
+<div class="collapsible-block-folded"><a class="collapsible-block-link" href="javascript:;"> ▽ </a></div>
+<div class="collapsible-block-unfolded" style="display:none">
+<div class="collapsible-block-unfolded-link"><a class="collapsible-block-link" href="javascript:;"> △ </a></div>
+<div class="collapsible-block-content">
+<div class="side-box">
+<p><a href="_admin.html">Manage</a> | <a href="admin_themes.html">Theme</a> | <a href="nav_top.html">Top</a> | <a href="nav_top.html">Side</a></p>
+
+<div class="new-page-box" style="text-align: center; margin: 1em 0;">
+	<form action="http://hintjens.com/dummy.html" method="get" onsubmit="WIKIDOT.modules.NewPageHelperModule.listeners.create(event);">
+		<input class="text" name="pageName" type="text" size="40" maxlength="128" style="margin: 1px"/>
+				<input type="submit" class="button" value="New post" style="margin: 1px;"/>
+									<input type="hidden" name="categoryName" value="blog"/>
+													<input type="hidden" name="parent" value="blog:_start"/>
+				
+	</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                        
+
+
+                    </div>
+                
+                
+                <!-- google_ad_section_end -->
+                
+                <div id="main-content">
+                    <div id="action-area-top"></div>
+                    
+                    
+                        <div id="page-title">
+                            Revisting ZeroMQ Multipart
+                        </div>
+                    
+
+                    
+                        <div id="breadcrumbs">
+                            <a href="blog__start.html">All Articles</a> &raquo; Revisting ZeroMQ Multipart
+                        </div>
+                    
+
+                                    <!-- wikidot_top_728x90 -->
+<div id="div-gpt-ad-1410946564449-1" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-above_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-1'); });
+</script>
+</div>
+
+            
+    
+
+
+                    <div id="page-content">
+                        
+
+<div style="overflow:hidden; font-size: 13px; margin: -26px 0 -22px 0">
+<div style="float:left"><div class="list-pages-box">    
+
+<p><a href="blog_83.html">&lt; Previous</a></p>
+
+    
+    
+    
+    </div></div>
+<div style="float:right"><div class="list-pages-box">    
+
+<p><a href="blog_85.html">Next &gt;</a></p>
+
+    
+    
+    
+    </div></div>
+</div>
+<div style="border: solid 1px #f00; padding:0 1em 0 1em; margin-bottom: 1em; margin-top:1em; min-height: 140px; overflow: hidden">
+<p><span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;"><img class="small" src="http://www.wikidot.com/avatar.php?userid=99&amp;amp;size=small&amp;amp;timestamp=1473156443" alt="pieterh" style="background-image:url(http://www.wikidot.com/userkarma.php?u=99)" /></a><a href="http://www.wikidot.com/user:info/pieterh" onclick="WIKIDOT.page.listeners.userInfo(99); return false;">pieterh</a></span> wrote on <span class="odate time_1422957453 format_%25e%20%25b%2C%20%25H%3A%25M%20%28%25O%20ago%29">03 Feb 2015 09:57</span></p>
+<div class="image-container floatleft"><a href="http://hintjens.wdfiles.com/local--files/blog:84/data.png"><img src="http://hintjens.wdfiles.com/local--resized-images/blog:84/data.png/small.jpg" alt="data.png" class="image" /></a></div>
+<p>Around FOSDEM 2015, a few core ZeroMQ maintainers decided to experiment with a simpler messaging API, and decided it'd be profitable to explore rethinking multipart messages from ZeroMQ. In this article I'll explain the why's and how's of this potential shift.</p>
+<table style="margin:0; padding:0">
+<tr>
+<td style="margin:0; padding:0">
+<div id="toc">
+<div id="toc-action-bar"><a href="javascript:;" onclick="WIKIDOT.page.listeners.foldToc(event)">Fold</a><a style="display: none" href="javascript:;" onclick="WIKIDOT.page.listeners.unfoldToc(event)">Unfold</a></div>
+<div class="title">Table of Contents</div>
+<div id="toc-list">
+<div style="margin-left: 2em;"><a href="#toc0">Don't Panic</a></div>
+<div style="margin-left: 2em;"><a href="#toc1">What's the Problem?</a></div>
+<div style="margin-left: 2em;"><a href="#toc2">The Identity Problem</a></div>
+<div style="margin-left: 2em;"><a href="#toc3">The Multihop Fallacy</a></div>
+<div style="margin-left: 2em;"><a href="#toc4">A Better Framing Approach</a></div>
+<div style="margin-left: 2em;"><a href="#toc5">A Better Client-Server Pattern</a></div>
+<div style="margin-left: 2em;"><a href="#toc6">Heartbeating and Sessions</a></div>
+<div style="margin-left: 2em;"><a href="#toc7">Why Threadsafe Sockets?</a></div>
+<div style="margin-left: 2em;"><a href="#toc8">CZMQ Changes</a></div>
+<div style="margin-left: 2em;"><a href="#toc9">How This Would Happen</a></div>
+<div style="margin-left: 2em;"><a href="#toc10">Conclusions</a></div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<h2 id="toc0"><span>Don't Panic</span></h2>
+<p>We don't remove functionality that people are using. The existing multipart functionality is defined by ZeroMQ RFCs 23 (ZMTP) and 28 (the request-reply pattern). There is no plan to stop supporting these RFCs, nor to remove the multipart API contracts. Our strategy for shifting ZeroMQ's functionality is to develop new contracts over time, and when these are stable and proven, deprecate old ones. This happens over many years, with new code existing in parallel to old code.</p>
+<p>So the focus of this experiment are mainly in new code: new language bindings, new protocols, and new stacks. The overall goal, as I'll explain, is to make things simpler, and easier to understand.</p>
+<h2 id="toc1"><span>What's the Problem?</span></h2>
+<p>Multipart messages aim to solve a number of problems, and in turn create a number of problems. At the core of our shift is the understanding that the costs now appear to outweigh the benefits.</p>
+<p>First, let's collect the problems that multipart solves:</p>
+<ul>
+<li>It allows zero-copy for high-volume pub-sub data, where the application sends a routing key, followed by a body. With one part, the body must be copied into a buffer. With two parts, the body can be sent directly from an existing buffer (thus, no copying).</li>
+</ul>
+<ul>
+<li>It provides a mechanism for multi-hop request-reply, where routing identifiers are pushed to an &quot;envelope&quot;, and popped on the return path.</li>
+</ul>
+<ul>
+<li>It provides applications with a simple serialization mechanism, either to avoid using additional libraries, or so that brokers can add and remove information to messages they are forwarding.</li>
+</ul>
+<p>Now, let's list the main problems that we've seen with the multipart model in ZeroMQ:</p>
+<ul>
+<li>It is confusing, as a &quot;message&quot; means both a part, and a list of parts. We've had to add new terms like &quot;frame&quot; to compensate.</li>
+</ul>
+<ul>
+<li>The multipart request-reply envelope is complex to understand, and yet any realistic application has to use it. This creates a real learning cost.</li>
+</ul>
+<ul>
+<li>ZeroMQ servers exploit the request-reply envelope to do server-client routing (using ROUTER sockets). This always confuses new users.</li>
+</ul>
+<ul>
+<li>ZeroMQ implementations cannot realistically make sockets threadsafe, as they must serialize multiple send and recv calls to a single thread. Thus, multipart messages have stopped us making threadsafe sockets.</li>
+</ul>
+<ul>
+<li>Multipart messages are counter-intuitive; the &quot;send&quot; method does not actually send anything; it queues the message until the final part is sent. New users often try to use multipart to send large files. This does not work.</li>
+</ul>
+<ul>
+<li>The two main sockets that exploit the multipart mechanism (REQ and REP) cannot recover from failures, and rarely used by real applications.</li>
+</ul>
+<ul>
+<li>Supporting multipart messages has raised complexity and performance in all bindings and tools. It is significantly harder and more work to support a list of messages than to support a single frame.</li>
+</ul>
+<ul>
+<li>Multipart data is incompatible with other layers that treat data as a stream of bytes or blobs. For example, the Go I/O interface expects a transport to read and write blobs.</li>
+</ul>
+<h2 id="toc2"><span>The Identity Problem</span></h2>
+<p>The ZMQ_IDENTITY socket setting is one of the more confused, and in my view dangerous, semantics in ZeroMQ. It allows a DEALER/REQ/REP peer to tell a ROUTER socket what value to use for its internal routing ID. &quot;User-defined identities&quot; arrive as a magical first frame that can be up to 255 bytes long.</p>
+<p>It was a mistake to mix node identities with routing information. These are two separate layers (contracts) and mixing them creates a confused hybrid contract. What happens when two clients connect with the same identity? At what stage is the identity checked? How do we correlate such identities with application-level identities? How do we proxying traffic?</p>
+<p>It has been clear for some time that:</p>
+<ul>
+<li>We should stop using the term &quot;identity&quot; for server-side routing information (which is essentially the handle of a pipe).</li>
+<li>We should delegate identity management (authentication and access control) to higher layers, where different decisions can be made depending on the case.</li>
+<li>We should in fact hide the routing information in simple request-reply servers.</li>
+</ul>
+<h2 id="toc3"><span>The Multihop Fallacy</span></h2>
+<p>The multipart request-reply envelope solves what appears to be a fallacy, a fake problem. That is: we want to be able to carry a single message across many hops, from originator to recipient, and then carry a reply back along the same path.</p>
+<p>This scenario does not seem to happen in practice. There is a very good reason for this, stemming from the essential need of a distributed system to work in layers, and hide the internals of every layer from other layers.</p>
+<p>Put this another way, the extended request-reply scenario assumes, or tries to enforce, a single contract that spans across many layers. And this is a failing pattern. Success needs specific contracts between each layer, and the flexibility to change these at need, without affecting other layers.</p>
+<p>Take an example, the Majordomo protocol that takes client work requests, and delivers them to workers. This is practically the simplest kind of load balancing we can do.</p>
+<p>In Majordomo we have two contracts. One defines the interaction between clients and the broker. The second defines the interaction between workers and the broker. These two layers are separate, and it is profitable to keep them so. It lets us evolve the worker contract (adding heartbeating, timeouts, recovery) and the client contract (e.g. adding scheduling and quotas) separately. It lets us experiment with multiple worker-broker contracts without affecting client applications.</p>
+<p>Clearly we do carry payloads across both layers. However there is an intelligent piece of code switching between the two layers, and translating messages from one contract to another.</p>
+<p>So it looks like multihop request-reply can be falsified as a theory, and thus the use case for request-reply envelopes can also be falsified.</p>
+<h2 id="toc4"><span>A Better Framing Approach</span></h2>
+<p>In the last few years the ZeroMQ community has developed its own tool for framing, namely <a href="https://github.com/zeromq/zproto">zproto</a>. This generates a fast binary codec for a protocol, in arbitrary languages (Go, Clojure, Java, C, C# at this stage).</p>
+<p>The advantage of zproto over framing is that you get a properly documented protocol with robust error checking at client and server side. For example, ZeroMQ RFC 7 (the Majordomo protocol), uses multipart framing for its protocol, which makes it expensive to implement the protocol, or evolve and improve it.</p>
+<h2 id="toc5"><span>A Better Client-Server Pattern</span></h2>
+<p>While the standard pattern for client-server cases is DEALER-ROUTER, these sockets are clumsy and often confusing to newcomers. Their names are unclear. The ROUTER socket uses multipart messages for routing, which is semantically and technically confusing.</p>
+<p>There is a much simpler, more obvious client-server pattern:</p>
+<ul>
+<li>CLIENT and SERVER socket types that are separate from the request-reply pattern.</li>
+<li>CLIENT can implement, immediately, necessary logic for heartbeating, and recovery from server restarts.</li>
+<li>SERVER can implement client sessions, recovery from network failures, and disconnection of idle clients.</li>
+</ul>
+<p>There are several possibilities for a SERVER socket design:</p>
+<ul>
+<li>Just like ROUTER today, except the routing information is not provided as a multipart frame. Instead, it is a message property (it cannot be a socket property, if sockets are to be threadsafe).</li>
+</ul>
+<ul>
+<li>A higher level socket that automatically manages client sessions. This means, identifying new connections and re-connections (when the same client reconnects on a different network socket), responding to heartbeats, and expiring idle clients. The API here would add a &quot;session&quot; object, corresponding to a single client session.</li>
+</ul>
+<p>Similarly, CLIENT could be very similar to DEALER, or something more sophisticated that deals with the requirements we always have in client-server scenarios.</p>
+<h2 id="toc6"><span>Heartbeating and Sessions</span></h2>
+<p>Looking at several years of building client-server stacks with ZeroMQ, a consistent pattern emerges for reliable session management. We build this today using DEALER-ROUTER and zproto for protocol commands. It could profitably be built into the CLIENT-SERVER sockets, and the ZMTP protocol:</p>
+<ul>
+<li>The server must detect new client sessions. Ideally, a session identifies a CLIENT socket instance, with the same lifecycle. Today we use the routing ID, which means we cannot recover a client session after a network break.</li>
+<li>The client must send heartbeats, when idle. The heartbeat interval is typically one or several seconds, depending on client-side power considerations. A heartbeat command (&quot;PING&quot;) carries no data.</li>
+<li>The server must repond to heartbeats, simply by sending a heartbeat reply (&quot;PING-OK&quot;), again carrying no data.</li>
+<li>Clients must send at most a few PINGs, if they are not getting PING-OK replies. Otherwise they will fill up their outgoing pipes with a thousand PING commands.</li>
+<li>Servers must expire clients that have sent nothing within a certain timeout (typically 10 to 30 seconds, depending on the network).</li>
+</ul>
+<p>For session management, the client must send a unique ID that can be used as session ID. Today we use the routing ID for this. Some applications use the ZMQ_IDENTITY setting for this. Neither are ideal. The best solution is that a CLIENT socket automatically generate its own unique session ID, which cannot be over-ridden or used at any layer except this one.</p>
+<p>The client sends its session ID when connecting to the server. The server holds known client sessions in a table. If the client connects with an existing session ID, the server attaches that new connection to the existing session. If not, it creates a new session. Sessions expire when they have no activity for 10-30 seconds (per heartbeating).</p>
+<p>This session reconnection is invisible to the application. It sees, at worst, a brief lull in traffic, which then resumes.</p>
+<p>Separately, the SERVER socket provides a routing ID for each message. This is an internal short integer that identifies the session. The SERVER does NOT expose the session ID. If applications want their own client identifiers, they build these themselves.</p>
+<p>The SERVER's routing ID is a socket (and perhaps also message) property that the caller can get (after receiving a message) and set (before sending a message). It is trivial to write simple servers, which can just be a recv/send loop, like today's REP sockets. Unlike REP sockets, a SERVER socket has no state machine and can trivially recover from errors.</p>
+<h2 id="toc7"><span>Why Threadsafe Sockets?</span></h2>
+<p>One of the unexpected costs of multipart messages was that sockets could not be threadsafe. It's obvious why: a socket has to serialize an unknown number of &quot;send&quot; commands from a single caller thread. If receiving and sending is an atomic operation, the socket can be threadsafe, else not.</p>
+<p>Threadsafe sockets resolve a major, long-standing problem, of using ZeroMQ from languages that spawn many threads. This is such a common use case: the UI spawns a thread which wants to send a message. Today it must create a new socket, connect it, send its message, and destroy the socket. This is not fast.</p>
+<p>Ideally, the new thread would grab the socket from shared memory, send to it, and die happily. Note that this is for a one-way message flow. If threads need a reply from their socket, they must use (today) a DEALER-ROUTER model, and (in our new model) a CLIENT-SERVER model.</p>
+<p>There have been abortive attempts to make ZeroMQ sockets threadsafe. They did not, however, make the codebase simpler. Removing multipart messages (even if this is a compile time option), makes threadsafe sockets possible.</p>
+<h2 id="toc8"><span>CZMQ Changes</span></h2>
+<p>As a worked example, let's see how this could change the CZMQ API:</p>
+<ul>
+<li>Deprecation of the zmsg and zframe classes, and promotion of zchunk (or byte * + size_t) as the basic message type.</li>
+<li>New zclient and zserver classes, which implement CLIENT and SERVER sockets, as described above. Initially these could be emulated over DEALER and ROUTER, later over real CLIENT and SERVER.</li>
+<li>Deprecation of all functionality that supports identities and multipart.</li>
+<li>A new &quot;reply&quot; semantic, for SERVER sockets, which replies to a previously received message. This can be implicit (reply to socket), if the socket is thread local, or explicit (reply to message or to message routing id) if the socket is shared between multiple threads.</li>
+<li>Change of actors and pipes to use CLIENT-SERVER instead of PAIR-PAIR. This lets actors reply to caller requests, where each caller would get its own client socket to speak to the actor.</li>
+</ul>
+<h2 id="toc9"><span>How This Would Happen</span></h2>
+<p>Clearly some of the goals we have — simplifying the internals of ZeroMQ stacks — are not compatible with existing applications.</p>
+<p>We cannot break existing application code, and so future ZeroMQ stacks will need to continue supporting multipart data. Some options for doing this are:</p>
+<ul>
+<li>To build a new socket types (client, server) that are threadsafe and that work on single parts only. This would leave the existing codebases largely untouched.</li>
+<li>To fork the codebase. Not perhaps the nicest option.</li>
+<li>To support both models, and allow newer applications to disable multipart, to get the eventual advantages.</li>
+</ul>
+<h2 id="toc10"><span>Conclusions</span></h2>
+<p>It's unclear we can make these shifts successfully. However, if we can, then here are some potential outcomes:</p>
+<ul>
+<li>The REQ-REP-DEALER-ROUTER socket types will disappear (be deprecated).</li>
+<li>The ZMQ_IDENTITY concept will disappear.</li>
+<li>New CLIENT and SERVER sockets will replace REQ-REP-DEALER-ROUTER.</li>
+<li>Messages will be single opaque blobs of data.</li>
+<li>All other names for messages (frames and parts) will be deprecated.</li>
+<li>All &quot;recv more&quot; and &quot;send more&quot; semantics will be deprecated.</li>
+<li>CLIENTs and SERVERs may eventually do heartbeating and session management automatically.</li>
+<li>All socket types that no longer accept multipart messages can probably be made thread safe.</li>
+</ul>
+<p>Comments and discussion welcome, please use zeromq-dev for this.</p>
+<div style="float:left;width:33%; margin:-15px 0 0 0">
+<p><iframe src="http://hintjens.wdfiles.com/local--html/blog%3A84/7373174a681e78e469baa4c4501c0b77efbe04fa-11211943651667988307/hintjens.com/" allowtransparency="true" frameborder="0" class="html-block-iframe"></iframe></p>
+</div>
+<div style="float:right"><div class="page-rate-widget"><div class="page-rate-widget-start" data-rating="0"></div></div></div>
+</div>
+<p><a name="comments"></a></p>
+<div class="comments-box">
+	<h1>Comments</h1>	
+	<div class="options" id="comments-options-hidden" style="display: none">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.showComments(event)">Show Comments</a> 
+	</div>
+		
+	<div id="thread-container" class="thread-container reverse" style="margin-top: 1em">
+					
+
+
+<script type="text/javascript">
+	WIKIDOT.forumThreadId = 1094965;
+</script>
+
+        <a href="javascript:;" id="new-post-button" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.newPost(event,null)"
+      style="display:  block ; margin-bottom:1em"
+    >Add a New Comment</a>
+
+ 
+
+	<div class="options" id="comments-options-shown">
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumCommentsModule.listeners.hideComments(event)" class="btn btn-default btn-small btn-sm">Hide All Comments</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.unfoldAll(event)" class="btn btn-default btn-small btn-sm">Unfold All</a> 
+		<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.foldAll(event)" class="btn btn-default btn-small btn-sm">Fold All</a>
+	</div>
+
+<div id="thread-container-posts" style="display: none">
+    
+
+
+
+	
+					
+      
+    <div class="post-container" id="fpc-2248009">
+                      
+		<div class="post" id="post-2248009">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,2248009)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-2248009">
+																		zproto as a facade over multipart
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/drew-noakes" onclick="WIKIDOT.page.listeners.userInfo(2073608); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=2073608&amp;amp;size=small&amp;amp;timestamp=1570613220" alt="Drew Noakes" style="background-image:url(http://www.wikidot.com/userkarma.php?u=2073608)"/></a><a href="http://www.wikidot.com/user:info/drew-noakes" onclick="WIKIDOT.page.listeners.userInfo(2073608); return false;" >Drew Noakes</a></span> <span class="odate time_1425942850 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">09 Mar 2015 23:14</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-2248009">
+									
+
+<p>Could zproto be used as a façade over multipart messages, providing compatibility with legacy peers?</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,2248009)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,2248009)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-2248009" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,2248009)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,2248009)">zproto as a facade over multipart</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/drew-noakes" onclick="WIKIDOT.page.listeners.userInfo(2073608); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=2073608&amp;amp;size=small&amp;amp;timestamp=1570613220" alt="Drew Noakes" style="background-image:url(http://www.wikidot.com/userkarma.php?u=2073608)"/></a><a href="http://www.wikidot.com/user:info/drew-noakes" onclick="WIKIDOT.page.listeners.userInfo(2073608); return false;" >Drew Noakes</a></span>, <span class="odate time_1425942850 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">09 Mar 2015 23:14</span>
+		</div>
+	</div>
+ 
+                
+                	
+
+
+        
+            </div>
+ 
+
+	
+					
+      
+    <div class="post-container" id="fpc-2233514">
+                      
+		<div class="post" id="post-2233514">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,2233514)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-2233514">
+																		Thank you for this long waited move
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/brugeman" onclick="WIKIDOT.page.listeners.userInfo(459422); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=459422&amp;amp;size=small&amp;amp;timestamp=1570613220" alt="Brugeman" style="background-image:url(http://www.wikidot.com/userkarma.php?u=459422)"/></a><a href="http://www.wikidot.com/user:info/brugeman" onclick="WIKIDOT.page.listeners.userInfo(459422); return false;" >Brugeman</a></span> <span class="odate time_1424062895 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">16 Feb 2015 05:01</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-2233514">
+									
+
+<p>Finally, good old client-server apps won't look awkward in zmq, thank you for this initiative, hope the shifts will be successful!</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,2233514)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,2233514)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-2233514" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,2233514)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,2233514)">Thank you for this long waited move</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/brugeman" onclick="WIKIDOT.page.listeners.userInfo(459422); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=459422&amp;amp;size=small&amp;amp;timestamp=1570613220" alt="Brugeman" style="background-image:url(http://www.wikidot.com/userkarma.php?u=459422)"/></a><a href="http://www.wikidot.com/user:info/brugeman" onclick="WIKIDOT.page.listeners.userInfo(459422); return false;" >Brugeman</a></span>, <span class="odate time_1424062895 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">16 Feb 2015 05:01</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+
+	
+					
+      
+    <div class="post-container" id="fpc-2224032">
+                      
+		<div class="post" id="post-2224032">
+		<div class="long">
+			<div class="head">
+									<div class="options">
+						<a href="javascript:;" onclick="togglePostFold(event,2224032)" class="btn btn-default btn-small btn-sm">Fold</a>
+					</div>
+								<div class="title" id="post-title-2224032">
+																		Thanks for the heads-up
+															</div>
+				<div class="info">
+					<span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/greggirwin" onclick="WIKIDOT.page.listeners.userInfo(583361); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=583361&amp;amp;size=small&amp;amp;timestamp=1570613220" alt="greggirwin" style="background-image:url(http://www.wikidot.com/userkarma.php?u=583361)"/></a><a href="http://www.wikidot.com/user:info/greggirwin" onclick="WIKIDOT.page.listeners.userInfo(583361); return false;" >greggirwin</a></span> <span class="odate time_1422989338 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">03 Feb 2015 18:48</span>
+														</div>
+			</div>
+			<div class="content" id="post-content-2224032">
+									
+
+<p>While change can be scary and painful, you've laid out the reasoning clearly, along with reassurance that things will continue to work for now. It's this kind of management that makes 0MQ more than just a great piece of technology. Thanks for making it so.</p>
+
+							</div>
+
+								
+					
+						<div class="options">
+				
+													<strong><a href="javascript:;" onclick="postReply(event,2224032)" class="btn btn-primary btn-small btn-sm">Reply</a></strong> 
+																	<a href="javascript:;" onclick="togglePostOptions(event,2224032)" class="btn btn-default btn-small btn-sm">Options</a>
+							</div>
+									
+			<div id="post-options-2224032" class="options" style="display: none">
+			</div>
+		</div>
+		<div class="short">
+							<a class="options btn btn-default btn-mini btn-xs" href="javascript:;" onclick="togglePostFold(event,2224032)" c>Unfold</a>
+						<a class="title" href="javascript:;" onclick="togglePostFold(event,2224032)">Thanks for the heads-up</a> by <span class="printuser avatarhover"><a href="http://www.wikidot.com/user:info/greggirwin" onclick="WIKIDOT.page.listeners.userInfo(583361); return false;"  ><img class="small" src="http://www.wikidot.com/avatar.php?userid=583361&amp;amp;size=small&amp;amp;timestamp=1570613220" alt="greggirwin" style="background-image:url(http://www.wikidot.com/userkarma.php?u=583361)"/></a><a href="http://www.wikidot.com/user:info/greggirwin" onclick="WIKIDOT.page.listeners.userInfo(583361); return false;" >greggirwin</a></span>, <span class="odate time_1422989338 format_%25e%20%25b%20%25Y%2C%20%25H%3A%25M%7Cagohover">03 Feb 2015 18:48</span>
+		</div>
+	</div>
+ 
+                
+        
+            </div>
+ 
+
+
+
+</div>
+
+
+<div style="display:none" id="post-options-template">
+	<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.showPermalink(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Permanent Link</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.editPost(event,'%POST_ID%')" class="btn btn-default btn-small btn-sm">Edit</a>
+			<a href="javascript:;" onclick="WIKIDOT.modules.ForumViewThreadModule.listeners.deletePost(event,'%POST_ID%')" class="btn btn-danger btn-small btn-sm">Delete</a>
+</div>
+	
+			</div>
+	
+	
+	
+</div>
+                    </div>
+
+                                    <!-- wikidot_bottom_300x250 -->
+<div id="div-gpt-ad-1410946564449-0" style="display: none" class="wd-adunit wd-adunit-dfp wd-adunit-below_content">
+
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1410946564449-0'); });
+</script>
+</div>
+
+            
+    
+
+
+                    
+                        <div class="page-tags">
+                            <span>
+                                <a href="system_page-tags/tag/zeromq.html#pages">zeromq</a>
+                            </span>
+                        </div>
+                    
+
+                    <div id="page-info-break"></div>
+                    
+                        <div id="page-options-container">
+                            
+                        </div>
+                    
+                    <div id="action-area" style="display: none;"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div id="footer" style="display: block; visibility: visible;">
+                <div class="options" style="display: block; visibility: visible;">
+    <a href="http://www.wikidot.com/doc" id="wikidot-help-button">Help</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:terms-of-service" id="wikidot-tos-button">Terms of Service</a>
+    &nbsp;|
+    <a href="http://www.wikidot.com/legal:privacy-policy" id="wikidot-privacy-button">Privacy</a>
+    &nbsp;|
+    <a href="javascript:;" id="bug-report-button" onclick="WIKIDOT.page.listeners.pageBugReport(event)">Report a bug</a>
+    &nbsp;|
+    <a href="javascript:;" id="abuse-report-button" onclick="WIKIDOT.page.listeners.flagPageObjectionable(event)">Flag as objectionable</a>
+</div>
+Powered by <a href="http://www.wikidot.com/">Wikidot.com</a> 
+            </div>
+            
+                <div id="license-area" class="license-area">
+                    Unless otherwise stated, the content of this page is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>
+                </div>
+            
+            
+            
+
+
+
+            <div id="extrac-div-1"><span></span></div><div id="extrac-div-2"><span></span></div><div id="extrac-div-3"><span></span></div>
+            
+            
+            
+            
+                
+            
+        </div>
+        
+    </div>
+<!-- These extra divs/spans may be used as catch-alls to add extra imagery. -->
+<div id="extra-div-1"><span></span></div><div id="extra-div-2"><span></span></div><div id="extra-div-3"><span></span></div>
+<div id="extra-div-4"><span></span></div><div id="extra-div-5"><span></span></div><div id="extra-div-6"><span></span></div>
+</div>
+
+
+
+</div>
+<div id="dummy-ondomready-block" style="display: none;" ></div>
+    <!-- Google Analytics load -->
+    <script type="text/javascript">
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <!-- Quantcast -->
+    <script type="text/javascript">
+    _qoptions={
+        qacct:"p-edL3gsnUjJzw-"
+    };
+    (function() {
+        var qc = document.createElement('script'); qc.type = 'text/javascript'; qc.async = true;
+        qc.src = ('https:' == document.location.protocol ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(qc, s);
+    })();
+    </script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-edL3gsnUjJzw-.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+    </noscript>
+
+
+
+
+<div id="page-options-bottom-tips" style="display: none;">
+    <div id="edit-button-hovertip">
+        Click here to edit contents of this page.    </div>
+</div>
+<div id="page-options-bottom-2-tips"  style="display: none;">
+    <div id="edit-sections-button-hovertip">
+        Click here to toggle editing of individual sections of the page (if possible).         Watch headings for an &quot;edit&quot; link when available.    </div>
+    <div id="edit-append-button-hovertip">
+        Append content without editing the whole page source.    </div>
+    <div id="history-button-hovertip">
+        Check out how this page has evolved in the past.    </div>
+    <div id="discuss-button-hovertip">
+        If you want to discuss contents of this page - this is the easiest way to do it.    </div>
+    <div id="files-button-hovertip">
+        View and manage file attachments for this page.    </div>
+    <div id="site-tools-button-hovertip">
+        A few useful tools to manage this Site.    </div>
+    <div id="backlinks-button-hovertip">
+        See pages that link to and include this page.    </div>
+    <div id="rename-move-button-hovertip">
+        Change the name (also URL address, possibly the category) of the page.    </div>
+    <div id="view-source-button-hovertip">
+        View wiki source for this page without editing.    </div>
+    <div id="parent-page-button-hovertip">  
+        View/set parent page (used for creating breadcrumbs and structured layout).    </div>
+            <div id="abuse-report-button-hovertip">
+            Notify administrators if there is objectionable content in this page.        </div>
+        <div id="bug-report-button-hovertip">
+            Something does not work as expected? Find out what you can do.        </div>
+        <div id="wikidot-help-button-hovertip">
+            General Wikidot.com documentation and help section.        </div>
+        <div id="wikidot-tos-button-hovertip">
+            Wikidot.com Terms of Service - what you can, what you should not etc.        </div>
+        <div id="wikidot-privacy-button-hovertip">
+            Wikidot.com Privacy Policy.          
+        </div>
+    </div>
+</body>
+
+<!-- Mirrored from hintjens.com/blog:84 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Oct 2019 09:30:05 GMT -->
+</html>

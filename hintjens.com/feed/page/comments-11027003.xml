@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wikidot="http://www.wikidot.com/rss-namespace">
+
+	<channel>
+		<title>Comments for page &quot;Credit-based Flow Control&quot;</title>
+		<link>http://hintjens.com/blog:15/comments/show</link>
+		<description></description>
+				<copyright></copyright>
+		<lastBuildDate>Wed, 09 Oct 2019 09:31:55 +0000</lastBuildDate>
+		
+					<item>
+				<guid>http://hintjens.com/blog:15/comments/show#post-2014352</guid>
+				<title>Re: queue with volatile consumers</title>
+				<link>http://hintjens.com/blog:15/comments/show#post-2014352</link>
+				<description></description>
+				<pubDate>Thu, 17 Apr 2014 22:11:03 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>It makes sense, though the only way to know is make it and try and then improve it until it works as you want it.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:15/comments/show#post-2014332</guid>
+				<title>queue with volatile consumers</title>
+				<link>http://hintjens.com/blog:15/comments/show#post-2014332</link>
+				<description></description>
+				<pubDate>Thu, 17 Apr 2014 21:16:26 +0000</pubDate>
+				<wikidot:authorName>mhaberler</wikidot:authorName>				<wikidot:authorUserId>1450048</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I need such a vehicle for a viewing pipeline (interpreter outputs graphics primitives, consumed be remote UI); however the consumer might pause (fine - credit stays at zero while paused), or exit unexpectedly altogether (not so fine - credit stays at zero forever; am I right this case can't be detected in the above example?).</p> <p>My current idea would be to combine client-originated heartbeating with the current credit tacked on; the producer could detect a vanished consumer by timing out on the heartbeat/credit update.</p> <p>Does this make sense, or am missing something?</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:15/comments/show#post-1374029</guid>
+				<title>Prefer messages vs bytes</title>
+				<link>http://hintjens.com/blog:15/comments/show#post-1374029</link>
+				<description></description>
+				<pubDate>Tue, 14 Feb 2012 18:32:39 +0000</pubDate>
+				<wikidot:authorName>cremes</wikidot:authorName>				<wikidot:authorUserId>479952</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I think this idea would work quite well. However, I think it is conceptually simpler to work in terms of messages (whole messages, not just message parts/frames).</p> <p>The reason is that, IME, most applications that would use a service like 0mq are unconcerned with bytes. The &quot;currency&quot; of my application isn't bytes but messages that contain semantic meaning.</p> <p>Your example is counting bytes but it could just as easily count messages. I would prefer that.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:15/comments/show#post-1220791</guid>
+				<title>Re: Flow Control</title>
+				<link>http://hintjens.com/blog:15/comments/show#post-1220791</link>
+				<description></description>
+				<pubDate>Thu, 04 Aug 2011 15:58:54 +0000</pubDate>
+				<wikidot:authorName>alpha0</wikidot:authorName>				<wikidot:authorUserId>1095055</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>I noted the simplicity. I like it! Your thoughts on using this for UDP?</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:15/comments/show#post-1220778</guid>
+				<title>Re: Flow Control</title>
+				<link>http://hintjens.com/blog:15/comments/show#post-1220778</link>
+				<description></description>
+				<pubDate>Thu, 04 Aug 2011 15:39:14 +0000</pubDate>
+				<wikidot:authorName>pieterh</wikidot:authorName>				<wikidot:authorUserId>99</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Yes, this is equivalent to sliding windows, but conceptually simpler.</p> 
+				 	]]>
+				</content:encoded>							</item>
+					<item>
+				<guid>http://hintjens.com/blog:15/comments/show#post-1220214</guid>
+				<title>Flow Control</title>
+				<link>http://hintjens.com/blog:15/comments/show#post-1220214</link>
+				<description></description>
+				<pubDate>Thu, 04 Aug 2011 01:01:09 +0000</pubDate>
+				<wikidot:authorName>alpha0</wikidot:authorName>				<wikidot:authorUserId>1095055</wikidot:authorUserId>				<content:encoded>
+					<![CDATA[
+						 <p>Do you know what is the appropriate terminology in reference to TCP flow-control 'sliding windows'? The above is basically a simplified simplex form of that, right?</p> 
+				 	]]>
+				</content:encoded>							</item>
+				</channel>
+</rss>
